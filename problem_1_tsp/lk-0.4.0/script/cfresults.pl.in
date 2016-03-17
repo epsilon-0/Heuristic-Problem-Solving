@@ -1,0 +1,41 @@
+#! @PERL@
+# @configure_input@
+
+# Extract final length and time for preprocessing+LK.
+# All the input files are presented at once, 
+# e.g. out.grid1024.0.deg, out.grid1024.0.no_d, out.grid1024.1.deg...
+# So we need to keep a parity count.
+
+$is_deg = 1;  # Parity count.
+
+$float_expr= "(-?\\d+\\.?\[0-9\]*|\\.\[0-9\]+)"; # See Programming Perl
+
+$file_num = 0;
+
+while(<>) {
+	if ( m/^LK phase ended with incumbent_len == \(0+\*2\^32\+$float_expr\) after $float_expr sec for LK and $float_expr sec for ds\+LK/o ) {
+		($len,$lk_sec,$ds_sec)=($1,$2,$3);
+		print STDERR;
+		print STDERR "$len $lk_sec $ds_sec\n";
+		if ($is_deg) {
+			($deg_len,$deg_lk_sec,$deg_ds_sec) = ($len,$lk_sec,$ds_sec);
+		};
+	} elsif ( m/^Final milestone: $float_expr\%/o ) {
+		$pct = $1;
+		if ($is_deg) { 
+			$deg_pct = $pct; 
+			$is_deg = 0;
+		} else {
+			$filename = "cf.$file_num";
+			open(OUT,">$filename.deg") || die "Can't open $file_num.deg for writing";
+			open(OUTNIB,">$filename.no_d") || die "Can't open $file_num.no_d for writing";
+			print OUT "$deg_ds_sec $deg_pct\n";
+			print OUTNIB "$deg_ds_sec $deg_pct\n$ds_sec $pct\n";
+			close(OUT);
+			close(OUTNIB);
+
+			$file_num++;
+			$is_deg = 1;
+		}
+	}
+}

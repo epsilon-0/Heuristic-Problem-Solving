@@ -1,0 +1,307 @@
+#!/bin/sh
+rm -rf 3S-1.0
+tar xzf 3S-1.0.tgz
+cd 3S-1.0
+ROOT=$PWD
+
+# force 32 bits compilation
+mkdir CC32
+cat <<EOF > CC32/gcc
+#!/bin/sh
+`which gcc` -m32 \$*
+EOF
+
+cat <<EOF > CC32/g++
+#!/bin/sh
+`which g++` -m32 \$*
+EOF
+
+chmod u+x CC32/*
+
+PATH=$ROOT/CC32:$PATH
+
+
+
+for f in solvers utilities preprocessors ; do
+  mv $f precompiled-$f
+  mkdir $f
+done
+
+rm COACH/coach
+
+cd SourceCode
+cd COACH
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make clean
+make
+mv coach coach-static
+
+export STATIC=
+make clean
+make
+
+cp coach ../../COACH
+
+cd $ROOT/SourceCode/Solvers/SATenstein/
+unzip -x SATenstein.zip
+cd SATenstein/
+make
+cp ubcsat $ROOT/solvers/SATenstein
+
+cd $ROOT/SourceCode/Solvers/TNM/
+unzip -x TNM.zip
+cd TNM
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv TNM TNM-static
+
+export STATIC=
+make
+
+cp TNM $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/UBCSAT
+make
+cp ubcsat $ROOT/solvers/ubcsatOrig
+
+cd $ROOT/SourceCode/Solvers/agwsat
+tar xvf adaptg2wsat2009.tar
+cd adaptg2wsat2009
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv adaptg2wsat2009 adaptg2wsat2009-static
+
+export STATIC=
+make clean
+make
+cp adaptg2wsat2009 $ROOT/solvers/
+
+cd ..
+
+tar xvf adaptg2wsat2009++.tar
+cd adaptg2wsat2009++
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv adaptg2wsat2009++ adaptg2wsat2009++-static
+
+export STATIC=
+make clean
+make
+cp adaptg2wsat2009++ $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/clasp
+tar xvzf clasp-1.3.7-source.tar.gz
+cd clasp-1.3.7
+./configure.sh
+cd build/release
+make
+
+cp bin/clasp $ROOT/solvers/clasp-1.3.6-x86-linux
+
+cd $ROOT/SourceCode/Solvers/cryptominisat
+tar xvzf cryptominisat-2.9.0.tar.gz
+cd cryptominisat-2.9.0
+sh configure
+make
+
+cp cryptominisat $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/gNovelty
+
+tar xvzf gnovelty+2.tar.gz
+cd gnovelty+2
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv gnovelty+2-static
+
+export STATIC=
+make clean
+make
+
+cp gnovelty+2 $ROOT/solvers/
+
+cd ..
+tar xvzf gnovelty+2-H.tar.gz
+cd gnovelty+2-H
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv gnovelty+2-H-static
+
+export STATIC=
+make clean
+make
+
+cp gnovelty+2-H $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/glucose
+tar xvzf glucose.tgz
+cd glucose_1.0/
+cd sources/glucose/core
+make r
+cp glucose_release $ROOT/solvers/glucose_static
+
+
+cd $ROOT/SourceCode/Solvers/hybridGM3
+unzip -x hybridGM3.zip
+cd hybridGM3
+echo A | unzip ../hybridGM3_fix.zip
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv hybridGM3 hybridGM3-static
+
+export STATIC=
+make clean
+make
+
+cp hybridGM3 $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/kcnf
+tar xvzf kcnfs-2004.tgz
+cd kcnfs-2004
+sed -i -e 's/-static/$(STATIC)/g' makefile
+export STATIC=-static
+make
+mv kcnfs-2004 kcnfs-2004-static
+
+export STATIC=
+make clean
+make
+
+cp kcnfs-2004 $ROOT/solvers/kcnfs04SAT07
+
+cd $ROOT/SourceCode/Solvers/lingeling
+tar xvzf lingeling-276-6264d55-100731.tgz
+cd lingeling-276-6264d55-100731
+chmod u+x mkconfig configure
+./configure
+make
+
+cp lingeling  $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/lysat
+tar xvzf lysatc.tgz
+cd minisat/core
+make clean
+make r
+cp lysat_release $ROOT/solvers/LySATc
+
+cd $ROOT/SourceCode/Solvers/lysat
+tar xvzf lysati.tgz
+cd BLOCKED_SUBMITION/core
+make clean
+make r
+cp LySAT_release $ROOT/solvers/LySATi
+
+cd $ROOT/SourceCode/Solvers/march
+unzip -x march_hi.zip
+cd march_hi
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv march_hi march_hi-static
+
+export STATIC=
+make clean
+make
+
+cp march_hi $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/march
+unzip -x march_nn.zip
+cd march_nn
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+mv march_nn march_nn-static
+
+export STATIC=
+make clean
+make
+
+cp march_nn $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/minisat
+export MROOT=$PWD
+cd core
+make clean
+make r
+
+cp minisat_release $ROOT/solvers/minisat_static
+
+cd $ROOT/SourceCode/Solvers/mxcsat
+unzip mxc-sat09.zip
+
+(echo '#include <ctype.h>'; echo '#include <stdint.h>'; cat mxc-sat09.cpp) > modif
+mv modif mxc-sat09.cpp
+
+sh compile.sh
+mv mxc-sat09 mxc-sat09-static
+
+sed -i -e 's/-static//g' compile.sh
+sh compile.sh
+
+cp mxc-sat09 $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/picosat-936
+tar xvzf picosat-936.tgz
+cd picosat-936
+
+chmod u+x mkconfig configure
+./configure
+make
+
+cp picosat  $ROOT/solvers/
+
+cd $ROOT/SourceCode/Solvers/precosat
+rm -f precosat-236-3e7a3f8-090322.tar.gz
+cp $ROOT/../precosat-570-239dbbe-100801.tar.gz .
+tar xvzf precosat-570-239dbbe-100801.tar.gz
+cd precosat-570-239dbbe-100801
+
+chmod u+x mkconfig configure
+./configure
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=-static
+make
+
+mv precosat precosat-static
+make clean
+./configure
+sed -i -e 's/-static/$(STATIC)/g' Makefile
+export STATIC=
+make
+
+cp precosat  $ROOT/solvers/
+
+
+cd $ROOT/SourceCode/Utilities/features
+make features
+cp features $ROOT/utilities
+cd $ROOT 
+ln -s utilities/features .
+
+cp $ROOT/../timerun $ROOT/utilities
+
+cd $ROOT/SourceCode/Preprocessors/Satelite/
+unzip sat2005_submission.zip
+patch -p0 < $ROOT/../satelite.patch
+cd sat2005_submission/SatELite_submission/
+export FM=$PWD/ForMani
+cd SatELite
+make realclean
+make r
+cp SatELite_release $ROOT/preprocessors/SatELite_v1.0_linux
+
+cd $ROOT
+./3S-executables-test.sh
+
+#
+
+

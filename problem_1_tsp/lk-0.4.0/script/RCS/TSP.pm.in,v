@@ -1,0 +1,196 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1;
+comment	@# @;
+
+
+1.1
+date	97.11.29.18.06.41;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Perl class for handling TSPLIB instances.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#! @@PERL@@ -w
+# @@configure_input@@
+
+# This is a Perl class encapsulating behaviour for TSPLIB instances.
+# (insert reference to TSPLIB)
+
+# This program is Copyright 1997 David Neto.
+# It is distributed with the package LK under the terms of the 
+# GNU Public License, version 2 or later.
+# See the file named COPYING for the details of the license.
+
+package TSP;  # Use cap first name, so it's not a pragma.
+require	Exporter;
+@@ISA 	= qw(Exporter);
+@@EXPORT	= qw(new read write geo_types two_d_types explicit_types);
+
+use strict;
+
+my(%two_d_types)=("EUC_2D",2,"CEIL_2D",3);
+my(%geo_types)=%two_d_types;
+my(%explicit_types)=("EXPLICIT",1);
+my(@@edge_types)=("EXPLICIT",1,"EUC_2D",2,"CEIL_2D",3);
+my(@@edge_formats)=("LOWER_DIAG_ROW",101,"FULL_MATRIX",102,"UPPER_ROW",103);
+my($float_expr)="(-?\\d+\\.?\[0-9\]*|\\.\[0-9\]+)";
+
+# Class methods
+# Class method new allocates a new TSP object and blesses it into the TSP 
+# package (or whatever subclass inherits this).
+sub new {
+   my $this = shift;
+   my $class = ref($this) || $this;
+   my $self = {};
+   bless $self, $class;
+   $self->initialize();
+   return $self;
+}
+
+# Instance methods
+# Instance method initialize sets default values for common fields. 
+# The instance still needs populating with edge lengths or coordinates.
+sub initialize {
+	my ($self) = shift;
+	$$self{'n'}=0;
+	$$self{'name'}="(no name)";
+	$$self{'comment'}="(no comment)";
+	$$self{'type'}="(no type)";
+	$$self{'edge_type'}="(no edge type)";
+	$$self{'edge_format'}="(no edge format)";
+}
+
+sub is_two_d { # Answer whether I am a 2-d geometric instance.
+	my $self = shift;
+	return $two_d_types{$$self{'edge_type'}};
+}
+
+sub is_geo { # Answer whether I am a geometric instance.
+	my $self = shift;
+#	print STDERR "geo types are: ", keys(%geo_types),"\n";
+	return $geo_types{$$self{'edge_type'}};
+}
+
+sub is_explicit { # Answer whether I have explicit edge weights.
+	my $self = shift;
+	return $explicit_types{$$self{'edge_type'}};
+}
+
+# read: fileHandle
+# Read the TSPLIB instance from the filehandle and populate myself with it.
+sub read {
+	my $self = shift;
+	my $fh = shift;	# file handle
+	my $line;
+
+	# Parse the header
+	HEADER: while($line=<$fh>) {
+		$_ = $line;
+		if (m/^\s*NAME\s*:\s*(.*)/) {
+			$$self{'name'}=$1;
+		} elsif (m/^\s*COMMENT\s*:\s*(.*)/) {
+			$$self{'comment'}=$1;
+		} elsif (m/^\s*TYPE\s*:\s*(.*)/) {
+			my $str = $1;
+			$str =~ m/^TSP$/ 
+				|| die "TSP->read: I know TSPLIB files of type TSP, not $1";
+			$$self{'type'}=$str;
+		} elsif (m/^\s*EDGE_WEIGHT_TYPE\s*:\s*(.*)/) {
+			$$self{'edge_type'}=$1;
+		} elsif (m/^\s*DIMENSION\s*:\s*(.*)/) { # The number of cities
+			$$self{'n'}=0+$1;
+		} elsif (m/^\s*NODE_COORD_SECTION\s*/) {
+			if ( $self->is_geo ) { last HEADER; }
+			else { 
+				my ($edge_type) = $$self{'edge_type'};
+				die "TSP->read: Can't have NODE_COORD_SECTION in $edge_type";
+			}
+		} else { die "TSP->read: Unrecognized line: $line"; }
+	}
+
+	# Parse the body
+	SWITCH: {
+		&two_d_body_from_handle($self,$fh),
+			last SWITCH if (&is_two_d($self));
+		&explicit_body_from_handle($self,$fh),
+			last SWITCH if (&is_explicit($self));
+		die "TSP->Unkown TSPLIB type";
+	}
+	
+	return $self;
+}
+
+# two_d_body_from_handle: fileHandle
+# Coordinates are stored in the 'coords' attribute of the object, and is
+# 1-based array of references to 2-element arrays of double precision floating
+# point numbers.
+sub two_d_body_from_handle {
+	my $self = shift;
+	my $fh = shift;
+	my $line;
+	my $i=1;		# The array is 1-based, dammit.
+	my $n = $$self{'n'};
+	my @@coords=();
+	LINE: while( $line=<$fh> ) {
+		last LINE if ( $i > $n );
+		if ( $line=~ m/^\s*\d+\s+$float_expr\s+$float_expr/o ) {
+			$coords[$i] = [ ($1+0), ($2+0) ];
+			#print STDERR "$coords[$i][1]\n";
+			$i++;
+			#print STDERR ".";
+		}
+	}
+	if ( $i-1 != $$self{'n'} ) { 
+		die "Wrong number of coordinates: $i instead of $$self{'n'}";
+	}
+	$$self{'coords'} = \@@coords;
+#print STDERR "coords are $$self{'coords'}\n";
+	return $self;
+}
+
+
+# write: fileHandle
+# Write the instance in TSPLIB form onto the filehandle.
+sub write {
+	my $self = shift;
+	my $fh = shift;	# file handle
+
+	print $fh "NAME: $$self{'name'}\n";
+	print $fh "COMMENT: $$self{'comment'}\n";
+	print $fh "TYPE: $$self{'type'}\n";
+	print $fh "EDGE_WEIGHT_TYPE: $$self{'edge_type'}\n";
+	print $fh "DIMENSION: $$self{'n'}\n";
+	if ( &is_two_d($self) ) {
+		print $fh "NODE_COORD_SECTION\n";
+		my $i;
+		for $i (1..$$self{'n'}) {
+			my $x = $$self{'coords'}[$i][0];
+			my $y = $$self{'coords'}[$i][1];
+			print $fh "$i\t$x\t$y\n";
+		}
+	}
+	print $fh "EOF\n";
+	
+	return $self;
+}
+
+# Add a second reference to satisfy Perl -w.
+#my @@foo = @@geo_types;
+#my @@bar = @@two_d_types;
+
+# $foo[0] ne $bar[0];  # This is *REALLY* stupid; it's just to get around Perl -w
+1;
+@

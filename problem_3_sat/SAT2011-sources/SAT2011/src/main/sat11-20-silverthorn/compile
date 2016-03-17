@@ -1,0 +1,88 @@
+#!/bin/sh
+
+DEST=$PWD
+ROOT=$PWD/borg-sat-11.03.02b
+
+rm -rf march_hi
+rm -rf cryptominisat-2.9.0
+rm -rf glucoser-1.0
+
+rm -rf borg
+rm -rf borg-sat-11.03.02b
+
+tar xzf borg-sat-11.03.02b.tar.gz
+rm $ROOT/solvers/cryptominisat-2.9.0/cryptominisat-2.9.0Linux64 $ROOT/solvers/march_hi/march_hi $ROOT/solvers/glucosER/glucoser_static
+
+cd $DEST
+tar xzf cryptominisat-2.9.0.tar.gz
+cd cryptominisat-2.9.0
+./configure
+make
+cp cryptominisat $ROOT/solvers/cryptominisat-2.9.0/cryptominisat-2.9.0Linux64
+
+cd $DEST
+unzip march_hi.zip
+cd march_hi
+make
+cp march_hi $ROOT/solvers/march_hi/march_hi
+
+cd $DEST
+tar xvzf glucoser-1.0.tar.gz
+cd glucoser-1.0/ER
+make
+cp glucoser $ROOT/solvers/glucosER/glucoser_static
+
+rm -rf $ROOT/cargo/build/* $ROOT/borg/build/* 
+
+cd $ROOT/cargo/build
+cmake -DCMAKE_INSTALL_PREFIX=. ../src
+make install
+
+cd $ROOT/borg/build
+cmake -DCMAKE_INSTALL_PREFIX=. ..
+make install
+
+cd $ROOT/solvers/run-1.4
+make distclean
+./configure
+make
+
+cd $ROOT/solvers/TNM
+rm TNM
+make
+
+cd $ROOT/solvers/lingeling-276-6264d55-100731
+make clean
+./configure
+make
+
+cd $ROOT/solvers/precosat-570-239dbbe-100801/
+./configure
+make
+
+cd $ROOT
+python calibrate etc/local_speed
+
+
+# binaries from previous competitions
+cat <<EOF > /tmp/list
+66e89d2f6cc83b08cc375d9da949b205  solvers/FH/FH
+a1553d98cdc8632698a2c40a3f890204  solvers/NCVWr/NCVWr
+7f553541b6c8028180ac48d39cb6946e  solvers/SApperloT/SApperloT-base
+cead572e3ae4215a8975427edb1db9a6  solvers/adaptg2wsat2009++/adaptg2wsat2009++
+0552098a1a637d6795b8d5ac7b3c630c  solvers/glucose/glucose_static
+4fcfb52cf43647590054700c09a370a0  solvers/gnovelty+2/gnovelty+2
+277dcffb656b573a34c67a0465176fd3  solvers/hybridGM3/hybridGM3
+6c414f6c99c79999fcbc46dabb166b64  solvers/iPAWS/iPAWS
+9618885681958aedfb08c60c9d3493f4  solvers/kcnfs-2006/kcnfs-2006
+EOF
+
+md5sum -c /tmp/list
+
+# install 
+
+LIST='solve cargo/build/lib borg/build/lib etc/borg-mix+class.industrial.pickle  etc/borg-mix+class.random.pickle  etc/local_speed  etc/model_speed solvers/FH/FH solvers/NCVWr/NCVWr solvers/SApperloT/SApperloT-base  solvers/adaptg2wsat2009++/adaptg2wsat2009++ solvers/glucose/glucose_static solvers/gnovelty+2/gnovelty+2 solvers/hybridGM3/hybridGM3 solvers/iPAWS/iPAWS solvers/kcnfs-2006/kcnfs-2006 solvers/run-1.4/run solvers/TNM/TNM solvers/lingeling-276-6264d55-100731/lingeling solvers/lingeling-276-6264d55-100731/plingeling solvers/precosat-570-239dbbe-100801/precosat solvers/cryptominisat-2.9.0/cryptominisat-2.9.0Linux64 solvers/march_hi/march_hi solvers/glucosER/glucoser_static'
+mkdir $DEST/borg
+tar cf - $LIST | tar -C $DEST/borg -xf -
+
+#

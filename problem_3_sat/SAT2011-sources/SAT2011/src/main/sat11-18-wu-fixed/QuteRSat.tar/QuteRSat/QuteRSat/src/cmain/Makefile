@@ -1,0 +1,4 @@
+#COPTIMIZE = 
+
+include ../template.mk
+

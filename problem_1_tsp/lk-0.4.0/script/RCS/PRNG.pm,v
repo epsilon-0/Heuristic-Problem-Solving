@@ -1,0 +1,97 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1;
+comment	@# @;
+
+
+1.1
+date	97.12.05.20.57.19;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Random number generators as a Perl class.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#! /local/bin/perl -w
+# Generated automatically from PRNG.pm.in by configure.
+
+# This is a Perl package providing a pseudo-random number generator.
+#
+# This file is in the public domain, and comes with no warranty.
+# David Neto, November 21, 1997.
+#
+# TODO: encapsulate it as a Perl class so multiple generators may exist at
+# once, so separate streams may be repeatable.
+
+package PRNG;  # Use cap first name, so it's not a pragma.
+require	Exporter;
+@@ISA 	= qw(Exporter);
+@@EXPORT	= qw(unif01 unif_range unif_int normal);
+
+use strict;
+require GB_flip; import GB_flip;
+
+sub unif_int { 
+	# Answer an integer from a uniformly distribution over 0,...,m-1
+	my ($m)=shift; 
+	return &gb_unif_rand($m);
+}
+
+sub unif01 { # Uniform sample over [0,1), to exactly 53 bits precision.
+	my ($a,$b,$quo);
+	# Assert an ordering.
+	$a = &unif_int(1<<30);
+	$b = &unif_int(1<<23);
+	$quo = (1<<30);
+	$quo *= (1<<23);
+	$quo -= 1;  # This likely has no effect, but theoretically forces 
+		# the sampling interval to be closed at 1.
+	return ($a*(1<<30) + $b)/$quo;
+}
+
+sub unif_range {
+	# Answer a floating point number from a uniform distribution over [a,b]
+	my($a)=shift;
+	my($b)=shift;
+	return $a+(($b-$a)*&unif01);
+}
+
+my($norm_saved)=0;
+my($norm_have_saved)=0;
+sub norm { # Answer a normally distributed floating point number
+	# One argument, the standard deviation
+	# See Knuth's TAOCP, vol 2, sec 3.4.1, algorithm P.
+	my($stddev)=shift;
+	my($v1,$v2,$s);
+	if ( $norm_have_saved ) { 
+		$norm_have_saved = 0; 
+		return $norm_saved*$stddev; 
+	} else {
+		do { ($v1,$v2) = (2*&unif01-1,2*&unif01-1); 
+			$s = $v1*$v1 + $v2*$v2;
+		} while ( $s >= 1 );
+		$norm_saved = $v2*sqrt(-2*log($s)/$s); 
+		$norm_have_saved=1;
+		return $v1*sqrt(-2*log($s)/$s)*$stddev;
+	}
+}
+
+
+sub PRNG_self_test {
+	# GB_flip will test istelf on startup...
+	1;
+}
+
+&PRNG_self_test;
+@

@@ -1,0 +1,941 @@
+head	1.19;
+access;
+symbols
+	zero-four-zero:1.19;
+locks
+	neto:1.19;
+comment	@# @;
+
+
+1.19
+date	97.04.30.17.49.08;	author neto;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	97.04.23.18.46.24;	author neto;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	97.04.22.22.28.02;	author neto;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	97.04.22.21.47.00;	author neto;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	97.04.22.19.02.55;	author neto;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	97.03.19.22.17.29;	author neto;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	97.02.07.17.58.11;	author neto;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	97.02.07.17.47.44;	author neto;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	97.01.22.12.51.56;	author neto;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	97.01.22.10.19.30;	author david;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	97.01.21.19.35.58;	author david;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	96.09.19.15.54.32;	author neto;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	96.08.20.11.36.16;	author neto;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	96.08.16.16.27.09;	author neto;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	96.08.15.13.57.53;	author neto;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	96.08.15.13.56.43;	author neto;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	96.08.15.11.18.52;	author neto;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	96.07.30.16.04.11;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	96.07.26.17.12.41;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Makefile for the lk program
+@
+
+
+1.19
+log
+@Fixed the OS version number checkers.
+@
+text
+@# Makefile for LK, the program.
+# David Neto
+# netod@@acm.org
+#
+# $Header: /h/t/neto/graph/tsp/lk/RCS/Makefile,v 1.18 1997/04/23 18:46:24 neto Exp neto $
+#
+
+
+#  SGB stuff is needed for gb_flip
+SGBLIBDIR = -L$(HOME)/local/lib
+#SGBLIBDIR = -L/usr/local/lib
+SGBINCLUDEDIR = -I$(HOME)/local/share/include/sgb
+#SGBINCLUDEDIR = -I/usr/local/include/sgb
+
+CFLAGS=
+CTANGLE = ctangle -bhp # Turn off banner, happy, progress messages
+CWEAVE = cweave
+TEX = tex
+
+# Anywhere GCC is available:
+GCCWARNINGS = -Wall -Wpointer-arith -Wcast-qual -Wcast-align \
+	-Wwrite-strings -Wconversion -Wstrict-prototypes -Wmissing-prototypes
+CC = gcc -ansi -pedantic $(GCCWARNINGS)
+
+
+# For SGI machines
+#  I Use -xansi instead of -ansi so that some intrinsics are inlined.  hypot?
+#SGIWARNINGS = -fullwarn -xansi
+# Turn warnings off if compiling for COFF.
+SGIWARNINGS =  -xansi
+#CC = cc $(SGIWARNINGS) 
+# The following is for Luk's experiments
+#CC = cc $(SGIWARNINGS) -non_shared
+
+
+# For speed tests
+# 	On the SPARCs, use
+#OPTIMIZE = -O2
+#	On the RS6K, use
+#OPTIMIZE = -O3 -qstrict
+#   for ordinary debugging, use
+#OPTIMIZE = -pg -g
+#	for profiling, add -pg
+OPTIMIZE = -O
+#OPTIMIZE = -O3
+#OPTIMIZE = -O2
+#OPTIMIZE =
+LINKOPTIMIZE = -O2	
+# IRIX linker doesn't like -O3; it asks for -O2 or lower.
+
+# For debugging purposes
+# -DERROR_NO_CHECK to turn off assertion checking.
+# -DLENGTH_LONG_LONG to use long long. 
+# -DLENGTH_DOUBLE to use doubles.
+# -DLENGTH_FLOAT to use floats. Otherwise, use int.
+# -DCOST_USE_HYPOT to use the hypot function instead of sqrt.
+# -DJBMR_ALLOW_VERBOSE turns on debugging output for JBMR, 
+#		subject to the verbose command line option
+# -DJBMR_WATCH_THIS_CITY turns on very verbose debugging output for JBMR, 
+#		when t[1] is this city (define this symbol to that number).
+# -DJBMR_REQUEST_SPLIT_GAIN_VAR   If an inexact type is specified for length
+#       then this option makes the LK optimization phase compute 
+#		cumulative gains in a split variable: positive and negative parts.
+#		Turn this option on if you don't trust summing an alternating series
+#		with floating point numbers.  :)
+#		However, I do use machine epsilon intelligently in cutting off the
+#		search, so these alternating sums shouldn't be such an issue anymore.
+#       Also, if the user specifies a probe depth cutoff, then these 
+#		sums shouldn't get too long.
+# -DLK_CHECK_KDTREE makes lk check that all nn computations are correct.
+# -DKD_ALLOW_VERBOSE turns on debugging output for KDTREE, 
+#		subject to the verbose command line option
+# -DKD_CHECK_PARTITIONING makes the kdtree building routine check that
+#		it has partitioned correctly
+# -DKD_CHECK_BBOX makes the kdtree building routine check that
+#		it computes its bounding boxes correctly.
+# -DKD_BUILD_SMALLEST_SEGMENT_FIRST builds the kd tree smallest segment first
+# -DKD_NO_HIDDEN_BIT makes kd not compile any hidden bit stuff at all
+# -DKD_NO_HIDDEN_RNN_TEST makes kd not test for the hidden bit before recursing
+# 		in E2_rnn
+# -DQSORT_DETERMINATE makes qsort calls completely determinate, so that
+# 		we preserve order of objects comparing as equal.  
+#		Also consider option -S dsort.
+# -DCITY_ORDER_INVARIANT  Compute the same results no matter how the cities
+#   	are reordered.  This does not necessarily imply QSORT_DETERMINATE.  
+#       (not implemented yet)
+# -DFIX_INCLUDES to compensate for no prototypes for some functions under
+# 		SunOS and IRIX
+# -DARRAY_DEBUG  non-zero if we check precondition for array_flip
+# 		Greater than 1000 forces an internal consistency check (very slow).
+# -DTWOLEVEL_FLIP_CHECK_PRECONDITION  
+#		check precondition for twolevel_flip
+# -DTWOLEVEL_DEBUG
+#		enable twolevel_debug routines to
+#		compare twolevel operations with array implementation.
+#DEBUG = -DLK_CHECK_KDTREE -DKD_CHECK_BBOX -DKD_CHECK_PARTITIONING -DKD_ALLOW_VERBOSE
+#DEBUG = -DERROR_NO_CHECK
+#DEBUG = -DKD_BUILD_SMALLEST_SEGMENT_FIRST
+#DEBUG = -DQSORT_DETERMINATE
+#DEBUG = -DJBMR_ALLOW_VERBOSE -DJBMR_WATCH_THIS_CITY=999
+#DEBUG = -DLENGTH_DOUBLE
+#DEBUG = -DLENGTH_DOUBLE -DJBMR_REQUEST_SPLIT_GAIN_VAR
+#DEBUG = -DLENGTH_DOUBLE -DJBMR_LIMIT_PROBE_DEPTH -DJBMR_REQUEST_SPLIT_GAIN_VAR
+#DEBUG = -DLENGTH_DOUBLE -DJBMR_LIMIT_PROBE_DEPTH
+#DEBUG = -DLENGTH_FLOAT
+#DEBUG = -DLENGTH_FLOAT -DJBMR_LIMIT_PROBE_DEPTH
+#DEBUG = -DLENGTH_FLOAT -DJBMR_LIMIT_PROBE_DEPTH -DJBMR_REQUEST_SPLIT_GAIN_VAR
+#DEBUG = -DLENGTH_FLOAT -DJBMR_REPORT_DEPTHS -DJBMR_LIMIT_PROBE_DEPTH
+#DEBUG = 
+DEBUG = -DLENGTH_DOUBLE -DJBMR_REQUEST_SPLIT_GAIN_VAR -DJBMR_ALLOW_VERBOSE
+
+#  Use the following for SunOS and IRIX
+#SYSTEM_FIXES = -DFIX_INCLUDES
+SYSTEM_FIXES = 
+
+#  SunOS 5.4 is broken because it puts definition of struct rusage in
+#  sys/rusage.h instead of sys/resource.h
+#  You might also need to add /usr/ucblib to LD_LIBRARY_PATH
+OS_VERSION_MAJOR = `uname -r | sed -e "s/\\([0-9]*\\)\\..*/\\1/"`
+OS_VERSION_MINOR = `uname -r | sed -e "s/[0-9]*\\.\\([0-9]*\\).*/\\1/"`
+
+SYSTEM_FIXES += -DOS_VERSION_MAJOR=$(OS_VERSION_MAJOR) -DOS_VERSION_MINOR=$(OS_VERSION_MINOR)
+SOLARIS_BSD_LIB = -L/usr/ucblib -lucb
+#SOLARIS_BSD_LIB = 
+
+
+# -DLK_SHOW_AFTER_SFC shows (in PostScript output) the cities 
+#					after sorted according to my space filling curve.
+# -DKD_SHOW_KDTREE shows (in PostScript output) the kdtree partitioning.
+# -DJBMR_REPORT_DEPTHS   show how far probes went, and how far moves went
+#OUTPUT = -DLK_SHOW_AFTER_SFC
+#OUTPUT = -DJBMR_REPORT_DEPTHS
+#OUTPUT = -DKD_SHOW_KDTREE
+#OUTPUT = -DKD_SHOW_KDTREE -DJBMR_REPORT_DEPTHS
+OUTPUT =
+
+# Tabu check styles
+# One of {TABU_JBMR,TABU_Papadimitriou} and one of {TABU_LINEAR,TABU_SPLAY}
+#TABU = -DTABU_JBMR -DTABU_LINEAR
+TABU = -DTABU_JBMR -DTABU_SPLAY
+
+CFLAGS = $(OPTIMIZE) $(DEBUG) $(TABU) $(SYSTEM_FIXES) $(OUTPUT)
+#LINKFLAGS = $(LINKOPTIMIZE) $(SOLARIS_BSD_LIB)
+LINKFLAGS = $(LINKOPTIMIZE)
+
+.SUFFIXES : 
+.SUFFIXES : .c .w .tex .dvi .idx $(SUFFIXES)
+
+UTILITIES = countpages distcalc.w number.pl unifd.w grid.w sier.w ifs.w \
+	doitfly.double
+RCSSTUFF = RCS/*
+
+MAINSOURCES = copyrt.w webdefs.w prolog.ps \
+	error.w memory.w read.w resource.w \
+	pool.w kdtree.w construct.w array.w twolevel.w dsort.w nn.w \
+	dict.w jbmr.w lk.w
+SOURCES = gb_flip.ch length.w fixincludes.w $(MAINSOURCES)
+
+CSOURCES = error.c memory.c read.c resource.c \
+	pool.c kdtree.c construct.c array.c twolevel.c dsort.c nn.c \
+	dict.c jbmr.c lk.c gb_flip.c
+AUXCSOURCES =  ifs.c unifd.c
+OBJS = error.o memory.o read.o resource.o \
+	pool.o kdtree.o construct.o array.o twolevel.o dsort.o nn.o \
+	dict.o jbmr.o lk.o
+DOCS = error.dvi memory.dvi length.dvi read.dvi resource.dvi \
+	pool.dvi kdtree.dvi construct.dvi array.dvi twolevel.dvi dsort.dvi nn.dvi \
+	dict.dvi jbmr.dvi lk.dvi fixincludes.dvi sier.dvi unifd.dvi ifs.dvi
+
+lk : gb_flip.o $(OBJS) compile.o
+	$(CC) $(LINKFLAGS) -o lk gb_flip.o compile.o $(OBJS) -lm
+
+lk.sgi.jsg : lk
+	mv lk lk.sgi.jsg
+
+pagecount : $(DOCS)
+	wc *.log
+
+linecount : $(CSOURCES) $(AUXCSOURCES)
+	wc $(CSOURCES) $(AUXCSOURCES)
+
+
+striphashline : $(CSOURCES)
+	striphashline.pl gb_flip.c
+	striphashline.pl error.c 
+	striphashline.pl memory.c 
+	striphashline.pl read.c 
+	striphashline.pl resource.c 
+	striphashline.pl pool.c 
+	striphashline.pl kdtree.c 
+	striphashline.pl construct.c 
+	striphashline.pl array.c 
+	striphashline.pl twolevel.c 
+	striphashline.pl dsort.c 
+	striphashline.pl nn.c 
+	striphashline.pl dict.c 
+	striphashline.pl jbmr.c 
+	striphashline.pl lk.c 
+	striphashline.pl gb_flip.h
+	striphashline.pl error.h
+	striphashline.pl memory.h
+	striphashline.pl read.h
+	striphashline.pl resource.h
+	striphashline.pl pool.h
+	striphashline.pl kdtree.h
+	striphashline.pl construct.h
+	striphashline.pl array.h
+	striphashline.pl twolevel.h
+	striphashline.pl dsort.h
+	striphashline.pl nn.h
+	striphashline.pl dict.h
+	striphashline.pl jbmr.h
+	striphashline.pl lk.h
+	
+	
+	
+jbmrNO : jbmr.c
+	$(CC) $(DEBUG) $(TABU) -c jbmr.c
+
+jbmrO : jbmr.c
+	$(CC) -O $(DEBUG) $(TABU) -c jbmr.c
+
+jbmrO2 : jbmr.c
+	$(CC) -O2 $(DEBUG) $(TABU) -c jbmr.c
+
+jbmrO3 : jbmr.c
+	$(CC) -O3 -qstrict $(DEBUG) $(TABU) -c jbmr.c
+
+jbmrOcompact : jbmr.c
+	$(CC) -O -qcompact $(DEBUG) $(TABU) -c jbmr.c
+
+unifd : unifd.o gb_flip.o
+	$(CC) unifd.o gb_flip.o -o unifd
+
+unif : unif.o gb_flip.o
+	$(CC) unif.o gb_flip.o -o unif
+
+sier : sier.o gb_flip.o
+	$(CC) sier.o gb_flip.o -o sier -lm
+
+ifs : ifs.o gb_flip.o
+	$(CC) ifs.o gb_flip.o -o ifs -lm
+
+#grid : grid.o
+#	$(CC) grid.o -o grid
+
+makeit : 
+	rm -f makeit
+	make -n >makeit
+
+compile.c : $(SOURCES) Makefile
+	rm -f compile.o compile.c
+	echo const char \*compile=\" $(CC) $(CFLAGS) \"\; >compile.c
+	# $(CC) $(CFLAGS) -c compile.c
+
+Makefile :
+	echo Making makefile for compile.c
+
+out: lk
+	rm -f out
+	lk run/lin318.tsp -r tld >out
+
+
+distcalc : distcalc.o read.o error.o resource.o memory.o gb_flip.o 
+	$(CC) $(CFLAGS) -o distcalc distcalc.o read.o error.o resource.o memory.o gb_flip.o -lm
+
+docs : $(DOCS)
+
+csources : $(CSOURCES)
+	wc $(CSOURCES)
+
+dicttest : gb_flip.o pool.o dicttest.o dict.o error.o memory.o resource.o
+	$(CC) $(CFLAGS) gb_flip.o pool.o dicttest.o dict.o error.o memory.o resource.o -o dicttest
+
+dicttest.c : dict.w
+	$(CTANGLE) dict.w
+
+$(MAINSOURCES) : length.h
+$(MAINSOURCES) : fixincludes.h
+
+.w.c :
+	if [ -f $*.ch ]; then $(CTANGLE) $*.w $*.ch; else $(CTANGLE) $*.w; fi
+
+.w.o :
+	# echo making $*.w into $*.o
+	$(CC) $(CFLAGS) -c $*.c
+
+.w.tex : webdefs.w copyrt.w
+	echo making $*.w into $*.tex
+	$(CWEAVE) $*.w
+
+.w.idx :
+	echo making $*.w into $*.idx
+	$(CWEAVE) $*.w
+
+.tex.dvi : 
+	echo making $*.tex into $*.dvi
+	make $*.idx
+	$(TEX) $*.tex
+
+
+clean : 
+	rm -f core *.o *.dvi *.idx *.log *.scn *.toc
+	$(CTANGLE) error.w
+	$(CTANGLE) length.w
+	$(CTANGLE) memory.w
+	$(CTANGLE) fixincludes.w
+	$(CTANGLE) lk.w
+
+veryclean : clean
+	rm -f $(CSOURCES) $(AUXCSOURCES)
+
+# Force the genereration of error.h when error.w has changed.
+error.h : error.c
+
+length.h : length.w
+	$(CTANGLE) length.w
+
+dict.h : dict.w
+	$(CTANGLE) dict.w
+
+gb_flip.o : gb_flip.h gb_flip.c
+	$(CC) $(CFLAGS) -c gb_flip.c
+
+gb_flip.h : gb_flip.ch
+	$(CTANGLE) gb_flip.w gb_flip.ch
+
+gb_flip.c : gb_flip.ch
+	$(CTANGLE) gb_flip.w gb_flip.ch
+
+# Force the genereration of memory.h when memory.w has changed.
+memory.h : memory.c
+
+tgz :
+	rm -f lk.tar.gz
+	tar cvf lk.tar $(SOURCES) $(RCSSTUFF) $(UTILITIES) Makefile
+	gzip --best lk.tar
+
+
+test :
+	rm -f /tmp/neto.out.test
+	unif.sparc 62 100000 failure | lk.sparc -v 125 - -S dsort -r two-level --noround >/tmp/neto.out.test
+@
+
+
+1.18
+log
+@Cleaned up for Solaris 2
+@
+text
+@d5 1
+a5 1
+# $Header: /h/t/neto/graph/tsp/lk/RCS/Makefile,v 1.17 1997/04/22 22:28:02 neto Exp neto $
+d102 1
+a102 1
+DEBUG = -DLENGTH_DOUBLE -DJBMR_REQUEST_SPLIT_GAIN_VAR
+d110 1
+d113 2
+a114 2
+SYSTEM_FIXES = -DFIX_INCLUDES
+#SYSTEM_FIXES = 
+d119 3
+a121 2
+OS_VERSION_MAJOR = `uname -r | sed -e "s/\\.[0-9]*//"`
+OS_VERSION_MINOR = `uname -r | sed -e "s/[0-9]*\\.//"`
+d143 2
+a144 1
+LINKFLAGS = $(LINKOPTIMIZE) $(SOLARIS_BSD_LIB)
+@
+
+
+1.17
+log
+@Now it compiles under Sun
+5.4
+Will fix for portability.
+@
+text
+@d5 1
+a5 1
+# $Header: /h/t/neto/graph/tsp/lk/RCS/Makefile,v 1.16 1997/04/22 21:47:00 neto Exp neto $
+d117 1
+d121 3
+d141 1
+a141 1
+LINKFLAGS = $(LINKOPTIMIZE) $(DEBUG) $(TABU) -L/usr/ucblib -lucb
+@
+
+
+1.16
+log
+@Support SunOS 5.4 braindeadness about struct rusage.
+@
+text
+@d5 1
+a5 1
+# $Header: /h/t/neto/graph/tsp/lk/RCS/Makefile,v 1.15 1997/04/22 19:02:55 neto Exp neto $
+d137 1
+a137 1
+LINKFLAGS = $(LINKOPTIMIZE) $(DEBUG) $(TABU)
+@
+
+
+1.15
+log
+@Attempt to fix sys/resource.h behaviour under Solaris 2.5.
+This is done by adding -I/usr/bsdinclude.
+@
+text
+@d5 1
+a5 1
+# $Header$
+a34 4
+#  For Solaris 2.5
+BSDINCLUDE = -I/usr/ucbinclude
+#BSDINCLUDE =
+
+d115 6
+d136 1
+a136 1
+CFLAGS = $(OPTIMIZE) $(DEBUG) $(TABU) $(SYSTEM_FIXES) $(OUTPUT) $(BSDINCLUDE)
+@
+
+
+1.14
+log
+@Added linecount, pagecount lk.sgi.jsg and veryclean targets.
+@
+text
+@d3 1
+a3 1
+# neto@@eecg.utoronto.ca
+d5 1
+a5 1
+# $Header: /tsa/a0/neto/graph/tsp/lk/RCS/Makefile,v 1.13 1997/02/07 17:58:11 neto Exp neto $
+d12 1
+a12 1
+SGBINCLUDEDIR = -I$(HOME)/local/include
+d23 3
+a25 1
+#CC = gcc -ansi -pedantic $(GCCWARNINGS)
+d31 1
+a31 1
+CC = cc $(SGIWARNINGS) 
+d35 5
+d134 1
+a134 1
+CFLAGS = $(OPTIMIZE) $(DEBUG) $(TABU) $(SYSTEM_FIXES) $(OUTPUT)
+@
+
+
+1.13
+log
+@Added dependence of .w to .tex on webdefs and copyright files.
+@
+text
+@d5 1
+a5 1
+# $Header: /tsa/a0/neto/graph/tsp/lk/RCS/Makefile,v 1.12 1997/02/07 17:47:44 neto Exp neto $
+d23 1
+a23 1
+CC = gcc -ansi -pedantic $(GCCWARNINGS)
+d29 1
+a29 1
+#CC = cc $(SGIWARNINGS) 
+d119 2
+a120 2
+OUTPUT = -DKD_SHOW_KDTREE -DJBMR_REPORT_DEPTHS
+#OUTPUT =
+d124 2
+a125 2
+TABU = -DTABU_JBMR -DTABU_LINEAR
+#TABU = -DTABU_JBMR -DTABU_SPLAY
+d146 1
+d152 1
+a152 1
+	dict.dvi jbmr.dvi lk.dvi fixincludes.dvi
+d157 10
+d294 2
+@
+
+
+1.12
+log
+@Added ifs.w
+@
+text
+@d5 1
+a5 1
+# $Header: /tsa/a0/neto/graph/tsp/lk/RCS/Makefile,v 1.11 97/01/22 12:51:56 neto Exp $
+d261 1
+a261 1
+.w.tex :
+d269 1
+a269 1
+.tex.dvi :
+@
+
+
+1.11
+log
+@Added header.
+Removed double entry for prolog.ps in tgz target.
+@
+text
+@d5 1
+a5 1
+# $Header$
+d15 1
+d26 6
+a31 2
+SGIWARNINGS = -fullwarn -xansi
+#CC = cc $(SGIWARNINGS)
+a67 3
+# -DLK_SHOW_AFTER_SFC shows (in PostScript output) the cities 
+#					after sorted according to my space filling curve.
+# -DKD_SHOW_KDTREE shows (in PostScript output) the kdtree partitioning.
+d83 1
+d99 2
+a100 2
+#DEBUG = -DLENGTH_DOUBLE -DJBMR_REPORT_DEPTHS -DJBMR_LIMIT_PROBE_DEPTH -DJBMR_REQUEST_SPLIT_GAIN_VAR
+#DEBUG = -DLENGTH_DOUBLE -DJBMR_REPORT_DEPTHS -DJBMR_LIMIT_PROBE_DEPTH
+d104 1
+a104 1
+DEBUG = -DLENGTH_FLOAT -DJBMR_LIMIT_PROBE_DEPTH -DJBMR_REQUEST_SPLIT_GAIN_VAR
+a105 5
+#DEBUG = -DFIX_INCLUDES -DLENGTH_DOUBLE
+#DEBUG = -DFIX_INCLUDES -DLENGTH_DOUBLE -DJBMR_ALLOW_VERBOSE
+#DEBUG = -DFIX_INCLUDES -DJBMR_ALLOW_VERBOSE
+#DEBUG = -DFIX_INCLUDES -DLENGTH_FLOAT
+#DEBUG = -DFIX_INCLUDES
+d108 13
+d124 2
+a125 2
+#TABU = -DTABU_JBMR -DTABU_LINEAR
+TABU = -DTABU_JBMR -DTABU_SPLAY
+d127 1
+a127 1
+CFLAGS = $(OPTIMIZE) $(DEBUG) $(TABU)
+d133 2
+a134 1
+UTILITIES = countpages distcalc.w number.pl unifd.w grid.w doitfly.double
+d156 34
+d210 6
+@
+
+
+1.10
+log
+@Added copyrt.w
+@
+text
+@d1 8
+d255 1
+a255 1
+	tar cvf lk.tar $(SOURCES) $(RCSSTUFF) $(UTILITIES) Makefile prolog.ps
+@
+
+
+1.9
+log
+@Added more flags.
+Also, grid target.
+@
+text
+@d69 4
+a72 1
+# 		we preserve order of objects comparing as equal.
+d88 1
+a88 1
+DEBUG = -DLENGTH_DOUBLE -DJBMR_REPORT_DEPTHS -DJBMR_LIMIT_PROBE_DEPTH -DJBMR_REQUEST_SPLIT_GAIN_VAR
+d91 4
+d117 1
+a117 1
+MAINSOURCES = webdefs.w prolog.ps \
+@
+
+
+1.8
+log
+@Update for IRIX.
+Also handle change files.
+Also have a csources target.
+@
+text
+@d14 1
+a14 1
+#CC = gcc -ansi -pedantic $(GCCWARNINGS)
+d16 3
+a18 2
+SGIWARNINGS = -fullwarn -ansi
+CC = cc $(SGIWARNINGS)
+d28 2
+a29 2
+#OPTIMIZE = -O
+OPTIMIZE = -O3
+d37 4
+a40 1
+# -DLENGTH_LONG_LONG to use long long. Otherwise, use long.
+d45 9
+d55 3
+d71 1
+a71 1
+# 		SunOS
+d84 9
+a92 2
+DEBUG = -DFIX_INCLUDES
+#DEBUG =
+d107 1
+a107 1
+UTILITIES = countpages distcalc.w
+d144 3
+d150 3
+d176 1
+d214 1
+d242 5
+@
+
+
+1.7
+log
+@Made cweave less verbose.
+Commented out a an echo.
+@
+text
+@d14 4
+a17 3
+CC = gcc -ansi -pedantic $(GCCWARNINGS)
+# For IBM AIX machines
+#CC = cc   
+d27 3
+a29 1
+OPTIMIZE = -O
+d31 2
+d56 7
+d68 3
+a70 1
+DEBUG = 
+d79 1
+d82 1
+a82 1
+.SUFFIXES : .w .tex .dvi .idx $(SUFFIXES)
+d89 1
+a89 1
+	pool.w kdtree.w construct.w array.w dsort.w nn.w \
+d93 3
+d97 1
+a97 1
+	pool.o kdtree.o construct.o array.o dsort.o nn.o \
+d100 1
+a100 1
+	pool.dvi kdtree.dvi construct.dvi array.dvi dsort.dvi nn.dvi \
+d104 1
+a104 1
+	$(CC) $(CFLAGS) -o lk gb_flip.o compile.o $(OBJS) -lm
+d106 3
+d121 3
+d131 1
+a131 1
+	$(CC) $(CFLAGS) -c compile.c
+d138 1
+a138 1
+	lk run/lin105.tsp >out
+d146 1
+d157 3
+a161 1
+	$(CTANGLE) $*.w
+@
+
+
+1.6
+log
+@Added "watch this city".
+@
+text
+@d7 1
+a7 1
+CTANGLE = ctangle
+d14 1
+a14 1
+CC = gcc -ansi -pedantic $(GCCWARNINGS) -DFIX_INCLUDES
+d26 2
+a27 2
+#OPTIMIZE = -O
+OPTIMIZE =
+d49 2
+d55 2
+a56 1
+DEBUG = -DJBMR_ALLOW_VERBOSE -DJBMR_WATCH_THIS_CITY=999
+d83 1
+a83 1
+	dict.dvi jbmr.dvi lk.dvi
+d88 12
+d133 1
+a133 1
+	echo making $*.w into $*.o
+@
+
+
+1.5
+log
+@Added gb_flip.ch to the SOURCES list.
+@
+text
+@d14 1
+a14 1
+CC = gcc -ansi -pedantic $(GCCWARNINGS)
+d34 2
+d53 1
+a53 1
+DEBUG = 
+d73 1
+a73 1
+SOURCES = gb_flip.ch length.w $(MAINSOURCES)
+a88 4
+makeit2 : 
+	rm -f makeit2
+	make -n >makeit2
+
+d91 1
+a91 1
+	echo char \*compile=\" $(CC) $(CFLAGS) \"\; >compile.c
+d115 1
+d141 1
+d152 3
+@
+
+
+1.4
+log
+@Added gb_flip.ch
+@
+text
+@d71 1
+a71 1
+SOURCES = length.w $(MAINSOURCES)
+@
+
+
+1.3
+log
+@More compile-time symbols.
+Compiler warning options added.
+AIX cc's optimizer is downgraded.
+@
+text
+@d12 3
+a14 3
+CC = gcc -ansi -pedantic 
+# GCCWARNINGS = -Wall -Wpointer-arith -Wcast-qual -Wcast-align \
+#	-Wwrite-strings -Wconversion -Wstrict-prototypes -Wmissing-prototypes
+d69 1
+a69 1
+	upper.w pool.w kdtree.w construct.w array.w dsort.w nn.w \
+d74 1
+a74 1
+	upper.o pool.o kdtree.o construct.o array.o dsort.o nn.o \
+d77 1
+a77 1
+	upper.dvi pool.dvi kdtree.dvi construct.dvi array.dvi dsort.dvi nn.dvi \
+d83 8
+d152 6
+@
+
+
+1.2
+log
+@Better compile.o support
+More debug flags.
+@
+text
+@d12 3
+a14 1
+#CC = gcc -ansi -pedantic
+d16 1
+a16 1
+CC = cc   
+d22 1
+a22 1
+OPTIMIZE = -O3 -qstrict
+d24 1
+a24 1
+#OPTIMIZE = -g
+d26 2
+d45 2
+d49 3
+a51 2
+#DEBUG = -DKD_BUILD_SMALLEST_SEGMENT_FIRST 
+DEBUG =
+d69 1
+a69 1
+	upper.w pool.w kdtree.w construct.w array.w nn.w \
+d74 1
+a74 1
+	upper.o pool.o kdtree.o construct.o array.o nn.o \
+d77 1
+a77 1
+	upper.dvi pool.dvi kdtree.dvi construct.dvi array.dvi nn.dvi \
+d93 1
+a93 1
+	lk lin105.tsp >out
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d16 9
+d37 1
+d42 3
+a44 1
+DEBUG = -DERROR_NO_CHECK
+a45 8
+# For speed tests
+# 	On the SPARCs, use
+#OPTIMIZE = -O2
+#	On the RS6K, use
+OPTIMIZE = -O3 -qstrict
+#   for ordinary debugging, use
+#OPTIMIZE = -g
+#	for profiling, add -pg
+d79 1
+d124 3
+@

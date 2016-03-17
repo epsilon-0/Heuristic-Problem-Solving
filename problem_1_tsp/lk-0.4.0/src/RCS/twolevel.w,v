@@ -1,0 +1,4243 @@
+head	1.145;
+access
+	neto
+	david;
+symbols
+	zero-four-zero:1.145;
+locks
+	neto:1.145; strict;
+
+
+1.145
+date	98.07.16.21.58.55;	author neto;	state Exp;
+branches;
+next	1.144;
+
+1.144
+date	97.09.27.18.04.13;	author neto;	state Exp;
+branches;
+next	1.143;
+
+1.143
+date	97.08.15.20.19.30;	author neto;	state Exp;
+branches;
+next	1.142;
+
+1.142
+date	97.05.16.20.37.46;	author neto;	state Exp;
+branches;
+next	1.141;
+
+1.141
+date	97.05.16.18.13.25;	author neto;	state Exp;
+branches;
+next	1.140;
+
+1.140
+date	97.01.21.21.55.55;	author david;	state Exp;
+branches;
+next	1.139;
+
+1.139
+date	96.10.29.17.27.11;	author neto;	state Exp;
+branches;
+next	1.138;
+
+1.138
+date	96.09.19.15.41.07;	author neto;	state Exp;
+branches;
+next	1.137;
+
+1.137
+date	96.09.19.15.33.25;	author neto;	state Exp;
+branches;
+next	1.136;
+
+1.136
+date	96.09.18.11.40.32;	author neto;	state Exp;
+branches;
+next	1.135;
+
+1.135
+date	96.09.17.14.16.34;	author neto;	state Exp;
+branches;
+next	1.134;
+
+1.134
+date	96.09.17.14.03.43;	author neto;	state Exp;
+branches;
+next	1.133;
+
+1.133
+date	96.09.17.12.53.38;	author neto;	state Exp;
+branches;
+next	1.132;
+
+1.132
+date	96.09.17.12.39.31;	author neto;	state Exp;
+branches;
+next	1.131;
+
+1.131
+date	96.09.17.12.09.55;	author neto;	state Exp;
+branches;
+next	1.130;
+
+1.130
+date	96.09.17.11.55.58;	author neto;	state Exp;
+branches;
+next	1.129;
+
+1.129
+date	96.09.17.11.17.21;	author neto;	state Exp;
+branches;
+next	1.128;
+
+1.128
+date	96.09.16.17.11.21;	author neto;	state Exp;
+branches;
+next	1.127;
+
+1.127
+date	96.09.13.17.21.39;	author neto;	state Exp;
+branches;
+next	1.126;
+
+1.126
+date	96.09.13.15.40.55;	author neto;	state Exp;
+branches;
+next	1.125;
+
+1.125
+date	96.09.13.15.35.54;	author neto;	state Exp;
+branches;
+next	1.124;
+
+1.124
+date	96.09.13.13.06.24;	author neto;	state Exp;
+branches;
+next	1.123;
+
+1.123
+date	96.09.13.12.13.11;	author neto;	state Exp;
+branches;
+next	1.122;
+
+1.122
+date	96.09.13.11.54.30;	author neto;	state Exp;
+branches;
+next	1.121;
+
+1.121
+date	96.09.12.16.46.05;	author neto;	state Exp;
+branches;
+next	1.120;
+
+1.120
+date	96.09.12.15.45.50;	author neto;	state Exp;
+branches;
+next	1.119;
+
+1.119
+date	96.09.12.15.38.02;	author neto;	state Exp;
+branches;
+next	1.118;
+
+1.118
+date	96.09.12.14.18.09;	author neto;	state Exp;
+branches;
+next	1.117;
+
+1.117
+date	96.09.11.17.18.51;	author neto;	state Exp;
+branches;
+next	1.116;
+
+1.116
+date	96.09.10.16.51.35;	author neto;	state Exp;
+branches;
+next	1.115;
+
+1.115
+date	96.09.10.15.57.58;	author neto;	state Exp;
+branches;
+next	1.114;
+
+1.114
+date	96.09.10.15.55.03;	author neto;	state Exp;
+branches;
+next	1.113;
+
+1.113
+date	96.09.09.17.06.05;	author neto;	state Exp;
+branches;
+next	1.112;
+
+1.112
+date	96.09.06.16.03.10;	author neto;	state Exp;
+branches;
+next	1.111;
+
+1.111
+date	96.09.05.16.05.43;	author neto;	state Exp;
+branches;
+next	1.110;
+
+1.110
+date	96.09.05.15.37.22;	author neto;	state Exp;
+branches;
+next	1.109;
+
+1.109
+date	96.09.05.14.15.41;	author neto;	state Exp;
+branches;
+next	1.108;
+
+1.108
+date	96.09.05.12.53.55;	author neto;	state Exp;
+branches;
+next	1.107;
+
+1.107
+date	96.09.04.17.14.23;	author neto;	state Exp;
+branches;
+next	1.106;
+
+1.106
+date	96.09.03.17.06.17;	author neto;	state Exp;
+branches;
+next	1.105;
+
+1.105
+date	96.09.03.15.45.52;	author neto;	state Exp;
+branches;
+next	1.104;
+
+1.104
+date	96.08.30.21.28.38;	author david;	state Exp;
+branches;
+next	1.103;
+
+1.103
+date	96.08.30.20.38.17;	author david;	state Exp;
+branches;
+next	1.102;
+
+1.102
+date	96.08.30.20.28.16;	author david;	state Exp;
+branches;
+next	1.101;
+
+1.101
+date	96.08.23.20.55.43;	author david;	state Exp;
+branches;
+next	;
+
+
+desc
+@Two-level tree implmentation of the oriented tour ADT.
+@
+
+
+1.145
+log
+@Added the LGPL notice in each file.
+@
+text
+@
+
+
+\noindent Copyright \copyright 1994, 1995, 1996, 1997, 1998 David Neto
+\smallskip
+
+\noindent 
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+\smallskip
+
+\noindent 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+\smallskip
+
+\noindent   
+   You should have received a copy of the GNU Library General Public
+   License along with this library; if not, write to the
+   Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA  02111-1307, USA.
+\smallskip
+
+\noindent   
+   You may contact David Neto via email at {\tt netod@@@@acm.org}, or with
+   greater latency at
+\smallskip
+\noindent{\obeylines
+     Department of Computer Science
+     University of Toronto
+     10 King's College Rd.
+     Toronto, Ontario
+     M5S 3G4
+     Canada
+}
+\medskip
+
+
+\noindent\hbox{}\hrule\hbox{}\penalty-1000
+\vskip0.5cm\relax
+
+
+
+@@i webdefs.w
+@@i types.w
+
+
+{\obeylines
+$Log: twolevel.w,v $
+Revision 1.144  1997/09/27 18:04:13  neto
+Fixed RCS log behaviour.
+
+Revision 1.143  1997/08/15  20:19:30  neto
+Added Index major section.
+
+Revision 1.142  1997/05/16  20:37:46  neto
+Change FIX INCLUDES to OS HAS BROKEN HEADERS.
+
+Revision 1.141  1997/05/16  18:13:25  neto
+Include <config.h> and "lkconfig.h"
+
+Revision 1.140  1997/01/21  21:55:55  david
+Added standard copyright notice by including copyrt.w
+
+Revision 1.139  1996/10/29  17:27:11  neto
+add copyright notice.
+
+Revision 1.138  96/09/19  15:41:07  neto
+Removed useless const qualifiers.  Remember C passes arguments by value,
+so integers are safe.
+
+Revision 1.137  96/09/19  15:33:25  neto
+Removed conflict with definition of |abs| in stdlib.h for IRIX.
+
+Revision 1.136  96/09/18  11:40:32  neto
+There is no em in CWEB, only it.
+This module appears to work now.
+
+Revision 1.135  96/09/17  14:16:34  neto
+Fixed a conflict with the definition of prev and a structure in
+stdio under AIX.
+
+Revision 1.134  96/09/17  14:03:43  neto
+Fixed the self-consistency check.  The group sequence numbers were assumed
+to start at 0.  They can start anywhere and wrap around to 0.
+Also, made using\_two\_representations conditionally compiled.
+
+Revision 1.133  96/09/17  12:53:38  neto
+Made debugging output conditional.
+
+Revision 1.132  96/09/17  12:39:31  neto
+Fixed bug 10.
+Sequence numbers were screwed up on split right when current segment
+was reversed but right segment was not.  
+
+Revision 1.131  96/09/17  12:09:55  neto
+Fixed the descriptions on sequence numbers for splitting left and right.
+Still buggy.
+
+Revision 1.130  96/09/17  11:55:58  neto
+Fixed Bug 9.
+9a: head/tail wasn't being set properly when current seg was reversed.
+9a: seq numbers not set properly under same condition.
+
+Revision 1.129  96/09/17  11:17:21  neto
+Fixed bug 8a, 8b.
+8a: split segment while that segment is reversed fouled up the inbound
+sibling poitner.
+8b: split segment while reversed set the sequence numbers rwrogng.
+
+Revision 1.128  96/09/16  17:11:21  neto
+Quashed bug 7, failure at flip number 159.
+The inbound pointer addresses depend on the orientation of the ac segment.
+
+Revision 1.127  96/09/13  17:21:39  neto
+Quashed bugs 5 and 6.
+5: off-by-one in splitting left and right.
+6: implicit rebalancing for case 1; It was splitting right, but not
+fixing the city sibling pointers, both inbound and outbound.
+Now it fails on lin105 at flip number 159.
+
+Revision 1.126  96/09/13  15:40:55  neto
+Was splitting one-off, for case 3.  Ooops.
+
+Revision 1.125  96/09/13  15:35:54  neto
+Split right now updates sequence numbers properly.  I've made
+split left symmetric and I hope it works.
+Still fails on lin105.
+
+Revision 1.124  96/09/13  13:06:24  neto
+More debugging output.
+Reach case 2 when psa=psb=0, psc=psd=1.  Mabye need to enforce 4 or more
+groups?
+
+Revision 1.123  96/09/13  12:13:11  neto
+Added updating of sequence numbers in Case 1.  Oops.
+
+Revision 1.122  96/09/13  11:54:30  neto
+More checks of the twolevel data structure.
+
+Revision 1.121  96/09/12  16:46:05  neto
+More debugging output. Somewhere, sequence numbers aren't properly being
+maintained.
+
+Revision 1.120  96/09/12  15:45:50  neto
+Ensure that modulus returns non-negative result in the important places.
+
+Revision 1.119  96/09/12  15:38:02  neto
+Fixed debugging stuff a bit.
+
+Revision 1.118  96/09/12  14:18:09  neto
+Finished the redundancy code to check two-level trees.
+It compiles too, and catches an error in lin105.
+
+Revision 1.117  96/09/11  17:18:51  neto
+Started adding debugging code.
+
+Revision 1.116  96/09/10  16:51:35  neto
+Fixed problem in creating the data structure.  We need to compute a 
+new group size internally.
+
+Revision 1.115  96/09/10  15:57:58  neto
+Now it compiles.  (Two minor errors regarding the normalization macro.)
+
+Revision 1.114  96/09/10  15:55:03  neto
+Fixed the parent renumbering.
+It TeXs to my satisfaction.  We'll see if it compiles.
+
+Revision 1.113  96/09/09  17:06:05  neto
+Fixed some of the problem with interening in parents.
+Need to fix the parent sequence number updating.
+
+Revision 1.112  96/09/06  16:03:10  neto
+Fixed problem in flipping, case 1. 
+We might have had portion b-d contained in a-c.
+Still a problem in parents.  See research notes.
+Also, need to add a comment about avoiding a performance bug in
+choosing shorter sequence of parents.
+
+Revision 1.111  96/09/05  16:05:43  neto
+Now it compiles cleanly.
+Fixed precedence problems, vestiges of the ``city'' field, accessing
+wrong link array, variables declared twice, suggested parentheses, etc.
+
+Revision 1.110  96/09/05  15:37:22  neto
+Finished coding flipping.
+
+Revision 1.109  96/09/05  14:15:41  neto
+Fixed outbound sibling pointers in city list reversal.
+
+Revision 1.108  96/09/05  12:53:55  neto
+Check for case 1 after split c-d.
+
+Revision 1.107  96/09/04  17:14:23  neto
+Finished coding Case 3 of flipping.
+
+Revision 1.106  96/09/03  17:06:17  neto
+Finished coding case 1 in flip.
+
+Revision 1.105  96/09/03  15:45:52  neto
+Made city numbers implicit, as per first paragraph of p. 444 of
+Fredman et al.
+
+Revision 1.104  1996/08/30  21:28:38  david
+More of flip.
+
+Revision 1.103  1996/08/30  20:38:17  david
+Use plain sequence numbers and still protect against wraparound.
+
+Revision 1.102  1996/08/30  20:28:16  david
+Lots and lots and lots of coding.
+
+Revision 1.101  1996/08/23  20:55:43  david
+Initial revision.
+
+}
+
+@@*A two-level tree implementation of the oriented tour ADT.
+This module implements the oriented tour ADT using two-level trees.
+These were introduced by M.~L.~Fredman, D.~S.~Johnson, L.~A.~McGeoch,
+and G.~Ostheimer in {\sl Data Structures for Traveling Salesmen}, 
+Journal of Algorithms, {\bf 18}, 432--479 (1995), (and
+an earlier conference paper).  
+@@^Fredman, M.~L.@@>
+@@^Johnson, D.~S.@@>
+@@^McGeoch, L.~A.@@>
+@@^Ostheimer, G.@@>
+
+That paper introduces three new data structures for the oriented tour
+ADT: splay trees, two-level trees, and segment trees.  These three
+are compared with the traditional array-based representation.  
+Some broad conclusions are drawn:
+below a thousand cities, arrays are the fastest; 
+between a thousand  and a million cities, two-level
+trees are best; above a million, splay trees appear to win out.
+
+This module implements the oriented tour ADT in terms of two-level trees.
+Just like the \module{ARRAY} module, only one tour is supported at a
+time, although it shouldn't be too hard to make this code purely 
+object-oriented.
+
+@@ Fredman \etal.~define an oriented tour abstract data type supporting
+three queries and one update operation.  The most common and effective
+local search algorithms for the traveling salesman problem ---2-opt, 3-opt, 
+and Lin-Kernighan--- may all be implemented in terms of this abstraction.
+@@^oriented tour ADT@@>
+
+The oriented tour ADT consists of the following operations
+(I will use the names as implemented in this module, \ie, prepended by
+the word |twolevel_|.):
+
+|twolevel_next(a)| is a query that returns the city that follows $a$ in the
+current tour.
+
+|twolevel_prev(a)| is a query that returns the city that precedes $a$ in the
+current tour.  It must be the case that 
+|next(prev(a))==prev(next(a))==a|.
+
+|twolevel_between(a,b,c)| is a query that returns true or false.  It answers
+the question:  ``In a forward traversal starting at city $a$, do we reach
+city $b$ no later than city $c$?''
+
+|twolevel_flip(a,b,c,d)| updates the tour by replacing the edges $(a,b)$ and
+$(c,d)$ by the edges $(b,c)$ and $(a,d)$.  It assumes that 
+|a==next(b)| and |d==next(c)|.  The orientation of the updated tour
+is not specified.
+
+These four operations are the ones defined by Fredman \etal.  In fact, I
+have lifted these descriptions from that paper and lightly edited them
+for inclusion here.  
+
+For convenience's sake, I also define |twolevel_set(int *t)|, which
+sets the current tour to be the same as the array of
+integers |t|.  That is, city |i| in the tour is city |t[i]|.
+Note that we don't need a ``get'' routine because the tour can be read off
+by successively following |next| cities until we wrap to the start
+again.
+
+We also define the standard setup and clean procedures: 
+|twolevel_setup(int n, int seg_start_size)|
+and
+|twolevel_cleanup(void)|.  The parameters to the setup procedure is the number
+of cities in the instance and the starting segment size (see below).
+
+@@ The outline of this module is as follows:
+@@c
+#include <config.h>
+#include "lkconfig.h"
+@@<System headers@@>@@;
+@@<Module headers@@>@@;
+
+@@<Module type definitions@@>@@;
+@@<Module variables@@>@@;
+@@<Module prototypes@@>@@;
+@@<Subroutines@@>@@;
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.144 1997/09/27 18:04:13 neto Exp neto $";
+
+@@ We will be using many routines from external libraries.  The interfaces
+to those routines are described in the following headers.
+
+@@<System headers@@>=
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+
+@@ The exported interface is contained in the \file{twolevel.h} header file,
+which has the following form.
+
+@@(twolevel.h@@>=
+extern const char *twolevel_rcs_id;
+@@<Exported subroutines@@>@@;
+
+@@ To ensure consistency between the interface and the implementation,
+we include our own header.
+@@<Module headers@@>=
+#include "twolevel.h"
+
+@@*Two-level trees.
+A two-level tree on $n$ cities is much like a B+tree of degree $\sqrt{n}$.
+That is, the tour is stored as a linked list of cities.  
+They are clustered into 
+into $\sqrt{n}$ segments of $\sqrt{n}$ cities each.
+Each segment is represented at the root level by a
+parent node. The roughly $\sqrt{n}$ parent
+nodes are themselves organized in a doubly linked list.
+
+To facilitate ordering comparisons, the parent nodes are given consecutive
+sequence numbers, and city nodes are given consecutive sequence numbers
+within the context of their own segment.
+
+To facilitate quick reversals of large portions of the tour, each 
+parent node has an associated reversal bit, indicating whether the cities
+in the associated segment should are traversed from left to right or from
+right to left.
+
+When the parent's reversal bit is off, succesive cities in the tour
+are found by following |next| pointers, encountering increasing
+sequence numbers within a segment. 
+When the parent's reversal bit is on, succesive cities in the tour
+are found by following |prev| pointers, encountering decreasing
+sequence numbers within a segment. 
+
+@@ The diagram of a two-level tree that 
+Fredman \etal.\ provide include an explicitly stored city number in
+the city nodes.  However, they say ---at the top of page 444--- that
+the city nodes are stored in an array and that therefore looking up
+the city node from the city number can be done in constant time.  
+I take this to mean that they also save space by not explicitly 
+storing the city number in the city node.  This should also speed things
+up by making more effective use of the cache and the communication
+bandwidth between
+levels of the memory hierarchy.
+
+@@ Here are the type definitions for a parent node, |parent_node_t|,
+and for a city node, |city_node_t|.  Parents point to the head and tail
+of their associated, segments.  Each city node points to its parent.
+
+In both kinds of nodes, sibling pointers are held in the |link| array;
+macros |next| and |prev| are just a shorthand for the next and previous
+siblings, respectively.  Similarly, |head| and |tail| are abbreviations
+for access into the |city_link| array.
+
+(Here's a gotcha under AIX.  I used to use \CWEB/'s @@@@d facility to
+make these preprocessor definitions.  But that puts the definitions
+at the start of the \CEE/ file, before the includes.  But the |prev|
+macro conflicts with a \file{stdio.h} structure definition.  So I make
+these definitions after the standard includes.  There is still a possibility
+that a macro, \eg\ |putchar|, 
+might want to use the |prev| field in the \file{stdio} 
+structure.  However, until I come across this problem, I'll stick to the
+current solution.  I suppose I could use a |union| type to alias 
+|prev| to |link[LINK_PREV]|, but that would make everything far uglier.)
+@@^system dependencies@@>
+
+@@<Module type definitions@@>=
+
+#define LINK_PREV 0
+#define LINK_NEXT 1
+#define prev link[LINK_PREV]
+#define next link[LINK_NEXT]
+#define CITY_LINK_HEAD 0
+#define CITY_LINK_TAIL 1
+#define head city_link[CITY_LINK_HEAD]
+#define tail city_link[CITY_LINK_TAIL]
+
+typedef struct parent_node_s {
+	int seq;	/* Sequence number.  Fredman \etal.\ call this |ID| */
+	int reverse;	/* Either 0 (forward), or 1 (reverse) */
+	struct parent_node_s *link[2];
+	struct city_node_s *city_link[2];
+} parent_node_t;
+
+typedef struct city_node_s {
+	struct parent_node_s *parent;
+	int seq;	/* Sequence number.  Fredman \etal.\ call this |ID| */
+	struct city_node_s *link[2];
+} city_node_t;
+
+@@ The city nodes and parent nodes will reside in statically allocated
+arrays.  These are |city_node| and |parent_node|, respectively.
+
+%% We'll also need a mapping  from city numbers to city nodes.  This is done
+%% by the array |city_to_node|.  
+
+@@<Module variables@@>=
+static parent_node_t *parent_node=NULL;
+static city_node_t *city_node=NULL;
+
+
+@@ These variables get allocated in the setup routine.  We will be adding
+to this code later, so we separate it out in a new named section.
+
+@@<Subroutines@@>=
+void
+twolevel_setup(const int num_vertices, const int start_seg_size) {
+	@@<Set up the two-level data structure@@>@@;
+}
+
+@@ We also need a symmetrical tear down routine.
+@@<Subroutines@@>=
+void 
+twolevel_cleanup(void) {
+	@@<Clean up the two-level data structure@@>@@;
+}
+
+@@ We must export these routines.
+@@<Exported subroutines@@>=
+void twolevel_setup(const int num_vertices, const int start_seg_size);
+void twolevel_cleanup(void);
+
+@@  We allocate these arrays using the |new_arr_of| macro from the 
+\module{MEMORY} module.
+@@<Set up the two-level data structure@@>=
+city_node = new_arr_of(city_node_t,num_vertices);
+
+@@ We need the interface to the \module{MEMORY} module.    We'll also later do
+sanity checks using the macros from the \module{ERROR} module.
+
+@@<Module headers@@>=
+#include "error.h"
+#include "memory.h"
+
+@@ We use the |free_mem| macro to deallocate these arrays.
+@@<Clean up the two-level data structure@@>=
+free_mem(city_node);
+
+
+@@ There are at least two possible descriptions of the two-level
+tree data structure.
+To derive good
+worst-case time bounds, segment sizes are kept between $\sqrt{n}/2$ and
+$2\sqrt{n}$ cities via explicit balancing.   
+Under these conditions, the queries take constant time, and the |flip|
+update takes $O(\sqrt{n})$ time.
+
+However, the balancing required to achieve that worst-case time
+for flips can be quite time consuming.  
+For practical purposes, Fredman \etal.~describe a variant
+where each segment starts out with roughly |groupsize| elements.
+Furthermore, explicit balancing is dispensed with in favour 
+of implicit balancing with lower overhead .
+
+In the practical variant, queries remain constant time, but 
+flips may degenerate to linear time.  However, Fredman \etal.~cite
+the conventional wisdom that data structures stay balanced in practice,
+so they expect this bad behaviour to be rare.
+
+We'll see later what implicit balancing entails, but for now we
+declare the |groupsize| variable.
+
+It will also be convenient to know the number of groups, |num_groups|.
+
+@@<Module variables@@>=
+static int groupsize, num_groups;
+
+@@ I'll leave the setting of |groupsize| to the main module; it's passed
+as a parameter to the setup routine.  However, Fredman \etal.'s experiments
+were run with |groupsize==100| on instances of $10^3$ to $10^5$ cities,
+and |groupsize==200| on instances of $10^6$ cities.  For these million-city
+instances, this larger group size made each |flip| 27\% faster on average;
+performance was stable up to a group size of 800.
+
+Given an initial segment size of |groupsize|, there should be
+$\lfloor$|num_vertices/ groupsize|$\rfloor$ parent nodes.  
+
+@@<Set up the two-level data structure@@>=
+groupsize = start_seg_size;
+num_groups = num_vertices/groupsize;
+parent_node = new_arr_of(parent_node_t,num_groups);
+
+
+@@ While we're at it, let's  write down how we 
+deallocate the |parent_node| array.
+@@<Clean up the two-level data structure@@>=
+free_mem(parent_node);
+
+@@ It will also be convenient to remember the number of cities; we'll
+store it in the variable |n|.
+@@<Module variables@@>=
+static int n=0;
+
+@@ We set it at setup time. 
+@@<Set up the two-level data structure@@>=
+n = num_vertices;
+
+@@ For defensiveness' sake, we'll put a garbage value into it at cleanup time.
+@@<Clean up the two-level data structure@@>=
+n = 0;
+
+@@*Initializing the two-level tree.
+The procedure |twolevel_set(int *t)| takes a tour represented
+as an array of $n$ integers
+and changes the two-level tree to
+match it.  It balances the segment lengths as best as it can.
+
+@@ We have a choice to make here.  We must decide how to map
+cities to city nodes; this might have consequences on how 
+well the cache will perform over the duration of the local optimization
+phase of the program.
+Our choices are as follows.
+We can store the data for city $i$
+in the $i$'th city node;
+or, we could store the data for the city that appears in position $i$ of the
+tour
+in the $i$'th city node.
+
+Storing the data for city $i$ in the $i$'th node carries any locality
+properties of the initial city ordering over to this module.
+For instance, if we preprocess the data using a space-filling curve to try 
+to achieve better locality, then this first scheme carries that mapping into
+the manipulations of the two-level tree.  In this way, this scheme
+supports the efforts of that data rearrangement.
+
+On the other hand, storing the data in the order that it appears in 
+the tour might achieve better locality initially.  However, starting
+tours such as the Greedy/Multiple Fragment tours have some very large
+defects.  These defects both increase the tour size, but more importantly
+for our current
+discussion,  also likely decrease locality for the duration of the 
+local optimization phase.
+
+For this reason, I've chosen to map the data for city $i$ onto element
+$i$ of the |city_node| array.
+
+% Another point is that sequence numbers for cities are initialized to
+%be balanced around zero.  That is, they range roughly over the
+%interval from $-k$ to $k$, where $k$ is half the number of cities
+%in the group.  This is done in the hope that sequence numbers will 
+%not go near the overflow values of |INT_MAX| or |INT_MIN|, where
+%we'd be in danger of making integer comparisons go wrong.
+%
+%Hang on: as long as indices are consecutive, we don't have to
+%worry about integer comparisons going wrong anyway!  Unless, of course,
+%there are more than |UINT_MAX| cities in each segment --- that's $2^{32}-1$
+%on a 32-bit machine.  But we're only targeting for up to a million cities, so
+%it shouldn't become a problem.
+
+On another front, it turns out that \CEE/ doesn't guarantee that remainders
+will be non-negative when the dividend is negative.  
+But the pointer arithmetic for initializing sibling pointers
+relies on this property.
+So we must use
+|(group-1+num_groups)%num_groups| in place of the plainer
+|(group-1)%num_groups| in place of the plainer.  Similarly,
+|(i-1+n)%n| replaces
+|(i-1)%n|.
+
+@@<Subroutines@@>=
+void
+twolevel_set(int const *tour) {
+	int i, j, group, num_big_groups = n % num_groups, base_group_size = n/num_groups;
+	for ( i=0, group=0; i<n; group++ ) {
+		const int this_group_size = base_group_size + (group<num_big_groups);
+		parent_node[group].head = city_node+tour[i];
+		parent_node[group].tail = city_node+tour[i+this_group_size-1];
+		parent_node[group].reverse = 0;
+		parent_node[group].seq = group;
+		parent_node[group].prev = parent_node + ((group-1+num_groups) % num_groups);
+		parent_node[group].next = parent_node + ((group+1) % num_groups);
+		for ( j=0; j<this_group_size ; j++, i++ ) {
+			city_node[tour[i]].parent = parent_node+group;
+			city_node[tour[i]].seq = j;
+			city_node[tour[i]].prev = city_node+tour[(i-1+n)%n];
+			city_node[tour[i]].next = city_node+tour[(i+1)%n];
+		}
+	}
+	errorif( i != n || group != num_groups, "Bug in my 'rithmetic");
+}
+
+@@ We must export this routine.
+@@<Exported subroutines@@>=
+void twolevel_set(int const *tour);
+
+
+@@*Variations in the data structure.  
+There are few other potential variations on the data structure.  I hope
+to implement a few of them, to study their tradeoffs.
+
+@@ First, Fredman \etal.~maintian links between cities at the ends of 
+segments.  An alternative is to keep distinct linked lists, one 
+per segment.  That is, don't link ends of segments together at the
+city node level.
+
+This variation is  designed to  make |flip|s faster.  However, 
+|prev| and |next| queries might be slower because they would have
+to check for a |NULL| pointer.  The |between| query ought to be unaffected.
+
+@@ Second, we might choose to never move a city from its node.  We would
+change pointers instead.  When this is done, we don't have to explicitly
+store the city number in each city node.  This should make things faster
+because the cache will be able to store a larger portion of the
+city node array.
+
+I have to think about whether this change involves extra pointer 
+manipulation.  I ought to measure the difference from the standard 
+data structure.
+
+@@ Third, perhaps we can borrow use some approximate counting techniques
+such as are found in good implementations of the 
+$<INSERT,DELETE,RANK>$ ADT.  See Dietz (INSERT REFERENCE).
+
+@@ Fourth, perhaps we can soften the requirement for consecutive
+numberings within segments and at the root level.  (Q: Is this
+even done at all in the 
+`practical' variation?)  Instead of wholesale renumbering, just
+take an average of neighbours when inserting a node between two others.
+Then ``rebalance'' when we run out of precision.  In the common case,
+rebalancing ought to be rare.
+
+
+@@*Queries.
+We'll define the |prev| and |next| queries first.  The  |between| query
+will follow later.
+
+The only interesting thing about the |prev| and |next| queries is that
+we must decide which link to follow by examining the parent's 
+reversal bit.  We take advantage of the fact that the reversal bit
+is either 0 or 1 by exclusive-or'ing it with an index into the
+city node's link array.  This straightens the code path: the decision is
+made 
+via arithemtic and indexing, not by branching in the code.  That should
+save time on heavily pipelined architectures.
+@@^pipelined architectures@@>
+In fact, this trick, er, {\it technique}, 
+is the main motivation for declaring the link
+pointers as an array.
+@@^trick@@>
+@@^technique@@>
+
+Both queries take constant time.
+
+@@<Subroutines@@>=
+int
+twolevel_next(int a) {
+	const city_node_t *ca = city_node+a;
+	return (ca->link[ LINK_NEXT ^ ca->parent->reverse ])-city_node;
+}
+
+int
+twolevel_prev(int a) {
+	const city_node_t *ca = city_node+a;
+	return (ca->link[ LINK_PREV ^ ca->parent->reverse ])-city_node;
+}
+
+@@ We must export these routines.
+@@<Exported subroutines@@>=
+int twolevel_next(int a);
+int twolevel_prev(int a);
+
+@@ Query |between(a,b,c)| asks: ``In a forward traversal starting at $a$,
+do we reach $b$ no later than $c$?''
+
+The |between| query is drudgery in comparison with queries |prev|
+and |next|.  It is a case analysis
+on the cities' intra-segment number, 
+parent numbers, and parent reversal
+bits.
+Fredman \etal.~(page 444) describe this query quite well, and I take
+this description mostly from them.
+
+If all three cities have distinct parents, then we need only compare
+their parents' sequence numbers.
+
+If all three cities are in the same segment, then we need only 
+compare their intra-segment sequence numbers.  The actual comparison in
+this case depends on the common parent's reversal bit.
+
+If exactly two of the cities have the same parent, then the answer
+depends only on their intra-segment sequence numbers and their common
+parent's reversal bit.
+The placement of the third city is irrelevent: it is outside the
+segment.
+
+In some of the conditional expressions in the following,
+I use bitwise operators $\mid$ and |&|
+in place of short-circuiting
+operators |||| and |&&|.    
+Specifically, I do this when both operands of the logical operators
+are comparsions.  I expect that the extra time performing a possibly redundant 
+integer comparison is worth the savings on 
+pipelined architectures in not having to always take
+a branch.
+This trick also relies on \CEE/'s semantics
+of providing consistent values of 0 and 1 for boolean expressions
+evaluating to false and true values, respectively.
+@@^pipelined architectures@@>
+@@^trick@@>
+@@^technique@@>
+
+I also use bitwise exclusive-or, |^|, but there is no short-circuiting
+logical exclusive-or operator in \CEE/;
+exclusive-or must always evaluate both its arguments anyway.
+
+We're also careful to use as sequence numbers the offsets from 
+the beginning of the segment instead of the bare intra-segment sequence number.
+This protects us in case some sequence of flips has forced the sequence
+numbers to migrate and wrap around at one of the ends of the
+integer range, |INT_MIN|$\ldots$|INT_MAX|.
+
+This query takes constant time.
+
+@@<Subroutines@@>=
+int
+twolevel_between(int a, int b, int c) {
+	const city_node_t *ca = city_node+a, *cb= city_node+b, *cc = city_node+c;
+	const parent_node_t *pa = ca->parent, *pb = cb->parent, *pc = cc->parent;
+	const int sa=ca->seq-pa->head->seq, sb=cb->seq-pb->head->seq, sc=cc->seq-pc->head->seq;
+
+	if ( pa == pb ) 
+		if ( pa == pc) 	/* All in the same segment */
+			if ( pa->reverse )
+				 return (sa>=sb? ((sb>=sc)|(sc>sa)) : ((sb>=sc) & (sc>sa)));
+			else return (sa<=sb? ((sb<=sc)|(sc<sa)) : ((sb<=sc) & (sc<sa)));
+		else 	/* |a|, |b| in same, |c| elswhere */
+		return (sa==sb) | (pa->reverse ^ (sa<sb));
+	else 
+		if ( pa==pc )	/* |a|, |c| in same, |b| elswhere */
+			return (sa!=sc) & (pa->reverse ^ (sa>sc));
+		else 
+			if (pb==pc) /* |b|, |c| in same, |a| elswhere */
+				return (sb==sc) | ((pb->reverse) ^ (sb<sc));
+			else {/* All in different; much like all in the same, but use parent numbers. */
+				const int psa=pa->seq, psb=pb->seq, psc=pc->seq;
+				return (psa<=psb? ((psb<=psc)|(psc<psa)) : ((psb<=psc) & (psc<psa)));
+			}
+}
+
+@@ We export this function.
+@@<Exported subroutines@@>=
+int twolevel_between(int a, int b, int c);
+
+
+@@*Flipping.
+Flipping is the most difficult operation, as it changes the data structure,
+and must update pointers, reversal bits, and sequence numbers.
+
+With explicit balancing, one can make a flip take $O(\sqrt{n})$ time;
+Fredman \etal.~describe how.
+However, I've implemented the practical variant they describe. First,
+it uses
+implicit balancing instead of explicit balancing.
+Second, 
+when 
+the portion of the tour to be flipped
+is no more than $3/4\times groupsize$ and lies entirely within one segment,
+that segment is split and reversed using its parent's reversal bit.
+This practical variant incurs a lower overhead, but its performance
+may degenerate to $\Omega(n)$ time in the worst case.  One hopes that
+this occurs only vary rarely.
+
+@@ 
+An important observation is that we can flip either the $b-d$ portion 
+of the tour
+or the $a-c$ portion.  We have this freedom because the tour may be 
+arbitrarily oriented after
+the flip.  
+This simplifies the code somewhat.
+
+Flipping a tour segment splits into three cases.  
+
+The first case occurs if 
+either the $b-d$ portion or the $a-c$ portion
+lies entirely within one city list segment.
+
+The second case occurs when both the $a-c$ and the $b-c$ parts are made
+up only of entire segments.  That is, no segment contains both 
+$a$ and $d$ nor both $c$ and $b$.
+
+The third case covers the rest of the possibilities.  Fortunately, 
+we may always rearrange things so that the second case applies.
+
+(I used to define |SWAP| and |abs| globally using \CWEB/'s {\tt @@@@d}
+construct, but that interferes with the IRIX 5.3 definition of |abs|
+in \file{stdlib.h}.  So I moved these definitions to after that inclusion.)
+@@^system dependencies@@>
+@@^IRIX@@>
+
+@@<Subroutines@@>=
+#define SWAP(x,y,t)  ((t)=(x),(x)=(y),(y)=(t))
+#define abs(x) ((x)<0?-(x):(x))
+void
+twolevel_flip(int a, int b, int c, int d) {
+	city_node_t *ca = city_node+a, *cb= city_node+b, 
+		*cc = city_node+c,*cd = city_node+d, *tcn;
+	int psa=ca->parent->seq, psb=cb->parent->seq, 
+		psc=cc->parent->seq, psd=cd->parent->seq, ti;
+#if defined(TWOLEVEL_FLIP_CHECK_PRECONDITION)
+	errorif( a != twolevel_next(b), "a != twolevel_next(b)" );
+	errorif( d != twolevel_next(c), "d != twolevel_next(c)" );
+#endif 
+
+	@@<Handle case 1 of flipping, if it applies@@>@@;
+	if (psa==psb) {		/* Arrange for case 2 to apply, part 1. */
+		@@<Split the $a-b$ segment@@>@@;
+	}
+	if (psc==psd) {		/* Arrange for case 2 to apply, part 2. */
+		@@<Split the $c-d$ segment@@>@@;
+	}
+	@@<Flip a sequence of segments@@>@@;
+}
+
+@@ We export this routine.
+@@<Exported subroutines@@>=
+void twolevel_flip(int a, int b, int c, int d);
+
+@@ As I've said, 
+the first case occurs if 
+either the $b-d$ portion or the $a-c$ portion
+lies entirely within one city list segment.
+
+Note that both portions can't both be in single segments unless there
+are at most two segments; that's a degenerate case.  I had given some
+thought to adding code to flip the shorter portion until I realized
+this fact.  So, following Bentley and McIlroy's advice (INSERT REFERENCE), 
+I'm keeping
+the code simple.
+
+This code gets used in three places, as we'll see.  So I've split it off
+and made it a separate section.
+
+@@<Handle case 1 of flipping, if it applies@@>=
+@@<Verbose: handle case 1@@>@@;
+if ( psb==psd ) {	/* Case 1, but rename so that $a-c$ lies in one segment. */
+	SWAP(ca,cb,tcn); @@+ SWAP(cc,cd,tcn);
+	SWAP(psa,psb,ti);@@+  SWAP(psc,psd,ti);
+	/* |a|, |b|, |c|, |d| are not used again. */
+}
+if ( psa==psc ) {	/* Case 1, really do it. */
+	@@<Flip: |ca| and |cc| are in the same segment@@>@@;
+	return;
+}
+
+@@ Let's start with the first case,
+\ie, when both $a$ and $c$ lie in the same data structure segment.
+This means one of two things.  Either the $a-c$ portion lies entirely within
+this segment, or the $b-d$ portion lies within this segment and is
+sandwiched by cities $a$ and $c$.
+
+First we rename variables so that the list of cities from
+|ca| to |cc| lies entirely within one segment and contains no part
+of the |cb| to |cd| portion of the tour.
+Then we flip the segment.
+
+
+%Now, it may be the case that the $b-d$ segment lies entirely within this
+%segment, and is sandwiched by cities |ca| and |cc|.  It would then be 
+%wrong to flip the sequence of cities from |ca| through |cc| within this
+%segment: that would have the effect of reversing the $b-d$ segment, {\it and\/}
+%swapping cities $a$ and $c$.  So we must check for this condition and
+%move |u| and |v| one city `inward' if it is the case.  Note that it is
+%sufficient to check that |u->next| ...
+
+@@<Flip: |ca| and |cc| are in the same segment@@>=
+@@<Rename so that the |a-c| portion lies entirely in one segment@@>@@;
+@@<Flip: |ca| to |cc| lies entirely within one segment@@>@@;
+
+@@  
+We rename variables so that variables
+|ca| and |cc| point to the portion of the tour 
+lying entirely within this segment.
+This condition is convenient to check if we first rename variables so that
+|ca| is to the left of |cc|.
+
+Of course, if |ca==cc|, then the |ca| to |cc| portion of the tour is just
+one city long, so there is no work to do.  We don't check for this condition
+because we think it will be common. Rather, we do it so that checking
+for the containment of the |cb| to |cd| portion easy: it becomes the
+simple test |ca->next == cb|.
+
+It turns out that we won't be needing the identities of cities |b| or |d|
+any longer.  So the pair of assignments |ca=cb,cc=cd| is safe in place of a 
+set of full |SWAP|s.  
+
+If these assignments {\it are\/} performed, then
+|ca| still lies on or to the left of |cc|.  
+
+
+@@<Rename so that the |a-c| portion lies entirely in one segment@@>=
+if ( ca == cc ) return;	/* Rerversing a length-1 list is trivial */
+if ( ca->seq > cc->seq ) SWAP(ca,cc,tcn),SWAP(cb,cd,tcn);	/* Make $a$ come before $c$ */
+if ( ca->next == cb ) ca=cb,cc=cd;	/* Make $a-c$ lie entirely in this segment */
+
+@@ Now we can get down to the business of 
+flipping the $a-c$ portion of the tour.
+If it is long enough, then
+it makes sense to implictly rebalance:
+split the ends off and turn
+on its parent's reversal bit.
+Otherwise, we physically move the cities.
+
+
+@@<Flip: |ca| to |cc| lies entirely within one segment@@>=
+if ( abs(ca->seq-cc->seq) > implicit_balance_threshhold ) {
+	@@<Split the ends off and flip the parent's reversal bit@@>@@;
+} else {
+	@@<Reverse the list from |ca| to |cc|@@>@@;
+}
+
+@@ The variable |implicit_balance_threshhold| is set when we set up
+the data structure.  It is given the value of $3/4\times groupsize$,
+as prescribed by Fredman \etal.
+
+@@<Set up the two-level data structure@@>=
+implicit_balance_threshhold = (3 * groupsize)/4;
+
+@@ It is local to this module.
+@@<Module variables@@>=
+static int implicit_balance_threshhold;
+
+
+
+@@ Lets do the simpler part: moving links around to flip a tour segment.
+
+First we reverse the sequence  numbers, then we reverse the list by
+permuting pointers.
+
+There will be several places where we'll need to reverse a sequence of
+cities.  That code is generalized by using variables |u|  and |v| to
+denote the first and last cities to be reversed; city |u| occurs on or to
+the left of |v|.  We already assume that |ca| occurs on or to the
+left of |cc|.
+
+We reverse a segment by swapping each city's |next| and |prev| pointers.
+This way, what was a city's predecessor is now its successor, and
+vice versa.  We must ensure that
+pointers from outside the reversed segment get 
+updated to point to the appropriate
+end cities.  The outbound sibling pointers inside the segment are fixed by
+the |SWAP(u->prev,v->next)| code: remember they will be swapped appropriately
+when all the sibling links are swapped.
+
+
+
+
+@@<Reverse the list from |ca| to |cc|@@>=
+{ city_node_t *u = ca, *v = cc;
+@@<Reverse the city sequence numbers from |u| to |v|@@>@@;
+@@<Make external pointers point to the other of |u|, |v|@@>@@;
+SWAP(u->prev,v->next,tcn);		/* Fix outbound sibling pointers */
+@@<Swap links from |u| to |v|@@>@@;
+}
+
+@@ Now, |u| and |v| have been chosen so that |v| may be found by following
+zero or more |next| pointers from |u| without leaving this segment.
+Also, sequence numbers increase as we follow |next| pointers.
+This allows us
+to just overwrite the sequence numbers; we don't need to do any swapping.
+
+@@<Reverse the city sequence numbers from |u| to |v|@@>=
+{	city_node_t *i=u, *done=v->next;
+	int s;
+	for ( s=v->seq,i=u; i!=done ; i=i->next,s-- ){
+		i->seq=s;
+	}
+}
+
+@@ Now that we've updated sequence numbers, we can update pointers.
+The pointers that might need updating are |head| and |tail| pointers,
+and |prev| and |next| pointers.
+
+The code for updating the |prev| and |next| pointers is just 
+a parallel assignment.  Unfortunately, parallel
+assignment is awkward in \CEE/; parallel bindings are easy in \ML/.
+@@^ML@@>
+We need parallel assignment because we might be in the degenerate case
+where we are flipping the entire tour except for one node.   In that case,
+we shouldn't change its |next| pointer from |ca|, say, to |cc|, {\it and
+then back again.}  Think about it.
+
+Similarly, there might only be one node in the segment; it would be
+both the head and the tail.  But then updating it twice doesn't pose
+any problems, for then |ca==cc|!.  So we don't need a parallel assignment
+in fixing the head and tail pointers.
+
+Recall that we assume that |u| and |v| are in the same segment, 
+and therefore have the same parent.  Furthermore, |u| comes on or before
+|v|. 
+
+@@<Make external pointers point to the other of |u|, |v|@@>=
+{ parent_node_t *p = u->parent;
+const int upn_to_v = u->prev->next == u, upp_to_v = u->prev->prev == u,
+vnp_to_u = v->next->prev == v, vnn_to_u = v->next->next == v;
+if ( upn_to_v ) u->prev->next = v;
+if ( upp_to_v ) u->prev->prev = v;
+if ( vnp_to_u ) v->next->prev = u; 
+if ( vnn_to_u ) v->next->next = u;
+if ( p->head == ca ) p->head=cc;	/* Now fix |head| and |tail| */
+else if ( p->head== cc ) p->head=ca;
+if ( p->tail == ca ) p->tail=cc;
+else if ( p->tail== cc ) p->tail=ca;
+}
+
+
+@@ This code requires that sequence numbers increase as we follow |next| 
+pointers.  It assumes that |u| occurs at the same point or to the left of |v|.
+
+%%I've used fresh variables |i| and |j| because I want to be as hygienic 
+%%as possible:
+%%don't destroy values unnecessarily.  A good optimizing compiler will
+%% reuse the registers anyway.
+
+@@<Swap links from |u| to |v|@@>=
+{
+	city_node_t *i=u, *done = v->next;
+	for ( i=u; i != done; i=i->prev ) {	/* Yes, |prev|: it's the old |next| pointer. */
+		SWAP(i->next,i->prev,tcn);
+	}
+}
+
+@@ Let's do the other part: implict rebalancing. This involves
+splitting the ends off the $a-c$ segment, merging those ends
+with their neighbours, swapping the inbound sibling pointers, and
+then flipping their parent's reversal bit.
+
+We've already arranged things so that 
+that |ca|'s sequence number is
+no greater than |cc|'s sequence number, \ie, that we can find |cc| by
+following zero or more |next| pointers starting at node |ca| without
+leaving the segment.
+
+
+@@<Split the ends off and flip the parent's reversal bit@@>=
+@@<Split off the end to the left of |ca|@@>@@;
+@@<Split off the end to the right of |cc|@@>@@;
+@@<Fix sibling pointers to and from |ca| and |cc|@@>@@;
+ca->parent->reverse ^= 1;
+@@<Verbose: implicit rebalance done@@>@@;
+
+
+@@ The part of the segment to the left of |ca| is split off and merged
+with the segment to its left (left according to the |prev| link of the
+head of this segment).  
+We must be careful for a few reasons.
+
+First, there
+are four possible combined settings for the reversal bits of this
+segment and the segment to the left.  
+
+Second, we must set the city |prev| and |next| links so that they
+are correct {\it after\/} the parent's reversal bit is flipped.
+
+@@<Split off the end to the left of |ca|@@>=
+@@<Verbose: split off the end to the left of |ca| begin@@>@@;
+{ 	parent_node_t *p = ca->parent;
+	city_node_t *lc=p->head; 		/* City at left end of split off segment. */
+	city_node_t *rc=ca->prev;		/* City at right end of split off segment */
+	city_node_t *llc=lc->prev;		/* New sibling of |lc|: ``left of |lc|'' */
+	parent_node_t *lp=llc->parent;	/* Parent of the segment to be merged into */
+	int lpr = lp->reverse, pr=p->reverse;
+	errorif(lp==p,"Bug");
+	if ( lc != ca ) {	/* There is work to do. */
+		@@<Split left: set the end city links@@>@@;
+		@@<Split left: set the per-city data in the split off segment@@>@@;
+	}
+}
+@@<Verbose: split off the end to the left of |ca| end@@>@@;
+
+@@ This section updates any pointers to the end cities of the split off
+portion of the segment.  It helps to look at the input and output
+pointer ``flows'' to/from this split off portion.  This way we can
+hopefully avoid missing updating a pointer.
+
+The pointers coming {\it into\/} this split off portion of the segment are as
+follows:
+there is one sibling pointer pointing to the left end of the
+list, |llc->link[lpr^LINK_NEXT]|; there is one sibling pointer pointing to the
+right end of the list, |ca->prev|; finally there is a head pointer from
+the old parent, |p->head|, and a head/tail pointer from the
+new parent, |lp->city_link[pr^lpr^CITY_LINK_TAIL]|.  
+Interestingly, the sibling pointers need to be changed depending on the
+context in which this code is used, so we won't change them here.
+
+The pointers coming {\it out of\/} this split off portion of the segment are as
+follows:
+there is one sibling pointer pointing from the left end of the
+list, |lc->prev|; there is one sibling pointer pointing from the
+right end of the list, |rc->next|; finally there are parent pointers 
+at each node in the list.
+All these outgoing pointers will be handled as part of the per-city changes.
+
+@@<Split left: set the end city links@@>=
+p->head = ca;
+lp->city_link[(pr==lpr)?CITY_LINK_TAIL:CITY_LINK_HEAD] = rc;
+
+
+@@ Each city node in the split off segment must be updated in the
+following ways.
+
+First, we must set the sequence numbers so they are consecutive 
+with those in the segment to the left.    We use two variables
+to set them: |seq_num| begins as the sequence number that city |lc|
+should be set to; |seq_inc| is the increment in sequence numbers that
+should take effect in traversing the list from |lc| through to |rc|.
+
+There are two cases to consider.  
+If the two segments have the same orientation, then 
+we're appending the |lc| to |rc| list to the right end of the segment
+to the left.
+So
+|lc|'s new sequence number should be |llc->seq+1| and they should increase,
+\ie\ |seq_inc| should be 1.
+Otherwise, the segments have different orientations: |llc| is the
+head of its and we'll be moving the |lc| to |rc| list
+to the left of |llc|.  In this case, |lc|'s new sequence number should
+be |llc->seq-1| and they should decrease, \ie\ |seq_num| should be -1.
+
+Second, if the orientations of the old and the new segments are different,
+then we must reverse the links of the moved portion of the linked list.
+
+I've combined these functions into one segment because the
+traversal code changes according whether we change the sense
+of |prev| and |next|.  In particular, |link[succ_link]| traverses the
+list from |u| to |v|, which is left to right in the original list.
+
+@@<Split left: set the per-city data in the split off segment@@>=
+{ 
+city_node_t *i, *u=lc, *v=rc;
+int succ_link, seq_inc, seq_num;
+if ( lpr==pr ) {	/* Move to right end. */
+	succ_link=LINK_NEXT;
+	seq_inc = 1;
+	seq_num = llc->seq + 1;
+} else {	/* Move to left end. */
+	succ_link = LINK_PREV;
+	seq_inc = -1;
+	seq_num = llc->seq - 1;
+	@@<Swap links from |u| to |v|@@>@@;
+}
+for ( i=lc;i!=rc;i=i->link[succ_link], seq_num+= seq_inc ) {	/* Set parent pointers and
+sequence numbers */
+	i->parent = lp;
+	i->seq = seq_num;
+}
+i->parent = lp;
+i->seq = seq_num;
+}
+
+@@ Splitting off the right end is analogous to splitting off the left end,
+but with a slight twist.
+First, we make the following exchanges:
+|next|$\leftrightarrow$|prev|;
+|head|$\leftrightarrow$|tail|; 
+|l|$\leftrightarrow$|r|, in variable names;
+and |cc|$\leftrightarrow$|ca|.  The twist comes when setting sequence numbers;
+its explained below.
+
+Here's righthand version of the top-level section.  
+
+@@<Split off the end to the right of |cc|@@>=
+@@<Verbose: split off the end to the right of |cc| begin@@>@@;
+{ 	parent_node_t *p = cc->parent;
+	city_node_t *rc=p->tail; 		/* City at right end of split off segment */
+	city_node_t *lc=cc->next;		/* City at left end of split off segment */
+	city_node_t *rrc=rc->next;		/* New sibling of |rc|: ``right of |rc|'' */
+	parent_node_t *rp=rrc->parent;	/* Parent of the segment to be merged into */
+	int rpr = rp->reverse, pr=p->reverse;
+	errorif(rp==p,"Bug");
+	if ( rc != cc ) {	/* There is work to do. */
+		@@<Split right: set the end city links@@>@@;
+		@@<Split right: set the per-city data in the split off segment@@>@@;
+	}
+}
+@@<Verbose: split off the end to the right of |cc| end@@>@@;
+
+@@ Setting the end city links on the right is analogous to setting them
+on the left.
+@@<Split right: set the end city links@@>=
+p->tail = cc;
+rp->city_link[(pr==rpr)?CITY_LINK_HEAD:CITY_LINK_TAIL] = lc;
+
+@@ Setting the per-city data on the right hand side is also analogous.  
+
+As in splitting a segment to the left, |seq_num| 
+is again the new sequence number of |lc|
+and |seq_inc| is the increment on sequence numbers as we travel from
+|lc| to |rc|.  
+
+The twist in setting the sequence numbers that I mentioned earlier 
+is as follows.  When the orientations of the two segments are the
+same, then we're moving the |lc| to |rc| list to the {\it left\/}
+end of the new segment, and so |lc| must start out as |rrc->seq-1|
+minus the length of the |lc| to |rc| segment; the increment should
+again be 1.  When the orientations are different, we'll be adding
+to the right end of the new segment, with |rc| at the beginning and
+|lc| becoming the new tail.  In this case, 
+|lc|'s new sequence number should be |rrc->seq| plus the length
+of the |lc| to |rc| list, and |seq_inc| should be -1.
+
+@@<Split right: set the per-city data in the split off segment@@>=
+{ 
+city_node_t *i, *u=lc, *v=rc;
+int succ_link, seq_inc, seq_num;
+if ( rpr==pr ) {	/* Move to left end. */
+	succ_link=LINK_NEXT;
+	seq_inc = 1;
+	seq_num = rrc->seq + u->seq-v->seq - 1;
+} else {	/* Move to right end. */
+	succ_link = LINK_PREV;
+	seq_inc = -1;
+	seq_num = rrc->seq + v->seq-u->seq + 1;
+	@@<Swap links from |u| to |v|@@>@@;
+}
+for ( i=lc;i!=rc;i=i->link[succ_link], seq_num+= seq_inc ) {	
+	/* Set parent pointers and sequence numbers */
+	i->parent = rp;
+	i->seq = seq_num;
+}
+i->parent = rp;
+i->seq = seq_num;
+}
+
+
+@@ We're reversing a single segment and must therefore swap the two inbound
+sibling pointers and the two outbound pointers.  
+
+In more detail, there are four pointers to change.
+The sibling 
+pointer that used to point to |cc| should
+now point to |ca|, and vice versa.  
+The code is only tricky because we
+must handle all combinations of reversal bits of the two bordering segments.
+Then, |ca->prev| and |cc->next| should be swapped; these are the outbound
+sibling pointers.
+
+This section completes the code
+to handle the first case in flipping.
+
+@@<Fix sibling pointers to and from |ca| and |cc|@@>=
+{
+	city_node_t *l=ca->prev, *r = cc->next;
+	parent_node_t *lp= l->parent, *rp = r->parent;
+	const int ac_rev=ca->parent->reverse;
+	city_node_t **inbound_l = &l->link[LINK_NEXT^lp->reverse^ac_rev],
+		**inbound_r = &r->link[LINK_PREV^rp->reverse^ac_rev];
+	errorif(*inbound_l != ca,
+		"Inbound left %d != ca %d", 
+		*inbound_l - city_node, ca-city_node);
+	errorif(*inbound_r != cc,
+		"Inbound right %d != cc %d", 
+		*inbound_r - city_node, cc-city_node);
+	SWAP(*inbound_l,*inbound_r,tcn);
+	SWAP(ca->prev,cc->next,tcn);
+}
+
+@@ Now we can move on to handling the third case for flipping:
+either $a$ and $b$ are in the same segment, or $c$ and $d$ are.
+We handle this case by reducing it to the second case.  That is,
+we split segments so that $a$ and $b$ are in different segments,
+and $d$ and $c$ are in different segments.
+
+@@ Let's tackle splitting the $a-b$ segment first.
+Thankfully, we can reuse much of the code we've just written for implicit
+balancing in case 1.  In particular, we've got code to split off the 
+portion of a segment to the left of the pointer |ca|, and code
+to split off code to the right of pointer |cc|.
+
+That splitting code takes time proportional to the length of list that is
+split off.  So we prefer to split off the shorter portion of the segment.
+
+@@<Split the $a-b$ segment@@>=
+@@<Verbose: split the $a-b$ segment@@>@@;
+{ city_node_t *l, *r; parent_node_t *p = ca->parent; /* Same as |cb->parent| */
+if ( ca->seq < cb->seq ) l=ca, r=cb;
+else l=cb, r=ca;
+if ( l->seq - p->head->seq < p->tail->seq - r->seq ) {
+	city_node_t *ca=r;	/* No relation to the previous |ca| */
+	@@<Split off the end to the left of |ca|@@>@@;
+} else {
+	city_node_t *cc=l;	/* No relation to the previous |cc| */
+	@@<Split off the end to the right of |cc|@@>@@;
+}
+}
+@@<Renew the parent sequence numbers@@>@@;
+
+@@ We've moved one of $a$ or $b$.  We need to update its parent sequence number.
+It's simpler (and probably faster) to just update both than to figure
+out (or remember) which one was moved.
+
+Cities |c| and |d| might have been moved with the $a-b$ split.  We renew
+their parent sequence numbers just in case.
+
+The nice symmetry of this code allows us to use it after we split
+the segment containing $c$ and $d$.
+
+@@<Renew the parent sequence numbers@@>=
+psa=ca->parent->seq; 
+psb=cb->parent->seq;
+psc=cc->parent->seq; 
+psd=cd->parent->seq;
+
+@@ Our aim so far in this third case is to arrange things so that case 2 applies,
+\ie, so that both $a-c$ and $b-d$ are each a contiguous sequence of complete 
+segments.  However once we've split the $a-b$ segment, the {\it first\/}
+case might apply. That is, either $a-c$ or $b-d$ might lie entirely within
+one segment.  
+If this is the case, then we update the data structure as in
+case 1.  Fortunately, \CWEB/ lets us do this quite naturally by reusing
+that section.  Recall that if case 1 does apply, then that code
+performs its own |return| to complete this procedure execution.
+
+@@<Split the $a-b$ segment@@>=
+@@<Handle case 1 of flipping, if it applies@@>@@;
+
+@@ Now lets split the $c-d$ segment.  This is analogous to splitting the
+$a-b$ segment.
+
+@@<Split the $c-d$ segment@@>=
+@@<Verbose: split the $c-d$ segment@@>@@;
+{ city_node_t *l, *r; parent_node_t *p = cc->parent;  /* Same as |cd->parent| */
+if ( cc->seq < cd->seq ) l=cc, r=cd;
+else l=cd, r=cc;
+if ( l->seq - p->head->seq < p->tail->seq - r->seq ) {
+	city_node_t *ca=r;	/* No relation to the previous |ca| */
+	@@<Split off the end to the left of |ca|@@>@@;
+} else {
+	city_node_t *cc=l;	/* No relation to the previous |cc| */
+	@@<Split off the end to the right of |cc|@@>@@;
+}
+}
+@@<Renew the parent sequence numbers@@>@@;
+
+@@ Just as in the $a-b$ case, $c$ may have been moved into $a$'s segment,
+or $d$ may have been moved into $b$'s segment.   If either has occurred,
+then we're back to case 1.  So again, we check for case 1 and handle it
+if it occurs.
+
+@@<Split the $c-d$ segment@@>=
+@@<Handle case 1 of flipping, if it applies@@>@@;
+
+@@ Now we're ready to handle case 2: each of the $a-c$ and the $b-d$ portions
+of the tour consists of a contiguous sequence of complete segments.
+
+As with flipping a sequence of city nodes, we first rename cities so that
+the portion to be flipped is delimited by the parents of cities |a| and |c|.
+
+@@<Flip a sequence of segments@@>=
+@@<Verbose: flip a sequence of segments@@>@@;
+errorif((psa==psb||psc==psd),"psa %d==psb %d or psc %d == psd %d",psa,psb,psc,psd);
+@@<Rename so that |psa| through |psc| is shorter than |psb| through |psd|@@>@@;
+@@<Flip the sequence of segments from $a$ to $c$@@>@@;
+
+@@
+We prefer to flip the shorter of the two sequences of segments.  
+However, we must know how the sequences are laid out before we
+know which is shorter.  Schematically, the parents of the cities $a$, $b$,
+$c$, and $d$ may be laid out in forward order, $abdc$, in reverse, $cdba$,
+or in any of the three rotational variants of each of these:
+$bdca$, $dcab$, $cabd$, or $dbac$, $bacd$, $acdb$.  We'd rather not 
+expand the code unnecessarily by writing eight different versions, so
+we'll rename cities so that the sequence of parents from |a| through |c|
+is to be reversed.
+
+The first step of this renaming task is to identify which  of the above
+eight orderings hold.  There are two tricks to doing this easily.
+First, we filter out trivial flips, \ie~where
+one of the portions consists of a single parent.  
+We want the predecessor and successor
+of the parent of an end city (one of $a$, $b$, $c$, or $d$) to be 
+in the other portion.  
+Second, we must know the number of groups, |numgroups|; this makes identifying
+successors and predecessors easy by using modular arithmetic.
+
+We will make use of |normp| and |normm|, a pair of 
+a fast but restricted  macros for the remainder modulo |num_groups|.
+Macro |normp| normalizes numbers from $[0,2\hbox{|num_groups|}-1]$ down
+to $[0,\hbox{|num_groups|}-1]$; it is used when adding two numbers (remember
+$p$ for `plus').
+Macro |normm| normalizes numbers from 
+$[-\hbox{|num_groups|},\hbox{|num_groups|}-1]$ down
+to $[0,\hbox{|num_groups|}-1]$; it is used when subtracting 
+two numbers (remember
+$m$ for `minus').
+
+@@d normp(X) ((X)<num_groups ? (X) : (X)-num_groups)	
+@@d normm(X) ((X)<0 ? (X)+num_groups : (X))
+@@<Rename so that |psa| through |psc| is shorter than |psb| through |psd|@@>=
+if ( psb==psd ) {
+	SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+	SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+	SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+} else if ( psa!=psc ) {	/* Nontrivial sequence of parents. Determine the shorter of the two. */
+	if ( normp(psa+1)==psb ) { /* Forward order */
+		const int dmb = psd-psb, amc=psa-psc;
+		if ( normm(dmb) < normm(amc) )
+			SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+			SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+			SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+	} else { /* Reverse order */
+		const int bmd = psb-psd, cma=psc-psa;
+		if ( normm(bmd) < normm(cma) )
+			SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+			SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+			SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+	}
+}
+
+@@ It is convenient to know which parent comes first.  We'll write |u| and
+|v| for the lefthand and righthand parents of |ca| and |cb|, respectively.
+
+There are two kinds of tasks to perform.  The first involves
+changing pointers at the boundary.  The second involves making changes
+at each of the parent nodes in the reversed sequence.
+
+
+
+@@<Flip the sequence of segments from $a$ to $c$@@>=
+{
+parent_node_t *u, *v;
+if ( normp(psa+1)==psb ) u=cc->parent, v=ca->parent;
+else u=ca->parent, v=cc->parent;
+@@<Fix inbound and outbound sibling pointers@@>@@;
+@@<Fix per-parent data in the reversal from |u| to |v|@@>@@;
+}
+
+
+@@ It is convenient to do the end-pointer manipulation first, 
+while we have a good conceptual 
+handle on where pointers point.  
+
+We must fix outbound and inbound city sibling pointers at the boundaries,
+and outbound and inbound parent sibling pointers at the boundaries.
+
+This code looks hairy, but only because to fix
+the city siblings, 
+we have to handle all possible cases of reversal bits.  Also,
+we need some double indirection in order to swap properly.
+
+@@<Fix inbound and outbound sibling pointers@@>=
+{
+parent_node_t *tpn;
+int ur, vr;
+city_node_t **u_outbound, **v_outbound, **u_inbound, **v_inbound, *u_first, *v_last;
+ur=u->reverse;
+vr=v->reverse;
+u_first = u->city_link[ur^CITY_LINK_HEAD];
+v_last  = v->city_link[vr^CITY_LINK_TAIL];
+u_outbound = u_first->link + (ur^LINK_PREV);
+v_outbound = v_last ->link + (vr^LINK_NEXT);
+u_inbound = (*u_outbound)->link + 
+	((*u_outbound)->link[LINK_NEXT] == u_first? LINK_NEXT:LINK_PREV);
+v_inbound = (*v_outbound)->link + 
+	((*v_outbound)->link[LINK_NEXT] == v_last ? LINK_NEXT:LINK_PREV);
+	
+SWAP(*u_inbound,*v_inbound,tcn);	/* Fix inbound city sibling pointers */
+SWAP(*u_outbound,*v_outbound,tcn);	/* Fix outbound city sibling pointers */
+u->prev->next = v;	/* Fix inbound parent sibling pointers */
+v->next->prev = u;
+SWAP(u->prev,v->next,tpn); 	/* Fix outbound parent sibling pointers */
+}
+
+@@
+This section updates the per-node data on the reversed sequence of parents.
+
+The first job is to fix the parent sibling pointers.  This code is similar
+to the code to reverse a sequence of city links a single segment, namely
+swap the sibling link pointers: make a former successor into a predecessor
+and vice versa.  The outbound parent sibling pointers have already been taken
+care of.
+
+The second and third jobs are to update the parent sequence numbers and to
+flip the reversal bits.  
+
+Updating sequence numbers is interesting only
+because we must do all arithmetic modulo |num_groups|.  In the future,
+we might take the extra care
+so that we would never overflow the number representation, but this
+would only be possible (on a 32-bit or better machine) 
+if we had about two {\it billion\/} groups or more.  Instead, I've
+opted for the go for simpler and hopefully faster code.
+
+On the other hand, if you end up fixing this problem, beware that you must
+be very careful.  For instance, it is not good enough to leave the
+code as it is, changing |int|s to |unsigned int|s, because the definition
+of |upvn| in effect becomes 
+$$upvn = (\hbox{|u->seq + v->seq|}\ \mod\ m)\ \mod\ \hbox{|num_groups|}$$
+which is {\it not\/}
+in general equal to 
+$$(\hbox{|u->seq + v->seq|}\ \mod\ \hbox{|num_groups|})\ \mod\ m.$$
+For example, $(4\ \mod\ 3)\ \mod\ 2 = 1 \not=0=(4 \ \mod\ 2)\ \mod 3$.
+Here I've taken $m$ to be 1 greater than the maximum value of an unsigned
+integer, \eg\ $m=2^{32}$ on a 32-bit machine.
+
+
+@@<Fix per-parent data in the reversal from |u| to |v|@@>=
+{
+	const int upv = u->seq+v->seq, upvn = normp(upv);	
+	parent_node_t *i, *done=v->next, *tpn;
+	errorif(upv<u->seq || upv<v->seq, 
+		"We've overflowed the integer representation");
+	for ( i=u; i != done; i=i->prev ) {	/* Yes, |prev|: it's the old |next| pointer. */
+		const int new_seq = upvn - i->seq;
+		i->seq = normm(new_seq);
+		i->reverse ^= 1;
+		SWAP(i->next,i->prev,tpn);
+	}
+}
+
+@@*Debugging.
+I'm not perfect.  This module didn't work the first time it compiled.
+The following routines were created to help me debug the above routines.
+
+Externally, they duplicate the interface using different names.  Internally,
+they perform the queries and updates on both the array-based implementation
+and the two-level-tree-based implementation, and check
+the answers by comparing them.
+
+Here's the interface.
+
+@@<Exported subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+void twolevel_debug_setup(const int num_vertices, const int start_seg_size);
+void twolevel_debug_cleanup(void);
+void twolevel_debug_set(int const *tour);
+int twolevel_debug_next(int a);
+int twolevel_debug_prev(int a);
+int twolevel_debug_between(int a, int b, int c);
+void twolevel_debug_flip(int a, int b, int c, int d);
+#endif
+
+
+@@ The main wrinkle in this debuggging code is that the 
+|flip| operation of the ADT does not specify the orientation
+of the resulting tour.    So we must remember and adjust for the
+possibly different orientations of tours under both implementations.  
+Variable |reverse| is non-zero when the orientations differ.  
+
+We will
+take the two-level tree as the base implementation and adjust calls
+to the array implementation.  That is, the answers to the queries
+will always be the answers given by the two-level tree; the answers
+from the array queries will be adjusted before comparing.  I've made
+this choice because I want to process exactly the same sequence of operations
+as when the bare two-level tree implementation is used.  I want to
+minimize the entropy during debugging.
+@@^entropy@@>
+
+
+@@<Module variables@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int reverse;
+#endif
+
+@@ The setup, cleanup and tour-setting routines call the appropriate
+routines in both modules, then set the reversal variables as appropriate.
+
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+void 
+twolevel_debug_setup(const int num_vertices, const int start_seg_size) {
+	array_setup(num_vertices);
+	twolevel_setup(num_vertices,start_seg_size);
+	using_two_representations=1;
+}
+
+void 
+twolevel_debug_cleanup(void) {
+	twolevel_cleanup();
+	array_cleanup();
+	using_two_representations=0;
+}
+
+void 
+twolevel_debug_set(int const *tour) {
+	if ( verbose >= 100) { printf("set\n"); }
+	array_set(tour);
+	twolevel_set(tour);
+	reverse = array_next(0) != twolevel_next(0);
+	if ( verbose >=200) 
+		printf("\t\treverse %d == (an0=%d != tn0=%d)\n",reverse,array_next(0),
+				twolevel_next(0));
+	check_tours_match();
+}
+#endif
+
+@@ We need the interface to the \module{ARRAY} module.
+@@<Module headers@@>=
+#if defined(TWOLEVEL_DEBUG)
+#include "array.h"
+#endif
+
+@@ 
+@@<Module variables@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int using_two_representations;
+#endif
+
+@@ Here's a linear-time check on the tours.  
+We check most of the internal 
+consistency of the data structures, but not 
+any of the |between| queries.  Checking all the possible |between|
+queries would take cubic time!
+
+I also check sequence numbers; they weren't being properly maintained.
+
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int
+check_self_consistency(void)
+{	int i, c,cnt, an_error=0, cnpt, gs,s,tail_s,lgs,ls, ng=0, ph,pt;
+	const int first_city=
+		parent_node[0].city_link[CITY_LINK_HEAD^parent_node[0].reverse]
+		-city_node;
+	parent_node_t *p;
+	if (verbose >= 150)
+		printf("Checking twolevel tour consistency, reverse==%d\n",reverse);
+	tail_s = ls = city_node[twolevel_prev(first_city)].seq;
+	lgs = parent_node[0].seq-1;
+	for ( i=0, c=first_city; i<n && !an_error ; i++, c=cnt ) {
+		if ( c == first_city && i > 0) {an_error=1;printf("Not a tour\n");}
+		cnt = twolevel_next(c);
+		cnpt = twolevel_prev(cnt);
+		if ( cnpt != c ) {
+			an_error=1;
+			printf("twolevel next/prev inconsistent pos %d city %d next: %d, nextprev: %d\n",
+				i,c,cnt,cnpt);
+		}
+		p = city_node[c].parent;
+		if ( lgs != (gs=p->seq) ) { /* New segment. */
+			ng++;	/* Number of groups encountered */
+			if ( gs != ((lgs+1)%num_groups) ) {
+				an_error=1;
+				printf("Parent sequence numbers %d to %d not consecutive\n",
+					lgs,gs);
+			}
+			lgs=gs;
+			if ( tail_s != ls ) {
+				an_error=1;
+				printf("Seq of last city in segment %d doesn't seq of \"tail\"%d\n",
+					ls,tail_s);
+			}
+			tail_s = p->city_link[CITY_LINK_TAIL ^ p->reverse]->seq;
+			ls = city_node[c].seq;
+			if ( c != (ph=p->city_link[CITY_LINK_HEAD ^ p->reverse]-city_node) ) {
+				an_error=1;
+				printf("First city in segment %d isn't \"head\"%d\n",
+					c,ph);
+			}
+			{const cp=twolevel_prev(c);
+			const parent_node_t *pp = city_node[cp].parent;
+			if ( cp != (pt=pp->city_link[CITY_LINK_TAIL^pp->reverse]-city_node) ) {
+				an_error=1;
+				printf("Last city %d in previous segment isn't \"tail\" %d; step %d\n",
+					cp,pt,i);
+			}
+			}
+		} else {
+			const int s_should_be = ls + (p->reverse?-1:1);
+			s = city_node[c].seq;
+			if ( s != s_should_be ) {
+				an_error=1;
+				printf("Sequence number %d of %d should be %d\n",
+					s,c,s_should_be);
+			}
+			ls = s;
+		}
+	}
+	if ( ng != num_groups ) {
+		an_error=1;
+		printf("Only counted %d groups; should be %d groups\n",
+			ng,num_groups);
+	}
+	if ( c!=first_city ) {
+		an_error=1;
+		printf("Not a tour: didn't loop back from %d to itself\n",
+			first_city);
+	}
+	if ( an_error ) print_two_tours();
+	errorif(an_error,"Incorrect state for two-level trees.");
+	return 1;
+}
+
+static int
+check_tours_match(void)
+{	int i, c,cna, cnt, an_error=0;
+	const int first_city=
+		parent_node[0].city_link[CITY_LINK_HEAD^parent_node[0].reverse]
+		-city_node;
+	check_self_consistency();
+	if ( verbose >= 150 ) printf("Checking tours match\n");
+	for ( i=0, c=first_city; i<n && !an_error ; i++, c=cnt ) {
+		if ( c == first_city && i > 0) {an_error=1;printf("Not a tour\n");}
+		cna = reverse ? array_prev(c) : array_next(c);
+		cnt = twolevel_next(c);
+		if(cna!=cnt) {
+			an_error=1;
+			printf("next's don't match: position %d city %d array: %d, twolevel: %d\n",
+				i,c,cna,cnt);
+		} 
+	}
+	if ( c!=first_city ) {
+		an_error=1;
+		printf("Not a tour: didn't loop back from %d to itself\n",
+			first_city);
+	}
+	if ( an_error ) print_two_tours();
+	errorif(an_error,"Tours don't match.");
+	return 1;
+}
+#endif
+
+@@
+@@<System headers@@>=
+#include <stdio.h>
+#if defined(OS_HAS_BROKEN_HEADERS)
+#include "fixincludes.h"
+#endif
+
+
+@@
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int 
+print_two_tours(void) {
+	int i, ca, ct, amore=1, tmore=1, 
+	first_city=parent_node[0].city_link[CITY_LINK_HEAD^parent_node[0].reverse]
+				-city_node;
+	char a[100],t[100];
+	for ( i=0, ca=ct=first_city; i<n ; i++ ) {
+		if ( i==0 ) printf("Tour: Array Two-level\n");
+		sprintf(a,"%d",ca);
+		sprintf(t,"%d",ct);
+		printf("\t%4d %7s %7s", i, amore ? a : " ", tmore?t:" ");
+		if ( tmore ) {
+			printf("\tseq=%3d p=%p g=%2d %s h=%4d t=%4d", 
+				city_node[ct].seq,
+				city_node[ct].parent,
+				city_node[ct].parent->seq,
+				city_node[ct].parent->reverse? "r": " ",
+				city_node[ct].parent->head-city_node,
+				city_node[ct].parent->tail-city_node);
+		}
+		printf("\n");
+		ca = reverse ? array_prev(ca) : array_next(ca);
+		ct = twolevel_next(ct);
+		amore &= ca != first_city;
+		tmore &= ct != first_city;
+	}
+	return 1;	/* Non-zero, for use in |errorif|. */
+}
+#endif
+
+@@ The |next| and |prev| queries have already been foreshadowed by the
+check of the entire tour.  Specifically, we use |reverse| to select
+whether to call the other of |next|, |prev| on the array implementation.
+
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+int 
+twolevel_debug_next(int a) {
+	const int tn = twolevel_next(a);
+	const int an = reverse ? array_prev(a) : array_next(a);
+	const int tnp = twolevel_prev(tn);
+	if ( verbose >= 125 ) printf("next(%d)\n",a);
+	errorif(tn!=an && check_tours_match(),
+		"next: twolevel_next(%d)=%d, array_%s(%d)=%d",
+		a,tn,reverse?"prev":"next",an);
+	errorif( tnp != a && check_tours_match(), 
+		"next(%d)=%d, prev(%d)=%d",a,tn,tn,tnp);
+	return tn;
+}
+
+int
+twolevel_debug_prev(int a) {
+	const int tp = twolevel_prev(a);
+	const int ap = reverse ? array_next(a) : array_prev(a);
+	const int tpn = twolevel_next(tp);
+	if ( verbose >= 125 ) printf("prev(%d)\n",a);
+	errorif(tp!=ap && check_tours_match(),
+		"next: twolevel_next(%d)=%d, array_%s(%d)=%d",
+		a,tp,reverse?"next":"prev",ap);
+	errorif( tpn != a && check_tours_match(), 
+		"prev(%d)=%d, next(%d)=%d",a,tp,tp,tpn);
+	return tp;
+}
+#endif
+
+@@ The |between| query is interesting because reversing the orientation
+is reversing the arguments.  Doodle for a while to see why.
+There's
+modular arithmetic in there somewhere.
+This technique is also used in the module \module{JBMR} to define 
+|tour_inorder|.
+
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+int 
+twolevel_debug_between(int a, int b, int c) {
+	const int ab = reverse ? array_between(c,b,a) : array_between(a,b,c);
+	const int tb = twolevel_between(a,b,c);
+	if ( verbose >= 125 ) printf("between(%d,%d,%d)\n",a,b,c);
+	errorif(ab!=tb && check_tours_match() && print_two_tours(),
+		"between(%d,%d,%d) don't match: twolevel=%d array=%d",
+		a,b,c,tb,ab);
+	return tb;
+}
+#endif
+
+@@ 
+Orientation doesn't actually matter in |flip|, except that
+the ADT definition requires that |a==next(b)| and |d==next(c)|.  
+We propagate that condition.
+
+We must also reset |reverse|.
+
+@@<Subroutines@@>=
+#if defined(TWOLEVEL_DEBUG)
+void 
+twolevel_debug_flip(int a, int b, int c, int d) {
+	if (verbose >= 110) printf("flip(%d,%d,%d,%d) %d\n",a,b,c,d,++count_flips);
+	twolevel_flip(a,b,c,d);
+	if ( reverse ) array_flip(b,a,d,c);
+	else array_flip(a,b,c,d);
+	reverse = array_next(0) != twolevel_next(0);
+	if ( verbose >= 200 ) 
+		printf("\t\treverse %d == (an0=%d != tn0=%d)\n",reverse,array_next(0),
+				twolevel_next(0));
+	check_tours_match();
+	{ int an_error=0;
+	const int an = twolevel_next(a), ap = twolevel_prev(a);
+	const int bn = twolevel_next(b), bp = twolevel_prev(b);
+	const int cn = twolevel_next(c), cp = twolevel_prev(c);
+	const int dn = twolevel_next(d), dp = twolevel_prev(d);
+	if ( an==d ) {
+		if ( dp != a ) an_error=1,printf("dp!=a\n");
+		if ( bn != c ) an_error=1,printf("bn!=c\n");
+		if ( cp != b ) an_error=1,printf("cp!=b\n");
+	} else if ( ap==d ) {
+		if ( dn != a ) an_error=1,printf("dn!=a\n");
+		if ( bp != c ) an_error=1,printf("bp!=c\n");
+		if ( cn != b ) an_error=1,printf("cn!=b\n");
+	}
+	if ( an_error ) {
+		print_two_tours();
+		errorif(1,"Bug");
+	}
+	}
+}
+#endif
+
+
+@@
+@@<Module prototypes@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int check_tours_match(void);
+static int check_self_consistency(void);
+static int print_two_tours(void);
+#endif
+
+@@
+@@<Verbose: handle case 1@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( print_at_flips != -1 && print_at_flips <= count_flips ) {
+	if ( verbose >=200 ) printf(" Handle case 1\n");
+	if ( using_two_representations ) {
+		check_tours_match();
+		print_two_tours();
+	}
+}
+#endif
+
+@@
+@@<Verbose: split the $a-b$ segment@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( print_at_flips != -1 && print_at_flips <= count_flips ) {
+	if ( verbose >= 200 ) 
+		printf(" Split the a-b segment, a=%d b=%d c=%d d=%d\n",a,b,c,d);
+	if ( using_two_representations ) {
+		check_tours_match();
+		print_two_tours();
+	}
+}
+#endif
+
+@@
+@@<Verbose: split the $c-d$ segment@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( print_at_flips != -1 && print_at_flips <= count_flips ) {
+	if ( verbose >= 200 )
+	printf(" Split the c-d segment, a=%d b=%d c=%d d=%d\n",a,b,c,d);
+	if ( using_two_representations ) {
+		check_tours_match();
+		print_two_tours();
+	}
+}
+#endif
+
+@@
+@@<Verbose: flip a sequence of segments@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( print_at_flips != -1 && print_at_flips <= count_flips ) {
+	if ( verbose >= 125 ) printf(" flip a sequence of segments\n");
+	if ( using_two_representations ) {
+		check_tours_match();
+		print_two_tours();
+	}
+}
+#endif
+
+
+@@
+@@<Verbose: split off the end to the right of |cc| begin@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( verbose >= 150)
+printf("\t\t\tSplit off the end to the right of |cc|, c=%d begin\n",cc-city_node);
+if ( using_two_representations ) check_tours_match();
+#endif
+
+@@
+@@<Verbose: split off the end to the right of |cc| end@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( verbose >= 150)
+printf("\t\t\tSplit off the end to the right of |cc|, c=%d end\n",cc-city_node);
+if ( using_two_representations ) check_tours_match();
+#endif
+
+@@
+@@<Verbose: split off the end to the left of |ca| begin@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( verbose >= 150)
+printf("\t\t\tSplit off the end to the left of |ca|, a=%d begin\n",ca-city_node);
+if ( using_two_representations ) check_tours_match();
+#endif
+
+@@
+@@<Verbose: split off the end to the left of |ca| end@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( verbose >= 150)
+printf("\t\t\tSplit off the end to the left of |ca|, a=%d end\n",ca-city_node);
+if ( using_two_representations ) check_tours_match();
+#endif
+
+@@
+@@<Verbose: implicit rebalance done@@>=
+#if defined(TWOLEVEL_DEBUG)
+if ( verbose >= 150) printf("\t\t\tImplicit rebalance done\n");
+
+{ 
+const int old_reverse = reverse;
+if ( using_two_representations ) {
+	reverse = array_next(0) != twolevel_next(0);
+	if ( verbose >=200)
+		printf("\t\treverse %d == (an0=%d != tn0=%d)\n",reverse,array_next(0),
+				twolevel_next(0));
+}
+	check_self_consistency();
+if ( using_two_representations ) {
+	reverse = old_reverse;
+}
+}
+#endif
+
+@@
+@@<Module variables@@>=
+#if defined(TWOLEVEL_DEBUG)
+static int count_flips = -1, print_at_flips=-1;
+extern int verbose;
+#endif
+
+
+@@*Denoument.  Give performance numbers.
+
+@@*Index.
+@
+
+
+1.144
+log
+@Fixed RCS log behaviour.
+@
+text
+@d1 47
+a47 1
+@@i copyrt.w
+d54 3
+d300 1
+a300 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.143 1997/08/15 20:19:30 neto Exp neto $";
+@
+
+
+1.143
+log
+@Added Index major section.
+@
+text
+@d6 5
+a10 1
+{\obeylines$Log: twolevel.w,v $
+d251 1
+a251 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.142 1997/05/16 20:37:46 neto Exp neto $";
+@
+
+
+1.142
+log
+@Change FIX INCLUDES to OS HAS BROKEN HEADERS.
+@
+text
+@d7 3
+d247 1
+a247 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.141 1997/05/16 18:13:25 neto Exp neto $";
+d1932 2
+@
+
+
+1.141
+log
+@Include <config.h> and "lkconfig.h"
+@
+text
+@d7 3
+d244 1
+a244 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.140 1997/01/21 21:55:55 david Exp david $";
+d1672 1
+a1672 1
+#if defined(FIX_INCLUDES)
+@
+
+
+1.140
+log
+@Added standard copyright notice by including copyrt.w
+@
+text
+@d7 3
+d232 2
+d241 1
+a241 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.139 1996/10/29 17:27:11 neto Exp david $";
+@
+
+
+1.139
+log
+@add copyright notice.
+@
+text
+@d1 1
+a1 1
+
+a4 4
+\copyright 1996 David Neto
+
+All rights reserved, etc.
+\vskip.5cm\relax
+d6 3
+a9 1
+{\obeylines$Log:	twolevel.w,v $
+d236 1
+a236 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.138 96/09/19 15:41:07 neto Exp Locker: neto $";
+@
+
+
+1.138
+log
+@Removed useless const qualifiers.  Remember C passes arguments by value,
+so integers are safe.
+@
+text
+@d5 6
+d12 4
+d238 1
+a238 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.137 96/09/19 15:33:25 neto Exp Locker: neto $";
+@
+
+
+1.137
+log
+@Removed conflict with definition of |abs| in stdlib.h for IRIX.
+@
+text
+@d6 3
+d228 1
+a228 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.136 96/09/18 11:40:32 neto Exp Locker: neto $";
+d586 1
+a586 1
+twolevel_next(const int a) {
+d592 1
+a592 1
+twolevel_prev(const int a) {
+d599 2
+a600 2
+int twolevel_next(const int a);
+int twolevel_prev(const int a);
+d656 1
+a656 1
+twolevel_between(const int a, const int b, const int c) {
+d682 1
+a682 1
+int twolevel_between(const int a, const int b, const int c);
+d1466 3
+a1468 3
+int twolevel_debug_next(const int a);
+int twolevel_debug_prev(const int a);
+int twolevel_debug_between(const int a, const int b, const int c);
+d1701 1
+a1701 1
+twolevel_debug_next(const int a) {
+d1715 1
+a1715 1
+twolevel_debug_prev(const int a) {
+d1739 1
+a1739 1
+twolevel_debug_between(const int a, const int b, const int c) {
+@
+
+
+1.136
+log
+@There is no em in CWEB, only it.
+This module appears to work now.
+@
+text
+@d6 4
+d225 1
+a225 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.135 96/09/17 14:16:34 neto Exp Locker: neto $";
+d721 5
+a725 2
+@@d SWAP(x,y,t)  ((t)=(x),(x)=(y),(y)=(t))
+@@d abs(x) ((x)<0?-(x):(x))
+d728 2
+@
+
+
+1.135
+log
+@Fixed a conflict with the definition of prev and a structure in
+stdio under AIX.
+@
+text
+@d6 4
+d221 1
+a221 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.134 96/09/17 14:03:43 neto Exp Locker: neto $";
+d1120 1
+a1120 1
+same, then we're moving the |lc| to |rc| list to the {\em left\/}
+@
+
+
+1.134
+log
+@Fixed the self-consistency check.  The group sequence numbers were assumed
+to start at 0.  They can start anywhere and wrap around to 0.
+Also, made using\_two\_representations conditionally compiled.
+@
+text
+@d6 5
+d217 1
+a217 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.133 96/09/17 12:53:38 neto Exp Locker: neto $";
+d284 11
+d296 1
+a296 8
+@@d LINK_PREV 0
+@@d LINK_NEXT 1
+@@d prev link[LINK_PREV]
+@@d next link[LINK_NEXT]
+@@d CITY_LINK_HEAD 0
+@@d CITY_LINK_TAIL 1
+@@d head city_link[CITY_LINK_HEAD]
+@@d tail city_link[CITY_LINK_TAIL]
+d298 9
+a306 1
+@@<Module type definitions@@>=
+@
+
+
+1.133
+log
+@Made debugging output conditional.
+@
+text
+@d6 3
+d212 1
+a212 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.132 96/09/17 12:39:31 neto Exp Locker: neto $";
+d1502 1
+d1504 1
+d1518 1
+a1518 1
+{	int i, c,cnt, an_error=0, cnpt, gs,s,tail_s,lgs=-1,ls, ng=0, ph,pt;
+d1526 1
+d1539 1
+a1539 1
+			if ( gs != lgs+1 ) {
+@
+
+
+1.132
+log
+@Fixed bug 10.
+Sequence numbers were screwed up on split right when current segment
+was reversed but right segment was not.  
+@
+text
+@d6 5
+d209 1
+a209 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.131 96/09/17 12:09:55 neto Exp Locker: neto $";
+d1468 1
+d1475 1
+d1497 3
+d1767 4
+a1770 2
+	check_tours_match();
+	print_two_tours();
+d1780 4
+a1783 2
+	check_tours_match();
+	print_two_tours();
+d1793 4
+a1796 2
+	check_tours_match();
+	print_two_tours();
+d1805 4
+a1808 2
+	check_tours_match();
+	print_two_tours();
+d1818 1
+a1818 1
+check_tours_match();
+d1826 1
+a1826 1
+check_tours_match();
+d1834 1
+a1834 1
+check_tours_match();
+d1842 1
+a1842 1
+check_tours_match();
+d1850 3
+a1852 1
+{ const int old_reverse = reverse;
+d1857 1
+d1859 3
+a1861 1
+  reverse = old_reverse;
+@
+
+
+1.131
+log
+@Fixed the descriptions on sequence numbers for splitting left and right.
+Still buggy.
+@
+text
+@d6 4
+d204 1
+a204 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.130 96/09/17 11:55:58 neto Exp Locker: neto $";
+a623 6
+#if 0
+printf("\ta->seq=%d b->seq=%d c->seq=%d\n",ca->seq,cb->seq,cc->seq);
+printf("\tpa->head->seq=%d pb->head->seq=%d pc->head->seq=%d\n",
+	pa->head->seq, pb->head->seq, pc->head->seq);
+printf("\tsa=%d sb=%d sc=%d\n",sa,sb,sc);
+#endif
+d1094 5
+a1098 3
+again be 1.  When the orientations are different, we set |seq_num=rrc->+1|
+and |seq_inc=-1|, because we are adding the list to the right end
+of the new segment and reversing the list at the same time.
+a1099 1
+
+d1111 1
+a1111 1
+	seq_num = rrc->seq + 1;
+d1473 1
+a1473 1
+	printf("set\n");
+d1477 1
+d1508 2
+a1509 1
+	printf("Checking twolevel tour consistency, reverse==%d\n",reverse);
+d1582 1
+a1582 1
+	printf("Checking tours match\n");
+d1616 1
+a1616 1
+print_two_tours(void) { 
+d1656 1
+a1656 1
+	printf("next(%d)\n",a);
+d1670 1
+a1670 1
+	printf("prev(%d)\n",a);
+d1693 1
+a1693 1
+	printf("between(%d,%d,%d)\n",a,b,c);
+d1712 1
+a1712 1
+	printf("flip(%d,%d,%d,%d) %d\n",a,b,c,d,++count_flips);
+d1717 1
+a1717 1
+#if 0
+a1719 1
+#endif
+d1756 1
+a1756 1
+	printf(" Handle case 1\n");
+d1766 2
+a1767 1
+	printf(" Split the a-b segment, a=%d b=%d c=%d d=%d\n",a,b,c,d);
+d1777 1
+d1788 1
+a1788 1
+	printf(" flip a sequence of segments\n");
+d1798 1
+d1806 1
+d1814 1
+d1822 1
+d1830 2
+a1831 1
+printf("\t\t\tImplicit rebalance done\n");
+d1834 1
+d1845 2
+a1846 1
+static int count_flips = -1, print_at_flips=482;
+@
+
+
+1.130
+log
+@Fixed Bug 9.
+9a: head/tail wasn't being set properly when current seg was reversed.
+9a: seq numbers not set properly under same condition.
+@
+text
+@d6 5
+d200 1
+a200 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.129 96/09/17 11:17:21 neto Exp Locker: neto $";
+d1003 4
+a1006 10
+with those in the segment to the left.  
+If the segment we're moving
+the cities into is reversed,
+%%%%% (in comparison with the current segment, \ie\ |lpr!=rpr|), 
+then we're adding them to the left end
+of the list.  In this case, sequence numbers should {\it end\/}
+at |llc->seq-1|, so they should begin at |llc->seq| minus the length
+of the list that we're moving. 
+(Don't get caught by an off-by-one error
+in the subtraction |u->seq - v->seq|.)
+d1008 13
+a1020 1
+Second, if the reversal bits of the old and the new parents are different,
+d1086 5
+d1092 7
+a1098 10
+is as follows.
+If the segment we're moving
+the cities into is reversed, then we're adding them to the {\it right\/}
+(this was {\it left\/} in the other case) end
+of the list.  If so, sequence numbers should {\it start\/}
+at |rrc->seq+1|.  If not, sequence numbers should begin at |rrc->seq| 
+minus the length
+of the list that we're moving.
+(Don't get caught by an off-by-one error
+in the subtraction |u->seq - v->seq|.)
+d1837 1
+a1837 1
+static int count_flips = -1, print_at_flips=-1;
+@
+
+
+1.129
+log
+@Fixed bug 8a, 8b.
+8a: split segment while that segment is reversed fouled up the inbound
+sibling poitner.
+8b: split segment while reversed set the sequence numbers rwrogng.
+@
+text
+@d6 6
+d195 1
+a195 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.128 96/09/16 17:11:21 neto Exp Locker: neto $";
+d615 1
+d620 1
+d991 1
+a991 1
+lp->city_link[pr^lpr^CITY_LINK_TAIL] = lpr==pr ? rc : lc;
+d1028 1
+a1028 1
+	seq_num = llc->seq + u->seq - v->seq - 1;
+d1071 1
+a1071 1
+rp->city_link[pr^rpr^CITY_LINK_HEAD] = rpr==pr ? lc : rc;
+d1095 1
+a1095 1
+	seq_num = rrc->seq + u->seq - v->seq - 1;
+d1703 1
+d1706 1
+d1824 1
+a1824 1
+static int count_flips = -1, print_at_flips=162;
+@
+
+
+1.128
+log
+@Quashed bug 7, failure at flip number 159.
+The inbound pointer addresses depend on the orientation of the ac segment.
+@
+text
+@d6 4
+d189 1
+a189 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.127 96/09/13 17:21:39 neto Exp Locker: neto $";
+d969 3
+a971 3
+new parent, |lp->city_link[lpr^CITY_LINK_TAIL]|.  
+Interestingly, the sibling pointers don't need
+to be changed.  
+d983 1
+a983 1
+lp->city_link[lpr^CITY_LINK_TAIL] = lpr==pr ? rc : lc;
+d992 3
+a994 1
+the cities into is reversed, then we're adding them to the left end
+d1012 9
+a1020 4
+int succ_link=LINK_NEXT, seq_inc = lpr ? -1 : 1, 
+	seq_num=llc->seq + (lpr ? u->seq-v->seq-1 : 1);
+if ( lpr != pr ) {
+	succ_link=LINK_PREV;
+d1063 1
+a1063 1
+rp->city_link[rpr^CITY_LINK_HEAD] = rpr==pr ? lc : rc;
+d1083 9
+a1091 4
+int succ_link=LINK_NEXT, seq_inc = rpr ? -1 : 1, 
+	seq_num=rrc->seq + (rpr ? 1 : u->seq-v->seq-1);
+if ( rpr != pr ) {
+	succ_link=LINK_PREV;
+d1814 1
+a1814 1
+static int count_flips = -1, print_at_flips=159;
+@
+
+
+1.127
+log
+@Quashed bugs 5 and 6.
+5: off-by-one in splitting left and right.
+6: implicit rebalancing for case 1; It was splitting right, but not
+fixing the city sibling pointers, both inbound and outbound.
+Now it fails on lin105 at flip#159.
+@
+text
+@d6 7
+d185 1
+a185 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.126 96/09/13 15:40:55 neto Exp Locker: neto $";
+d990 4
+a993 2
+at |llc->seq-1|, so they should begin at |llc->seq-1| minus the length
+of the list that we're moving.
+d1054 1
+a1054 1
+@@ Setting the per-city data is also analogous.  
+d1062 1
+a1062 1
+at |rrc->seq+1|.  If not, sequence numbers should begin at |rrc->seq-1| 
+d1065 2
+d1107 9
+a1115 2
+	city_node_t **inbound_l = &l->link[LINK_NEXT^lp->reverse],
+		**inbound_r = &r->link[LINK_PREV^rp->reverse];
+@
+
+
+1.126
+log
+@Was splitting one-off, for case 3.  Ooops.
+@
+text
+@d6 3
+d178 1
+a178 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.125 96/09/13 15:35:54 neto Exp Locker: neto $";
+d901 2
+a902 1
+with their neighbours, and then flipping their parent's reversal bit.
+d910 1
+d914 1
+d916 1
+d932 1
+d945 1
+a1057 3
+This section completes the code
+to handle the first case in flipping.
+
+d1076 26
+d1170 1
+a1170 1
+	city_node_t *ca=l;
+d1173 1
+a1173 1
+	city_node_t *cc=r;
+d1425 1
+a1425 1
+	check_tours();
+d1436 4
+a1439 5
+@@ Here's a linear-time check on the tours.  We only check some of the 
+external observables
+of the implementations, namely that |next| and |prev| work properly. 
+We don't check internal consistency of the data structures, nor that
+any of the |between| queries work.  Checking all the possible |between|
+d1447 5
+a1451 3
+check_tours(void)
+{	int i, c,cna, cnt, an_error=0, cnpa, cnpt, gs,s,tail_s,lgs=-1,ls, ng=0, ph,pt;
+	const int first_city=parent_node[0].head-city_node;
+d1453 1
+a1454 1
+	printf("Checking twolevel tour consistency, reverse==%d\n",reverse);
+a1456 2
+		cna = reverse ? array_prev(c) : array_next(c);
+		cnpa = reverse ? array_next(cna) : array_prev(cna);
+d1459 1
+a1459 1
+		if(cna!=cnt) {
+d1461 2
+a1462 7
+			printf("next's don't match: position %d city %d array: %d, twolevel: %d\n",
+				i,c,cna,cnt);
+		} 
+		if ( cnpa != c ) {
+			an_error=1;
+			printf("array next/prev inconsistent pos %d city %d next: %d, nextprev: %d",
+				i,c,cna,cnpa);
+a1463 5
+		if ( cnpa != c ) {
+			an_error=1;
+			printf("twolevel next/prev inconsistent pos %d city %d next: %d, nextprev: %d",
+				i,c,cna,cnpa);
+		}
+d1489 2
+a1490 2
+				printf("Last city %d in previous segment isn't \"tail\"%d\n",
+					cp,pt);
+d1518 28
+d1561 3
+a1563 1
+	int i, ca, ct, amore=1, tmore=1, first_city=parent_node[0].head-city_node;
+d1582 2
+a1583 2
+		amore = ca != first_city;
+		tmore = ct != first_city;
+d1601 1
+a1601 1
+	errorif(tn!=an && check_tours(),
+d1604 1
+a1604 1
+	errorif( tnp != a && check_tours(), 
+d1615 1
+a1615 1
+	errorif(tp!=ap && check_tours(),
+d1618 1
+a1618 1
+	errorif( tpn != a && check_tours(), 
+d1638 1
+a1638 1
+	errorif(ab!=tb && check_tours() && print_two_tours(),
+d1663 1
+a1663 1
+	check_tours();
+d1690 2
+a1691 1
+static int check_tours(void);
+d1698 1
+a1698 1
+if ( print_at_flips <= count_flips ) {
+d1700 1
+a1700 1
+	check_tours();
+d1708 1
+a1708 1
+if ( print_at_flips <= count_flips ) {
+d1710 1
+a1710 1
+	check_tours();
+d1718 1
+a1718 1
+if ( print_at_flips <= count_flips ) {
+d1720 1
+a1720 1
+	check_tours();
+d1728 1
+a1728 1
+if ( print_at_flips <= count_flips ) {
+d1730 1
+a1730 1
+	check_tours();
+d1740 1
+a1740 1
+check_tours();
+d1747 1
+a1747 1
+check_tours();
+d1751 27
+d1780 1
+a1780 1
+static int count_flips = -1, print_at_flips=149;
+d1782 1
+@
+
+
+1.125
+log
+@Split right now updates sequence numbers properly.  I've made
+split left symmetric and I hope it works.
+Still fails on lin105.
+@
+text
+@d6 5
+d175 1
+a175 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.124 96/09/13 13:06:24 neto Exp Locker: neto $";
+d1091 1
+a1091 1
+	city_node_t *ca=l;
+d1094 1
+a1094 1
+	city_node_t *cc=r;
+d1687 1
+a1687 1
+printf("\t\t\tSplit off the end to the right of |cc| begin\n");
+d1694 1
+a1694 1
+printf("\t\t\tSplit off the end to the right of |cc| end\n");
+@
+
+
+1.124
+log
+@More debugging output.
+Reach case 2 when psa=psb=0, psc=psd=1.  Mabye need to enforce 4 or more
+groups?
+@
+text
+@d6 5
+d170 1
+a170 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.123 96/09/13 12:13:11 neto Exp Locker: neto $";
+d965 6
+a970 1
+with those in the segment to the left.
+d977 2
+a978 1
+of |prev| and |next|.
+d981 1
+a981 1
+{ int succ_link=LINK_NEXT, seq_inc = lpr ? -1 : 1, seq_num=llc->seq + seq_inc;
+d983 2
+d998 3
+a1000 2
+@@ Splitting off the right end is analogous to splitting off the left end.
+We make the following exchanges:
+d1004 2
+a1005 1
+and |cc|$\leftrightarrow$|ca|.
+d1010 1
+d1023 1
+d1031 1
+a1031 1
+@@ Setting the per-city data is also analogous.
+d1033 11
+d1048 1
+a1048 1
+{ int succ_link=LINK_NEXT, seq_inc = rpr ? -1 : 1, seq_num=rrc->seq + seq_inc;
+d1050 2
+d1601 1
+a1603 1
+	twolevel_flip(a,b,c,d);
+d1641 1
+a1641 1
+if ( print_at_flips >= count_flips ) {
+d1651 1
+a1651 1
+if ( print_at_flips >= count_flips ) {
+d1661 1
+a1661 1
+if ( print_at_flips >= count_flips ) {
+d1671 1
+a1671 1
+if ( print_at_flips >= count_flips ) {
+d1676 15
+@
+
+
+1.123
+log
+@Added updating of sequence numbers in Case 1.  Oops.
+@
+text
+@d6 3
+d165 1
+a165 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.122 96/09/13 11:54:30 neto Exp Locker: neto $";
+d698 1
+d1051 1
+d1098 1
+d1127 2
+a1128 1
+errorif(psa==psb||psc==psd,"Bug");
+d1356 2
+d1386 1
+a1386 1
+	printf("Checking twolevel tour consistency\n");
+d1395 1
+a1395 1
+			printf("next's don't match: position %d city %d array: %d, twolevel: %d",
+d1477 1
+a1477 1
+	int i, ca, ct, amore=1, tmore=1;
+d1479 1
+a1479 1
+	for ( i=0, ca=ct=0; i<n ; i++ ) {
+d1485 1
+a1485 1
+			printf("\tseq=%d p=%p g=%d %s h=%d", 
+d1490 2
+a1491 1
+				city_node[ct].parent->head-city_node);
+d1494 1
+a1494 1
+		ca = reverse ? array_prev(ca) : array_next(ca) ;
+d1496 2
+a1497 2
+		amore = ca != 0;
+		tmore = ct != 0;
+d1570 1
+a1570 1
+	printf("flip(%d,%d,%d,%d)\n",a,b,c,d);
+d1575 2
+d1584 3
+a1586 3
+		if ( dp != a ) an_error=1,printf("dp!=a");
+		if ( bn != c ) an_error=1,printf("bn!=c");
+		if ( cp != b ) an_error=1,printf("cp!=b");
+d1588 3
+a1590 3
+		if ( dn != a ) an_error=1,printf("dn!=a");
+		if ( bp != c ) an_error=1,printf("bp!=c");
+		if ( cn != b ) an_error=1,printf("cn!=b");
+d1608 45
+@
+
+
+1.122
+log
+@More checks of the twolevel data structure.
+@
+text
+@d6 3
+d162 1
+a162 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.121 96/09/12 16:46:05 neto Exp Locker: neto $";
+d399 1
+a399 1
+%@@ Another point is that sequence numbers for cities are initialized to
+d786 3
+d809 1
+d815 16
+a830 1
+@@ The pointers that might need updating are |head| and |tail| pointers,
+d1262 1
+@
+
+
+1.121
+log
+@More debugging output. Somewhere, sequence numbers aren't properly being
+maintained.
+@
+text
+@d6 4
+d159 1
+a159 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.120 96/09/12 15:45:50 neto Exp Locker: neto $";
+d579 2
+a580 2
+printf("a->seq=%d b->seq=%d c->seq=%d\n",ca->seq,cb->seq,cc->seq);
+printf("pa->head->seq=%d pb->head->seq=%d pc->head->seq=%d\n",
+d582 1
+a582 1
+printf("sa=%d sb=%d sc=%d\n",sa,sb,sc);
+d1322 1
+d1326 1
+a1326 1
+	check_matching_tours();
+d1341 2
+a1342 2
+any of the |between| queries work.  (Checking all the possible |between|
+queries would take cubic time!)
+d1344 2
+d1349 8
+a1356 4
+check_matching_tours(void)
+{ int i, c,cna, cnt, no_match=0, cnpa, cnpt;
+	for ( i=0, c=0; i<n && !no_match ; i++ ) {
+		if( c == 0 && i > 0) printf("Not a tour\n");
+d1362 1
+a1362 1
+			no_match=1;
+d1367 1
+a1367 1
+			no_match=1;
+d1372 1
+a1372 1
+			no_match=1;
+d1376 39
+a1414 1
+		c = cnt;
+d1416 12
+a1427 2
+	if ( no_match ) print_two_tours();
+	else errorif( c != 0, "Not a tour");
+d1482 1
+a1482 1
+	errorif(tn!=an && check_matching_tours(),
+d1485 1
+a1485 1
+	errorif( tnp != a && check_matching_tours(), 
+d1496 1
+a1496 1
+	errorif(tp!=ap && check_matching_tours(),
+d1499 1
+a1499 1
+	errorif( tpn != a && check_matching_tours(), 
+d1519 1
+a1519 1
+	errorif(ab!=tb && check_matching_tours() && print_two_tours(),
+d1542 1
+a1542 1
+	check_matching_tours();
+d1569 1
+a1569 1
+static int check_matching_tours(void);
+@
+
+
+1.120
+log
+@Ensure that modulus returns non-negative result in the important places.
+@
+text
+@d6 3
+d155 1
+a155 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.119 96/09/12 15:38:02 neto Exp Locker: neto $";
+a573 1
+	const int psa=pa->seq, psb=pb->seq, psc=pc->seq;
+d575 4
+d580 3
+a582 3
+	if ( psa == psb ) 
+		if ( psa == psc) 	/* All in the same segment */
+			if ( ca->parent->reverse )
+d586 1
+a586 1
+		return (sa==sb) | (ca->parent->reverse ^ (sa<sb));
+d588 2
+a589 2
+		if ( psa==psc )	/* |a|, |c| in same, |b| elswhere */
+			return (sa!=sc) & (ca->parent->reverse ^ (sa>sc));
+d591 4
+a594 3
+			if (psb==psc) /* |b|, |c| in same, |a| elswhere */
+				return (sb==sc) | ((cb->parent->reverse) ^ (sb<sc));
+			else /* All in different; much like all in the same, but use parent numbers. */
+d596 1
+d1321 1
+a1321 1
+	@@<Debug: Check that the two tour implementations match@@>@@;
+d1339 6
+a1344 3
+@@<Debug: Check that the two tour implementations match@@>=
+{ int i, c,cna, cnt;
+	for ( i=0, c=0; i<n ; i++ ) {
+d1347 1
+d1349 16
+a1364 8
+		errorif(cna!=cnt && print_two_tours(), 
+				"Tour nexts don't match");
+		errorif( (reverse ? array_next(cna):array_prev(cna))!=c 
+				&& print_two_tours(), 
+				"Array next/prevs don't match");
+		errorif(twolevel_prev(cnt)!=c && print_two_tours(), 
+				"Two-level next/prevs don't match: next(%d)=%d, prev(%d)=%d",
+					c,cnt,cnt,twolevel_prev(cnt));
+d1367 3
+a1369 1
+	errorif( c != 0, "Not a tour");
+d1371 1
+d1392 10
+a1401 1
+		printf("\t%d %7s %7s\n", i, amore ? a : " ", tmore?t:" ");
+d1422 3
+a1424 1
+	errorif(tn!=an,"next: twolevel_next(%d)=%d, array_%s(%d)=%d",
+d1426 2
+a1427 1
+	errorif( tnp != a, "next(%d)=%d, prev(%d)=%d",a,tn,tn,tnp);
+d1436 3
+a1438 1
+	errorif(tp!=ap,"next: twolevel_next(%d)=%d, array_%s(%d)=%d",
+d1440 2
+a1441 1
+	errorif( tpn != a, "prev(%d)=%d, next(%d)=%d",a,tp,tp,tpn);
+d1459 3
+a1461 1
+	errorif(ab!=tb,"between(%d,%d,%d) don't match: twolevel=%d array=%d",
+d1478 1
+d1483 20
+a1502 1
+	@@<Debug: Check that the two tour implementations match@@>@@;
+d1510 1
+@
+
+
+1.119
+log
+@Fixed debugging stuff a bit.
+@
+text
+@d6 3
+d152 1
+a152 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.118 96/09/12 14:18:09 neto Exp Locker: neto $";
+d402 9
+d422 1
+a422 1
+		parent_node[group].prev = parent_node + ((group-1) % num_groups);
+d427 1
+a427 1
+			city_node[tour[i]].prev = city_node+tour[(i-1)%n];
+@
+
+
+1.118
+log
+@Finished the redundancy code to check two-level trees.
+It compiles too, and catches an error in lin105.
+@
+text
+@d6 4
+d149 1
+a149 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.117 96/09/11 17:18:51 neto Exp Locker: neto $";
+d1323 1
+a1323 1
+		cna = array_next(c);
+d1327 2
+a1328 1
+		errorif(array_prev(cna)!=c && print_two_tours(), 
+d1331 3
+a1333 2
+				"Array next/prevs don't match");
+		c = cna;
+d1357 2
+a1358 2
+		printf("\t%d %20s %20s\n", i, amore ? a : " ", tmore?t:" ");
+		ca = reverse ? array_next(ca) : array_prev(ca) ;
+d1390 1
+a1390 1
+		a,tp,reverse?"prev":"next",ap);
+@
+
+
+1.117
+log
+@Started adding debugging code.
+@
+text
+@d1 1
+d6 3
+d145 1
+a145 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.116 96/09/10 16:51:35 neto Exp Locker: neto $";
+d398 1
+a398 1
+twolevel_set(const int const *tour) {
+d420 1
+a420 1
+void twolevel_set(const int const *tour);
+d1236 1
+a1236 1
+and the two-level-tree-based implementation, and checks 
+d1245 1
+a1245 1
+void twolevel_debug_set(int *tour);
+d1257 3
+a1259 1
+Variable |reverse| is non-zero when the orientations differ.  We will
+d1261 7
+a1267 1
+to the array implementation.
+d1269 1
+d1292 2
+a1293 1
+void twolevel_debug_set(const int const *tour) {
+d1301 5
+a1306 2
+@@ Here's a linear-time check on the tours.  We only check external observables
+of the implementations; we don't check internal consistency.
+d1308 7
+d1333 8
+d1352 1
+a1352 1
+		ca = array_next(ca);
+d1359 1
+a1359 1
+#end
+d1361 68
+a1434 1
+-------
+@
+
+
+1.116
+log
+@Fixed problem in creating the data structure.  We need to compute a 
+new group size internally.
+@
+text
+@d5 7
+a11 3
+# Revision 1.115  96/09/10  15:57:58  neto
+# Now it compiles.  (Two minor errors regarding the normalization macro.)
+# 
+d139 1
+d141 1
+a141 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.115 96/09/10 15:57:58 neto Exp Locker: neto $";
+d292 1
+a292 1
+where each segment begins with roughly |groupsize| elements.
+d394 1
+a394 1
+twolevel_set(int *tour) {
+d416 1
+a416 1
+void twolevel_set(int *tour);
+d1225 111
+@
+
+
+1.115
+log
+@Now it compiles.  (Two minor errors regarding the normalization macro.)
+@
+text
+@d5 3
+d136 1
+a136 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.114 96/09/10 15:55:03 neto Exp Locker: neto $";
+d390 1
+a390 1
+	int i, j, group, num_big_groups = n % groupsize;
+d392 1
+a392 1
+		const int this_group_size = groupsize + (group<num_big_groups);
+@
+
+
+1.114
+log
+@Fixed the parent renumbering.
+It TeXs to my satisfaction.  We'll see if it compiles.
+@
+text
+@d5 4
+d133 1
+a133 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.113 96/09/09 17:06:05 neto Exp Locker: neto $";
+d1095 2
+a1096 2
+@@d normp(X) ((X)<num_groups : (X) : (X)-num_groups)	
+@@d normm(X) ((X)<0?(X)+num_groups: (X))
+d1103 1
+a1103 1
+	if ( norm(psa+1)==psb ) { /* Forward order */
+@
+
+
+1.113
+log
+@Fixed some of the problem with interening in parents.
+Need to fix the parent sequence number updating.
+@
+text
+@d5 4
+d129 1
+a129 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.112 96/09/06 16:03:10 neto Exp Locker: neto $";
+d1051 2
+a1052 1
+.....
+a1053 10
+But the parent 
+sequence numbers are restricted to the range $0\ldots numgroups$.
+are from 
+
+We make use of |normp| and |normm|, a pair of 
+a fast but restricted  macros for the remainder modulo |num_groups|.
+
+@@d normp(X) ((X)<num_groups : (X) : (X)-num_groups)
+@@d normm(X) ((X)<0?(X)+num_groups: (X))
+
+a1056 17
+if ( psb==psd ) {
+	SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+	SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+	SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+} else if ( psa!=psc ) {	/* Nontrivial sequence of parents. Determine shorter */
+	if ( norm(psa+1)==psb ) { /* Forward order */
+		if ( normm(psd-psb) < normm(psa-psc) )
+			SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+			SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+			SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+	} else { /* Reverse order */
+		if ( normm(psb-psd) < normm(psc-psa) )
+			SWAP(a,b,ti), @@+ SWAP(c,d,ti),@@+
+			SWAP(ca,cb,tcn), @@+ SWAP(cc,cd,tcn),@@+
+			SWAP(psa,psb,ti), @@+ SWAP(psc,psd,ti);
+	}
+}
+a1057 1
+......
+a1058 8
+if ( abs(psb-psd)<abs(psa-psc) ) {	/* Flip the shorter sequence. */
+	SWAP(a,b,ti); @@+ SWAP(c,d,ti);@@+
+	SWAP(ca,cb,tcn); @@+ SWAP(cc,cd,tcn);@@+
+	SWAP(psa,psb,ti); @@+ SWAP(psc,psd,ti);
+}
+@@<Flip the sequence of segments from $a$ to $c$@@>@@;
+
+
+d1072 3
+a1074 1
+First, we filter out trivial flips.  We want the predecessor and successor
+d1080 13
+d1098 1
+a1098 1
+} else if ( psa!=psc ) {	/* Nontrivial sequence of parents. Determine shorter */
+d1100 2
+a1101 1
+		if ( normm(psd-psb) < normm(psa-psc) )
+d1106 2
+a1107 1
+		if ( normm(psb-psd) < normm(psc-psa) )
+d1115 1
+a1115 1
+|v| for the lefthand and righthand parents of |ca| and |cb|.
+d1134 2
+a1135 2
+while we have a good
+handle where pointers point.  
+d1174 1
+a1174 1
+and vice versa.  The outbound sibling pointers have already been taken
+d1178 1
+a1178 1
+flip the reversal bits.
+d1180 7
+a1186 3
+This code relies on the fact that parent sequence numbers increase
+from left to right, \ie, following parent |next| pointers.  Also,
+the |head| city of the lefthand parent is the leftmost city in the sequence.
+d1188 12
+d1202 1
+a1202 1
+	const int upv = u->seq+v->seq;	/* Does it matter if this overflows? I don't think so. */
+d1204 2
+d1207 3
+a1210 2
+		i->reverse ^= 1;
+		i->seq = upv - i->seq;
+@
+
+
+1.112
+log
+@Fixed problem in flipping, case 1. 
+We might have had portion b-d contained in a-c.
+Still a problem in parents.  See research notes.
+Also, need to add a comment about avoiding a performance bug in
+choosing shorter sequence of parents.
+@
+text
+@d5 7
+d125 1
+a125 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.111 96/09/05 16:05:43 neto Exp Locker: neto $";
+d288 2
+d291 1
+a291 1
+static int groupsize;
+d301 1
+a301 1
+$\lfloor$|num_vertices/ groupsize|$\rfloor$ parent nodes.
+d305 2
+a306 1
+parent_node = new_arr_of(parent_node_t,num_vertices/groupsize);
+d379 1
+a379 1
+	int i, j, group, num_groups=n/groupsize, num_big_groups = n % groupsize;
+d658 1
+a658 1
+sandwiched by cities $a$ and $b$.
+d672 1
+a672 1
+%sufficient to check that |u->next
+d692 1
+a692 1
+any longer.  So the assignments |ca=cb,cc=cd| is safe in place of a 
+d1011 2
+a1012 2
+If this is the case, then we apply update the data structure as in
+case 1.  Fortunately, \CWEB/ lets us do this quite naturally by resuing
+d1047 12
+a1058 1
+We prefer to flip the shorter of the two segments.
+d1061 21
+d1089 40
+a1128 1
+It is convenient to know which parent comes first.  We'll write |u| and
+d1140 2
+a1141 2
+if ( psa < psc ) u=ca->parent, v=cc->parent;
+else u=cc->parent, v=ca->parent;
+@
+
+
+1.111
+log
+@Now it compiles cleanly.
+Fixed precedence problems, vestiges of the ``city'' field, accessing
+wrong link array, variables declared twice, suggested parentheses, etc.
+@
+text
+@d5 5
+d118 1
+a118 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.110 96/09/05 15:37:22 neto Exp Locker: neto $";
+d611 1
+a611 7
+	errorif(psa==psb||psc==psd,"Bug");
+	if ( abs(psb-psd)<abs(psa-psc) ) {	/* Flip the shorter sequence. */
+		SWAP(a,b,ti); @@+ SWAP(c,d,ti);@@+
+		SWAP(ca,cb,tcn); @@+ SWAP(cc,cd,tcn);@@+
+		SWAP(psa,psb,ti); @@+ SWAP(psc,psd,ti);
+	}
+	@@<Flip the sequence of segments from $a$ to $c$@@>@@;
+d645 4
+a648 3
+\ie, when the $a-c$
+portion of the tour
+lies entirely within one data structure segment.
+d650 47
+a696 1
+If the $a-c$ portion of the tour is long enough, then
+d702 2
+a703 1
+@@<Flip: |ca| and |cc| are in the same segment@@>=
+d707 1
+a707 1
+	@@<Flip from |ca| to |cc|, all in the same segment@@>@@;
+d721 2
+d725 6
+a739 2
+Things are simplified if we rename variables so that |u| comes before |v|
+in the segment.
+d743 1
+a743 1
+@@<Flip from |ca| to |cc|, all in the same segment@@>=
+a744 1
+if ( u->seq > v->seq ) SWAP(u,v,tcn);
+d796 2
+a797 2
+	city_node_t *i=u;
+	for ( i=u; i != v; i=i->prev ) {	/* Yes, |prev|: it's the old |next| pointer. */
+a799 1
+	SWAP(i->next,i->prev,tcn);
+d806 2
+a807 1
+For definiteness, we rename variables so that |ca|'s sequence number is
+a812 1
+if ( ca->seq > cc->seq ) SWAP(ca,cc,tcn);
+d987 3
+d1037 10
+d1120 2
+a1121 2
+	parent_node_t *i, *tpn;
+	for ( i=u; i != v; i=i->prev ) {	/* Yes, |prev|: it's the old |next| pointer. */
+a1125 3
+	SWAP(i->next,i->prev,tpn);
+	i->reverse ^= 1;
+	i->seq = upv - i->seq;
+@
+
+
+1.110
+log
+@Finished coding flipping.
+@
+text
+@d5 3
+d113 1
+a113 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.109 96/09/05 14:15:41 neto Exp Locker: neto $";
+d195 1
+a195 1
+	struct city_node_t *city_link[2];
+d371 2
+a372 2
+		parent_node[group].prev = parent_node[(group-1) % num_groups];
+		parent_node[group].next = parent_node[(group+1) % num_groups];
+a377 1
+			city_node[tour[i]].city = tour[i];
+d383 5
+d449 1
+a449 1
+	return (ca->link[ LINK_NEXT ^ ca->parent->reverse ])->city;
+d455 1
+a455 1
+	return (ca->link[ LINK_PREV ^ ca->parent->reverse ])->city;
+d520 1
+a520 1
+	const int psa=pa->seq, psa=pb->seq, psc=pc->seq;
+d526 2
+a527 2
+				 return (sa>=sb? (sb>=sc|sc>sa) : (sb>=sc & sc>sa));
+			else return (sa<=sb? (sb<=sc|sc<sa) : (sb<=sc & sc<sa));
+d529 1
+a529 1
+		return sa==sb | (ca->parent->reverse ^ sa<sb);
+d532 1
+a532 1
+			return sa!=sc & (ca->parent->reverse ^ sa>sc);
+d535 1
+a535 1
+				return sb==sc | (cb->parent->reverse ^ sb<sc);
+d537 1
+a537 1
+				return (psa<=psb? (psb<=psc|psc<psa) : (psb<=psc & psc<psa));
+d592 1
+a592 1
+	int psa=ca->parent->seq, psa=cb->parent->seq, 
+d615 4
+d804 1
+a804 1
+new parent, |lp->link[lpr^CITY_LINK_TAIL]|.  
+d818 1
+a818 1
+lp->link[lpr^CITY_LINK_TAIL] = lpr==pr ? rc : lc;
+d877 1
+a877 1
+rp->link[lpr^CITY_LINK_HEAD] = rpr==pr ? lc : rc;
+d994 1
+a994 1
+parent_node_t *u, *v, *tpn;
+d1021 8
+a1028 8
+u_first = u->city_link[ur^CITY_HEAD_LINK];
+v_last  = v->city_link[vr^CITY_TAIL_LINK];
+u_outbound = u_first->link + ur^LINK_PREV;
+v_outbound = v_last ->link + vr^LINK_NEXT;
+u_inbound = *u_outbound->link + 
+	(*u_outbound->link[LINK_NEXT] == u_first? LINK_NEXT:LINK_PREV);
+v_inbound = *v_outbound->link + 
+	(*v_outbound->link[LINK_NEXT] == v_last ? LINK_NEXT:LINK_PREV);
+d1062 1
+a1062 1
+	SWAP(i->next,i->prev,tcn);
+@
+
+
+1.109
+log
+@Fixed outbound sibling pointers in city list reversal.
+@
+text
+@d5 3
+d110 1
+a110 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.108 96/09/05 12:53:55 neto Exp Locker: neto $";
+d683 1
+a683 1
+SWAP(u->prev,v->next);		/* Fix outbound sibling pointers */
+d699 4
+d970 87
+a1056 1
+of the tour consist of a contiguous sequence of complete segments.
+@
+
+
+1.108
+log
+@Check for case 1 after split c-d.
+@
+text
+@d5 6
+a10 3
+# Revision 1.107  96/09/04  17:14:23  neto
+# Finished coding Case 3 of flipping.
+# 
+d107 1
+a107 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.107 96/09/04 17:14:23 neto Exp Locker: neto $";
+d617 2
+a618 2
+This code gets used in two places, as we'll see.  So I've split it off
+as a separate section.
+d664 6
+a669 3
+vice versa.  The only extra thing we must do is to make sure the
+pointers outside the reversed segment get updated to point to the appropriate
+end cities.
+d674 2
+d680 1
+d962 2
+a963 1
+---------
+@
+
+
+1.107
+log
+@Finished coding Case 3 of flipping.
+@
+text
+@d5 3
+d104 1
+a104 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.106 96/09/03 17:06:17 neto Exp $";
+d944 8
+@
+
+
+1.106
+log
+@Finished coding case 1 in flip.
+@
+text
+@d5 3
+d101 1
+a101 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.105 96/09/03 15:45:52 neto Exp $";
+a560 7
+Note that both portions can't both be in single segments unless there
+are at most two segments; that's a degenerate case.  I had given some
+thought to adding code to flip the shorter portion until I realized
+this fact.  So, following Bentley and McIlroy's advice (INSERT REFERENCE), 
+I'm keeping
+the code simple.
+
+d583 1
+a583 9
+	if ( psb==psd ) {	/* Case 1, but rename so that $a-c$ lies in one segment. */
+		SWAP(ca,cb,tcn); @@+ SWAP(cc,cd,tcn);
+		SWAP(psa,psb,ti);@@+  SWAP(psc,psd,ti);
+		/* |a|, |b|, |c|, |d| are not used again. */
+	}
+	if ( psa==psc ) {	/* Case 1, really do it. */
+		@@<Flip: $a$ and $c$ are in the same segment@@>@@;
+		return;
+	}@@#
+d599 4
+d604 21
+d636 1
+a636 1
+@@<Flip: $a$ and $c$ are in the same segment@@>=
+d827 1
+a827 1
+Here's righthand version of the top-level section.
+d851 3
+d870 5
+a874 4
+--------
+@@
+Cities |c| and |d| might have been moved with the $a-b$ split.  We renew
+their parent sequence numbers just in case.
+d876 5
+a880 2
+@@<Split the $a-b$ segment@@>=
+psc=cc->parent->seq; psd=cd->parent->seq;
+d882 2
+a883 4
+---------
+@@
+As with the $a-b$ split, we must similarly renew the 
+parent sequence numbers for cities $a$ and $b$.
+d885 13
+a897 2
+@@<Split the $c-d$ segment@@>=
+psa=ca->parent->seq; psb=cb->parent->seq;
+d899 3
+a901 1
+--------
+d903 2
+d906 5
+a910 1
+@@ In flipping, we need to take care of wraparound, and updating the |B| array.
+d912 9
+a920 2
+To reduce the strength of the remainder, I'll use a normalizing macro.
+It only works when its argument is between $0$ and $2n-1$, inclusive.
+d922 2
+a923 2
+Note that this code assumes that |ra<rc|.
+@@d norm(x) ((x)<n?(x):(x)-n)
+d925 2
+a926 15
+@@<Flip |a,c|@@>=
+{
+	int ri,rj,t;
+	for ( ri=ra, rj=rc; ri<rj ; ri++, rj-- ) {
+		B[A[norm(ri)]] = norm(rj);
+		B[A[norm(rj)]] = norm(ri);
+		t = A[norm(ri)]; A[norm(ri)] = A[norm(rj)]; A[norm(rj)] = t;
+	}
+#if ARRAY_DEBUG>1000	/* This is slow */
+	for ( i=0; i<n; i++ ) {
+		assert( B[A[i]] == i );
+		assert( A[B[i]] == i );
+	}
+#endif
+}
+d928 10
+a937 16
+@@ We must export this routine.
+@@<Exported subroutines@@>=
+void array_flip(int a, int b, int c, int d);
+
+@@ Setting the initial contents of the array is easy.
+
+I assume that the tour is actually a permutation of the integers $0,\ldots,n-1$.
+
+@@<Subroutines@@>=
+void
+array_set(int *tour) {
+	int i;
+	for ( i=0;i<n;i++ ) {
+		A[i]=tour[i];
+		B[A[i]]=i;
+	}
+d939 2
+d942 1
+a942 14
+@@ We must export this routine.
+@@<Exported subroutines@@>=
+void array_set(int *tour);
+
+@@*Profiling.
+Currently, we do no profiling.
+
+@@<Profiling for |array_next|@@>=
+@@
+@@<Profiling for |array_prev|@@>=
+@@
+@@<Profiling for |array_between|@@>=
+@@
+@@<Profiling for |array_flip|@@>=
+@
+
+
+1.105
+log
+@Made city numbers implicit, as per first paragraph of p. 444 of
+Fredman et al.
+@
+text
+@d4 8
+a11 4
+{\obeylines$Log: twolevel.w,v $
+# Revision 1.104  1996/08/30  21:28:38  david
+# More of flip.
+#
+d98 1
+a98 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.104 1996/08/30 21:28:38 david Exp david $";
+d587 1
+a587 2
+	if ( psb==psd ) {	/* Case 1, but rename to force $a-c$ to lie in the
+same segment. */
+d589 1
+a589 1
+		SWAP(psa,psb,ti);@@+  SWAP(psc,psd,ti;
+d593 1
+a593 1
+		@@<Flip: $a$ and $c$ are in the same segment@@>=
+d595 1
+a595 1
+	}
+d671 1
+d678 1
+a678 1
+int upn_to_v = u->prev->next == u, upp_to_v = u->prev->prev == u,
+d699 1
+a699 1
+@@<Swap links from |u| to |v|@@>@@;
+d702 1
+a702 1
+	while ( i != v ) {
+a703 1
+		i=i->prev;	/* Yes, |prev|: it's the old |next| pointer. */
+d705 1
+d741 1
+a741 1
+	parent_node_t *lp=llc->parent;	/* Parent of the segment to be merged into.*/
+d745 1
+a748 1
+.......
+d750 23
+a772 1
+@@
+d774 2
+a775 2
+if ( lpr != pr )
+llc->link[lpr^LINK_NEXT] = 
+d784 2
+a785 1
+Second, if the reversal bits of the 
+a789 1
+....................
+d793 1
+a793 1
+city_node_t *i=lc;
+d796 1
+a796 4
+	for (i=lc;i!=rc;i=i->prev) {	/* Yes, |i=i->prev|! */
+		SWAP(i->prev,i->next,tcn);
+	}
+	SWAP(rc->prev,rc->next,tcn);
+d798 2
+a799 1
+for ( i=lc;i!=rc;i=i->link[succ_link] ) {
+a801 1
+	seq_num += seq_inc;
+d807 21
+a827 4
+@@
+@@<Set the sequence numbers in the split off segment@@>=
+{ city_node_t *i=lc;
+	for(i=lc;i!=rc;i=
+d830 25
+a854 1
+---------
+@
+
+
+1.104
+log
+@More of flip.
+@
+text
+@d5 3
+d45 2
+a46 2
+local search algorithms for the traveling salesman problem --- 2-opt, 3-opt, 
+and Lin-Kernighan --- may all be implemented in terms of this abstraction.
+d94 1
+a94 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.103 1996/08/30 20:38:17 david Exp david $";
+d141 10
+d161 1
+a182 1
+	int city;
+d188 2
+a189 2
+We'll also need a mapping  from city numbers to city nodes.  This is done
+by the array |city_to_node|.  
+a193 1
+static city_node_t **city_to_node=NULL;
+a220 1
+city_to_node = new_arr_of(city_node_t *,num_vertices);
+a231 1
+free_mem(city_to_node);
+a359 1
+			city_to_node[tour[i]].city = city_node+tour[i];
+d425 1
+a425 1
+	const city_node_t *ca = city_to_node[a];
+d431 1
+a431 1
+	const city_node_t *ca = city_to_node[a];
+d495 1
+a495 1
+	const city_node_t *ca = city_to_node[a], *cb= city_to_node[b], *cc = city_to_node[c];
+d574 2
+a575 2
+	city_node_t *ca = city_to_node[a], *cb= city_to_node[b], 
+		*cc = city_to_node[c],*cd = city_to_node[d], *tcn;
+d590 1
+a590 1
+		@@<Flip: $a$ and $c$ are in the same segment@@>@@;
+d624 1
+a624 1
+	@@<Physically move the cities@@>@@;
+d638 1
+a638 4
+@@ Lets do the simpler part: physically move the cities.
+The simplest way to do this is to keep the data structure the same
+and move the city numbers themselves around.  We must also remember
+to update the |city_to_node| array.
+d640 5
+a644 1
+This code requires that sequence numbers increase as we follow |next| pointers.
+d646 50
+a695 1
+@@<Flip: $a$ and $c$ are in the same segment@@>=
+d697 4
+a700 10
+	city_node_t *i=ca, *j=cc;
+	if ( i->seq > j->seq ) SWAP(i,j,tcn);
+	while ( i->seq < j->seq ) {
+		const int ic = i->city, jc=j->city;
+		i->city = jc;
+		j->city = ic;
+		city_to_node[ic] = j;
+		city_to_node[jc] = i;
+		i=i->next;
+		j=j->prev;
+@
+
+
+1.103
+log
+@Use plain sequence nunbers and still protect against wraparound.
+@
+text
+@d5 3
+d91 1
+a91 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.102 1996/08/30 20:28:16 david Exp david $";
+d670 1
+a670 1
+We must be careful  for a few reasons.
+d674 1
+a674 1
+segment and the segment to the left.  Each 
+d676 2
+a677 1
+Second, 
+d681 6
+a686 1
+	city_node_t *lc=p->head; /* City at the left end of the split off segment. */
+d688 1
+a688 7
+		city_node_t *llc = lc->prev;	/* New sibling of |lc|: ``left of |lc|'' */
+		city_node_t *rc = ca->prev;	/* City at right end of split off segment */
+		parent_node_t *lp=llc->parent;	/* Parent of the segment to be merged into.*/
+		int lpr = lp->reverse, pr=p->reverse;
+		errorif(lp==p,"Bug");
+		@@<Set the per-city data in the split off segment@@>@@;
+		@@<Set the sequence numbers in the split off segment@@>@@;
+d691 6
+d698 1
+d703 1
+a703 3
+We must set the sequence numbers in any case, but we reverse
+the sense of |prev| and |next| only if the reversal sense of the two
+segments are different.
+d705 1
+a705 2
+I've combined both these functions into one segment because the
+traversal code changes according 
+d707 8
+a714 1
+@@<Set the per-city data in the split off segment@@>=
+d716 1
+a716 1
+	city_node_t *i=lc;
+d721 8
+@
+
+
+1.102
+log
+@Lots and lots and lots of coding.
+@
+text
+@d4 4
+a7 1
+{\obeylines $Log: twolevel.w,v $
+d88 1
+a88 1
+const char *twolevel_rcs_id="$Id: twolevel.w,v 1.101 1996/08/23 20:55:43 david Exp david $";
+d315 12
+a326 12
+@@ Another point is that sequence numbers for cities are initialized to
+be balanced around zero.  That is, they range roughly over the
+interval from $-k$ to $k$, where $k$ is half the number of cities
+in the group.  This is done in the hope that sequence numbers will 
+not go near the overflow values of |INT_MAX| or |INT_MIN|, where
+we'd be in danger of making integer comparisons go wrong.
+
+Hang on: as long as indices are consecutive, we don't have to
+worry about integer comparisons going wrong anyway!  Unless, of course,
+there are more than |UINT_MAX| cities in each segment --- that's $2^{32}-1$
+on a 32-bit machine.  But we're only targeting for up to a million cities, so
+it shouldn't become a problem.
+d343 1
+a343 1
+			city_node[tour[i]].seq = j - this_group_size/2;
+d408 1
+a408 1
+Both operations take constant time.
+d472 7
+a478 1
+This operation takes constant time.
+d484 3
+a486 2
+	const int psa=ca->parent->seq, psa=cb->parent->seq, psc=cc->parent->seq;
+	const int sa=ca->seq, sb=cb->seq, sc=cc->seq;
+@
+
+
+1.101
+log
+@Initial revision.
+@
+text
+@d4 4
+a7 1
+{\obeylines$Log$
+d85 1
+a85 1
+const char *twolevel_rcs_id="$Id$";
+d125 6
+d146 4
+a149 4
+@@d LINK_HEAD 0
+@@d LINK_TAIL 1
+@@d head city_link[LINK_HEAD]
+@@d tail city_link[LINK_TAIL]
+d153 1
+a153 1
+	int seq;	/* Sequence number.  Fredman \etal\ call this |ID| */
+d160 2
+a161 2
+	struct parent_node_s parent;
+	int seq;	/* Sequence number.  Fredman \etal\ call this |ID| */
+d201 1
+a201 1
+@@<Set up the array data structure@@>=
+d254 1
+a254 1
+@@<Set up the array data structure@@>=
+d312 14
+d352 1
+a352 1
+to  a few of them, to study their tradeoffs.
+d381 3
+a383 1
+take an average of neighbours when inserting a
+d385 1
+d405 2
+d465 6
+a498 1
+------------
+d500 42
+a541 3
+@@
+Query |array_between(a,b,c)| is basically a comparison of indices, 
+but we have to take wraparound into effect.
+d543 2
+a544 1
+Note that if |b == c| then we return true.
+d546 2
+a547 1
+We'll put in hooks for profiling.
+d550 53
+a602 10
+int
+array_between(int a, int b, int c) {
+	int ra, rb, rc;
+	ra = B[a];
+	rb = B[b];
+	rc = B[c];
+	@@<Profiling for |array_between|@@>@@;
+	if ( rb < ra ) rb+=n;
+	if ( rc < ra ) rc+=n;
+	return rb <= rc;
+d605 3
+a607 3
+@@ We must export this routine.
+@@<Exported subroutines@@>=
+int array_between(int a, int b, int c);
+d609 2
+a610 2
+@@ Flipping is the most difficult operation.
+There are several difficulties.  
+d612 3
+a614 1
+First, for efficiency's sake, we prefer to flip the shorter segment.
+d616 21
+a636 2
+Second, we must be careful and do the right thing when flipping a segment
+that straddles the |n-1,0| boundary.
+d638 40
+a677 2
+Third, we must update the |B| array while reversing the segment in the
+|A| array.
+d679 2
+a680 7
+I have defined a compile time |ARRAY_DEBUG| option to turn on checking of the
+assumptions, that is, that 
+|a = next(b)| and |d = next(c)|.
+(Note that these assumptions may be loosened: an alternative
+arrangement is 
+|a = prev(b)| and |d = prev(c)|.  See my research notes 
+of February 23, 1996.)
+d682 16
+a697 1
+@@d ARRAY_DEBUG 1
+d699 4
+a702 11
+@@<Subroutines@@>=
+void
+array_flip(int a, int b, int c, int d) {
+	int ra, rb, rc, rd;
+#if ARRAY_DEBUG
+	errorif( a != array_next(b), "a != array_next(b)" );
+	errorif( d != array_next(c), "d != array_next(c)" );
+#endif /* |ARRAY_DEBUG| */
+	@@<Make |a,c| the shorter segment@@>@@;
+	@@<Profiling for |array_flip|@@>@@;
+	@@<Flip |a,c|@@>@@;
+d705 7
+a711 3
+@@ We need to import the error checking code.
+@@<Module headers@@>=
+#include "error.h"
+d713 1
+d715 8
+a722 21
+Given the assumption that |a = next(b)| and |d = next(c)|, 
+we can either flip |a,c| or |d,b|.  This section arranges these variables
+so that |a,c| is the shorter of the two, and the assumptions still hold.
+
+We first need to adjust things so that |a| comes no later than |c|, 
+and |d| comes no later than |b|.
+
+@@<Make |a,c| the shorter segment@@>=
+ra = B[a];
+rb = B[b];
+rc = B[c];
+rd = B[d];
+if ( rc < ra ) rc += n;
+if ( rb < rd ) rb += n;
+if ( rc - ra > rb - rd ) { /* Rename the variables */
+	int t;
+	t = a; a = d; d = t;
+	t = b; b = c; c = t;
+	t = ra; ra = rd; rd = t;
+	t = rb; rb = rc; rc = t;
+}
+@

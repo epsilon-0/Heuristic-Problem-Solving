@@ -1,0 +1,8 @@
+/* @configure_input@ */
+/* This file lets the program LK know at what compiler and flags were used
+ * to make the program binary.  The items between at signs `@' are
+ * substituted for at configuration time.
+ */
+const char *compile_compile="@CC@ -c @DEFS@ @CPPFLAGS@ @CFLAGS@"
+" (and possibly other -I flags)";
+const char *compile_link="@CC@ @LDFLAGS@";

@@ -1,0 +1,115 @@
+#! @PERL@ -w
+# @configure_input@
+# vi:ts=4 sw=4:
+
+# tsp2dm.pl
+# Convert TSPLIB instances to DIMACS matching format.
+
+# This file is in the public domain, and comes with no warranty.
+# David Neto, November 22, 1997.
+
+use strict;
+my($progname) 		= "tsp2dm.pl";
+my($pkgname) 		= "@PACKAGE@";
+my($pkgversion) 	= "@VERSION@";
+my($version_banner)	="$progname ($pkgname) $pkgversion";
+
+my($float_expr)="(-?\\d+\\.?\[0-9\]*|\\.\[0-9\]+)";
+my($line);  #Input line
+my(@comments)=();
+my(@buf)=(); # lines buffered for output, pending opening of output stream.
+my($n); # Number of vertices
+my($type)=0;
+my(%type_map)=("EUC_2D",1,"CEIL_2D",2,"EXPLICIT",3);
+my($type_string);
+
+
+my($usage) = <<EOT;
+$version_banner
+Convert TSPLIB instances into DIMACS matching format
+$progname [options]
+  -h --help       : Print this help and exit successfully
+  -p --perfect    : Output a perfect matching input.  If input has odd
+                      number of vertices, then omit the last vertex.
+                      This is the default.
+     --no-perfect : Preserve all points in input.
+     --version    : Print version info and exit successfully
+EOT
+
+my($perfect)=1; # by default, do a perfect matching
+
+# Parse the command line options
+while ($#ARGV >= 0 && $ARGV[0] =~ m/^-/) {
+    my($option) = $_ = shift(@ARGV);
+    if (m/^-h$/ || m/^--help$/) { print $usage; exit; }
+    if (m/^-p$/ || m/^--perfect$/) { $perfect = 1; }
+    if (           m/^--no-perfect$/) { $perfect = 0; }
+    if (m/^--version$/) { print "$version_banner\n"; exit; }
+    die "$progname: Unknown option $option\n$usage";
+}
+
+
+
+
+############################################
+# Form the output.
+
+HEADER: while($line=<>) {
+	$_ = $line;
+	if (m/^\s*NAME\s*:/) {
+		push(@buf,"c $line");
+	} elsif (m/^\s*COMMENT\s*:/) {
+		push(@buf,"c $line");
+	} elsif (m/^\s*TYPE\s*:\s*(.*)/) {
+		push(@buf,"c $line");
+		$1 =~ m/^TSP/ || die "I know TSPLIB files of type TSP, not $1";
+	} elsif (m/^\s*EDGE_WEIGHT_TYPE\s*:\s*(.*)/) {
+		push(@buf,"c $line");
+		#print STDERR "edge weight type .$1.\n";
+		$type_string = $1;
+		$type = $type_map{$type_string};
+	} elsif (m/^\s*DIMENSION\s*:\s*(.*)/) {
+		push(@buf,"c $line");
+		#print STDERR "dimension .$1.\n";
+		$n=0+$1;
+	} elsif (m/^\s*NODE_COORD_SECTION\s*/) {
+		push(@buf,"c $line");
+		$type==1 || $type==2 
+			|| die "Can't have NODE_COORD_SECTION in $type_string";
+		last HEADER;
+	} else { die "Unrecognized line: $line"; }
+}
+
+print "c Converted from TSPLIB instance by $version_banner\n";
+print @buf;
+
+if ( $perfect && ($n % 2) ) { 
+	print "c Last point omitted to form a perfect matching input.\n";
+	$n--; 
+}
+print "p geom $n 2\n";
+
+
+SWITCH: {
+	&two_d, 	last SWITCH if ($type==1 || $type==2);
+	&explicit, 	last SWITCH if $type==3;
+	die "Unkown TSPLIB type";
+}
+
+exit 0;
+
+sub two_d {
+	# Read the coordinates and output them.
+	my($i)=0;
+	while (($i<$n) && ($line=<>) ) {
+		if ( $line=~ m/^\s*\d+\s+$float_expr\s+$float_expr/o ) {
+			print "v $1 $2\n";
+			$i++;
+		}
+	}
+	$i==$n || die "Not enough vertices on input";
+}
+
+sub explicit {
+	die "Yo David, write this code, will ya!";
+}

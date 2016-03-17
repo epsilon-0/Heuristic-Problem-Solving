@@ -1,0 +1,41 @@
+#!/bin/sh
+ROOT=$PWD
+
+rm -rf sn1mt sn1st sn2mt sn2st
+mkdir sn1mt sn1st sn2mt sn2st
+
+cd $ROOT/sn1mt
+tar xvzf $ROOT/cryptominisat-cryptominisat-strange-night1-mt.tar.gz
+cd cryptominisat-cryptominisat
+patch -p1 <$ROOT/cryptoms-profile-diff-sn1.patch
+sed -i -e 's/CXXFLAGS="-g -O3"/CXXFLAGS="-g -O3 -DNDEBUG"/' configure.in
+make -f Makefile.cvs
+./configure
+make profile
+
+cd $ROOT/sn1st
+tar xvzf $ROOT/cryptominisat-cryptominisat-strange-night1-st.tar.gz
+cd cryptominisat-cryptominisat
+patch -p1 <$ROOT/cryptoms-profile-diff-sn1.patch
+sed -i -e 's/CXXFLAGS="-g -O3"/CXXFLAGS="-g -O3 -DNDEBUG"/' configure.in
+make -f Makefile.cvs
+./configure
+make profile
+
+cd $ROOT/sn2mt
+tar xvzf $ROOT/cryptominisat-cryptominisat-strange-night2-mt.tar.gz
+cd cryptominisat-cryptominisat
+patch -p1 <$ROOT/cryptoms-profile-diff-sn2.patch
+sed -i -e 's/CXXFLAGS="-g -O3"/CXXFLAGS="-g -O3 -DNDEBUG"/' configure.in
+make -f Makefile.cvs
+./configure
+make profile
+
+cd $ROOT/sn2st
+tar xvzf $ROOT/cryptominisat-cryptominisat-strange-night2-st.tar.gz
+cd cryptominisat-cryptominisat
+patch -p1 <$ROOT/cryptoms-profile-diff-sn2.patch
+sed -i -e 's/CXXFLAGS="-g -O3"/CXXFLAGS="-g -O3 -DNDEBUG"/' configure.in
+make -f Makefile.cvs
+./configure
+make profile

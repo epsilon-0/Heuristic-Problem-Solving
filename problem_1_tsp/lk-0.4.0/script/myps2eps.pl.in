@@ -1,0 +1,23 @@
+#! @PERL@ -w
+# @configure_input@
+#
+# myps2eps.pl
+# Convert the postscript output of lk into encapsulated postscript.
+#
+
+while(<>) {
+	
+	if (m/^%(%%BoundingBox: 0 0 288 288)/) {
+		print "%%BoundingBox: 0 0 180 180\n";
+	} elsif (m/(.*)size 4 72 mul def(.*)/) {
+		print "$1size 2.5 72 mul def$2\n";
+	} elsif (m/^%(makeepsf.*)/) {
+		print "$1\n";
+	} elsif (m/^showpage/) {
+		print "end\n"
+	} elsif (m/title$/) {
+		;
+	} elsif (m/comment$/) {
+		;
+	} else { print; }
+}

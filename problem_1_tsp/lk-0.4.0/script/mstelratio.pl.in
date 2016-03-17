@@ -1,0 +1,14 @@
+#! @PERL@
+# @configure_input@
+# mstelratio.pl
+# Find and print the ratios of successive lengths.
+# Input is a sequence non-decreasing floating point numbers, one to a line.
+
+$line_no = 0;
+while( <> ) {
+	$line = $_;
+	if ( $line_no++ > 0 ) {
+		print $line/$last,"\n";
+	}
+	$last=$line;
+}

@@ -1,0 +1,76 @@
+diff --git a/Makefile.am b/Makefile.am
+index 7b281d7..9f78ff8 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -3,7 +3,14 @@
+ AUTOMAKE_OPTIONS = foreign 1.4
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = Solver
++SUBDIRS = Solver tests
++
++profile:
++	make clean
++	make CXXFLAGS="$(CXXFLAGS) -fprofile-generate" -j8
++	make check CXXFLAGS="$(CXXFLAGS) -fprofile-generate"
++	make mostlyclean
++	make CXXFLAGS="$(CXXFLAGS) -fprofile-use" -j8
+ 
+ all-local: Solver
+ 	cp Solver/cryptominisat .
+diff --git a/Solver/Makefile.am b/Solver/Makefile.am
+index 0b1aa9f..a4a5a8a 100644
+--- a/Solver/Makefile.am
++++ b/Solver/Makefile.am
+@@ -12,4 +12,4 @@ cryptominisat_SOURCES = Main.cpp \
+ 	SolverMisc.cpp SolverDebug.cpp ClauseAllocator.cpp \
+ 	UselessBinRemover.cpp SCCFinder.cpp ClauseVivifier.cpp \
+ 	CompleteDetachReattacher.cpp DimacsParser.cpp \
+-	OnlyNonLearntBins.cpp SolverConf.cpp
++	OnlyNonLearntBins.cpp SolverConf.cpp DataSync.cpp
+diff --git a/configure.in b/configure.in
+index d727b5d..af283ed 100644
+--- a/configure.in
++++ b/configure.in
+@@ -6,6 +6,9 @@ AC_PROG_LIBTOOL
+ dnl we are C++
+ AC_LANG_CPLUSPLUS
+ AC_PROG_CXX
++if test X$user_set_cxxflags != Xyes; then
++  CXXFLAGS="-g -O3"
++fi
+ AC_LANG(C++)
+ 
+ dnl AC_CONFIG_AUX_DIR([m4-extra])
+@@ -35,4 +38,4 @@ AC_FUNC_MEMCMP
+ #search for openmp
+ AC_OPENMP
+ 
+-AC_OUTPUT(Makefile Solver/Makefile)
++AC_OUTPUT(Makefile Solver/Makefile tests/Makefile)
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+new file mode 100644
+index 0000000..7d042f7
+--- /dev/null
++++ b/tests/Makefile.am
+@@ -0,0 +1,8 @@
++METASOURCES = AUTO
++
++#TESTS = cryptominisat
++
++check-local:
++	cp $(buildddir)../cryptominisat .
++	chmod +x $(srcdir)/test.sh
++	$(srcdir)/test.sh
+diff --git a/tests/test.sh b/tests/test.sh
+new file mode 100755
+index 0000000..b4e3526
+--- /dev/null
++++ b/tests/test.sh
+@@ -0,0 +1,6 @@
++#!/bin/bash
++myret="`./cryptominisat --nosolprint --verbosity=1 AProVE09-12.cnf.gz`"
++if [ "$myret" == "c SATISFIABLE" ]
++then
++exit 0
++fi

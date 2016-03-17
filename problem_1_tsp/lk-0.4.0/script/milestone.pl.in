@@ -1,0 +1,24 @@
+#! @PERL@
+# @configure_input@
+# milestone.pl
+# Distill milestone data from LK output.
+# It doesn't handle lower bound names with embedded spaces.  Alas.
+#
+$number_expr = "(-?\\d+\\.?\\d*|\\.\\d+)"; # See Programming Perl
+$milestone_expr = "\\s+$number_expr% above \\S+ after $number_expr";
+
+open(IN, "zcat @ARGV |");  # Uncompress input files.
+open(MOUT ,">milestone.gpl") || die "Can't open milestone.gpl for writing";
+
+while(<IN>) {
+	if( m/^Initial milestone:$milestone_expr/o) {
+		print MOUT "$2 $1\n";
+	} elsif( m/^Milestone:$milestone_expr/o) {
+		print MOUT "$2 $1\n";
+	} elsif( m/^LK phase ended .* after $number_expr sec for LK/o) {
+		$end_time = $1;
+	} elsif( m/^Final milestone: $number_expr\% above/o) {
+		print MOUT "$end_time $1\n";
+	}
+}
+close(MOUT);

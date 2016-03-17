@@ -1,0 +1,718 @@
+# Makefile.in generated automatically by automake 1.0 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+# Makefile for generating binary program LK from sources.
+
+# $Id: Makefile.am,v 1.25 1998/05/23 16:24:54 neto Exp neto $
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+EXTRA_DIST = \
+	array.w construct.w copyrt.w decluster.w dict.w distcalc.w dsort.w \
+	error.w fixincludes.w gb_flip.w gb_flip.ch \
+	fullgrid.w ifs.w jbmr.w kdtree.w \
+	length.w lk.w memory.w nn.w pool.w read.w resource.w sier.w tspgen.w \
+	twolevel.w types.w unifd.w webdefs.w \
+	cwebmac.tex compile.c.in \
+	prng.w prngconfig.h \
+	jitter.w \
+	shake.w \
+	prolog.ps \
+	mkcwebch.pl \
+	tspps.w \
+	match.w \
+	ascend.w \
+	pq.w \
+	boilerplate.w
+# Stanford GraphBase's boilerplate file.
+
+# Docs should also include ifs.dvi, but that also needs
+# fern.eps nicecloud.eps tropicalfish.eps tropicalfisheye.eps
+
+DOCS = array.dvi construct.dvi decluster.dvi dict.dvi distcalc.dvi dsort.dvi \
+	error.dvi fixincludes.dvi gb_flip.dvi \
+	fullgrid.dvi jbmr.dvi kdtree.dvi \
+	length.dvi lk.dvi memory.dvi nn.dvi pool.dvi read.dvi resource.dvi  \
+	sier.dvi tspgen.dvi \
+	twolevel.dvi unifd.dvi \
+	prng.dvi \
+	jitter.dvi \
+	shake.dvi \
+	tspps.dvi \
+	match.dvi \
+	ascend.dvi \
+	pq.dvi \
+	upper.dvi
+
+bin_PROGRAMS = lk tspgen jitter tspps shake \
+	ifs fullgrid unifd sier distcalc \
+	dsorttest dicttest declustertest test_flip prngtest pqtest
+
+TESTS = test_flip dicttest declustertest prngtest dsorttest pqtest
+
+lk_SOURCES = \
+	array.c \
+	array.h \
+	construct.c \
+	construct.h \
+	declevel.h \
+	decluster.c \
+	decluster.h \
+	dict.c \
+	dict.h \
+	dsort.c \
+	dsort.h \
+	error.c \
+	error.h \
+	fixincludes.h \
+	gb_flip.c \
+	gb_flip.h \
+	jbmr.c \
+	jbmr.h \
+	kdtree.c \
+	kdtree.h \
+	length.h \
+	match.c \
+	match.h \
+	lk.c \
+	lk.h \
+	lkconfig.h \
+	memory.c \
+	memory.h \
+	nn.c \
+	nn.h \
+	pool.c \
+	pool.h \
+	prng.c \
+	prng.h \
+	pq.h \
+	pq.c \
+	read.c \
+	read.h \
+	resource.c \
+	resource.h \
+	twolevel.c \
+	twolevel.h \
+	ascend.c \
+	ascend.h \
+	compile.c 
+
+tspgen_SOURCES = \
+	dsort.c \
+	dsort.h \
+	error.c \
+	error.h \
+	memory.c \
+	memory.h \
+	gb_flip.c \
+	gb_flip.h \
+	tspgen.c
+
+# read needs gb_flip.
+tspps_SOURCES = \
+	length.h \
+	error.c \
+	error.h \
+	memory.c \
+	memory.h \
+	gb_flip.c \
+	gb_flip.h \
+	read.c \
+	read.h \
+	tspps.c
+
+jitter_SOURCES = \
+	decluster.h \
+	decluster.c \
+	dsort.c \
+	dsort.h \
+	error.c \
+	error.h \
+	kdtree.c \
+	kdtree.h \
+	memory.c \
+	memory.h \
+	gb_flip.c \
+	gb_flip.h \
+	pool.c \
+	pool.h \
+	prng.c \
+	prng.h \
+	prngconfig.h \
+	pq.c \
+	pq.h \
+	read.h \
+	read.c \
+	jitter.c
+
+shake_SOURCES = \
+	decluster.h \
+	decluster.c \
+	dsort.c \
+	dsort.h \
+	error.c \
+	error.h \
+	kdtree.c \
+	kdtree.h \
+	memory.c \
+	memory.h \
+	gb_flip.c \
+	gb_flip.h \
+	pool.c \
+	pool.h \
+	prng.c \
+	prng.h \
+	prngconfig.h \
+	pq.c \
+	pq.h \
+	read.h \
+	read.c \
+	shake.c
+
+ifs_SOURCES = gb_flip.c gb_flip.h ifs.c
+unifd_SOURCES = gb_flip.c gb_flip.h unifd.c
+sier_SOURCES = gb_flip.c gb_flip.h sier.c
+fullgrid_SOURCES = fullgrid.c
+distcalc_SOURCES = error.h error.c memory.h memory.c read.c read.h \
+	gb_flip.h gb_flip.c \
+	length.h distcalc.c
+
+BUILT_SOURCES = \
+	array.c \
+	array.h \
+	compile.c \
+	construct.c \
+	construct.h \
+	decluster.c \
+	decluster.h \
+    declustertest.c \
+	dict.c \
+	dict.h \
+	dicttest.c \
+	distcalc.c \
+	dsort.c \
+	dsort.h \
+	dsorttest.c \
+	error.c \
+	error.h \
+	fixincludes.h \
+	gb_flip.c \
+	gb_flip.h \
+	fullgrid.c \
+	ifs.c \
+	jbmr.c \
+	jbmr.h \
+	kdtree.c \
+	kdtree.h \
+	length.h \
+	lk.c \
+	lk.h \
+	memory.c \
+	memory.h \
+	nn.c \
+	nn.h \
+	pool.c \
+	pool.h \
+	prng.c \
+	prng.h \
+	prngtest.c \
+	read.c \
+	read.h \
+	resource.c \
+	resource.h \
+	sier.c \
+	test_flip.c \
+	tspgen.c \
+	twolevel.c \
+	twolevel.h \
+	unifd.c
+
+# Programs required to process the .w sources.
+# ctangle makes .w into .c and .h  (not necessarily both or either)
+# cweave makes .w into .tex (.idx and .scn)
+# tex makes .tex (and .idx and .scn) into .dvi
+CTANGLE = @CTANGLE@
+CWEAVE = @CWEAVE@
+TEX = @TEX@
+
+# Get default flags from confgure
+CTANGLEFLAGS_DEFAULT = @CTANGLEFLAGS_DEFAULT@
+CWEAVEFLAGS_DEFAULT = @CWEAVEFLAGS_DEFAULT@
+
+# FIXME: separate tests 
+test_flip_SOURCES = test_flip.c gb_flip.c gb_flip.h
+dsorttest_SOURCES = dsort.c dsorttest.c
+dicttest_SOURCES = dicttest.c dict.c dict.h \
+	error.c memory.c pool.c gb_flip.c \
+	error.h memory.h pool.h gb_flip.h 
+pqtest_SOURCES = pqtest.c pq.c pq.h \
+	error.c error.h
+declustertest_SOURCES = declustertest.c decluster.c decluster.h \
+	pq.c pq.h resource.c resource.h \
+	error.c memory.c pool.c gb_flip.c kdtree.c read.c dsort.c \
+	error.h memory.h pool.h gb_flip.h kdtree.h read.h dsort.h 
+
+# If your compiler does not have inlining, then add prng.c to this list.
+prngtest_SOURCES = error.c error.h memory.c memory.h gb_flip.c gb_flip.h \
+	prng.c prng.h prngtest.c fixincludes.h
+
+#########################################################################
+# Implicit rules.
+# .ch  -- CWEB change files; implicit .ch rules should precede implicit .w rules
+# .w   -- CWEB files
+# .tex -- TeX files
+# .scn -- generated by CWEAVE and used by TeX to typeset programs
+# .idx -- index files generated by CWEAVE and used by TeX to typeset programs
+# .dvi -- device independent typeset files generated by TeX
+
+SUFFIXES = .ch .w .c .h .o .tex .scn .idx .dvi
+mkinstalldirs = $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+PROGRAMS = $(bin_PROGRAMS)
+
+
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I..
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+
+COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(LDFLAGS) -o $@
+lk_OBJECTS = array.o construct.o decluster.o dict.o dsort.o error.o \
+gb_flip.o jbmr.o kdtree.o match.o lk.o memory.o nn.o pool.o prng.o pq.o \
+read.o resource.o twolevel.o ascend.o compile.o
+EXTRA_lk_SOURCES =
+lk_LDADD = $(LDADD)
+tspgen_OBJECTS = dsort.o error.o memory.o gb_flip.o tspgen.o
+EXTRA_tspgen_SOURCES =
+tspgen_LDADD = $(LDADD)
+jitter_OBJECTS = decluster.o dsort.o error.o kdtree.o memory.o gb_flip.o \
+pool.o prng.o pq.o read.o jitter.o
+EXTRA_jitter_SOURCES =
+jitter_LDADD = $(LDADD)
+tspps_OBJECTS = error.o memory.o gb_flip.o read.o tspps.o
+EXTRA_tspps_SOURCES =
+tspps_LDADD = $(LDADD)
+shake_OBJECTS = decluster.o dsort.o error.o kdtree.o memory.o gb_flip.o \
+pool.o prng.o pq.o read.o shake.o
+EXTRA_shake_SOURCES =
+shake_LDADD = $(LDADD)
+ifs_OBJECTS = gb_flip.o ifs.o
+EXTRA_ifs_SOURCES =
+ifs_LDADD = $(LDADD)
+fullgrid_OBJECTS = fullgrid.o
+EXTRA_fullgrid_SOURCES =
+fullgrid_LDADD = $(LDADD)
+unifd_OBJECTS = gb_flip.o unifd.o
+EXTRA_unifd_SOURCES =
+unifd_LDADD = $(LDADD)
+sier_OBJECTS = gb_flip.o sier.o
+EXTRA_sier_SOURCES =
+sier_LDADD = $(LDADD)
+distcalc_OBJECTS = error.o memory.o read.o gb_flip.o distcalc.o
+EXTRA_distcalc_SOURCES =
+distcalc_LDADD = $(LDADD)
+dsorttest_OBJECTS = dsort.o dsorttest.o
+EXTRA_dsorttest_SOURCES =
+dsorttest_LDADD = $(LDADD)
+dicttest_OBJECTS = dicttest.o dict.o error.o memory.o pool.o gb_flip.o
+EXTRA_dicttest_SOURCES =
+dicttest_LDADD = $(LDADD)
+declustertest_OBJECTS = declustertest.o decluster.o pq.o resource.o \
+error.o memory.o pool.o gb_flip.o kdtree.o read.o dsort.o
+EXTRA_declustertest_SOURCES =
+declustertest_LDADD = $(LDADD)
+test_flip_OBJECTS = test_flip.o gb_flip.o
+EXTRA_test_flip_SOURCES =
+test_flip_LDADD = $(LDADD)
+prngtest_OBJECTS = error.o memory.o gb_flip.o prng.o prngtest.o
+EXTRA_prngtest_SOURCES =
+prngtest_LDADD = $(LDADD)
+pqtest_OBJECTS = pqtest.o pq.o error.o
+EXTRA_pqtest_SOURCES =
+pqtest_LDADD = $(LDADD)
+DIST_COMMON = Makefile.am Makefile.in
+
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
+
+TAR = tar
+SOURCES = $(lk_SOURCES) $(tspgen_SOURCES) $(jitter_SOURCES) \
+$(tspps_SOURCES) $(shake_SOURCES) $(ifs_SOURCES) $(fullgrid_SOURCES) \
+$(unifd_SOURCES) $(sier_SOURCES) $(distcalc_SOURCES) \
+$(dsorttest_SOURCES) $(dicttest_SOURCES) $(declustertest_SOURCES) \
+$(test_flip_SOURCES) $(prngtest_SOURCES) $(pqtest_SOURCES)
+OBJECTS = $(lk_OBJECTS) $(tspgen_OBJECTS) $(jitter_OBJECTS) \
+$(tspps_OBJECTS) $(shake_OBJECTS) $(ifs_OBJECTS) $(fullgrid_OBJECTS) \
+$(unifd_OBJECTS) $(sier_OBJECTS) $(distcalc_OBJECTS) \
+$(dsorttest_OBJECTS) $(dicttest_OBJECTS) $(declustertest_OBJECTS) \
+$(test_flip_OBJECTS) $(prngtest_OBJECTS) $(pqtest_OBJECTS)
+
+default: all
+
+
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: $(top_builddir)/config.status Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+compile.c: $(top_builddir)/config.status compile.c.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	$(mkinstalldirs) $(bindir)
+	list="$(bin_PROGRAMS)"; for p in $$list; do \
+	  if test -f $$p; then \
+	    $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	list="$(bin_PROGRAMS)"; for p in $$list; do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+.c.o:
+	$(COMPILE) $<
+
+mostlyclean-compile:
+	rm -f *.o core
+
+clean-compile:
+
+distclean-compile:
+	rm -f *.tab.c
+
+maintainer-clean-compile:
+$(lk_OBJECTS): ../config.h
+
+lk: $(lk_OBJECTS) $(lk_DEPENDENCIES)
+	$(LINK) $(lk_OBJECTS) $(lk_LDADD) $(LIBS)
+$(tspgen_OBJECTS): ../config.h
+
+tspgen: $(tspgen_OBJECTS) $(tspgen_DEPENDENCIES)
+	$(LINK) $(tspgen_OBJECTS) $(tspgen_LDADD) $(LIBS)
+$(jitter_OBJECTS): ../config.h
+
+jitter: $(jitter_OBJECTS) $(jitter_DEPENDENCIES)
+	$(LINK) $(jitter_OBJECTS) $(jitter_LDADD) $(LIBS)
+$(tspps_OBJECTS): ../config.h
+
+tspps: $(tspps_OBJECTS) $(tspps_DEPENDENCIES)
+	$(LINK) $(tspps_OBJECTS) $(tspps_LDADD) $(LIBS)
+$(shake_OBJECTS): ../config.h
+
+shake: $(shake_OBJECTS) $(shake_DEPENDENCIES)
+	$(LINK) $(shake_OBJECTS) $(shake_LDADD) $(LIBS)
+$(ifs_OBJECTS): ../config.h
+
+ifs: $(ifs_OBJECTS) $(ifs_DEPENDENCIES)
+	$(LINK) $(ifs_OBJECTS) $(ifs_LDADD) $(LIBS)
+$(fullgrid_OBJECTS): ../config.h
+
+fullgrid: $(fullgrid_OBJECTS) $(fullgrid_DEPENDENCIES)
+	$(LINK) $(fullgrid_OBJECTS) $(fullgrid_LDADD) $(LIBS)
+$(unifd_OBJECTS): ../config.h
+
+unifd: $(unifd_OBJECTS) $(unifd_DEPENDENCIES)
+	$(LINK) $(unifd_OBJECTS) $(unifd_LDADD) $(LIBS)
+$(sier_OBJECTS): ../config.h
+
+sier: $(sier_OBJECTS) $(sier_DEPENDENCIES)
+	$(LINK) $(sier_OBJECTS) $(sier_LDADD) $(LIBS)
+$(distcalc_OBJECTS): ../config.h
+
+distcalc: $(distcalc_OBJECTS) $(distcalc_DEPENDENCIES)
+	$(LINK) $(distcalc_OBJECTS) $(distcalc_LDADD) $(LIBS)
+$(dsorttest_OBJECTS): ../config.h
+
+dsorttest: $(dsorttest_OBJECTS) $(dsorttest_DEPENDENCIES)
+	$(LINK) $(dsorttest_OBJECTS) $(dsorttest_LDADD) $(LIBS)
+$(dicttest_OBJECTS): ../config.h
+
+dicttest: $(dicttest_OBJECTS) $(dicttest_DEPENDENCIES)
+	$(LINK) $(dicttest_OBJECTS) $(dicttest_LDADD) $(LIBS)
+$(declustertest_OBJECTS): ../config.h
+
+declustertest: $(declustertest_OBJECTS) $(declustertest_DEPENDENCIES)
+	$(LINK) $(declustertest_OBJECTS) $(declustertest_LDADD) $(LIBS)
+$(test_flip_OBJECTS): ../config.h
+
+test_flip: $(test_flip_OBJECTS) $(test_flip_DEPENDENCIES)
+	$(LINK) $(test_flip_OBJECTS) $(test_flip_LDADD) $(LIBS)
+$(prngtest_OBJECTS): ../config.h
+
+prngtest: $(prngtest_OBJECTS) $(prngtest_DEPENDENCIES)
+	$(LINK) $(prngtest_OBJECTS) $(prngtest_LDADD) $(LIBS)
+$(pqtest_OBJECTS): ../config.h
+
+pqtest: $(pqtest_OBJECTS) $(pqtest_DEPENDENCIES)
+	$(LINK) $(pqtest_OBJECTS) $(pqtest_LDADD) $(LIBS)
+
+ID: $(HEADERS) $(SOURCES)
+	here=`pwd` && cd $(srcdir) && mkid -f$$here/ID $(SOURCES) $(HEADERS)
+
+tags: TAGS
+
+TAGS: $(HEADERS) $(SOURCES) $(TAGS_DEPENDENCIES)
+	here=`pwd` && cd $(srcdir) && etags $(ETAGS_ARGS) $(SOURCES) $(HEADERS) -o $$here/TAGS
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	rm -f TAGS ID
+
+maintainer-clean-tags:
+
+subdir = src
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir: $(DEP_DISTFILES)
+	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+	$(MAKE) dist-hook
+array.o: array.c lkconfig.h array.h memory.h error.h
+ascend.o: ascend.c lkconfig.h error.h length.h read.h lk.h memory.h \
+ decluster.h ascend.h
+compile.o: compile.c
+construct.o: construct.c lkconfig.h fixincludes.h construct.h length.h \
+ error.h gb_flip.h read.h memory.h pq.h pool.h lk.h kdtree.h dsort.h
+decluster.o: decluster.c lkconfig.h error.h memory.h length.h read.h \
+ decluster.h pq.h kdtree.h lk.h
+declustertest.o: declustertest.c lkconfig.h error.h length.h memory.h \
+ resource.h dsort.h read.h kdtree.h decluster.h
+dict.o: dict.c lkconfig.h fixincludes.h dict.h pool.h error.h memory.h
+dicttest.o: dicttest.c error.h memory.h pool.h dict.h gb_flip.h
+distcalc.o: distcalc.c lkconfig.h length.h read.h
+dsort.o: dsort.c lkconfig.h dsort.h
+dsorttest.o: dsorttest.c dsort.h
+error.o: error.c lkconfig.h fixincludes.h error.h
+fullgrid.o: fullgrid.c fixincludes.h
+gb_flip.o: gb_flip.c gb_flip.h
+ifs.o: ifs.c gb_flip.h fixincludes.h
+jbmr.o: jbmr.c lkconfig.h fixincludes.h error.h memory.h length.h \
+ read.h nn.h lk.h prng.h gb_flip.h prngconfig.h jbmr.h pool.h dict.h \
+ decluster.h declevel.h resource.h
+jitter.o: jitter.c lkconfig.h prng.h error.h gb_flip.h fixincludes.h \
+ prngconfig.h length.h read.h dsort.h pool.h kdtree.h decluster.h \
+ memory.h
+kdtree.o: kdtree.c lkconfig.h fixincludes.h length.h read.h kdtree.h \
+ pool.h error.h memory.h
+lk.o: lk.c lkconfig.h fixincludes.h length.h read.h error.h memory.h \
+ prng.h gb_flip.h prngconfig.h lk.h dsort.h pool.h dict.h kdtree.h \
+ ascend.h resource.h declevel.h decluster.h nn.h array.h twolevel.h \
+ construct.h jbmr.h match.h
+match.o: match.c declevel.h lkconfig.h error.h memory.h length.h \
+ read.h match.h prng.h gb_flip.h fixincludes.h prngconfig.h lk.h \
+ construct.h nn.h dict.h pool.h decluster.h resource.h
+memory.o: memory.c lkconfig.h fixincludes.h error.h memory.h
+nn.o: nn.c lkconfig.h length.h read.h lk.h kdtree.h nn.h error.h \
+ memory.h dsort.h
+pool.o: pool.c lkconfig.h pool.h error.h memory.h
+pq.o: pq.c pq.h error.h
+pqtest.o: pqtest.c error.h pq.h
+prng.o: prng.c memory.h prng.h error.h gb_flip.h fixincludes.h \
+ prngconfig.h
+prngtest.o: prngtest.c prng.h error.h gb_flip.h fixincludes.h \
+ prngconfig.h
+read.o: read.c lkconfig.h fixincludes.h memory.h error.h gb_flip.h \
+ length.h read.h
+resource.o: resource.c lkconfig.h fixincludes.h error.h memory.h \
+ resource.h
+shake.o: shake.c lkconfig.h prng.h error.h gb_flip.h fixincludes.h \
+ prngconfig.h length.h read.h dsort.h pool.h kdtree.h decluster.h \
+ memory.h
+sier.o: sier.c fixincludes.h gb_flip.h
+test_flip.o: test_flip.c gb_flip.h
+tspgen.o: tspgen.c fixincludes.h error.h memory.h dsort.h gb_flip.h
+tspps.o: tspps.c lkconfig.h error.h length.h read.h
+twolevel.o: twolevel.c lkconfig.h fixincludes.h twolevel.h error.h \
+ memory.h
+unifd.o: unifd.c fixincludes.h gb_flip.h
+
+check-TESTS: $(TESTS)
+	@failed=0; all=0; \
+	srcdir=$(srcdir); export srcdir; \
+	for tst in $(TESTS); do \
+	  all=`expr $$all + 1`; \
+	  if test -f $$tst; then dir=.; \
+	  else dir="$(srcdir)"; fi; \
+	  if $$dir/$$tst; then \
+	    echo "PASS: $$tst"; \
+	  else \
+	    failed=`expr $$failed + 1`; \
+	    echo "FAIL: $$tst"; \
+	  fi; \
+	done; \
+	if test "$$failed" -eq 0; then \
+	  echo "========================"; \
+	  echo "All $$all tests passed"; \
+	  echo "========================"; \
+	else \
+	  echo "$$failed of $$all tests failed"; \
+	fi
+info:
+
+dvi:
+
+check: all check-TESTS
+
+installcheck:
+
+install-exec: install-binPROGRAMS
+
+install-data: 
+
+install: install-exec install-data all
+	@:
+
+uninstall: uninstall-binPROGRAMS
+
+all: $(PROGRAMS) Makefile
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs:
+	$(mkinstalldirs)  $(bindir)
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-binPROGRAMS mostlyclean-compile \
+		mostlyclean-tags mostlyclean-generic
+
+clean:  clean-binPROGRAMS clean-compile clean-tags clean-generic \
+		mostlyclean 
+
+distclean:  distclean-binPROGRAMS distclean-compile distclean-tags \
+		distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-binPROGRAMS maintainer-clean-compile \
+		maintainer-clean-tags maintainer-clean-generic \
+		distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+install-binPROGRAMS mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir check-TESTS info dvi check \
+installcheck install-exec install-data install uninstall all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+dist-hook : 
+	rm -f $(distdir)/compile.c
+	cp -r RCS $(distdir)
+
+# All the DVI documentation is generated from the program sources.
+docs : $(DOCS)
+
+# When to run ctangle
+.ch.c :
+	@CTANGLE_CMD@
+
+.w.c :
+	@CTANGLE_CMD@
+
+# Maybe need to fix this kludge for headers?
+.ch.h :
+	@CTANGLE_CMD@
+
+.w.h :
+	@CTANGLE_CMD@
+
+# When to run cweave
+.w.tex :
+	@CWEAVE_CMD@
+
+.w.idx :
+	@CWEAVE_CMD@
+
+.w.scn :
+	@CWEAVE_CMD@
+
+# When to run TeX
+# We put $(srcdir) on TEXINPUTS path because it contains cwebmac.tex, which
+# is required to typeset CWEB programs.
+.tex.dvi :
+	(TEXINPUTS=$(TEXINPUTS):$(srcdir);@TEX_CMD@)
+.SUFFIXES:
+.SUFFIXES: .c .o $(SUFFIXES)
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

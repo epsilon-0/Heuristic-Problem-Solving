@@ -1,0 +1,137 @@
+
+Short term (pre-proposal):
+--------------------------
+
+Medium term (post-proposal, pre-writing thesis):
+------------------------------------------------
+
+
+fix tspreorder so it works on all edge types (can't reorder upper row matrices
+right now...)  Maybe use a fixed-up TSP.pm.
+
+find out that fscking GEO distance function.
+
+write a perl script to combine results into a latex table.
+
+extend expt.pl to allow for clones (perhaps parameter inside expt.data)
+
+graft held-karp code onto lk, or write a script to get its output and
+	dump it into an answer database.
+	Integrate
+		prim.w
+		hk.w
+		ascend.w
+		ee.w
+		branch.w
+		kruskal.w
+		upper.w
+	Namespace clean:
+		prim
+	Sequential only:
+		prim
+	
+	
+
+
+
+------
+ILK for matching.
+	Done.  match.w version 1.12
+	Iterating LK for matching doesn't seem to improves solutions.  But it
+	*does* take longer.... :-)
+
+MST dangle and construct (and other inspired distributions)
+
+Non-metric instance data
+
+Adapt match for graphs with odd number of vertices (see. DIMACS1)
+
+Dust off HK code from 1994.
+	Done.  It works with read, error, memory as in LK.
+	Now integrate it with lk?
+	Add better option handling.
+
+Adapt others' code for max-weight matching to min-weight matching.  
+Must learn primal-dual.
+
+Write better scripts for generating graphs.
+
+Medium long term (post-writing, pre-defense):
+---------------------------------------------
+
+Release the code as lk-0.9.0.
+
+Long term (post-defense):
+-------------------------
+
+Release the code as lk-1.0.0.
+
+Implement Martin-Otto-Felten -style chained optimization (maybe)
+
+Use hash tables (even broken ones) for TABU check. (maybe)
+
+
+Optional:
+---------
+
+Insert code into match.w so that we can get graphs out of it.
+
+Upgrade nn so it does nq. (Done)
+	Be smarter about it, e.g. don't search saturated quadrants.
+
+Write an edge length distribution sampler.
+	This might not be as good as I might think, because the clones are
+	not that interesting, visually anyway (for now).
+
+Convert to use HAVE_* macros. (partially done)
+
+Check the distribution on IRIX.  
+	Use the native C compiler on IRIX.  
+	(CC=cc ./configure; also, make sure we aren't using COFF)
+
+Check the distribution on cygwin32.  
+	(I get an internal compiler error with beta 18.  Did not investigate.)
+
+Write self-check target lk.
+
+
+Deprecated items:
+-----------------
+Modify all code so it can handle arbitrary instances.
+	Now LK runs from start to finish with arbitrary instances supported by 
+	read (i.e. LOWER_DIAG_ROW, UPPER_ROW, EXPLICIT, EUC_2D, CEIL_2D).
+	1998/4/16.
+
+Finish jitter
+	src/jitter.w
+
+Write shake
+	src/shake.w
+
+Generate Bentley distributions
+	script/tspbgen.pl.in
+
+Run experiments with --maxdepth 50
+	This is now supported in lkdoit via --lk-option
+
+Generate TSP instances based on distribution of edge lengths.
+	DONE.  They all look the same: very sparse, fractal dimension 1.1?
+
+Switch over from LINEAR to SPLAY in the tabu check.
+	In light of declustering this might not matter much.
+
+Implement CEIL_2D, and check that kdtree is ok with it.
+Implement supports_kd_tree.
+	DONE October 1997.  Both work.
+
+Write to log: cost(t[1],t[2]) and decluster_d(t[1],t[2]):
+	DONE.  It appears variation in runtimes is mainly
+	due to start tour variation, and these effects might be
+	exacerbated by very clustered instances.
+
+Be smarter about which city we next choose for t[1].
+	- most recently changed
+	- longest edge remaining among dirty cities
+	- edge with longest excess over cluster distance. (this might be great!) 
+	- edge with longest excess over nearest neighbour. (this might be better...)
+	In light of the above, this might not matter much.

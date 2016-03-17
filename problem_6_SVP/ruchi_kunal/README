@@ -1,0 +1,9 @@
+To run, use the following command:
+  sh run.sh <input_file> <output_file>
+
+
+-------
+The submission includes the binary files; if you want to do a fresh make, please use following commands:
+  make clean
+  make
+Now you can run using the above .sh file.

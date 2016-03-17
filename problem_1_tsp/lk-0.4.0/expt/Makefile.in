@@ -1,0 +1,378 @@
+# Makefile.in generated automatically by automake 1.0 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+# Makefile for generating plot data from LK output.
+
+# $Id: Makefile.am,v 1.8 1997/11/22 17:58:15 neto Exp neto $
+
+# Requires GNU make (pattern rules, functions).
+
+# vi :set tw=0 sw=4 ts=4:
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+EXTRA_DIST = 0.0 expttest expttsp exptmatch expttsphk
+
+scriptdir=../script
+
+comma=,
+dollar=\$$
+
+# LK output files names are of the form:
+# 	out.<instance-basename>.<massage-key>.<permutation>.<lk-kind>.gz
+# e.g.
+#	out.dsj1000.c.5.deg.gz
+
+# <massage-key> is of form <rotate><sfc><clone>, where
+# 
+# <rotate> is r if the instance was rotated instead of having its s cities
+# randomly renamed.  Otherwise it is empty
+# 
+# <sfc> is s if LK reordered the cities by Moore's space-filling curve.
+# Otherwise it is empty
+#
+# <clone> is c if this instance is a clone of the instance instead of the
+# original instance itself.  Otherwise it is empty
+
+# <permutation> is a number, usually 0 through 5.  It affects
+# the massaging.  If the massage is a random renaming, the number
+# is the seed used for the reordering, with 0 being the identity
+# permutation.  If the massage is a rotation, the number is the
+# number of radians by which the instance is rotated.
+
+# <lk-kind> is one of
+# 	no_d indicating no declustering
+# 	deg indicating declustering in eligibility test and greedy selection
+
+#permnumbers		= 0 1 2 3 4 5
+permnumbers		= 0 1 2
+permutations 	= $(foreach n,$(permnumbers),$(massagekey).$(n) )
+
+plotno_d 	=with lines
+plotdeg  	=with linespoints
+cfplotno_d	=with lines
+cfplotdeg	=with points
+
+plotfiles ='$(foreach perm,$(permutations),"$*.$(perm).LKKIND.DATA.gpl" PLOTOPTION$(comma))'
+
+no_dplotfiles	=$(subst PLOTOPTION,$(plotno_d),$(subst LKKIND,no_d,$(plotfiles)))
+degplotfiles	=$(subst PLOTOPTION,$(plotdeg),$(subst LKKIND,deg,$(plotfiles)))
+plotline 		= plot $(no_dplotfiles) $(degplotfiles)
+milemileplotline= plot \"0.0\" with lines, $(no_dplotfiles) $(degplotfiles)
+
+cfno_dplotfiles =$(subst PLOTOPTION,$(cfplotno_d),$(subst LKKIND,no_d,$(plotfiles)))
+cfdegplotfiles  =$(subst PLOTOPTION,$(cfplotdeg),$(subst LKKIND,deg,$(plotfiles)))
+cfcfplotline    =plot \"0.0\" with lines, $(no_dplotfiles) $(degplotfiles)
+
+mileplotline 	= $(subst DATA,mile,$(milemileplotline))
+cfplotline 		= $(subst DATA,cf,$(cfcfplotline))
+probeplotline 	= $(subst DATA,probe,$(plotline))
+moveplotline 	= $(subst DATA,move,$(plotline))
+improveplotline = $(subst DATA,improve,$(plotline))
+
+gpl = if [ -r out.$*.$(perm).$(lkkind).gz ]; then make $*.$(perm).$(lkkind).DATA.gpl ;fi;
+
+cfgpl 	= out.$*.$(perm).$(lkkind)
+milegpl 		= $(subst DATA,mile,$(gpl))
+probegpl 		= $(subst DATA,probe,$(gpl))
+movegpl 		= $(subst DATA,move,$(gpl))
+improvegpl 		= $(subst DATA,improve,$(gpl))
+
+allmilegpl 		= $(foreach lkkind,no_d deg,$(milegpl))
+allcfgpl 		= $(foreach lkkind,deg no_d,$(cfgpl))
+allprobegpl 	= $(foreach lkkind,no_d deg,$(probegpl))
+allmovegpl 		= $(foreach lkkind,no_d deg,$(movegpl))
+allimprovegpl 	= $(foreach lkkind,no_d deg,$(improvegpl))
+
+plttops = \
+	echo set term postscript landscape monochrome >$@.tmp; \
+	grep -v pause <`echo $@ | sed s/\.ps/\.plt/` >>$@.tmp; \
+	gnuplot $@.tmp >$@; \
+	rm -f $@.tmp
+mkinstalldirs = $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+DIST_COMMON = README Makefile.am Makefile.in README
+
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
+
+TAR = tar
+default: all
+
+
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: $(top_builddir)/config.status Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+tags: TAGS
+TAGS:
+
+
+subdir = expt
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir: $(DEP_DISTFILES)
+	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+	$(MAKE) dist-hook
+info:
+
+dvi:
+
+check: all
+
+installcheck:
+
+install-exec: 
+
+install-data: 
+
+install: install-exec install-data all
+	@:
+
+uninstall: 
+
+all: Makefile
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs:
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-generic
+
+clean:  clean-generic mostlyclean 
+
+distclean:  distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-generic distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default tags distdir info dvi check installcheck install-exec \
+install-data install uninstall all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+
+dist-hook : 
+	cp -r RCS $(distdir)
+
+%.ps : Makefile %.plt
+	$(plttops)
+
+%..cf.plt : Makefile
+	make massagekey= $*.cf.plt
+%..mile.plt : Makefile
+	make massagekey= $*.mile.plt
+%..probe.plt : Makefile
+	make massagekey= $*.probe.plt
+%..improve.plt : Makefile
+	make massagekey= $*.improve.plt
+%..move.plt : Makefile
+	make massagekey= $*.move.plt
+
+%.r.cf.plt : Makefile
+	make massagekey=r $*.cf.plt
+%.r.mile.plt : Makefile
+	make massagekey=r $*.mile.plt
+%.r.probe.plt : Makefile
+	make massagekey=r $*.probe.plt
+%.r.improve.plt : Makefile
+	make massagekey=r $*.improve.plt
+%.r.move.plt : Makefile
+	make massagekey=r $*.move.plt
+
+%.s.cf.plt : Makefile
+	make massagekey=s $*.cf.plt
+%.s.mile.plt : Makefile
+	make massagekey=s $*.mile.plt
+%.s.probe.plt : Makefile
+	make massagekey=s $*.probe.plt
+%.s.improve.plt : Makefile
+	make massagekey=s $*.improve.plt
+%.s.move.plt : Makefile
+	make massagekey=s $*.move.plt
+
+%.c.cf.plt : Makefile
+	make massagekey=c $*.cf.plt
+%.c.mile.plt : Makefile
+	make massagekey=c $*.mile.plt
+%.c.probe.plt : Makefile
+	make massagekey=c $*.probe.plt
+%.c.improve.plt : Makefile
+	make massagekey=c $*.improve.plt
+%.c.move.plt : Makefile
+	make massagekey=c $*.move.plt
+
+%.rs.cf.plt : Makefile
+	make massagekey=rs $*.cf.plt
+%.rs.mile.plt : Makefile
+	make massagekey=rs $*.mile.plt
+%.rs.probe.plt : Makefile
+	make massagekey=rs $*.probe.plt
+%.rs.improve.plt : Makefile
+	make massagekey=rs $*.improve.plt
+%.rs.move.plt : Makefile
+	make massagekey=rs $*.move.plt
+
+%.rc.cf.plt : Makefile
+	make massagekey=rc $*.cf.plt
+%.rc.mile.plt : Makefile
+	make massagekey=rc $*.mile.plt
+%.rc.probe.plt : Makefile
+	make massagekey=rc $*.probe.plt
+%.rc.improve.plt : Makefile
+	make massagekey=rc $*.improve.plt
+%.rc.move.plt : Makefile
+	make massagekey=rc $*.move.plt
+
+%.sc.cf.plt : Makefile
+	make massagekey=sc $*.cf.plt
+%.sc.mile.plt : Makefile
+	make massagekey=sc $*.mile.plt
+%.sc.probe.plt : Makefile
+	make massagekey=sc $*.probe.plt
+%.sc.improve.plt : Makefile
+	make massagekey=sc $*.improve.plt
+%.sc.move.plt : Makefile
+	make massagekey=sc $*.move.plt
+
+%.rsc.cf.plt : Makefile
+	make massagekey=rsc $*.cf.plt
+%.rsc.mile.plt : Makefile
+	make massagekey=rsc $*.mile.plt
+%.rsc.probe.plt : Makefile
+	make massagekey=rsc $*.probe.plt
+%.rsc.improve.plt : Makefile
+	make massagekey=rsc $*.improve.plt
+%.rsc.move.plt : Makefile
+	make massagekey=rsc $*.move.plt
+
+%.cf.plt : Makefile
+	zcat $(foreach perm,$(permutations),$(allcfgpl)) | $(scriptdir)/cfresults.pl
+	$(foreach perm,$(permnumbers),$(foreach lkkind,deg no_d,mv cf.$(perm).$(lkkind) $*.$(massagekey).$(perm).$(lkkind).cf.gpl; ))
+	echo set title \"LK compared with LK+decluster \(% vs. time\)\" >$*.$(massagekey).cf.plt
+	echo $(cfplotline) | sed -e s#,$(dollar)##g >>$*.$(massagekey).cf.plt
+	echo pause -1 >>$*.$(massagekey).cf.plt
+
+%.mile.plt :
+	$(foreach perm,$(permutations),$(allmilegpl))
+	echo set title \"Percentage milestones vs. time\" >$*.$(massagekey).mile.plt
+	echo $(mileplotline) | sed -e s#,$(dollar)##g >>$*.$(massagekey).mile.plt
+	echo pause -1 >>$*.$(massagekey).mile.plt
+
+%.probe.plt :
+	$(foreach perm,$(permutations),$(allprobegpl))
+	echo set title \"Histogram of probe depths\" >$*.$(massagekey).probe.plt
+	echo $(probeplotline) | sed -e s#,$(dollar)##g >>$*.$(massagekey).probe.plt
+	echo pause -1 >>$*.$(massagekey).probe.plt
+
+%.move.plt :
+	$(foreach perm,$(permutations),$(allmovegpl))
+	echo set title \"Histogram of move depths\" >$*.$(massagekey).move.plt
+	echo $(moveplotline) | sed -e s#,$(dollar)##g >>$*.$(massagekey).move.plt
+	echo pause -1 >>$*.$(massagekey).move.plt
+
+%.improve.plt :
+	$(foreach perm,$(permutations),$(allimprovegpl))
+	echo set title \"Tour length vs. time\" >$*.$(massagekey).improve.plt
+	echo $(improveplotline) | sed -e s#,$(dollar)##g >>$*.$(massagekey).improve.plt
+	echo pause -1 >>$*.$(massagekey).improve.plt
+
+%.probe.gpl : out.%.gz
+	$(scriptdir)/probe.pl $<
+	mv probe.gpl $@
+
+%.move.gpl %.: out.%.gz
+	$(scriptdir)/probe.pl $<
+	mv move.gpl $@
+
+%.mile.gpl %.: out.%.gz
+	$(scriptdir)/milestone.pl $<
+	mv milestone.gpl $@
+
+%.improve.gpl %.: out.%.gz
+	$(scriptdir)/improve.pl $<
+	mv improve.gpl $@
+
+%.cost.gpl %.: out.%.gz
+	$(scriptdir)/cd.pl $<
+	mv cost.gpl $@
+
+%.decd.gpl %.: out.%.gz
+	$(scriptdir)/cd.pl $<
+	mv decd.gpl $@
+
+%.prd.gpl %.: out.%.gz
+	$(scriptdir)/cd.pl $<
+	mv prd.gpl $@
+
+clean :
+	rm -f *.plt
+
+veryclean :  clean
+	rm -f *.gpl
+.SUFFIXES:
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

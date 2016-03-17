@@ -1,0 +1,60 @@
+head	1.2;
+access;
+symbols
+	zero-four-zero:1.2;
+locks
+	neto:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	97.11.07.22.21.01;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	97.06.19.19.45.05;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Extract probe and move depth from a LK output file.
+@
+
+
+1.2
+log
+@Now we expect gzipped log files.
+@
+text
+@#! @@PERL@@
+# @@configure_input@@
+# probe.pl
+# Extract probe and move depth from a LK output file.
+
+open(IN, "zcat @@ARGV |");  # Uncompress input files.
+open(POUT ,">probe.gpl");
+open(MOUT ,">move.gpl");
+while(<IN>) {
+	if( m/p (\d+) citydeep (\d+)/ ) {
+		print POUT "$1 $2\n";
+	} elsif( m/m (\d+) citydeep (\d+)/ ) {
+		print MOUT "$1 $2\n";
+	}
+}
+close(POUT);
+close(MOUT);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 1
+d9 1
+a9 1
+while(<>) {
+@

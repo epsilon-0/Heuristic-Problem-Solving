@@ -1,0 +1,18 @@
+==== Need Library ====
+readline
+libz
+pthread
+openmp
+
+==== Compile ====
+We use g++(gcc) version 4.1.2
+In Directory "HOME/QuteRSat/"
+]$ make
+
+==== Run ====
+In Directory "HOME/QuteRSat/"
+]$ ./qutersat_release BENCHNAME
+
+For assigning a random seed ( default:0 )
+]$ ./qutersat_release BENCHNAME RANDOMSEED
+

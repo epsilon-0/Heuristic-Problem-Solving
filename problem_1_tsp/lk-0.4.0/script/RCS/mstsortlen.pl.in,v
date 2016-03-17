@@ -1,0 +1,43 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1;
+comment	@# @;
+
+
+1.1
+date	97.11.07.22.22.10;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sort MST elem lengths.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#! @@PERL@@
+# @@configure_input@@
+# mstsortlen.pl
+# Input is $n$ followed by $n$ floating point numbers, one to a line.
+# Output is the $n$ numbers, in increasing order.
+
+$tmp_file = "/tmp/mstsortlen.$$";
+open(TMP,"|sort -n -r >$tmp_file") # Relies on numeric sort!
+	|| die "Can't open $tmp_file for writing"; 
+$num_lines = <>;
+while( <> ) { print TMP; }
+close(TMP);
+print $num_lines;
+open(TMP,"<$tmp_file")
+	|| die "Can't open $tmp_file for reading"; 
+while(<TMP>) { print; }
+unlink($tmp_file);
+@

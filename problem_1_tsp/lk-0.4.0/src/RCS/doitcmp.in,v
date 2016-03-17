@@ -1,0 +1,89 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	97.06.17.21.21.40;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Support making multiple levels of declustering.
+But why didn't CFLAGS=... work?
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#! @@PERL@@
+# @@configure_input@@
+# I want to be able to support many levels of declustering.  This Perl
+# script got a little out of hand.  I didn't want to change the Makefile
+# too much...  :)
+# This script takes no arguments
+
+$header= "declevel.h";
+$tmpheader= "/tmp/perlsub$$";
+$ident_expr="[A-Za-z_][A-Za-z_0-9]*";
+
+&compile("lk.no.d",
+"JBMR_DECLUSTER_IN_ELIGIBILITY_TEST",0,"JBMR_DECLUSTER_IN_GREEDY",0);
+&compile("lk.de",
+"JBMR_DECLUSTER_IN_ELIGIBILITY_TEST",1,"JBMR_DECLUSTER_IN_GREEDY",0);
+&compile("lk.deg",
+"JBMR_DECLUSTER_IN_ELIGIBILITY_TEST",1,"JBMR_DECLUSTER_IN_GREEDY",1);
+
+exit 0;
+
+sub compile {
+	local($name) = shift(@@_);
+	&substitute(@@_);
+	system("make lk && mv lk $name && strip $name");
+}
+
+
+sub substitute {
+	local(%substitutions)=@@_;
+	local(%dict);
+	local($processing)=1;
+	local($s);
+	foreach $symbol (keys(%substitutions)) {
+		$dict{$symbol} = 1;
+	}
+	open(HEADERIN,"<$header") || die "Can't open $header for reading";
+	open(HEADEROUT, ">$tmpheader") || die "Can't open $tmpheader for writing";
+	while(<HEADERIN>) {
+		#print "line:$_";
+		if ($processing && m/^.define\s+($ident_expr)/ && $dict{$1} ) {
+			#print "MATCH";
+			$s=$substitutions{$1};
+			print HEADEROUT "#define $1 $s\n";
+		} elsif (m/Don\'t touch the following/) {
+			$processing=0;
+			#print "STOP PROCESSING\n";
+			print HEADEROUT;
+		} else {
+			print HEADEROUT;
+		}
+	}
+	close(HEADERIN);
+	close(HEADEROUT);
+	open(HEADERIN,"<$tmpheader") || die "Can't open $tmpheader for reading";
+	open(HEADEROUT, ">$header") || die "Can't open $header for writing";
+	while(<HEADERIN>) {
+		print HEADEROUT;
+	}
+	close(HEADERIN);
+	close(HEADEROUT);
+	unlink($tmpheader);
+}
+@

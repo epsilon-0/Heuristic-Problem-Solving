@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1;
+comment	@# @;
+
+
+1.1
+date	97.06.25.18.28.55;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@README file for data.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@Files with names ending in ".tsp" are sample inputs taken from TSPLIB
+(insert references).  
+
+STSP.html is the list of best values known for symmetric TSPLIB
+instances.  This was downloaded on June 19, 1997 from the TSPLIB web
+site.
+
+Files ending in ".ifs" are specifications for iterated function systems.
+They are processed with program ifs to generate instances in TSPLIB format.
+@

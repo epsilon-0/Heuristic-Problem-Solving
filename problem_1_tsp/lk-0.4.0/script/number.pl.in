@@ -1,0 +1,15 @@
+#! @PERL@
+# @configure_input@
+# number.pl
+# Extract just the essential facts from LK output.
+while (<>) {
+	if (m/(\d+.\d+) user seconds/) {
+		print $1,"\n";  # Time
+	} elsif (m/^LK \d/) { # The version banner.
+		print;
+	} elsif (m/^Initial tour length:/) {
+		print;
+	} elsif (m/^Length:/) {
+		print;
+	}
+}

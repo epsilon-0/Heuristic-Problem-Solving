@@ -1,0 +1,41 @@
+#! @PERL@
+# @configure_input@
+# hist.pl
+# Create a histogram out of a sequence of data, split into bins.
+# Input is a sequence floating point numbers, one to a line.
+
+$bins = 25;
+
+$#ARGV < 1 || die "Usage: hist.pl [#bins].\n";
+if ( $#ARGV == 0 ) {$bins = $ARGV[0];}
+shift(@ARGV);
+$bins >= 2 || die "hist.pl: Need at least 2 bins, $bins bins specified.\n";
+$bins = int($bins);
+# print "ARG count is $#ARGV bins is $bins\n";
+
+
+# We need a two-pass solution since we need min and max bounds.
+@input=();
+
+
+$line_no = 0;
+while( <> ) {
+	$line = $_;
+	push(@input,$line);
+	if ($line < $min || $line_no == 1) { $min = $line; }
+	if ($line > $max || $line_no == 1) { $max = $line; }
+}
+
+#print "max is $max, min is $min, bins is $bins\n";
+$bin_width = ($max - $min) / $bins;
+# Now we split them into bins.
+foreach $v (@input) {
+#	print ".";
+	if ( $v == $max ) {$bin{$bins-1}++;}
+	else { $bin{int(($v-$min)/$bin_width)}++; }
+}
+#print "\n";
+
+for ( $i=0; $i<$bins; $i++ ) {
+	print $bin{$i}+0, "\n";
+}

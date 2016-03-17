@@ -1,0 +1,311 @@
+head	1.114;
+access
+	david
+	neto;
+symbols
+	zero-four-zero:1.114;
+locks
+	neto:1.114;
+
+
+1.114
+date	98.07.16.21.58.55;	author neto;	state Exp;
+branches;
+next	1.113;
+
+1.113
+date	97.05.21.16.58.41;	author neto;	state Exp;
+branches;
+next	1.112;
+
+1.112
+date	97.05.16.15.16.09;	author neto;	state Exp;
+branches;
+next	1.111;
+
+1.111
+date	97.02.07.19.34.14;	author neto;	state Exp;
+branches;
+next	1.110;
+
+1.110
+date	97.02.07.16.53.06;	author neto;	state Exp;
+branches;
+next	1.109;
+
+1.109
+date	96.09.10.15.28.14;	author neto;	state Exp;
+branches;
+next	1.108;
+
+1.108
+date	96.09.10.15.25.27;	author neto;	state Exp;
+branches;
+next	1.107;
+
+1.107
+date	96.09.04.10.24.23;	author neto;	state Exp;
+branches;
+next	1.106;
+
+1.106
+date	96.08.23.17.24.32;	author david;	state Exp;
+branches;
+next	1.105;
+
+1.105
+date	96.06.28.12.18.57;	author neto;	state Exp;
+branches;
+next	1.104;
+
+1.104
+date	96.06.24.16.54.39;	author neto;	state Exp;
+branches;
+next	1.103;
+
+1.103
+date	96.06.19.14.38.32;	author neto;	state Exp;
+branches;
+next	1.102;
+
+1.102
+date	96.06.05.14.15.54;	author neto;	state Exp;
+branches;
+next	1.101;
+
+1.101
+date	96.05.29.15.27.42;	author neto;	state Exp;
+branches;
+next	1.100;
+
+1.100
+date	96.05.29.11.13.25;	author neto;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	96.03.15.16.00.28;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	96.03.04.13.55.28;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@TeX macro definitions.
+@
+
+
+1.114
+log
+@Added the LGPL notice in each file.
+@
+text
+@% This is included in every cweb file of this program.
+% This file is in the public domain.
+\def\etal{{\it et al}}
+\def\ie{\hbox{\it i.e.}}
+\def\eg{\hbox{\it e.g.}}
+\def\etc{{\it etc}}
+\def\br{\hfill\penalty-10000\relax}
+\def\module#1{{\sc #1}}
+\def\file#1{{\tt #1}}
+\def\instance#1{{\tt #1}}
+\def\type#1{{\tt #1}}
+\def\term#1{{\sl #1}}
+\def\implies{\Rightarrow}
+\def\iff{\Leftrightarrow}
+\def\CWEB/{{\mc CWEB\spacefactor1000}}% Imitate the macros for \CEE/, etc.
+\def\ML/{{\mc ML\spacefactor1000}}
+\def\cost{\hbox{\it cost}}
+\def\emphpar#1\par{{\medskip\narrower\noindent\relax #1\medskip}}
+\def\centrepar#1{{\medskip\noindent\hbox{}\hfill\relax#1\relax\hfill{}\hbox{}%
+\medskip}}
+\def\book#1{{\sl #1}}
+\def\mod{{\rm mod}}
+\def\size#1{\,\mid\!#1\!\mid\,}
+% The following are used in ifs.w for the list of characteristics of a
+% fractal.
+%\def\itempar#1{{\leftskip=100pt\rightskip=100pt\noindent\relax #1}}
+\def\unnarrow{\advance\leftskip by -\parindent\advance\rightskip by -\parindent}
+\def\li#1#2\par{\narrower\narrower\noindent\llap{(#1)\enspace}#2\par\unnarrow\unnarrow}
+\def\itempar#1{\narrower\relax#1}
+\def\itemskip{\smallskip}
+\def\emphitemnum#1{({\it#1\/})}
+\def\emphitem#1{\quad\quad\quad\llap{\emphitemnum{#1}}\quad}
+@
+
+
+1.113
+log
+@Added li, a nicer list item macro.
+@
+text
+@d2 1
+@
+
+
+1.112
+log
+@Make emphasis on item clearer.
+@
+text
+@d9 1
+d20 9
+a28 1
+\def\itempar#1{{\leftskip=100pt\rightskip=100pt\noindent\relax #1}}
+a31 3
+\def\book#1{{\sl #1}}
+\def\mod{{\rm mod}}
+\def\size#1{\,\mid\!#1\!\mid\,}
+@
+
+
+1.111
+log
+@More playing with item paragraphs.
+Added a size definition.
+@
+text
+@d22 1
+a22 1
+\def\emphitem#1{\llap{\emphitemnum{#1}}\quad}
+@
+
+
+1.110
+log
+@Added a par ending to the emphpar macro.
+@
+text
+@d19 4
+d25 1
+@
+
+
+1.109
+log
+@Added eg
+@
+text
+@d16 1
+a16 1
+\def\emphpar#1{{\medskip\narrower\noindent\relax #1\medskip}}
+@
+
+
+1.108
+log
+@Added mod
+@
+text
+@d4 1
+@
+
+
+1.107
+log
+@Defined a macro for ML,the language.
+@
+text
+@d19 1
+@
+
+
+1.106
+log
+@Removed the period from the etal macro
+@
+text
+@d13 1
+@
+
+
+1.105
+log
+@Moved some Tex definitions from jbmr.w
+@
+text
+@d2 1
+a2 1
+\def\etal{{\it et al.}}
+@
+
+
+1.104
+log
+@Added a CWEB macro.
+Added implies and iff
+@
+text
+@d13 5
+@
+
+
+1.103
+log
+@Added the term type.
+@
+text
+@d10 3
+@
+
+
+1.102
+log
+@Added a break command.
+@
+text
+@a1 2
+\def\module#1{{\sc #1}}
+\def\file#1{{\tt #1}}
+d6 2
+d9 1
+@
+
+
+1.101
+log
+@Added a macro for computer typing.
+@
+text
+@d5 1
+a5 1
+\def\ie{{\it i.e.}}
+d7 1
+@
+
+
+1.100
+log
+@This version works.  
+Needs improvement:
+	command-line switches
+	faster tabu check
+	allow Papadimitriou tabu rule
+	faster preprocessing
+	different candidate lists
+@
+text
+@d7 1
+@
+
+
+1.2
+log
+@Initial implementation of LK.  This is buggy.
+@
+text
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 1
+@

@@ -1,0 +1,20 @@
+1998/7/16
+lk-0.4.0 is the first public release of LK.
+	- lk implements Lin-Kernighan for the TSP and min-weight perfect matching.
+	- Most TSPLIB files are understood.  (GEO is still a mystery to me)
+	- Iterated-LK is supported via the -i switch.
+	- tspgen generates TSPLIB-format instances from a list of weights.
+	- shake perturbs a 2-d TSPLIB-format instance by articulating some
+of the large edges in a MST for that instance
+	- jitter perturbs a 2-d TSPLIB-format instance by adding noise to the
+coordinates of its vertices
+	- ifs generates 2-d TSPLIB instances based on iterated function systems.
+The input format is rather sparse and should be updated to the DIMACS IFS
+format.  (I didn't know the DIMACS format existed when I wrote ifs.w.)
+	- The script directory contains many useful scripts for
+generating and transforming instances, for running experiments,
+and for massaging the output of experiments.  There's also an embryonic
+TSP Perl class.
+	- The Makefile in the expt directory is godawful ugly and requires GNU
+make to be functional.  It was a hack to get automatic generation of gnuplot
+files from experiment logs.

@@ -1,0 +1,8 @@
+#include <iostream>
+#include "edmondskarp.h"
+#include <algorithm>
+#include <vector>
+
+vector<int> densest;
+vector<vector<double> > capacities;
+vector<vector<int> > graph;

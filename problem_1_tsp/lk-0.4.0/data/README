@@ -1,0 +1,18 @@
+Most files with names ending in ".tsp" are sample inputs taken from TSPLIB
+(see http://www.iwr.uni-heidelberg.de/iwr/comopt/soft/TSPLIB95/TSPLIB.html). 
+Files fullgrid*.tsp are regular grids of points, and files unifd*.tsp
+are uniform random grids of points.
+
+STSP.html is the list of best values known for symmetric TSPLIB
+instances.  This was downloaded on June 19, 1997 from the TSPLIB web
+site.  
+
+Files ending in ".ifs" are specifications for iterated function systems.
+They are processed with program ifs to generate instances in TSPLIB format.
+	(Should convert to use DIMACS IFS format.)
+The .ifs files provided here are named according to what I think
+the output looks like.  Ok, don't go doing a Rhorschack test on me now!
+(How *do* you spell that?)
+
+
+David Neto, netod@acm.org, 1998/7/16

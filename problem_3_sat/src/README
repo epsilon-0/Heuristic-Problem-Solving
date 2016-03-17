@@ -1,0 +1,7 @@
+README FILE
+
+--- For compliling the code
+./compiler.sh
+
+--- For running the program
+./WalkSat.sh /path/to/input /path/to/output

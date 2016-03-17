@@ -1,0 +1,99 @@
+#! @PERL@ -w
+# @configure_input@
+
+# This is a Perl version of the Stanford GraphBase random number generator.
+# Official copies of the Stanford GraphBase software suite may be found
+# at ftp://labrea.stanford.edu/pub/sgb
+# Many thanks to Donald Knuth for excellent software and for unsurpassed 
+# inspiration.
+#
+# This file is *not* part of the Stanford GraphBase.
+# This file is in the public domain, and comes with no warranty.
+# David Neto, November 6, 1997.
+#
+# TODO: encapsulate it as a Perl class so multiple generators may exist at
+# once, so separate streams may be repeatable.
+
+package GB_flip;  # Use cap first name, so it's not a pragma.
+require	Exporter;
+@ISA 	= qw(Exporter);
+@EXPORT	= qw(gb_next_rand gb_init_rand gb_unif_rand);
+
+use strict;
+
+my (@A);
+my ($ptr);
+
+
+sub gb_flip_initialize {
+	@A=(-1);
+	return 1; # Answer something true.
+}
+
+sub gb_mod_diff {  
+	# All the 7fffffff's you see below are where this mod_diff was removed.
+	my ($x,$y) = @_;
+	return ($x-$y) & 0x7fffffff;
+}
+
+sub gb_flip_cycle {
+	my ($j, $i);
+	for $j (32..55) { $A[$j-31] = ($A[$j-31]-$A[$j])& 0x7fffffff; }
+	for $i (25..55) { $A[$i]    = ($A[$i]-$A[$i-24])& 0x7fffffff; }
+	$ptr = 54;
+	return $A[55];
+}
+
+sub gb_next_rand {
+	return $A[$ptr] >= 0 ? $A[$ptr--] : &gb_flip_cycle;
+}
+
+sub gb_init_rand {
+	my ($seed) = shift;
+	my ($i, $prev, $next);
+	&gb_flip_initialize;
+	$next = 1;
+	$seed = $prev = ($seed-0)&0x7fffffff;
+	$A[55] = $prev;
+	for ( $i=21; $i ; $i = ($i+21) % 55) {
+		$A[$i] = $next;
+		# Section 9: Compute a new next value, based on next, prev, and seed.
+		$next = ($prev-$next)&0x7fffffff;
+		if ( $seed & 1 ) {$seed = 0x40000000 + ($seed >> 1);}
+		else {$seed >>= 1;}
+		$next = ($next-$seed)&0x7fffffff;
+		# :9
+		$prev = $A[$i];
+	}
+	# Section 8: Get the array values warmed up.
+	&gb_flip_cycle;
+	&gb_flip_cycle;
+	&gb_flip_cycle;
+	&gb_flip_cycle;
+	&gb_flip_cycle;
+	# :8
+}
+
+sub gb_unif_rand {
+	my ($m, $r, $t);
+	# Make sure the argument is small enough, and positive.
+	$m = int( shift ) & 0x7fffffff;
+	$t = 0x80000000 - (0x80000000 % $m);
+	do {
+		$r = &gb_next_rand;
+	} while ( $t <= $r );
+	return $r % $m;
+}
+
+sub gb_self_test {
+	my ($j);
+	&gb_init_rand(-314159);
+	&gb_next_rand == 119318998 || die("GB_flip::Failure on the first try!");
+	for $j (1..133) { &gb_next_rand; }
+	&gb_unif_rand(0x55555555) == 748103812 || die("GB_flip::Failure on the second try!");
+	#print STDERR "Ok the gb_flip routines seem to work!\n";
+	return 1;
+}
+
+&gb_flip_initialize;
+&gb_self_test;

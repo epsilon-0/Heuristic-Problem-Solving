@@ -1,0 +1,48 @@
+#! @PERL@ -w
+# @configure_input@
+# vi: set ts=2 sw=2:
+# doshake.pl
+# Run shake multiple times on a given instance
+#
+# This file is in the public domain, and comes with no warranty.
+# David Neto, December 17, 1997.
+#
+# Example parameters: dsj1000 lin105
+# For argument dsj1000, dsj1000.tsp must exist in the current directory.
+# Also, for postscript output, prolog.ps must exist in the current directory.
+
+
+# Instance-specific data.
+my($instance)="lin105";
+my($always_args)="-v 50 -S dsort --no-round";
+my($bound)="-b optimal 14379";
+my($candidate)="-c nn 20 or nq 5";
+my($representation)="-r array";
+
+
+my($shakeprog) = "../src/shake";
+my($psprog) = "../src/tspps";
+my($lkprog) = "../src/lk";
+
+my(@bl) = (1,2,4,10,20);  # Number of branches to rotate.
+my(@dl) = (0.5,1,5);  # Number of branches to rotate.
+my(@sl) = ("48","50","98");		# seeds
+
+# For testing, search a small space.
+#my(@bl) = (4);  # Number of branches to rotate.
+#my(@dl) = (5);  # Number of branches to rotate.
+#my(@sl) = ("50","98");		# seeds
+
+
+my($s,$b,$d,$sbd,$dec_option);
+
+for $s (@sl) {
+	for $b (@bl) {
+		for $d (@dl) {
+			$sbd = "$s"."_"."$b"."_"."$d";
+			for $dec_option("deg", "no_d") {
+system("$lkprog.$dec_option $always_args $bound $candidate $representation $instance.shake.$sbd.tsp | gzip -c  >out.$instance.shake.$sbd.$dec_option.gz");
+			}
+		}
+	}
+}

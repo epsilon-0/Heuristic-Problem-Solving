@@ -1,0 +1,17 @@
+#! @PERL@
+# @configure_input@
+# mstsortlen.pl
+# Input is $n$ followed by $n$ floating point numbers, one to a line.
+# Output is the $n$ numbers, in increasing order.
+
+$tmp_file = "/tmp/mstsortlen.$$";
+open(TMP,"|sort -n >$tmp_file") # Relies on numeric sort!
+	|| die "Can't open $tmp_file for writing"; 
+$num_lines = <>;
+while( <> ) { print TMP; }
+close(TMP);
+print $num_lines;
+open(TMP,"<$tmp_file")
+	|| die "Can't open $tmp_file for reading"; 
+while(<TMP>) { print; }
+unlink($tmp_file);

@@ -1,0 +1,850 @@
+head	1.122;
+access
+	david
+	neto;
+symbols
+	zero-four-zero:1.122;
+locks
+	neto:1.122;
+
+
+1.122
+date	98.07.16.21.58.55;	author neto;	state Exp;
+branches;
+next	1.121;
+
+1.121
+date	98.06.19.16.24.09;	author neto;	state Exp;
+branches;
+next	1.120;
+
+1.120
+date	98.01.24.16.58.02;	author neto;	state Exp;
+branches;
+next	1.119;
+
+1.119
+date	97.12.04.16.37.33;	author neto;	state Exp;
+branches;
+next	1.118;
+
+1.118
+date	97.10.28.20.41.47;	author neto;	state Exp;
+branches;
+next	1.117;
+
+1.117
+date	97.09.27.18.06.55;	author neto;	state Exp;
+branches;
+next	1.116;
+
+1.116
+date	97.05.16.20.47.09;	author neto;	state Exp;
+branches;
+next	1.115;
+
+1.115
+date	97.05.16.20.44.57;	author neto;	state Exp;
+branches;
+next	1.114;
+
+1.114
+date	97.01.21.21.55.55;	author david;	state Exp;
+branches;
+next	1.113;
+
+1.113
+date	96.12.20.16.26.11;	author neto;	state Exp;
+branches;
+next	1.112;
+
+1.112
+date	96.12.20.12.25.46;	author neto;	state Exp;
+branches;
+next	1.111;
+
+1.111
+date	96.12.19.12.54.25;	author neto;	state Exp;
+branches;
+next	1.110;
+
+1.110
+date	96.12.13.15.09.13;	author neto;	state Exp;
+branches;
+next	1.109;
+
+1.109
+date	96.11.08.15.43.48;	author neto;	state Exp;
+branches;
+next	1.108;
+
+1.108
+date	96.11.08.12.08.09;	author neto;	state Exp;
+branches;
+next	1.107;
+
+1.107
+date	96.11.08.12.05.30;	author neto;	state Exp;
+branches;
+next	1.106;
+
+1.106
+date	96.08.15.14.45.33;	author neto;	state Exp;
+branches;
+next	1.105;
+
+1.105
+date	96.08.02.14.27.49;	author neto;	state Exp;
+branches;
+next	1.104;
+
+1.104
+date	96.07.29.17.08.14;	author neto;	state Exp;
+branches;
+next	1.103;
+
+1.103
+date	96.07.29.16.20.01;	author neto;	state Exp;
+branches;
+next	1.102;
+
+1.102
+date	96.07.26.13.14.16;	author neto;	state Exp;
+branches;
+next	1.101;
+
+1.101
+date	96.07.04.19.44.13;	author david;	state Exp;
+branches;
+next	1.100;
+
+1.100
+date	96.05.29.11.13.15;	author neto;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	96.05.29.11.09.53;	author neto;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	96.05.22.17.03.16;	author neto;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	96.05.22.13.39.23;	author neto;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	96.03.15.15.59.51;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	96.03.04.13.54.21;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Length data type.
+@
+
+
+1.122
+log
+@Added the LGPL notice in each file.
+@
+text
+@
+
+
+
+\noindent Copyright \copyright 1994, 1995, 1996, 1997, 1998 David Neto
+\smallskip
+
+\noindent 
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+\smallskip
+
+\noindent 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+\smallskip
+
+\noindent   
+   You should have received a copy of the GNU Library General Public
+   License along with this library; if not, write to the
+   Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA  02111-1307, USA.
+\smallskip
+
+\noindent   
+   You may contact David Neto via email at {\tt netod@@@@acm.org}, or with
+   greater latency at
+\smallskip
+\noindent{\obeylines
+     Department of Computer Science
+     University of Toronto
+     10 King's College Rd.
+     Toronto, Ontario
+     M5S 3G4
+     Canada
+}
+\medskip
+
+
+\noindent\hbox{}\hrule\hbox{}\penalty-1000
+\vskip0.5cm\relax
+
+
+@@i webdefs.w
+@@i types.w
+
+{\obeylines
+$Log: length.w,v $
+Revision 1.121  1998/06/19 16:24:09  neto
+Added an integral test.
+
+Revision 1.120  1998/01/24  16:58:02  neto
+Changed the print spec for double to be shorter by 2 characters.  double
+is the most common type for length t.
+
+Revision 1.119  1997/12/04  16:37:33  neto
+HUGE VAL is not necessarily a valid floating point number, so I
+have replaced it with DBL MAX when we use doubles.
+
+Revision 1.118  1997/10/28  20:41:47  neto
+Fixed comments to compile.
+
+Revision 1.117  1997/09/27 18:06:55  neto
+Fixed RCS log behaviour.
+Give more precision in printing double lengths.
+
+Revision 1.116  1997/05/16  20:47:09  neto
+Terminated the comment at the very end.  Doh!
+
+Revision 1.115  1997/05/16  20:44:57  neto
+Put comments on preprocesser conditionals, as per GNU standards.
+
+Revision 1.114  1997/01/21  21:55:55  david
+Added standard copyright notice by including copyrt.w
+
+Revision 1.113  96/12/20  16:26:11  neto
+Put parens around macro
+
+Revision 1.112  96/12/20  12:25:46  neto
+Fixed an int vs. long int printf spec.
+
+Revision 1.111  96/12/19  12:54:25  neto
+Added exactness macro, and a machine epsilon macro.
+
+Revision 1.110  96/12/13  15:09:13  neto
+Fixed the double entry.  Added a float entry.
+
+Revision 1.109  96/11/08  15:43:48  neto
+Fixed print spec for double.
+
+Revision 1.108  96/11/08  12:08:09  neto
+Fixed comment about doubles.
+
+Revision 1.107  96/11/08  12:05:30  neto
+Added double option.  Also, doubles have 48 bits of mantissa, not 53.
+
+Revision 1.106  96/08/15  14:45:33  neto
+Restrict definition of length\_rcs\_id.
+
+Revision 1.105  96/08/02  14:27:49  neto
+Allow multiple includes.
+
+Revision 1.104  96/07/29  17:08:14  neto
+Fixed to compile
+
+Revision 1.103  96/07/29  16:20:01  neto
+Added *\_rcs\_id.
+Made sure RCS log is activated within this file.
+
+}
+
+@@* Lengths.
+The primary atomic abstraction of a TSP program is the distance between
+two cities.  We need to declare a numerical type for values of this kind.
+
+We would like for all our calculations to be repeatable and accurate.
+This suggests the use of an integral type for our calculations.
+
+However, we don't want to have distances overflow.  This suggests the
+use of type |double| in place of |long| because |doubles| often have 53
+bits of mantissa.  Compare this with the 32 bits that are often provided
+for |long| or |int|.
+
+When 32 bits (including sign) suffice, 
+we will use |int|.  Otherwise we will use
+type |long long| which is supported by some compilers.  These 
+are integers with at least 64 bits of precision.
+
+This module defines both the length type and the appropriate |printf|
+output specification strings.  Hopefully this isolates this design decision
+well enough that a simple |define| change in this module changes over the
+entire program.
+
+Type |long long| is supported both by GCC and the IBM AIX C compilers.
+That's good.
+However, I couldn't get 
+|long long|s to print out properly on the Sun machines, so I compromise
+by printing it out in two components: the upper and lower 32 bits.
+
+This module only defines a header file.
+
+@@ Sometimes I use a floating point type, and sometimes I use an integral
+type.  The two cases require different handling, so I define a compile-time
+constant
+|LENGTH_TYPE_IS_EXACT| that allows other source code to be compiled
+according to the nature of the current meaning of the |length_t| type.
+
+If a floating point type is used, we need to know what the machine epsilon
+is.  This number is defined to be ``the difference between 1 and the least value
+greater than 1 that is representable in the given floating-point type''.
+See page 61 of P.~J.~Plauger's {\sl The Standard C Library} for this excerpt
+from the ISO C Library Standard.  The values for types |float| and |double| 
+are given in the header file \file{float.h} as macros |FLT_EPSILON| and
+|DBL_EPSILON|, respectively.  We define |LENGTH_MACHINE_EPSILON| to be
+the same as whichever machine epsilon is in effect.
+
+@@(length.h@@>=
+#if !defined(_LENGTH_H_)
+#define _LENGTH_H_
+
+#if defined(LENGTH_USE_RCS_ID)
+static const char *length_rcs_id = "$Id: length.w,v 1.121 1998/06/19 16:24:09 neto Exp neto $";
+#endif
+
+#if defined(LENGTH_LONG_LONG)
+	/* Use |long long|, and assume they are 8-bytes long */
+	typedef long long length_t;
+#	define LENGTH_TYPE_IS_EXACT (1)
+#	define LENGTH_TYPE_IS_INTEGRAL (1)
+#	define INFINITY \
+	((( ((long long)0x7FFF) << 16   \
+     |((long long)0xFFFF)) << 16	\
+     |((long long)0xFFFF)) << 16	\
+     |((long long)0xFFFF)) 	
+
+#	define length_t_pcast(Y) (long)((Y)>>32),(unsigned long)((Y)&0xffffffff)
+#	define length_t_spec "(0000%ld*2^32+%ld)"  
+#else /* |!defined(LENGTH_LONG_LONG)| */
+#if defined(LENGTH_DOUBLE)
+	/* Use |double|. We get the infinity value from \file{math.h}. */
+	typedef double length_t;
+#	define LENGTH_TYPE_IS_EXACT (0)
+#	define LENGTH_TYPE_IS_INTEGRAL (0)
+#   include <math.h>
+#   include <float.h>
+#   define LENGTH_MACHINE_EPSILON  DBL_EPSILON
+#	define INFINITY DBL_MAX
+#	define length_t_pcast(Y) ((double)(Y))
+#	define length_t_spec "(0*2^32+%f)"  
+#else /* |!defined(LENGTH_DOUBLE)| */
+#if defined(LENGTH_FLOAT)
+	/* Use |float|. We get the infinity value from \file{math.h}. */
+	typedef float length_t;
+#	define LENGTH_TYPE_IS_EXACT (0)
+#	define LENGTH_TYPE_IS_INTEGRAL (0)
+#   include <math.h>
+#   include <float.h>
+#   define LENGTH_MACHINE_EPSILON  FLT_EPSILON
+#	define INFINITY FLT_MAX
+#	define length_t_pcast(Y) ((double)(Y))
+#	define length_t_spec "(000*2^32+%.3f)"  
+#else /* |!defined(LENGTH_FLOAT)| */
+	/* Use |int|, and assume they are 4-bytes long */
+	typedef int length_t;
+#	define LENGTH_TYPE_IS_EXACT (1)
+#	define LENGTH_TYPE_IS_INTEGRAL (1)
+#	define INFINITY (0x7FFFFFFF)
+#	define length_t_pcast(Y) (Y)
+#	define length_t_spec "(00*2^32+%d)"  
+#endif /* |!defined(LENGTH_FLOAT)| */
+#endif /* |!defined(LENGTH_DOUBLE)| */
+#endif /* |!defined(LENGTH_LONG_LONG)| */
+
+#endif /* |!defined(_LENGTH_H_)| */
+@
+
+
+1.121
+log
+@Added an integral test.
+@
+text
+@d1 47
+a47 1
+@@i copyrt.w
+d53 3
+d166 1
+a166 1
+static const char *length_rcs_id = "$Id: length.w,v 1.120 1998/01/24 16:58:02 neto Exp neto $";
+@
+
+
+1.120
+log
+@Changed the print spec for double to be shorter by 2 characters.  double
+is the most common type for length t.
+@
+text
+@d7 4
+d117 1
+a117 1
+static const char *length_rcs_id = "$Id: length.w,v 1.119 1997/12/04 16:37:33 neto Exp neto $";
+d124 1
+d138 1
+d150 1
+d161 1
+@
+
+
+1.119
+log
+@HUGE VAL is not necessarily a valid floating point number, so I
+have replaced it with DBL MAX when we use doubles.
+@
+text
+@d7 4
+d113 1
+a113 1
+static const char *length_rcs_id = "$Id: length.w,v 1.118 1997/10/28 20:41:47 neto Exp neto $";
+d127 1
+a127 1
+#	define length_t_spec "(%ld*2^32+%ld)"  
+d138 1
+a138 1
+#	define length_t_spec "(000*2^32+%f)"  
+d149 1
+a149 1
+#	define length_t_spec "(0000*2^32+%.3f)"  
+@
+
+
+1.118
+log
+@Fixed comments to compile.
+@
+text
+@d7 3
+d109 1
+a109 1
+static const char *length_rcs_id = "$Id: length.w,v 1.117 1997/09/27 18:06:55 neto Exp neto $";
+d132 1
+a132 1
+#	define INFINITY HUGE_VAL
+@
+
+
+1.117
+log
+@Fixed RCS log behaviour.
+Give more precision in printing double lengths.
+@
+text
+@d7 4
+d106 1
+a106 1
+static const char *length_rcs_id = "$Id: length.w,v 1.116 1997/05/16 20:47:09 neto Exp neto $";
+d121 1
+a121 1
+#else /* !defined(LENGTH_LONG_LONG) */
+d132 1
+a132 1
+#else /* !defined(LENGTH_DOUBLE) */
+d143 1
+a143 1
+#else /* !defined(LENGTH_FLOAT) */
+d150 3
+a152 3
+#endif /* !defined(LENGTH_FLOAT) */
+#endif /* !defined(LENGTH_DOUBLE) */
+#endif /* !defined(LENGTH_LONG_LONG) */
+d154 1
+a154 1
+#endif /* !defined(_LENGTH_H_) */
+@
+
+
+1.116
+log
+@Terminated the comment at the very end.  Doh!
+@
+text
+@d5 5
+a9 1
+{\obeylines$Log: length.w,v $
+d102 1
+a102 1
+static const char *length_rcs_id = "$Id: length.w,v 1.115 1997/05/16 20:44:57 neto Exp neto $";
+d127 1
+a127 1
+#	define length_t_spec "(000*2^32+%.3f)"  
+@
+
+
+1.115
+log
+@Put comments on preprocesser conditionals, as per GNU standards.
+@
+text
+@d6 3
+d98 1
+a98 1
+static const char *length_rcs_id = "$Id: length.w,v 1.114 1997/01/21 21:55:55 david Exp david $";
+d146 1
+a146 1
+#endif /* !defined(_LENGTH_H_)
+@
+
+
+1.114
+log
+@Added standard copyright notice by including copyrt.w
+@
+text
+@d5 4
+a8 1
+{\obeylines$Log:	length.w,v $
+d95 1
+a95 1
+static const char *length_rcs_id = "$Id: length.w,v 1.113 96/12/20 16:26:11 neto Exp $";
+d110 1
+a110 1
+#else 
+d121 1
+a121 1
+#else 
+d132 1
+a132 1
+#else
+d139 3
+a141 3
+#endif
+#endif
+#endif
+d143 1
+a143 1
+#endif
+@
+
+
+1.113
+log
+@Put parens around macro
+@
+text
+@d1 1
+d6 3
+d92 1
+a92 1
+static const char *length_rcs_id = "$Id: length.w,v 1.112 96/12/20 12:25:46 neto Exp $";
+@
+
+
+1.112
+log
+@Fixed an int vs. long int printf spec.
+@
+text
+@d5 3
+d88 1
+a88 1
+static const char *length_rcs_id = "$Id: length.w,v 1.111 96/12/19 12:54:25 neto Exp $";
+d94 1
+a94 1
+#	define LENGTH_TYPE_IS_EXACT 1
+d107 1
+a107 1
+#	define LENGTH_TYPE_IS_EXACT 0
+d118 1
+a118 1
+#	define LENGTH_TYPE_IS_EXACT 0
+d128 1
+a128 1
+#	define LENGTH_TYPE_IS_EXACT 1
+@
+
+
+1.111
+log
+@Added exactness macro, and a machine epsilon macro.
+@
+text
+@d5 3
+d85 1
+a85 1
+static const char *length_rcs_id = "$Id: length.w,v 1.110 96/12/13 15:09:13 neto Exp $";
+d128 1
+a128 1
+#	define length_t_spec "(00*2^32+%ld)"  
+@
+
+
+1.110
+log
+@Fixed the double entry.  Added a float entry.
+@
+text
+@d5 3
+d40 1
+a40 1
+use of type |double| in place of |long| because |doubles| often have 48
+d62 15
+d82 1
+a82 1
+static const char *length_rcs_id = "$Id: length.w,v 1.109 96/11/08 15:43:48 neto Exp $";
+d88 1
+d101 1
+d103 2
+d112 2
+d115 1
+d122 1
+@
+
+
+1.109
+log
+@Fixed print spec for double.
+@
+text
+@d5 3
+d64 1
+a64 1
+static const char *length_rcs_id = "$Id: length.w,v 1.108 96/11/08 12:08:09 neto Exp $";
+d78 1
+a78 1
+#else
+d81 1
+a81 1
+	typedef int length_t;
+d84 1
+a84 1
+#	define length_t_pcast(Y) (Y)
+d86 8
+d100 1
+@
+
+
+1.108
+log
+@Fixed comment about doubles.
+@
+text
+@d5 3
+d61 1
+a61 1
+static const char *length_rcs_id = "$Id: length.w,v 1.107 96/11/08 12:05:30 neto Exp $";
+d75 2
+a76 1
+#elsif defined(LENGTH_DOUBLE)
+d82 1
+a82 1
+#	define length_t_spec "(000*2^32+%.3lf)"  
+d89 1
+@
+
+
+1.107
+log
+@Added double option.  Also, doubles have 48 bits of mantissa, not 53.
+@
+text
+@d5 3
+d58 1
+a58 1
+static const char *length_rcs_id = "$Id: length.w,v 1.106 96/08/15 14:45:33 neto Exp $";
+d73 1
+a73 1
+	/* Use |int|, and assume they are 4-bytes long */
+d84 1
+a84 1
+#	define length_t_spec "(00*2^32+%d)"  
+@
+
+
+1.106
+log
+@Restrict definition of length\_rcs\_id.
+@
+text
+@d5 3
+d28 1
+a28 1
+use of type |double| in place of |long| because |doubles| often have 53
+d35 1
+a35 1
+are (at least) 64 bit integers.
+d55 1
+a55 1
+static const char *length_rcs_id = "$Id: length.w,v 1.105 96/08/02 14:27:49 neto Exp $";
+d69 7
+@
+
+
+1.105
+log
+@Allow multiple includes.
+@
+text
+@d5 3
+d51 3
+a53 1
+static const char *length_rcs_id = "$Id: length.w,v 1.104 96/07/29 17:08:14 neto Exp $";
+@
+
+
+1.104
+log
+@Fixed to compile
+@
+text
+@d5 3
+d45 2
+a46 1
+static const char *length_rcs_id = "$Id: length.w,v 1.103 96/07/29 16:20:01 neto Exp $";
+d48 2
+d67 2
+@
+
+
+1.103
+log
+@Added *\_rcs\_id.
+Made sure RCS log is activated within this file.
+@
+text
+@d4 5
+a8 1
+{\obeylines$Log$
+d42 1
+a42 1
+static const char length_rcs_id[] = "$Id$";
+@
+
+
+1.102
+log
+@use LENGTH_LONG_LONG instead of 0/1.
+@
+text
+@d1 7
+a7 1
+@@ Lengths.*
+d38 1
+@
+
+
+1.101
+log
+@Using |sizeof(int)| in ad |#if| condition is actually illegal.
+So I got less ambitious.
+@
+text
+@d33 1
+a33 7
+#if 1
+	/* Use |int|, and assume they are 4-bytes long */
+	typedef int length_t;
+#	define INFINITY (0x7FFFFFFF)
+#	define length_t_pcast(Y) (Y)
+#	define length_t_spec "(00*2^32+%d)"  
+#else
+d44 6
+@
+
+
+1.100
+log
+@This version works.
+Needs improvement:
+	command-line switches
+	faster tabu check
+	allow Papadimitriou tabu rule
+	faster preprocessing
+	different candidate lists
+@
+text
+@d33 2
+a34 3
+#define LENGTH_BYTES 4
+
+#if sizeof(int)==LENGTH_BYTES
+d40 1
+@
+
+
+1.5
+log
+@Allow use of 32 bit integers.
+@
+text
+@@
+
+
+1.4
+log
+@As long as we use pcast, we're ok, so the SPARC comment doesn't apply.
+@
+text
+@d11 1
+a11 1
+for |long|.
+d13 3
+a15 1
+The ideal candidate is |long long| which some compilers support.  These 
+d29 1
+a29 1
+The outline of this module is as follows:
+d33 10
+a42 2
+typedef long long length_t;
+#define INFINITY \
+d48 3
+a50 2
+#define length_t_pcast(Y) (long)((Y)>>32),(unsigned long)((Y)&0xffffffff)
+#define length_t_spec "(%ld*2^32+%ld)"  
+@
+
+
+1.3
+log
+@Added comments about where the $length_t_spec$ works.
+@
+text
+@d39 1
+a39 1
+#define length_t_spec "(%ld*2^32+%ld)"  /* This works on SPARCs at least...*/
+@
+
+
+1.2
+log
+@Initial implementation of LK.  This is buggy.
+@
+text
+@d39 1
+a39 1
+#define length_t_spec "(%ld*2^32+%ld)"
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@@

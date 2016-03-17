@@ -1,0 +1,23 @@
+# clasp 2.0.0-RC2 portfolio file
+# A portfolio file contains (possibly empty) a list of configurations.
+# Each of which must have the following format:
+#   [<name>]: <options>
+# where <name> is an arbitrary string and <options> is a list of
+# command-line options from "Search Options" and/or "Lookback Options".
+#
+# SEE: clasp --help
+#
+# NOTE: Options given on the command-line are added to all configurations in a
+#       portfolio file. If an option is given both on the command-line and in a
+#       portfolio configuration, the one from the command-line is preferred.
+#
+# EXAMPLE for up to 8 threads:
+[CRAFTED]: --berk-max=512 --berk-once --otfs=1 --recursive-str --dinit=800,10000 --dsched=20000,1.1 --reverse-arcs=2
+[INDUST]:  --berk-max=512 --berk-once --restarts=256 --reverse-arcs=2 --recursive-str --dinit=800,10000 --dsched=10000,1.1 --dscore=2 --update-lbd --dalgo=2
+[LUBY-SP]: --heu=VSIDS --restarts=128 --save-p --otfs=1 --rand-w=false --contr=0
+[STRONG]:  --heu=VSIDS --otfs=2 --reverse-arcs=2 --recursive-str --rand-w=false
+[LOCAL-R]: --berk-max=512 --restarts=100,1.5,1000 --local-restarts --rand-w=false --contr=0
+[SLOW]:    --berk-max=512 --restarts=16000 --initial-look=50
+[RANDY]:   --heu=VSIDS --rand-f=0.02 --rand-p=20,100 --recursive-str --shuffle=10,2
+[SIMPLE]:  --heu=VMTF --str=no --contr=0 --restarts=100,1.3 --dinit=800,10000
+

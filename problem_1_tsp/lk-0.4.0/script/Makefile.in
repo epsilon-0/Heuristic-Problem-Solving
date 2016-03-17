@@ -1,0 +1,286 @@
+# Makefile.in generated automatically by automake 1.0 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+# Makefile for generating scripts related to program LK.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+EXTRA_DIST = README  \
+att2upper.pl.in \
+cd.pl.in \
+cfresults.pl.in \
+cfresults.pl.in.new \
+countpages.pl.in \
+domst.pl.in \
+doshake.pl.in \
+doshakelk.pl.in \
+expt.pl.in \
+GB_flip.pm.in \
+hist.pl.in \
+improve.pl.in \
+least.pl.in \
+lkdoit.in \
+lkdoitcmp.in \
+milestone.pl.in \
+mkcwebch.pl.in \
+mstelratio.pl.in \
+mstrsortlen.pl.in \
+mstsortlen.pl.in \
+myps2eps.pl.in \
+number.pl.in \
+PRNG.pm.in \
+probe.pl.in \
+results.pl.in \
+spectrum.pl.in \
+TSP.pm.in \
+tsp2dm.pl.in \
+tspbgen.pl.in \
+tspreorder.pl.in \
+tsprotate.pl.in
+
+bin_SCRIPTS = \
+att2upper.pl \
+cd.pl \
+cfresults.pl \
+countpages.pl \
+domst.pl \
+doshake.pl \
+doshakelk.pl \
+expt.pl \
+GB_flip.pm \
+hist.pl \
+improve.pl \
+least.pl \
+lkdoit \
+lkdoitcmp \
+milestone.pl \
+mkcwebch.pl \
+mstelratio.pl \
+mstrsortlen.pl \
+mstsortlen.pl \
+myps2eps.pl \
+number.pl \
+PRNG.pm.in \
+probe.pl \
+results.pl \
+spectrum.pl \
+TSP.pm \
+tsp2dm.pl \
+tspbgen.pl \
+tspreorder.pl \
+tsprotate.pl
+mkinstalldirs = $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+SCRIPTS = $(bin_SCRIPTS)
+
+DIST_COMMON = README Makefile.am Makefile.in README
+
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
+
+TAR = tar
+default: all
+
+
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: $(top_builddir)/config.status Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+att2upper.pl: $(top_builddir)/config.status att2upper.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+cd.pl: $(top_builddir)/config.status cd.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+cfresults.pl: $(top_builddir)/config.status cfresults.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+countpages.pl: $(top_builddir)/config.status countpages.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+domst.pl: $(top_builddir)/config.status domst.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+doshake.pl: $(top_builddir)/config.status doshake.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+doshakelk.pl: $(top_builddir)/config.status doshakelk.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+expt.pl: $(top_builddir)/config.status expt.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+GB_flip.pm: $(top_builddir)/config.status GB_flip.pm.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+hist.pl: $(top_builddir)/config.status hist.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+improve.pl: $(top_builddir)/config.status improve.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+least.pl: $(top_builddir)/config.status least.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+lkdoit: $(top_builddir)/config.status lkdoit.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+lkdoitcmp: $(top_builddir)/config.status lkdoitcmp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+milestone.pl: $(top_builddir)/config.status milestone.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+mkcwebch.pl: $(top_builddir)/config.status mkcwebch.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+mstelratio.pl: $(top_builddir)/config.status mstelratio.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+mstrsortlen.pl: $(top_builddir)/config.status mstrsortlen.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+mstsortlen.pl: $(top_builddir)/config.status mstsortlen.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+myps2eps.pl: $(top_builddir)/config.status myps2eps.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+number.pl: $(top_builddir)/config.status number.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+PRNG.pm: $(top_builddir)/config.status PRNG.pm.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+probe.pl: $(top_builddir)/config.status probe.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+results.pl: $(top_builddir)/config.status results.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+spectrum.pl: $(top_builddir)/config.status spectrum.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+TSP.pm: $(top_builddir)/config.status TSP.pm.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+tsp2dm.pl: $(top_builddir)/config.status tsp2dm.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+tspbgen.pl: $(top_builddir)/config.status tspbgen.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+tspreorder.pl: $(top_builddir)/config.status tspreorder.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+tsprotate.pl: $(top_builddir)/config.status tsprotate.pl.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+install-binSCRIPTS: $(bin_SCRIPTS)
+	$(mkinstalldirs) $(bindir)
+	list="$(bin_SCRIPTS)"; for p in $$list; do \
+	  if test -f $$p; then \
+	    $(INSTALL_SCRIPT) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else if test -f $(srcdir)/$$p; then \
+	    $(INSTALL_SCRIPT) $(srcdir)/$$p \
+	      $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; fi; \
+	done
+
+uninstall-binSCRIPTS:
+	list="$(bin_SCRIPTS)"; for p in $$list; do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+tags: TAGS
+TAGS:
+
+
+subdir = script
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir: $(DEP_DISTFILES)
+	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+	$(MAKE) dist-hook
+info:
+
+dvi:
+
+check: all
+
+installcheck:
+
+install-exec: install-binSCRIPTS
+
+install-data: 
+
+install: install-exec install-data all
+	@:
+
+uninstall: uninstall-binSCRIPTS
+
+all: $(SCRIPTS) Makefile
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs:
+	$(mkinstalldirs)  $(bindir)
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-generic
+
+clean:  clean-generic mostlyclean 
+
+distclean:  distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-generic distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default uninstall-binSCRIPTS install-binSCRIPTS tags distdir \
+info dvi check installcheck install-exec install-data install uninstall \
+all installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# A hack to use the SCRIPTS before a full-blown install.
+myall :
+	chmod +x $(bin_SCRIPTS)
+
+# Distribute RCS files too.
+dist-hook :
+	cp -r RCS $(distdir)
+.SUFFIXES:
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,1564 @@
+head	1.17;
+access;
+symbols
+	zero-four-zero:1.17;
+locks
+	neto:1.17;
+
+
+1.17
+date	98.05.21.19.29.35;	author neto;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	98.05.21.19.26.11;	author neto;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	98.05.21.19.03.17;	author neto;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	98.05.21.18.58.12;	author neto;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	98.05.21.18.42.50;	author neto;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	95.11.17.16.08.11;	author neto;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	95.04.03.17.00.44;	author neto;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	95.03.23.13.54.00;	author neto;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	95.01.24.13.00.17;	author neto;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	95.01.13.16.31.37;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	95.01.12.13.11.13;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Prim's algorithm for MST.
+@
+
+
+1.17
+log
+@Fixed up standard CWEB thingies and Log stuff.
+@
+text
+@@@i webdefs.w
+@@i copyrt.w
+@@i types.w
+
+{\obeylines
+$Log: prim.w,v $
+Revision 1.16  1998/05/21 19:26:11  neto
+Include the log
+}
+
+
+@@*Prim's algorithm.
+
+This is a $O(n^2)$ algorithm for finding a minimum spanning tree,
+where $n$ is the number of vertices in the graph.  Now, this optimal
+if the graph is complete, \ie, if all possible edges are present
+in the graph.
+
+@@ The outline of this module is as follows:
+@@c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <assert.h>
+#include "tsp.h"
+#include "prim.h"
+#include "memory.h"
+#include "error.h"
+@@<Other includes@@>@@#
+
+@@<Type definitions@@>@@;
+@@<Module variables@@>@@;
+@@<Subroutines@@>@@;
+
+@@ The exported interface is contained in the {\tt prim.h} header file,
+which has the following form.
+
+@@(prim.h@@>=
+@@<Exported subroutines@@>@@;
+
+
+@@ If the graph is disconnected, the |prim_onetree| routine returns |INFINITY|, 
+a |double| value which
+is at least as large as any other |double| value.
+
+@@(prim.h@@>=
+#include <float.h>
+#include "length.h" /* Get a definition of |INFINITY| */
+
+
+@@
+This MST algorithm will be called many times with the same
+underlying vertex set, though the edges will be changing slightly
+over time.  
+We allocate the per-vertex auxiliary space 
+only once, and reuse it on each call to |prim|.  
+This allocation is done within |prim_setup| which should be called exactly
+once for each new underlying graph before |prim| is called for that graph.
+
+Also, |prim_cleanup| should be called 
+after the results of a call to |prim| are last used, but before
+a new underlying graph is worked on.
+
+
+@@<Subroutines@@>=
+void 
+prim_setup(const int num_vertices)
+{	int i;
+    n = num_vertices;
+	@@<Allocate the storage needed for a graph of size |n|@@>@@;
+}
+
+void 
+prim_cleanup(void) 
+{
+	@@<Recycle the auxiliary storage@@>@@;
+	n=0;
+}
+
+@@ We make these initialization and termination routines publicly available.
+@@<Exported subroutines@@>=
+void prim_setup(const int num_vertices);
+void prim_cleanup(void);
+
+@@
+@@<Module variables@@>=
+static int n;	/* The number of vertices. */
+
+@@ There is a structure associated with each vertex of a 1-tree.
+Its members will be described one by one below.
+
+@@<Type definitions@@>=
+typedef struct {
+	@@<|prim_vertex_t| fields@@>@@;
+} prim_vertex_t;
+
+@@ The array of |prim_vertex_t| values is stored in |v| and shared between
+multiple runs of |prim_onetree|.
+
+@@<Module variables@@>=
+static prim_vertex_t *v;
+
+@@
+@@<Allocate the storage needed for a graph of size |n|@@>=
+v = new_arr_of(prim_vertex_t,p);
+
+@@
+@@<Recycle the auxiliary storage@@>=
+free_mem(v);mem_deduct(sizeof(prim_vertex_t)*n);
+
+
+@@ Prim's algorithm begins with no edges in the tree.  It finds the smallest
+edge which connects vertex 0 to another vertex and adds it to the tree.
+Then it finds the smallest edge connecting the fragment to the remaining
+vertices and adds it, and so on.  
+
+This implementation maintains an array of distances 
+indexed by vertex number as follows.  If vertex |j| has been
+joined to the growing fragment, then its |available| field
+is false.
+Otherwise,
+its |distance| field is the length of 
+the shortest edge, say |(k,j)|, connecting vertex |j| to the fragment, and 
+|connect_with == k| is the vertex within the fragment to which that shortest
+edge leads.
+
+@@<|prim_vertex_t| fields@@>=
+	int available;
+	double distance;
+	int connect_with;
+
+@@ Initially the |distance| fields are filled with |INFINITY|.
+It doesn't matter what the contents of the |connect_with| fields are.
+@@<Initialize vertex |i|@@>=
+v[i].available = 1;
+v[i].distance = INFINITY;
+
+@@ For debugging purposes, set the edges initially to non-sense.
+@@<Initialize vertex |i|@@>=
+edge[i].e.from = 0;
+edge[i].e.to = 0;
+edge[i].from_next = NULL;
+edge[i].to_next = NULL;
+
+@@ We will be using this MST algorithm in the context of a branch and bound
+algorithm where certain edges are forced in the tree
+and certain other edges are forced out of the tree.
+
+First lets consider how to handle the forced in edges.
+We modify Prim's algorithm by starting out with fragments instead 
+of just vertices.
+We consider all vertices of a fragment contiguously.  
+We do this by
+constructing a set of linked lists, where 
+all the vertices in the same fragment are connected in a particular doubly
+linked list.
+
+Each vertex points to its predecessor and its successor in its fragment.
+
+We will also find it useful to know when a vertex has fixed in
+edges incident upon it.  
+The |fixed_deg| field counts such fixed in edges.
+If this degree is 2, then we need should not add any
+more edges incident upon that vertex, because the degree of each 
+vertex in a tour is exactly 2.   (It is an error to fix in more than 2 edges
+incident upon a single vertex.
+
+@@<|prim_vertex_t| fields@@>=
+int frag_prev;
+int frag_next;
+int fixed_deg;
+
+
+
+@@ Initially, each vertex is in its own fragment, and is not saturated.
+@@<Initialize vertex |i|@@>=
+v[i].frag_prev = -1;
+v[i].frag_next = -1;
+v[i].fixed_deg = 0;
+
+@@ When an edge from |i| to |j| is forced in the tree, we merge the lists
+that contain |i| and |j|.
+
+%As an added feature, we construct the lists so that |prev| indices point
+%only backwards, and |next| indices point only forwards.  (Whenever they
+%aren't |-1|, that is.)  This is done by looking scanning forwards
+%on the lesser of |i| and |j| and backwards on the greater.
+
+@@<Merge the |i| and |j| lists@@>=
+{	int i_last, ii, j_first, jj;
+
+	/* Find the end of the |ii| list */
+	for ( i_last = i ; (ii=v[i_last].frag_next) != -1 ; i_last = ii )
+		;
+	/* Find the start of the |jj| list */
+	for ( j_first = j ; (jj=v[j_first].frag_prev) != -1 ; j_first = jj )
+		;
+	/* Now join the |i_last| and the |j_first| nodes. */
+	v[i_last].frag_next = j_first;
+	v[j_first].frag_prev = i_last;
+}
+
+
+
+@@ In addition to computing the length of the minimum 1-tree, we also record the
+edges which are used and the degrees of each vertex in the MST.  
+See {\sc TSP} for the defintions of the |onetree| and |edge| arrays.
+
+We will be filling in the |edge| array from left to right, using
+|num_edges| as a write cursor.
+
+
+@@ Initially, the list of used edges incident upon each vertex is empty, 
+and each vertex is of degree 0.
+
+@@<Initialize vertex |i|@@>=
+onetree[i].edges = NULL;
+onetree[i].degree_less2 = -2;
+onetree[i].a_fixed_in_dest = -1;
+
+@@ Here is how we record the acceptance of an edge from |i| to |j|.
+First we record the endpoints in the |edge| array. 
+Second, we update the |onetree| array and uses the |from_next| and |to_next|
+fields (in the |edge| element) to link together all the edges incident
+upon each vertex.
+Third, we increment the degree count of the |i| and |j| vertices.
+
+@@<Use the edge from |i| to |j|@@>=
+{
+	edge_list_t *edge_node = edge + num_edges++;
+
+	edge_node->e.from = i;
+	edge_node->e.to = j;
+	edge_node->from_next = onetree[i].edges;
+	edge_node->to_next   = onetree[j].edges;
+	onetree[i].edges = onetree[j].edges = edge_node;
+
+	onetree[i].degree_less2++;
+	onetree[j].degree_less2++;
+
+	if ( verbose >= 10000 ) {
+		printf("#     Using edge from %d to %d len %f\n",i,j,(float)d);
+	}
+}
+
+@@  We're now ready for the Prim's algorithm itself.
+This code is inspired by sections 69 and 70 in {\sc MILES\_SPAN}.
+
+The major differences are that it deals with the |cost| function
+directly and that it processes all the edges of a fragment consecutively.
+
+Also, we compute the minimum spanning tree over the first |n-1| vertices,
+and then add the two shortest non-excluded edges incident upon node |n-1|.
+
+We return the length of the minimum 1-tree using the weighted cost
+function, i.e. using the $\lambda$ weight vector.
+
+@@<Subroutines@@>=
+double 
+prim_onetree(search_node_t *bbnode, 
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda,
+	const int use_edge_exchanges)
+{
+	int i, j, next_v, rows_to_process, edges_to_n_minus_1 = 0, num_edges;
+	double d, tot_len;
+	extern int verbose; 
+
+	for (i=0;i<n;i++) {	
+		@@<Initialize vertex |i|@@>@@;
+	}
+	tot_len = 0.0; 
+	num_edges = 0;
+
+	@@<Process the fixed in and fixed out edges@@>@@;
+	
+	next_v = 0;
+	@@<Process the fragment containing |next_v|@@>@@;
+	for ( rows_to_process=n-1; rows_to_process; rows_to_process-- ) {
+		@@<Find a new |next_v| if we've hit a dead end@@>@@;
+		const int i = next_v, j = v[next_v].connect_with;
+		@@<Use the edge from |i| to |j|@@>@@;
+		tot_len += d;
+		@@<Process the fragment containing |next_v|@@>@@;
+	}
+	@@<Add the two shortest non-excluded edges incident upon |n-1|@@>@@;
+	errorif( num_edges != n,"prim: num_edges == %d != %d == n", num_edges, n);
+	return tot_len;
+}
+
+@@ Make this routine publicly available.
+@@<Exported subroutines@@>=
+double prim_onetree(search_node_t *bbnode,
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda,
+	const int use_edge_exchanges);
+
+@@ In the general branch and bound search with constraints, 
+we can sometimes hit a dead end,
+indicated by |d == INFINITY|.  The same can happen with disconnected
+graphs.  
+
+Those interested only in Held-Karp lower bounds need not be
+concerned about this, since the graph is connected and there are
+no fixed-in nor fixed-out constraints.
+
+@@<Find a new |next_v| if we've hit a dead end@@>=
+if ( d==INFINITY ) {
+	/* Each available node can only be connected to |next_v|
+		by using a forbidden edge.  That is, we've reached a dead end. 
+		Find a new |next_v|. (We assume connected graphs) */
+	int something_available = 0;
+	for (i=0;i<n-1;i++) {
+		if ( v[i].available ) {
+			something_available = 1;
+			if ( v[i].distance < d ) {
+				d = v[i].distance;
+				next_v = i;
+			}
+		}
+	}
+	if (d==INFINITY && something_available ) {
+		return INFINITY;	/* Graph is disconnected. */
+	}
+}
+
+@@ We gather the constraints on this 1-tree by the path from
+|bbnode| to the root.
+
+We deal with a fixed-in edges from |i| to |j| right away by merging 
+those |i| and |j| lists in the |vf| array, as long as neither of
+the endpoints is the special vertex numbered |n-1|.  
+
+
+@@<Process the fixed in and fixed out edges@@>=
+if ( use_edge_exchanges ) {
+	/* Do fixed in edges now; fixed out edges on the fly. */
+	int i,j;
+	for (i=0;i<n;i++) {
+		for (j=i+1;j<n;j++) {
+			if ( is_in(i,j) ) {
+				@@<Fix in the edge from |i| to |j|@@>@@;
+			}
+		}
+	}
+}
+else 
+{ search_node_t *here;
+	for ( here = bbnode; here ; here = here->parent ) {
+		int i = here->e.from, j = here->e.to; 
+		switch( here->in_out ) {
+		case FIXED_IN : 
+			@@<Fix in the edge from |i| to |j|@@>@@;
+			break;
+
+		case FIXED_OUT :
+			@@<Fix out the edge from |i| to |j|@@>@@;
+			break;
+		}
+	}
+}
+
+@@
+@@<Fix in the edge from |i| to |j|@@>=
+			if ( verbose >= 10000 ) {
+				printf("#     Fixing in edge from %d to %d\n",i,j);
+			}
+			if ( i!= n-1 && j != n-1 ) {
+				/* Remember we're getting an MST excluding vertex |n-1| */
+				@@<Merge the |i| and |j| lists@@>@@;
+			} else { 
+				edges_to_n_minus_1++;
+			}
+			d = cost(i,j) + lambda[i] + lambda[j];
+			@@<Use the edge from |i| to |j|@@>@@;
+			v[i].fixed_deg++;
+			v[j].fixed_deg++;
+			errorif( v[i].fixed_deg>2,"Vertex %d has more than 2 fixed in edges",i);
+			errorif( v[j].fixed_deg>2,"Vertex %d has more than 2 fixed in edges",j);
+			onetree[i].a_fixed_in_dest = j;
+			onetree[j].a_fixed_in_dest = i;
+			tot_len += d;
+
+@@
+@@<Fix out the edge from |i| to |j|@@>=
+			if ( verbose >= 10000 ) {
+				printf("#     Fixing out edge from %d to %d\n",i,j);
+			}
+			@@<Exclude the edge from |i| to |j|@@>@@;
+
+@@ Fixed out edges are dealt with differently.  
+We construct an array |exclude_list| whose $i$th entry is the head of a linked
+list of excluded edges that are incident upon vertex $i$.
+
+In addition, we construct and maintain an array called |exclude_during|.
+During the processing of row |r| of the cost function, the 
+|i|th entry of this array will be |r| if we should exclude the edge from
+|i| to |r|.
+
+@@<|prim_vertex_t| fields@@>=
+search_node_t *exclude_list;
+int exclude_during;
+
+
+@@ Initially, |exclude_list| is empty for each vertex,
+and |exclude_during| shouldn't exclude anything.
+@@<Initialize vertex |i|@@>=
+v[i].exclude_list = NULL;
+v[i].exclude_during = -1;
+
+
+@@ To exclude the edge from |i| to |j|, we point those |exclude_list|
+entries to the associated constraint record.
+But we only do it the first time around because the rest are 
+linked together through |to_next| and |from_next| fields.
+
+@@<Exclude the edge from |i| to |j|@@>=
+if ( v[i].exclude_list == NULL ) v[i].exclude_list = here;
+if ( v[j].exclude_list == NULL ) v[j].exclude_list = here;
+
+@@ 
+@@<Set up |exclude_during| for row |f|@@>=
+if ( use_edge_exchanges ) {
+	int i;
+	for (i=0;i<n;i++)
+		if ( is_out(f,i) )
+			v[i].exclude_during = f;
+}
+else
+{
+search_node_t *f_outs = v[f].exclude_list;
+while ( f_outs ) {
+	if (f==f_outs->e.from) {
+		v[f_outs->e.to].exclude_during = f;
+		f_outs = f_outs->from_next_out;
+	} else {
+		v[f_outs->e.from].exclude_during = f;
+		f_outs = f_outs->to_next_out;
+	}
+}
+}
+
+@@
+@@<Process the fragment containing |next_v|@@>=
+{ int f, ff;
+/* Find the start of the fragment that contains |next_v| */
+for ( ff=next_v ; v[ff].frag_prev != -1 ; ff = v[ff].frag_prev )
+	;
+/* Mark all the vertices this fragment as unavailable */
+for ( f=ff ; f != -1 ; f = v[f].frag_next )
+	v[f].available = 0;
+/* Now process all the rows that belong to this fragment */
+d = INFINITY;
+for ( f=ff ; f != -1 ; f = v[f].frag_next ) {
+	@@<Set up |exclude_during| for row |f|@@>@@;
+	if ( verbose >= 10010 ) printf("# processing row %d\n",f);
+	@@<Update |d|, |next_v| and the |distance| vector using row |f|@@>@@;
+}
+}
+
+
+@@  If |f| is saturated by fixed in edges, then we don't bother
+updating the distance vectors, nor |d| nor |next_v|.
+
+Also, don't update a column that corresponds to a saturated vertex.
+
+@@<Update |d|, |next_v| and the |distance| vector using row |f|@@>=
+if ( v[f].fixed_deg < 2 ) {
+int i;
+for ( i=0; i < n-1 ; i++ ) {	/* MST over first n-1 elements only */
+	if ( v[i].available && v[i].fixed_deg<2 && v[i].exclude_during != f ) {
+		const double cfi = cost(f,i) + lambda[f] + lambda[i];
+		if ( cfi < v[i].distance ) {
+			v[i].distance = cfi;
+			v[i].connect_with = f;
+		}
+		if ( v[i].distance < d ) {d = v[i].distance; next_v=i;}
+	}
+}
+}
+
+
+@@ We have used the |cost| function which is defined in the 
+{\sc READ} module.
+@@<Other includes@@>=
+#include <config.h>
+#include "lkconfig.h"
+#include "length.h"
+#include "read.h"
+
+@@
+@@<Add the two shortest non-excluded edges incident upon |n-1|@@>=
+{
+	int to[2], i, j, f;
+	double len[2] = { INFINITY, INFINITY };
+
+	f = n-1;
+	@@<Set up |exclude_during| for row |f|@@>@@;
+
+for ( i=0; i < n-1 ; i++ ) {	/* MST over first n-1 elements only */
+	if ( v[i].fixed_deg <2 && v[i].exclude_during != f ) {
+		const double cfi = cost(f,i) + lambda[f] + lambda[i];
+		if ( cfi < len[0] ) {
+			len[1] = len[0];
+			len[0] = cfi;
+			to[1] = to[0];
+			to[0] = i;
+		} else if ( cfi < len[1] ) {
+			len[1] = cfi;
+			to[1] = i;
+		}
+	}
+}
+switch( edges_to_n_minus_1 ) {
+case 0:	
+	i = n-1; j=to[1]; d = len[1];
+	@@<Use the edge from |i| to |j|@@>@@; /* Fall through */
+	tot_len += len[1];
+case 1:	
+	i = n-1; j=to[0]; d = len[0];
+	@@<Use the edge from |i| to |j|@@>@@; 
+	tot_len += len[0];
+	break;
+case 2: break;
+default: errorif(1,"We've fixed in %d edges to vertex n-1",edges_to_n_minus_1);
+}
+
+}
+
+@@*Index.
+
+@
+
+
+1.16
+log
+@Include the log
+@
+text
+@d5 6
+a10 1
+$Log$
+@
+
+
+1.15
+log
+@Excised more pseudo-parallel code.
+@
+text
+@d5 2
+d65 1
+d84 1
+a84 2
+@@ There is a structure associated with each 
+vertex and for each concurrent team working on a 1-tree problem,
+d92 3
+a94 1
+@@
+@
+
+
+1.14
+log
+@Better comments, more cleaning up before inserting into LK.
+@
+text
+@d60 1
+a60 1
+prim_setup(const int num_vertices, const int num_teams)
+a62 2
+	p = num_teams;
+	@@<Allocate the storage needed for |p| teams for a graph of size |n|@@>@@;
+d67 1
+a67 1
+{	int i;
+d69 1
+d74 1
+a74 1
+void prim_setup(const int num_vertices, const int num_teams);
+a79 1
+static int p;	/* The number of concurrent teams. */
+d92 1
+a92 1
+static prim_vertex_t **pv;
+d95 2
+a96 5
+@@<Allocate the storage needed for |p| teams for a graph of size |n|@@>=
+	pv = new_arr_of(prim_vertex_t *,p);
+	for (i=0;i<p;i++) {
+		pv[i] = new_arr_of(prim_vertex_t,n);
+	}
+d100 2
+a101 4
+	for (i=0;i<p;i++) {
+		free_mem(pv[i]);
+	}
+	free_mem(pv);
+d251 1
+a251 1
+prim_onetree(search_node_t *bbnode, const int team_num, 
+a256 1
+	prim_vertex_t *v = pv[team_num];
+d283 1
+a283 1
+double prim_onetree(search_node_t *bbnode,const int team_num,
+@
+
+
+1.13
+log
+@Get rid of KSR (parallel) code that was never tried out.  Good riddance.
+@
+text
+@d25 1
+a25 2
+@@<Module-level variables@@>@@;
+@@<Function prototypes@@>@@;
+d35 1
+a35 1
+@@ If the graph is disconnected, the |onetree_prim| routine returns |INFINITY|, 
+d79 1
+a79 1
+@@<Module-level variables@@>=
+d93 1
+a93 1
+@@<Module-level variables@@>=
+d258 1
+a258 1
+onetree_prim(search_node_t *bbnode, const int team_num, 
+a265 2
+	extern unsigned long count_onetree;
+	count_onetree++;
+a274 1
+	rows_to_process = n-1;
+a275 1
+
+d277 3
+a279 20
+	while ( rows_to_process ) {
+		if ( d==INFINITY ) {
+			/* Each available node can only be connected to |next_v|
+				by using a forbidden edge.  That is, we've reached a dead end. 
+				Find a new |next_v|. (We assume connected graphs) */
+			int something_available = 0;
+			for (i=0;i<n-1;i++) {
+				if ( v[i].available ) {
+					something_available = 1;
+					if ( v[i].distance < d ) {
+						d = v[i].distance;
+						next_v = i;
+					}
+				}
+			}
+			if (d==INFINITY && something_available ) {
+				return INFINITY;	/* Graph is disconnected. */
+			}
+		}
+		i = next_v; j = v[next_v].connect_with;
+a283 1
+
+a284 1
+
+a285 1
+
+d291 1
+a291 1
+double onetree_prim(search_node_t *bbnode,const int team_num,
+d295 29
+a454 1
+	rows_to_process--;
+d526 2
+@
+
+
+1.12
+log
+@Last revision before depth paper.
+@
+text
+@d1 4
+d7 4
+a10 1
+This is a $O(n^2)$ algorithm for finding a minimum spanning tree.
+d33 1
+a33 1
+@@<Exported routines@@>@@;
+d42 1
+a42 6
+#define INFINITY (1000000000.0) /* A really big number. */
+#if 0
+#define INFINITY (DBL_MAX) /* A really big number. */
+#endif
+
+
+d75 1
+a75 1
+@@<Exported routines@@>=
+d315 1
+a315 1
+@@<Exported routines@@>=
+d480 3
+a523 219
+@@*Doing it in parallel.
+We only exploit parallelism at the lowest level, i.e. in the computation
+of |d|, |distance|, |connect_with|, and |next_v|.
+
+We need to have private versions of |d| and |next_v| to pass results
+back to the master processor.  
+These will be called
+|par_d| and |par_next_v| and will be allocated once at the start.
+They will be arrays indexed by thread number.
+
+We also keep arrays of lower and upper bounds which are computed only
+once.
+
+@@<Type definitions@@>=
+typedef struct {
+	double d;
+	int next_v;
+	int lb, ub;
+} par_prim_vertex_t;
+
+
+@@
+@@<Module-level variables@@>=
+static par_prim_vertex_t **par_pv;
+
+@@
+@@<Allocate the storage needed for |p| teams for a graph of size |n|@@>=
+	par_pv = new_arr_of(par_prim_vertex_t *,p);
+	for (i=0;i<p;i++) {
+		par_pv[i] = new_arr_of(par_prim_vertex_t,n);
+	}
+
+@@ We release the space after we're done.
+@@<Recycle the auxiliary storage@@>=
+	for (i=0;i<p;i++) {
+		free_mem(par_pv[i]);
+	}
+	free_mem(par_pv);
+
+@@ First some helper routines.  The first computes the lower and upper bounds
+for the iterations that we will be performing.  This is mostly copied
+from the {\tt spc} manual page example.
+
+@@<Subroutines@@>=
+#if __ksr__
+void
+par_init_bounds(par_prim_vertex_t *par_v)
+{
+	__private int me, my_lb, my_ub, my_work, num_threads;
+	
+	me = pr_mid();
+	num_threads = pr_tsize();
+	my_work = (n+ num_threads-1)/num_threads;
+	my_lb = me * my_work;
+	my_ub = my_lb + my_work;
+	if ( my_ub > n ) my_ub = n;
+
+	par_v[me].lb = my_lb;
+	par_v[me].ub = my_ub;
+}
+#endif
+
+@@ Now that the bounds arrays have been computed once and for all, it is
+easy to do a parallel loop.  Here's the initialization of the vertices.
+
+@@<Subroutines@@>=
+#if __ksr__
+void
+par_init_vertices(prim_vertex_t *v, par_prim_vertex_t *par_v, edge_list_t*edge,
+	onetree_node_t *onetree)
+{
+	__private i, me = pr_mid(), lb = par_v[me].lb, ub = par_v[me].ub;
+	
+	for (i=lb; i < ub; i++ ) {
+		@@<Initialize vertex |i|@@>@@;
+	}
+}
+#endif
+
+@@ The parallel version of Prim's algorithm is now as follows.
+I assume that a pthread team 
+has been created by the caller of this module
+and its id is passed as |team_id|.
+
+@@<Subroutines@@>=
+#if __ksr__
+double 
+par_onetree_prim(search_node_t *bbnode,const int team_num, edge_list_t *edge, 
+  onetree_node_t *onetree, const double *lambda,
+	const int team_id, const int num_threads, const int use_edge_exchanges)
+{
+	int i, j, next_v, rows_to_process, edges_to_n_minus_1 = 0, num_edges;
+	double d, tot_len;
+	prim_vertex_t *v;
+	par_prim_vertex_t *par_v;
+	extern int verbose;
+	
+
+	v = pv[team_num];
+	par_v = par_pv[team_num];
+
+	pr_pcall( team_id, par_init_bounds, copyargs(par_v));
+	pr_pcall( team_id, par_init_vertices, copyargs(v, par_v, edge,onetree));
+
+	tot_len = 0.0; 
+	num_edges = 0;
+
+	@@<Process the fixed in and fixed out edges@@>@@;
+	
+	rows_to_process = n-1;
+	next_v = 0;
+
+	@@<In parallel, process the fragment containing |next_v|@@>@@;
+	while ( rows_to_process ) {
+		if ( d == INFINITY ) return INFINITY; /* The graph isn't connected */
+		i = next_v; j = v[next_v].connect_with;
+		@@<Use the edge from |i| to |j|@@>@@;
+		tot_len += d;
+		@@<In parallel, process the fragment containing |next_v|@@>@@;
+	}
+
+	@@<Add the two shortest non-excluded edges incident upon |n-1|@@>@@;
+
+	errorif( num_edges != n,"par_prim: num_edges == %d != %d == n", num_edges, n);
+
+	return tot_len;
+}
+#endif
+
+@@ Export this routine.
+@@<Exported routines@@>=
+#if __ksr__
+double par_onetree_prim(search_node_t *bbnode,const int num_teams,
+	edge_list_t *edge, onetree_node_t *onetree, const double *lambda,
+	const int team_id, const int num_threads, const int use_edge_exchanges);
+#endif
+
+@@
+@@<In parallel, process the fragment containing |next_v|@@>=
+{ int f,ff;
+/* Find the start of the fragment that contains |next_v| */
+for ( ff=next_v ; v[ff].frag_prev != -1 ; ff = v[ff].frag_prev )
+	;
+for ( f = ff; f != -1 ; f = v[f].frag_next )
+	v[f].available = 0;
+/* Now process all the rows that belong to this fragment */
+d = INFINITY;
+for ( f = ff; f != -1 ; f = v[f].frag_next ) {
+	@@<Set up |exclude_during| for row |f|@@>@@;
+	@@<In parallel, update |d|, |next_v| and the |distance| vector using row |f|@@>@@;
+	
+	rows_to_process--;
+}
+}
+
+@@ Processing a row has two components.  The first is to update the |distance|
+and |connect_with|
+arrays which can be done without modification (although there may be some
+subpage thrashing on the borders of the work iteration spaces).  
+The second is to update the |d| and |next_v| variables, which really are
+reduction variables.  So we need an extra loop to do the reduction after
+the thread-specific values are computed.
+
+@@<In parallel, update |d|, |next_v| and the |distance| vector using row |f|@@>=
+if ( v[f].fixed_deg<2 ) {
+	int pp;
+	pr_pcall( team_id, par_update_row, copyargs(lambda,v,par_v,d,f));
+	for (pp=0; pp<num_threads;pp++) {
+		if ( par_v[pp].d < d ) { d=par_v[pp].d; next_v = par_v[pp].next_v; }
+	}
+}
+
+
+@@ The only level of parallelism that we exploit in the main part
+of the algorithm is the following.
+
+We update |par_d|, |par_next_v|, and the |distance| vector using row |f|.
+
+@@<Subroutines@@>=
+#if __ksr__
+void
+par_update_row(double *lambda,prim_vertex_t*v,par_prim_vertex_t *par_v,const double d, const int f)
+{
+	__private int k, me = pr_mid(), lb = par_v[me].lb, ub = par_v[me].ub,
+		local_next_v, i;
+	__private local_d = d;
+	extern int verbose;
+
+	if ( ub > n-1 ) ub = n-1;	/* MST on first n-1 nodes only */
+	for ( i=lb; i < ub ; i++ ) {
+		if ( v[i].available && v[i].fixed_deg<2 && v[i].exclude_during != f ) {
+			const double cfi = cost(f,i) + lambda[f] + lambda[i];
+
+			if ( cfi < v[i].distance ) {
+				v[i].distance = cfi;
+				v[i].connect_with = f;
+			}
+			if ( v[i].distance < local_d ){local_d = v[i].distance; local_next_v=i;}
+		}
+	}
+	par_v[me].d = local_d;
+	par_v[me].next_v = local_next_v;
+}
+#endif
+
+@@ Declare this routine early on in the source file.
+@@<Function prototypes@@>=
+#if __ksr__
+void par_update_row(double *lambda,prim_vertex_t*v,par_prim_vertex_t*pv,
+	const double d, const int f);
+#endif
+
+
+
+@@ We need to include the interface for |copyargs|.
+@@<Other includes@@>=
+#if __ksr__
+#include <ksr/numarg.h>
+#endif
+@
+
+
+1.11
+log
+@Added edge exchange analysis modifications.
+@
+text
+@d14 1
+d29 1
+a29 1
+@@ If the graph is disconnected, the |prim| routine returns |INFINITY|, 
+d238 1
+a238 1
+	if ( verbose >= 1000 ) {
+d356 1
+a356 1
+			if ( verbose >= 1000 ) {
+d377 1
+a377 1
+			if ( verbose >= 1000 ) {
+d447 1
+a447 1
+	if ( verbose >= 1010 ) printf("# processing row %d\n",f);
+d608 1
+a608 1
+	const int team_id, const int num_threads)
+d653 1
+a653 1
+	const int team_id, const int num_threads);
+@
+
+
+1.10
+log
+@Version used for March 17 draft of the fictitious upper bounds paper.
+@
+text
+@d257 2
+a258 1
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda)
+d314 2
+a315 1
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda);
+d326 12
+d343 12
+d359 1
+a372 1
+			break;
+d374 2
+a375 1
+		case FIXED_OUT :
+a379 3
+		}
+	}
+}
+d413 7
+@
+
+
+1.9
+log
+@Complete branch and bound code.  81 SPARC IPC seconds for eil51.tsp
+@
+text
+@d263 2
+d283 1
+d286 1
+d293 2
+a294 4
+			if (d==INFINITY) {
+				show_onetree( "bomb", n, bbnode, edge);
+				*(char *)0=0;
+				return INFINITY;
+d555 2
+a556 1
+par_init_vertices(prim_vertex_t *v, par_prim_vertex_t *par_v)
+d575 1
+a575 1
+  onetree_node_t *onetree, double *lambda,
+d580 4
+d589 1
+a589 1
+	pr_pcall( team_id, par_init_vertices, copyargs(v, par_v));
+d620 2
+a621 2
+	edge_list_t *edge, 
+   onetree_node_t *onetree, const int team_id, const int num_threads);
+d671 1
+a671 1
+		local_next_v;
+d680 1
+a680 1
+			if ( cfk < v[i].distance ) {
+@
+
+
+1.5
+log
+@Getting ready for multiple teams.  Compiles and works correctly
+in sequential mode.
+@
+text
+@d115 2
+a116 1
+joined to the growing fragment, then |distance[j]==-1|
+d118 1
+a118 1
+|distance[j]| is the length of 
+d120 1
+a120 1
+|connect_with[j] == k| is the vertex within the fragment to which that shortest
+d124 1
+d131 1
+d134 7
+d156 8
+d167 1
+d170 2
+a171 1
+@@ Initially, each vertex is in its own fragment.
+d175 1
+d185 1
+a185 1
+@@<Merge the |i| and |j| lists in |vf|@@>=
+d200 1
+d211 1
+d215 1
+d236 4
+d251 3
+d262 1
+d277 18
+a294 1
+		if ( d == INFINITY ) return INFINITY; /* The graph isn't connected */
+d303 1
+a303 1
+	errorif( num_edges != n,"num_edges == %d != %d == n", num_edges, n);
+d327 3
+d331 1
+a331 1
+				@@<Merge the |i| and |j| lists in |vf|@@>@@;
+d335 1
+d337 7
+a343 1
+			tot_len += cost(i,j) + lambda[i] + lambda[j];
+d345 1
+d347 3
+d402 1
+a402 1
+{ int f;
+d404 1
+a404 1
+for ( f=next_v ; v[f].frag_prev != -1 ; f = v[f].frag_prev )
+d406 3
+d411 1
+a411 2
+for ( ; f != -1 ; f = v[f].frag_next ) {
+	v[f].distance = -1;
+d413 1
+d420 5
+a424 1
+@@
+d426 2
+a427 1
+{int i;
+d429 1
+a429 1
+	if ( v[i].distance >= 0 && v[i].exclude_during != f ) {
+d456 1
+a456 1
+	if ( v[i].exclude_during != f ) {
+d471 1
+a471 1
+	i = n-1; j=to[1];
+d475 1
+a475 1
+	i = n-1; j=to[0];
+d479 1
+d603 1
+a603 1
+	errorif( num_edges != n,"num_edges == %d != %d == n", num_edges, n);
+d619 1
+a619 1
+{ int f;
+d621 1
+a621 1
+for ( f=next_v ; v[f].frag_prev != -1 ; f = v[f].frag_prev )
+d623 2
+d627 1
+a627 2
+for ( ; f != -1 ; f = v[f].frag_next ) {
+	v[f].distance = -1;
+d644 6
+a649 4
+pr_pcall( team_id, par_update_row, copyargs(lambda,v,par_v,d,f));
+{ int pp;
+for (pp=0; pp<num_threads;pp++) {
+	if ( par_v[pp].d < d ) { d=par_v[pp].d; next_v = par_v[pp].next_v; }
+a650 1
+}
+d670 1
+a670 1
+		if ( v[i].distance >= 0 && v[i].exclude_during != f ) {
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d11 1
+d13 1
+d55 1
+d58 2
+a59 2
+prim_setup(int num_vertices) 
+{
+d61 2
+a62 1
+    @@<Allocate the storage needed for |prim|@@>@@;
+d67 2
+a68 2
+{
+    @@<Recycle the auxiliary storage@@>@@;
+d73 1
+a73 1
+void prim_setup(int num_vertices);
+d79 1
+d81 27
+d122 3
+a124 3
+@@<Module-level variables@@>=
+static double *distance;
+static int *connect_with;
+d126 4
+a129 4
+@@ We need to allocate space for these  vectors once for each graph.
+@@<Allocate the storage needed for |prim|@@>=
+distance = new_arr_of(double,n);
+connect_with = new_arr_of(int,n);
+a130 10
+@@
+@@<Other includes@@>=
+#include "memory.h"
+
+@@ And we should return the space when we're done.
+@@<Recycle the auxiliary storage@@>=
+free_mem(distance);
+free_mem(connect_with);
+
+
+d138 4
+a141 3
+We consider all vertices of a fragment contiguously.  We do this by
+constructing an array, called |vf|,
+in which all the vertices in the same fragment are connected in a doubly
+d144 1
+a144 5
+@@<Type definitions@@>=
+typedef struct vf_s {
+	int prev;
+	int next;
+} vf_t;
+d146 3
+a148 3
+@@ The |vf| array has one entry for each vertex.
+@@<Module-level variables@@>=
+static vf_t *vf;
+a149 3
+@@ We allocate its space before |prim| gets called.
+@@<Allocate the storage needed for |prim|@@>=
+vf = new_arr_of(vf_t,n);
+d151 4
+a154 3
+@@ We release its space after we're done.
+@@<Recycle the auxiliary storage@@>=
+free_mem(vf);
+a155 9
+@@ Initially, |vf| contains |n| singleton lists.
+@@<Initialize |vf|@@>=
+{ int i;
+for (i=0;i<n;i++) {
+	vf[i].prev = -1;
+	vf[i].next = -1;
+}
+}
+
+d164 1
+a164 1
+@@<Merge the |i| and |j| lists@@>=
+d168 1
+a168 1
+	for ( i_last = i ; (ii=vf[i_last].next) != -1 ; i_last = ii )
+d171 1
+a171 1
+	for ( j_first = j ; (jj=vf[j_first].prev) != -1 ; j_first = jj )
+d174 2
+a175 2
+	vf[i_last].next = j_first;
+	vf[j_first].prev = i_last;
+a177 2
+@@  We're now ready for the Prim's algorithm itself.
+This code is adapted from sections 69 and 70 in {\sc MILES\_SPAN}.
+d179 3
+a181 2
+The major differences are that it deals with the |weighted_cost| function
+directly and that it processes all the edges of a fragment consecutively.
+d183 2
+a184 2
+It returns the length of the spanning tree it finds.  This value is
+maintained in the variable |tot_len|.
+a185 2
+@@<Module-level variables@@>=
+double tot_len;
+d187 5
+a191 5
+@@ The algorithm is split into three phases.  
+The initialization phase is handled by |prim_phase_0|.
+Then fixed in edges are put in place by calling |prim_fix_in| for each
+such edge.
+Then the MST found by calling |prim_phase_2|.
+d193 6
+a198 6
+In addition to computing the length of the MST, we also record the
+edges which are used in the MST and the degrees of each vertex in the MST.  
+The $n-1$ edges used by the MST are stored
+in entries $0$ through $n-1$ of the |MST_edges| array.
+The degree of vertex $i$, less 2, is stored in |degree_less2[i]|.
+These arrays are allocated outside of this module and passed to |prim_phase_2|.
+d200 1
+a200 13
+@@<Module-level variables@@>=
+edge_t *MST_edges;
+int num_edges;
+int *degree_less2;
+
+@@ We need the definition of |edge_t|.
+@@<Other includes@@>=
+#include "tsp.h"
+
+@@
+@@<Subroutines@@>=
+void
+prim_phase_0(edge_t *edge_array, int *degree_array)
+d202 1
+a202 4
+	@@<Initialize |vf|@@>@@;
+	MST_edges = edge_array;
+	degree_less2 = degree_array;
+	{int i; for (i=0;i<n;i++) degree_less2[i]=-2;}
+d204 5
+a208 3
+	num_edges = 0;
+	tot_len = 0.0;
+}
+d210 2
+a211 9
+void
+use_edge(const int i, const int j, const double len)
+{
+	degree_less2[i]++;
+	degree_less2[j]++;
+	MST_edges[num_edges].from = i;
+	MST_edges[num_edges].to = j;
+	num_edges++;
+	tot_len += len;
+d214 2
+a215 6
+void
+prim_fix_in( const int i, const int j )
+{
+	@@<Merge the |i| and |j| lists@@>@@;
+	use_edge(i,j,weighted_cost(i,j));
+}
+d217 10
+a226 2
+double
+prim_phase_2(void)
+d228 3
+a230 3
+	int next_v, rows_to_process;
+	double d;	/* The length of the shortest edge found in this fragment. */
+	extern int verbose;
+d232 5
+a236 1
+	@@<Initialize the |distance| array to be all |INFINITY|@@>@@;
+d238 3
+a241 1
+	rows_to_process = n;
+d246 3
+a248 1
+		use_edge(next_v, connect_with[next_v], d);
+d252 4
+d259 4
+d264 26
+a289 4
+@@
+@@<Initialize the |distance| array to be all |INFINITY|@@>=
+{int k;
+for (k=0;k<n;k++) distance[k]=INFINITY;
+d292 3
+d296 41
+d341 1
+a341 1
+for ( f=next_v ; vf[f].prev != -1 ; f = vf[f].prev )
+d345 3
+a347 2
+for ( ; f != -1 ; f = vf[f].next ) {
+	distance[f] = -1;
+d356 7
+a362 7
+{int k;
+for ( k=0; k < n ; k++ ) {
+	if ( distance[k] >= 0 ) {
+		const double cfk = weighted_cost(f,k);
+		if ( cfk < distance[k] ) {
+			distance[k] = cfk;
+			connect_with[k] = f;
+d364 1
+a364 1
+		if ( distance[k] < d ) {d = distance[k]; next_v=k;}
+d370 2
+a371 2
+@@ We have used the |weighted_cost| function which is defined in the 
+{\sc READ read} module.
+d376 4
+a379 4
+@@<Exported routines@@>=
+void prim_phase_0(edge_t *MST_edges, int *degree_array);
+void prim_fix_in(const int i, const int j);
+double prim_phase_2(void);
+d381 32
+d426 9
+d436 1
+a436 4
+static double *par_d;
+static int *par_next_v;
+static int *par_lb;
+static int *par_ub;
+d438 6
+a443 8
+@@ We allocate the space before |prim| gets called.  
+The maximum degree of parallelism is |n| so we use that as the size of the
+arrays.
+@@<Allocate the storage needed for |prim|@@>=
+par_d = new_arr_of(double,n);
+par_next_v = new_arr_of(int,n);
+par_lb = new_arr_of(int,n);
+par_ub = new_arr_of(int,n);
+d447 4
+a450 4
+free_mem(par_d);
+free_mem(par_next_v);
+free_mem(par_lb);
+free_mem(par_ub);
+a451 1
+
+d459 1
+a459 1
+par_init_bounds(void)
+d470 2
+a471 2
+	par_lb[me] = my_lb;
+	par_ub[me] = my_ub;
+d476 1
+a476 2
+easy to do a parallel loop.  Here's the initialization of the |distance|
+array.
+d481 1
+a481 1
+par_init_distance(void)
+d483 1
+a483 1
+	__private i, me = pr_mid(), lb = par_lb[me], ub = par_ub[me];
+d485 3
+a487 1
+	for (i=lb; i < ub; i++ ) distance[i] = INFINITY;
+d498 4
+a501 2
+double
+par_prim_phase_2(const int team_id,const int num_threads)
+d503 2
+a504 3
+	int next_v, rows_to_process;
+	double d;	/* The length of the shortest edge found in this fragment. */
+	extern int verbose;
+d506 2
+a507 2
+	pr_pcall( team_id, par_init_bounds, copyargs());
+	pr_pcall( team_id, par_init_distance, copyargs());
+d509 9
+a518 1
+	rows_to_process = n;
+d523 3
+a525 1
+		use_edge(next_v, connect_with[next_v], d);
+d529 4
+d540 3
+a542 1
+double par_prim_phase_2(const int team_id,const int num_threads);
+a544 1
+
+d549 1
+a549 1
+for ( f=next_v ; vf[f].prev != -1 ; f = vf[f].prev )
+d553 3
+a555 2
+for ( ; f != -1 ; f = vf[f].next ) {
+	distance[f] = -1;
+d571 4
+a574 4
+pr_pcall( team_id, par_update_row, copyargs((double)d,(int)f));
+{ int p;
+for (p=0; p<num_threads;p++) {
+	if ( par_d[p] < d ) { d=par_d[p]; next_v = par_next_v[p]; }
+a583 27
+%tid = pr_create_team(int numthreads);
+%int pr_destroy_team(int tid);
+%int pr_mid(void);
+%
+%pr_pcall( tid, fn_name, copyargs());
+%
+%             void jill(int foo[], int n)
+%             {
+%                 __private int i, me;
+%                 __private int my_lb, my_hb, my_work;
+%                 __private int numthreads;
+%
+%                                /* get presto member id */
+%                 me  = pr_mid();
+%                                /* partition the iteration space */
+%                 numthreads = pr_tsize();
+%                 my_work = (n + numthreads -1) / numthreads;
+%                 my_lb = me * my_work;
+%                 my_hb = my_lb + my_work -1;
+%                 if (my_hb > n-1) my_hb = n-1;
+%                               /* do my share of the work */
+%                 for (i=my_lb; i<=my_hb; i++)  {
+%                     foo[i] = foo[i] + i;
+%                 }
+%              }
+%
+
+d587 1
+a587 1
+par_update_row(const double d, const int f)
+d589 1
+a589 1
+	__private int k, me = pr_mid(), lb = par_lb[me], ub = par_ub[me],
+d594 4
+a597 3
+	for ( k=lb; k < ub ; k++ ) {
+		if ( distance[k] >= 0 ) {
+			const double cfk = weighted_cost(f,k);
+d599 3
+a601 3
+			if ( cfk < distance[k] ) {
+				distance[k] = cfk;
+				connect_with[k] = f;
+d603 1
+a603 1
+			if ( distance[k] < local_d ){local_d = distance[k]; local_next_v=k;}
+d606 2
+a607 2
+	par_d[me] = local_d;
+	par_next_v[me] = local_next_v;
+d614 2
+a615 1
+void par_update_row(const double d, const int f);
+@

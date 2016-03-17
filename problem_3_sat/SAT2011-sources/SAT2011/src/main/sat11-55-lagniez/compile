@@ -1,0 +1,22 @@
+#!/bin/sh
+rm -rf rclSolver sathysLPAR SatElite
+tar xzf rclSolver.tar.gz
+tar xzf sathys.tar.gz
+tar xzf rclSolver/satelite.tgz
+
+find SatElite -name depend.mak -exec rm {} \;
+cd SatElite
+export FM=$PWD/ForMani
+cd SatELite
+make realclean
+make r
+
+cd ../../rclSolver
+rm SatELite_release
+make clean
+make
+
+cd ../sathysLPAR
+rm SatELite_release
+make clean
+make

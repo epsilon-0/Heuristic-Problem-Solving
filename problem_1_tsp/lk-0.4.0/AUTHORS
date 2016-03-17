@@ -1,0 +1,19 @@
+Authors of LK.
+
+David Neto (netod@acm.org) wrote LK in support of the experiments in
+his PhD work.  The error handling routines, some memory macros, and the
+TSPLIB file reading routines are reused from related work from 1994 and 1995.
+LK itself was begun in early 1996.
+
+Donald Knuth wrote gb_flip.w.  It is the random number generator for
+The Stanford GraphBase.  See the book by the same name, ISBN 0-201-54275-7.
+David Neto wrote gb_flip.ch to provide function prototypes.
+
+dsort includes code published by Jon Bentley and Doug McIlroy in their
+paper, _Engineering a Sort Function_, Software Practice and Experience.
+
+Of course LK was inspired by the descriptions of Shen Lin and Brian
+Kernighan and of David Johnson, Jon Bentley, Lyle McGeoch, .. Rothberg,
+.. Ostheimer.
+
+For more details, see the README, and the literate source code.

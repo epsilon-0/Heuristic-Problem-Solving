@@ -1,0 +1,2006 @@
+head	1.129;
+access
+	david
+	neto;
+symbols
+	zero-four-zero:1.129;
+locks
+	neto:1.129;
+
+
+1.129
+date	98.07.16.21.58.55;	author neto;	state Exp;
+branches;
+next	1.128;
+
+1.128
+date	98.04.16.15.40.03;	author neto;	state Exp;
+branches;
+next	1.127;
+
+1.127
+date	98.04.11.14.34.09;	author neto;	state Exp;
+branches;
+next	1.126;
+
+1.126
+date	98.04.10.21.20.23;	author neto;	state Exp;
+branches;
+next	1.125;
+
+1.125
+date	97.10.28.21.23.19;	author neto;	state Exp;
+branches;
+next	1.124;
+
+1.124
+date	97.10.28.20.41.08;	author neto;	state Exp;
+branches;
+next	1.123;
+
+1.123
+date	97.10.28.20.27.50;	author neto;	state Exp;
+branches;
+next	1.122;
+
+1.122
+date	97.10.25.17.43.34;	author neto;	state Exp;
+branches;
+next	1.121;
+
+1.121
+date	97.10.18.20.39.43;	author neto;	state Exp;
+branches;
+next	1.120;
+
+1.120
+date	97.10.18.17.26.28;	author neto;	state Exp;
+branches;
+next	1.119;
+
+1.119
+date	97.10.17.21.27.34;	author neto;	state Exp;
+branches;
+next	1.118;
+
+1.118
+date	97.09.27.18.06.21;	author neto;	state Exp;
+branches;
+next	1.117;
+
+1.117
+date	97.08.15.20.18.25;	author neto;	state Exp;
+branches;
+next	1.116;
+
+1.116
+date	97.05.16.21.16.24;	author neto;	state Exp;
+branches;
+next	1.115;
+
+1.115
+date	97.05.16.18.11.41;	author neto;	state Exp;
+branches;
+next	1.114;
+
+1.114
+date	97.05.16.18.09.40;	author neto;	state Exp;
+branches;
+next	1.113;
+
+1.113
+date	97.02.11.15.58.26;	author neto;	state Exp;
+branches;
+next	1.112;
+
+1.112
+date	97.01.22.15.18.31;	author david;	state Exp;
+branches;
+next	1.111;
+
+1.111
+date	97.01.21.21.55.55;	author david;	state Exp;
+branches;
+next	1.110;
+
+1.110
+date	96.12.02.15.31.37;	author neto;	state Exp;
+branches;
+next	1.109;
+
+1.109
+date	96.08.23.16.36.44;	author david;	state Exp;
+branches;
+next	1.108;
+
+1.108
+date	96.08.15.14.13.21;	author neto;	state Exp;
+branches;
+next	1.107;
+
+1.107
+date	96.08.15.13.32.02;	author neto;	state Exp;
+branches;
+next	1.106;
+
+1.106
+date	96.08.14.13.36.08;	author neto;	state Exp;
+branches;
+next	1.105;
+
+1.105
+date	96.08.07.15.20.35;	author neto;	state Exp;
+branches;
+next	1.104;
+
+1.104
+date	96.07.29.17.10.35;	author neto;	state Exp;
+branches;
+next	1.103;
+
+1.103
+date	96.07.15.18.32.56;	author david;	state Exp;
+branches;
+next	1.102;
+
+1.102
+date	96.07.15.16.50.10;	author david;	state Exp;
+branches;
+next	1.101;
+
+1.101
+date	96.05.30.13.24.38;	author neto;	state Exp;
+branches;
+next	1.100;
+
+1.100
+date	96.05.29.11.13.19;	author neto;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	96.03.15.16.00.02;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	96.03.04.13.54.52;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Nearest neighbour list construction.
+@
+
+
+1.129
+log
+@Added the LGPL notice in each file.
+@
+text
+@
+
+
+\noindent Copyright \copyright 1994, 1995, 1996, 1997, 1998 David Neto
+\smallskip
+
+\noindent 
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+\smallskip
+
+\noindent 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+\smallskip
+
+\noindent   
+   You should have received a copy of the GNU Library General Public
+   License along with this library; if not, write to the
+   Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA  02111-1307, USA.
+\smallskip
+
+\noindent   
+   You may contact David Neto via email at {\tt netod@@@@acm.org}, or with
+   greater latency at
+\smallskip
+\noindent{\obeylines
+     Department of Computer Science
+     University of Toronto
+     10 King's College Rd.
+     Toronto, Ontario
+     M5S 3G4
+     Canada
+}
+\medskip
+
+
+\noindent\hbox{}\hrule\hbox{}\penalty-1000
+\vskip0.5cm\relax
+
+
+
+@@i webdefs.w
+@@i types.w
+
+
+{\obeylines
+$Log: nn.w,v $
+Revision 1.128  1998/04/16 15:40:03  neto
+Need to include dsort.h to get the select range prototype.
+
+Revision 1.127  1998/04/11 14:34:09  neto
+Duh.  select is a Unix system call.  Renamed my select to select\_range
+
+Revision 1.126  1998/04/10 21:20:23  neto
+Checked that this module is safe for use by TSPs with arbitrary cost
+functions.  It is.
+Also, made the non-Euclidean case more efficient by using the select
+function from module DSORT.  That's a lazy sorting function that only
+does enough to select the appropriate subrange.
+
+Revision 1.125  1997/10/28  21:23:19  neto
+It now runs ok with nn.  It was reallocating improperly and not
+initializing work next
+
+Revision 1.124  1997/10/28  20:41:08  neto
+Now it compiles.
+and links.
+
+Revision 1.123  1997/10/28  20:27:50  neto
+Removed FINISH signal to finish coding.
+Removed old balanced quadrant material.
+Added maintenance of nn max bound, that jbmr requires.
+
+Revision 1.122  1997/10/25 17:43:34  neto
+Done coding the quadrants.
+Will remove old stuff.
+
+Revision 1.121  1997/10/18 20:39:43  neto
+Restructuring so that we really do use multiple criteria.
+Also, change to a single list structure with variable sublists.
+
+Revision 1.120  1997/10/18 17:26:28  neto
+Added support for CEIL 2D.
+
+Revision 1.119  1997/10/17  21:27:34  neto
+Convert coord2d to x[0] and x[1].
+Fixed an apparent initialization bug in quadrant search.
+
+Revision 1.118  1997/09/27 18:06:21  neto
+Fixed RCS log behaviour.
+
+Revision 1.117  1997/08/15  20:18:25  neto
+Added Index major section.
+
+Revision 1.116  1997/05/16  21:16:24  neto
+Got rid of an unused variable and scope.
+
+Revision 1.115  1997/05/16  18:11:41  neto
+Break locks by david and neto.
+Include <config.h> and "lkconfig.h"
+
+Revision 1.114  1997/05/16  18:09:40  neto
+Include <config.h> and lkconfig.h
+
+Revision 1.113  1997/02/11  15:58:26  neto
+Reduced the number of calls to malloc.  This is also a bit
+smarter about compacting the memory used when list\_len < max\_bound.
+Luk pointed out the problem with malloc to me.
+
+Revision 1.112  1997/01/22  15:18:31  david
+Simplified wording. Fixed a wordo.
+
+Revision 1.111  1997/01/21  21:55:55  david
+Added standard copyright notice by including copyrt.w
+
+Revision 1.110  96/12/02  15:31:37  neto
+Add copyright notice.
+
+Revision 1.109  1996/08/23  16:36:44  david
+Changed "Module types" to "Module type definitions" for consistency
+with other modules.
+
+Revision 1.108  96/08/15  14:13:21  neto
+Fixed usage to match prototype of sort()
+
+Revision 1.107  96/08/15  13:32:02  neto
+Must export nn\_build
+
+Revision 1.106  96/08/14  13:36:08  neto
+Use sort instead of qsort.
+
+Revision 1.105  96/08/07  15:20:35  neto
+Make qsort optionally perserve the order of equals
+
+Revision 1.104  96/07/29  17:10:35  neto
+Added an RCS id, and it compiles.
+
+}
+
+@@*Nearest neighbour lists.
+This module constructs the nearest neighbour lists that are used by
+efficient implementations of the Lin-Kernighan algorithm.  
+For a discussion of this feature, see the chapter by Johnson and McGeoch.
+In the next few paragraphs I will describe the ideas contained in that
+discussion.
+
+The LK algorithm often looks for a nearest neighbour tour to switch an
+edge to.  For efficiency's sake, it would like to examine the neighbours
+of a given city in increasing distance order from that city.  The most
+natural structure for this is an array of neighbours of that city,
+sorted by distance.  Then the LK algorithm searches sequentially from
+the beginning of the array looking for candidates.
+
+@@ The above scheme takes quadratic space, which is not practical for
+very large instances.  So we compromise, storing only the first $k$
+nearest neighbours.  Once the near neighbour search exhausts this
+list, we just give up.   This also saves us time: we don't waste time
+searching in unlikely places.
+
+@@ This truncated scheme works well on randomly distributed instances --- 
+whether those with random edge lengths, or those which consist of
+cities placed randomly in a Euclidean space.  However, on more structured
+geometric instances, such as those taken from TSPLIB, we get better results
+if we reflect some of that structure in the neighbour lists.
+
+The main idea is to ensure that there is representation on this list
+from the various regions that surround a particular city.  For example,
+in a 2-D instance,
+we might want to include the ten nearest neighbours from each of the
+four surrounding quadrants.  This changes the makeup of the neighbour
+list dramatically if the city is on the edge of a cluster.
+
+This module supports both pure and region-oriented nearest neighbour lists
+via parameters passed to the construction routine.
+
+@@ This module provides the following interface.
+
+Procedures 
+|nn_setup| and |nn_cleanup| are the usual intialization and shutdown routines.
+
+Procedure |nn_build| builds the nearest neighbour arrays. 
+
+Procedure |nn_list| returns the nearest neighbour list for a given 
+city.
+
+Global variable |nn_max_bound| is the length of the longest neighbour
+list.
+
+@@ The outline of this module is as follows:
+@@c
+#include <config.h>
+#include "lkconfig.h"
+@@<System headers@@>@@;
+@@<Early module headers@@>@@;
+@@<Module headers@@>@@;
+
+@@<Global variables@@>@@;
+@@<Module type definitions@@>@@;
+@@<Module variables@@>@@;
+@@<Module subroutines@@>@@;
+@@<Subroutines@@>@@;
+const char *nn_rcs_id="$Id: nn.w,v 1.128 1998/04/16 15:40:03 neto Exp neto $";
+
+@@ We will be using many routines from external libraries.  The interfaces
+to those routines are described in the following headers.
+
+@@<System headers@@>=
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+
+@@ The exported interface is contained in the \file{nn.h} header file,
+which has the following form.
+
+@@(nn.h@@>=
+extern const char *nn_rcs_id;
+@@<Exported variables@@>@@;
+@@<Exported subroutines@@>@@;
+
+@@ To ensure consistency between the interface and the implementation,
+we include our own header.
+@@<Module headers@@>=
+#include "nn.h"
+
+@@ Variable |nn_max_bound| is an integer.
+@@<Global variables@@>=
+int nn_max_bound;
+
+@@
+@@<Exported variables@@>=
+extern int nn_max_bound;
+
+
+@@ When making up the nearest neighbour lists, this module needs to associate
+a neighbouring city with the distance to that city.
+We declare a local type for this purpose.
+
+However, during actual use
+we store only the neighbouring cities.  
+This saves a lot on space.  For most 32-bit architectures, it saves 2/3 of
+the space, because the city number is 4 bytes, and the length is 
+usually 8 bytes.  In fact the nearest neighbour lists take up more
+space than any other data structure in LK.
+
+@@<Module type definitions@@>=
+typedef struct {
+	length_t len;
+	int city;
+} nn_entry_t;
+
+@@ We've used the |length_t| type which is defined in the \file{length.h}
+module.
+
+@@<Early module headers@@>=
+#include "length.h"
+
+@@ Because there are multiple disjoint criteria for a city to belong
+to a neighbour list, the lengths of the lists will vary.  
+We save space by not having dummy entries.  
+
+Variable |list|  is an array of integers into which all the lists
+of neighbours are stored, one after another.  To mark the list boundaries,
+we use array |begin|. 
+In particular |begin[i]| is the index into |list|
+at which the candidate list for city $i$ begins.  Array |begin| has |n+1|
+entries: |begin[n]| points to just past the end of the list for the last 
+city.  In other words, the candidate list for city |i| runs from
+|list[begin[i]]| through |list[begin[i+1]-1]|, inclusive.
+
+Without going farther, we can already code the |nn_list| function.
+
+@@<Subroutines@@>=
+int *
+nn_list(int city, int *list_len)
+{
+	*list_len = begin[city+1]-begin[city];
+	return list+begin[city];
+}
+
+
+@@
+@@<Exported subroutines@@>=
+int *nn_list(int city, int *list_len);
+
+@@ We need to declare the |list| and |begin| arrays.  
+It will be convenient to store |n|, the number of cities.
+
+@@<Module variables@@>=
+static int *list, *begin, n;
+
+@@ Array |begin| has |n+1| entries. We'll see later how to allocate
+the |list| array.
+
+@@<Set up the array data structures@@>=
+begin = new_arr_of(int,n+1);
+begin[0]=0;
+
+@@ We need the interface to the memory module.  
+While we're at it, let's get the error module as well.
+
+@@<Module headers@@>=
+#include "error.h"
+#include "memory.h"
+
+@@ These arrays should be deallocated when we clean up.
+@@<Subroutines@@>=
+void
+nn_cleanup(void) {
+	@@<Clean up the array data structures@@>@@;
+}
+
+@@
+@@<Clean up the array data structures@@>=
+if ( begin ) { free_mem(begin);mem_deduct(sizeof(int)*(n+1)); }
+
+@@ The cleanup procedure must be declared externally.
+@@<Exported subroutines@@>=
+void nn_cleanup(void);
+
+@@*Building the neighbour lists.
+Procedure |nn_build| builds the nearest neighbour arrays.  
+
+There is one parameter for each kind of neighbour we might be
+asked to add: an unqualified (pure) near neighbour, a near neighbour
+in a particular quadrant, or a city nearby in the Delauney triangulation.
+The list of neighbours for each city $i$ should be:
+the |num_pure| closest neighbours of $i$; 
+the |num_quadrant| closest neighbours of $i$ in each of the four
+surrounding quadrants; 
+all cities that are at most |num_delauney| steps from $i$ 
+in the Delauney triangulation of the instance.  
+Of course, the same city may qualify under more than one of these criteria
+for a given seed.  Such cities are included only once for that seed city,
+\ie, duplicates are removed.
+
+@@d max(A,B) ((A)>(B) ? (A) : (B))
+
+@@<Subroutines@@>=
+void
+nn_build(int num_pure, int num_quadrant, int num_delauney) 
+{
+	@@<|nn_build| variables@@>@@;
+	int i;
+	n = tsp_instance->n;
+	@@<Check build parameters@@>@@;
+	
+	@@<Set up the array data structures@@>@@;
+	nn_max_bound = 0;
+	for (i=0;i<n;i++) {
+		@@<|nn_build| iteration variables@@>@@;
+		@@<Verbose: about to start building list for |i|@@>@@;
+		@@<Build a pure work list for city |i|@@>@@;
+		@@<Build a quadrant work list for city |i|@@>@@;
+		@@<Build a Delauney work list for city |i|@@>@@;
+		@@<Compress the work lists and copy them into |list|@@>@@;
+		nn_max_bound = max(nn_max_bound, begin[i+1]-begin[i]);
+	}
+	@@<Clean up the temporary data structures@@>@@;
+}
+
+@@ We export the building subroutine.
+@@<Exported subroutines@@>=
+void nn_build(int num_pure, int num_quadrant, int num_delauney);
+
+@@ We check for bad build parameters.  This helps us to spot bugs and 
+to avoid misleading the user, \eg, if they specified 50 nearest neighbours
+but only get 20 because there are only 21 cities.
+
+@@<Check build parameters@@>=
+@@<Verbose: show build parameters@@>@@;
+errorif(num_pure<0,
+	"Need positive number of nearest neighbours; %d specified",num_pure);
+errorif(num_quadrant<0,
+	"Need positive number of quadrant neighbours; %d specified",num_quadrant);
+errorif(num_delauney<0,
+	"Need positive Delauney depth; %d specified",num_delauney);
+errorif(num_pure<=0 && num_quadrant<=0 && num_delauney<=0,
+	"Must specify some candidates");
+errorif(num_pure>= n,
+	"%d nearest neighbours specified, but there are only %d cities",num_pure,n);
+
+@@ We need to import the instance |tsp_instance| and its type.
+@@<Early module headers@@>=
+#include "read.h"
+#include "lk.h"
+
+
+@@ We try to reduce the number of reallocations of 
+|list| by guessing the average length of each city's neighbour list.
+The following expressions are themselves just guesses.
+
+
+@@<Guess the average number of neighbours per city@@>=
+if ( num_pure )
+	guess_avg = num_pure + num_quadrant + num_delauney;
+else if ( num_quadrant )
+	guess_avg = 4*num_quadrant + num_delauney;
+else
+	guess_avg = 3*num_delauney*num_delauney;
+
+@@ Once we have a guess at the average length of a list, we initially
+allocate |n| times that number of entries for |list|.
+
+@@<Set up the array data structures@@>=
+{int guess_avg;
+@@<Guess the average number of neighbours per city@@>@@;
+list_size = guess_avg * n;
+list = new_arr_of(int,list_size);
+}
+
+@@
+@@<Clean up the array data structures@@>=
+if ( list ) { free_mem(begin);mem_deduct(sizeof(int)*list_size); }
+
+@@ Variable |list_size| always contains the number of elements allocated
+for |list|.
+
+@@<Module variables@@>=
+static int list_size;
+
+@@ We will need work space for each of the three passes through the data.
+In the worst (and exceedingly rare) case, 
+each city will appear three times in the work list.
+
+@@<Set up the array data structures@@>=
+work = new_arr_of(nn_entry_t,3*n);
+
+@@ We don't need the |work| array after we build the lists, so we clean it
+up early.  
+@@<Clean up the temporary data structures@@>=
+free_mem(work);mem_deduct(sizeof(nn_entry_t)*3*n);
+
+@@ But we must declare the variable.
+@@<|nn_build| variables@@>=
+nn_entry_t *work;
+
+@@ The work list will be built by just appending.  Specifically, the 
+working copy of the candidate list for a city is stored in  
+|work[0]| through |work[work_next-1]|.  
+
+We sort to find duplicates. After sorting, we don't ever use the
+lengths again.
+
+Module \module{LK} sets the |sort| function pointer to a suitable sorting
+procedure, \eg, the \CEE/ library |qsort| function.
+
+@@<Compress the work lists and copy them into |list|@@>=
+errorif( work_next < 1, "Must have nonempty candidate list"); 
+{
+int r, w, last_city;
+sort(work,(size_t)work_next,sizeof(nn_entry_t),cmp_entry_compress);
+for ( r=w=0, last_city=work[r].city-1; r<work_next; r++ ) {
+	if ( work[r].city != last_city )
+		last_city = work[w++].city = work[r].city;
+}
+@@<Make sure |list| has space for |w| more elements@@>@@;
+for (r=0;r<w;r++) list[begin[i]+r] = work[r].city;
+begin[i+1] = begin[i]+w;
+}
+
+@@ We must declare |work_next|.
+@@<|nn_build| iteration variables@@>=
+int work_next=0;
+
+
+@@ We do have to provide a comparison function. 
+We promise to the outside world to put nearer
+cities first on lists, so that's the first criterion.
+Second, we want duplicates to be brought together, so that's the second
+criterion.
+
+@@<Module subroutines@@>=
+static int 
+cmp_entry_compress(const void *a, const void *b) {
+	const length_t ad = ((const nn_entry_t *)a)->len;
+	const length_t bd = ((const nn_entry_t *)b)->len;
+	if ( ad < bd ) return -1;
+	else if ( ad > bd ) return 1;
+	else return ((const nn_entry_t *)a)->city - ((const nn_entry_t *)b)->city;
+}
+
+@@ We use repeated doubling to expand the |list| array to achieve a constant
+amortized allocation time per cell.  
+
+It's ok if we end up using horribly 
+less than the total allocated space.  It would only end up wasting address
+space, which we of course know is infinite.  
+There is no performance penalty because we never access the memory we don't
+use.  Duh.  Unused memory is never paged in.
+
+@@<Make sure |list| has space for |w| more elements@@>=
+if ( begin[i]+w > list_size ) {
+	int new_size = list_size;
+	while ( begin[i]+w > new_size ) new_size*=2;
+	@@<Verbose: resize |list|@@>@@;
+	list = mem_realloc(list,sizeof(int)*new_size);
+	list_size = new_size;
+}
+
+@@*1 Pure lists.
+Whenever possible, we use the $k$-d tree to speed things up.
+
+Otherwise, we use a quick and dirty method to calculate
+the nearest neighbour list.  For each city, compute the distances to all
+the cities, sort, and then pick off the first few entries.
+In the future we may want to do smart partitioning, like a truncated
+Quicksort, perhaps with randomized pivot sampling.
+
+
+@@<Build a pure work list for city |i|@@>=
+if ( num_pure ) {
+	int start_work = work_next;
+	if (E2_supports(tsp_instance)) {
+		@@<Use the $k$-d tree to find nearest neighbours@@>@@;
+	} else {
+		@@<Compute all the distances except from $i$@@>@@;
+		@@<Move the |num_pure| closest cities to the front@@>@@;
+	}
+}
+
+@@ The |E2| routines for 2-d trees are in the \module{KDTREE} module.
+@@<Early module headers@@>=
+#include "kdtree.h"
+
+@@ Let's do the fast way first,
+using the $k$-d search structure implemented in \module{KDTREE}.
+Here we only use the nearest neighbour search and the hiding and unhiding 
+routines.  Given those calls, building the list is rather easy.
+
+@@<Use the $k$-d tree to find nearest neighbours@@>=
+{
+	int j, city;
+	for (j=0;j<num_pure;j++) {
+		city = E2_nn(i);
+		if ( city == -1 ) break; /* No such neighbour. */
+		work[work_next].city = city;
+		work[work_next].len = cost(i,city);
+		work_next++;
+		E2_hide(city);
+	}
+	for (j=start_work;j<work_next;j++) E2_unhide(work[j].city);
+}
+
+@@ Now we're ready to do the brute force method. 
+Computing all the distances is easy.
+
+@@<Compute all the distances except from $i$@@>=
+{ int j;
+	for (j=0;j<i;j++) {
+		work[start_work+j].city = j;
+		work[start_work+j].len = cost(i,j);
+	}
+	for (j=i+1;j<n;j++) {
+		work[start_work+j-1].city = j;
+		work[start_work+j-1].len = cost(i,j);
+	}
+}
+
+
+@@  We use the handy-dandy partial sorting selection function |select_range| from
+the \module{DSORT} module to
+move the closest |num_pure| cities to the front of the array, and sort them
+too.
+
+Recall |num_pure <= n-1|, so we won't run off the end of what we've already
+written.
+
+@@<Move the |num_pure| closest cities to the front@@>=
+select_range((void *)work,(size_t)n-1,sizeof(nn_entry_t),cmp_entry_compress,
+	0,num_pure,0/*Don't sort them */);
+work_next += num_pure;
+
+@@ 
+@@<Module headers@@>=
+#include "dsort.h"
+
+
+@@*1 Quadrant-balanced lists.
+Quadrant balanced lists only make sense when the instance lives in a
+coordinate system.  Since the only coordinate system we support is
+2-dimensional real space, we just use the 2-d trees.  In fact, quadrant
+lists may be used precisely when 2-d trees are supported.
+
+@@<Check build parameters@@>=
+errorif(num_quadrant>0 && !E2_supports(tsp_instance),
+	"Quadrant lists supported only when 2-d trees supported",num_pure);
+
+@@ Quadrant lists are interesting for two reasons.
+
+First, building them efficiently requires special support in the 2-d tree.
+That is, we need to be able to find nearest neighbours while masking
+out entire quadrants of space surrounding the seed city.
+
+Second, although the user may ask for a certain number of cities from
+each quadrant, there may not be that many available there.  In fact, this
+is certain to be the case for cities at the ``corners'' of the instance.
+The only consequence of running short is that the caller gets back a
+shorter list.
+
+@@<Build a quadrant work list for city |i|@@>=
+if ( num_quadrant ) {
+	int quadrant;
+	@@<Find all cities in quadrant 0@@>@@;
+	for ( quadrant = 1; quadrant <= 4; quadrant++ ) {
+		@@<Find up to |num_quadrant| neighbours in quadrant |quadrant|@@>@@;
+	}
+}
+
+@@ 
+I borrow from and slightly extend ordinary mathematical 
+terminology: if city |i| lies
+at $(x,y)$, then 
+quadrant 0 is point $(x,y)$;
+quadrant 1 is all points $(x',y')$ with $x'>x$ and $y'\ge y$;
+quadrant 2 is all points $(x',y')$ with $x'\le x$ and $y'>y$;
+quadrant 3 is all points $(x',y')$ with $x'<x$ and $y'\le y$;
+quadrant 4 is all points $(x',y')$ with $x'\ge x$ and $y'<y$.
+
+I've been careful to define the boudaries of quadrants 1 through 4
+to be balanced: those quadrants are pairwise congruent to each other.
+
+Since all five quadrants are disjoint, we don't need to worry about
+duplicates.  So we write directly to the |work| array.
+
+The quadrant parameter passed to the |E2_nn_quadrant| 
+is a bit mask of all the quadrants in which to search.
+
+@@<Find up to |num_quadrant| neighbours in quadrant |quadrant|@@>=
+{ int j, start_work=work_next;
+	for (j=0;j<num_quadrant;j++) {
+		const int city = E2_nn_quadrant(i,1<<quadrant);
+		if ( city == -1 ) break; /* No such neighbour. */
+		work[work_next].city = city;
+		work[work_next].len = cost(i,city);
+		work_next++;
+		E2_hide(city);
+	}
+	for (j=start_work;j<work_next;j++) E2_unhide(work[j].city);
+}
+
+@@ 
+Now, we would hope to
+not have cities with duplicated coordinates.  But they might be there.
+Let's get all of them, no matter what |num_quadrant| is.
+
+We cheat a little by temporarily redefining the |num_quadrant| variable.
+
+@@<Find all cities in quadrant 0@@>=
+{ const int num_quadrant = n-1, quadrant=0;
+@@<Find up to |num_quadrant| neighbours in quadrant |quadrant|@@>@@;
+}
+
+
+@@*2 Delauney lists.
+We don't support Delauney lists.  Alas.  For further pointers, see
+either Knuth's {\sl The Stanford Graphbase} or 
+Preparata and Shamos' {\sl Computational Geometry}.
+
+@@
+@@<Check build parameters@@>=
+errorif(num_delauney,"Delauney neighbours not supported (yet)");
+
+@@
+@@<Build a Delauney work list for city |i|@@>=
+
+@@*Verbose.
+
+@@<Verbose: resize |list|@@>=
+if ( verbose >= 750 ) {
+	printf("nn: Resize list from %d elements to %d elements; begin[i]=%d, w=%d\n", 
+		list_size, new_size, begin[i], w);
+	fflush(stdout);
+}
+
+@@
+@@<Verbose: show build parameters@@>=
+if ( verbose >= 500 ) {
+printf("nn: build nn %d nq %d del %d\n", num_pure, num_quadrant, num_delauney);
+	fflush(stdout);
+}
+
+@@
+@@<Verbose: about to start building list for |i|@@>=
+if ( verbose >= 1250 ) {
+	printf("nn: about to build for %d; work_next=%d list_size=%d\n", 
+		i, work_next, list_size);
+	fflush(stdout);
+}
+
+@@*Index.
+
+@
+
+
+1.128
+log
+@Need to include dsort.h to get the select range prototype.
+@
+text
+@d1 47
+a47 1
+@@i copyrt.w
+d54 3
+d208 1
+a208 1
+const char *nn_rcs_id="$Id: nn.w,v 1.127 1998/04/11 14:34:09 neto Exp neto $";
+@
+
+
+1.127
+log
+@Duh.  select is a Unix system call.  Renamed my select to select_range
+@
+text
+@d8 3
+d159 1
+a159 1
+const char *nn_rcs_id="$Id: nn.w,v 1.126 1998/04/10 21:20:23 neto Exp neto $";
+d528 5
+@
+
+
+1.126
+log
+@Checked that this module is safe for use by TSPs with arbitrary cost
+functions.  It is.
+Also, made the non-Euclidean case more efficient by using the select
+function from module DSORT.  That's a lazy sorting function that only
+does enough to select the appropriate subrange.
+@
+text
+@d8 7
+d156 1
+a156 1
+const char *nn_rcs_id="$Id: nn.w,v 1.125 1997/10/28 21:23:19 neto Exp neto $";
+d514 1
+a514 1
+@@  We use the handy-dandy partial sorting selection function |select| from
+d523 1
+a523 1
+select((void *)work,(size_t)n-1,sizeof(nn_entry_t),cmp_entry_compress,
+@
+
+
+1.125
+log
+@It now runs ok with nn.  It was reallocating improperly and not
+initializing work next
+@
+text
+@d8 4
+d149 1
+a149 1
+const char *nn_rcs_id="$Id: nn.w,v 1.124 1997/10/28 20:41:08 neto Exp neto $";
+d453 1
+a453 1
+In the future we may want to smart partitioning, like a truncated
+d463 2
+a464 3
+		@@<Compute all the distances@@>@@;
+		@@<Sort the entries@@>@@;
+		@@<Copy the first |num_pure| cities@@>@@;
+d494 1
+a494 1
+@@<Compute all the distances@@>=
+d496 1
+a496 1
+	for (j=0;j<n;j++) {
+d500 4
+d507 4
+a510 10
+@@ Again we use a sorting function, and we may as well reuse the previous
+comparison function.
+@@<Sort the entries@@>=
+sort((char *)work,(size_t)n,sizeof(nn_entry_t),cmp_entry_compress);
+
+
+@@  Now we copy the cities from the work array to the output array.
+
+The only tricky part is to skip city |i| itself.  This is only tricky
+because there may be multiple cities with distance zero to city |i|.
+d515 3
+a517 7
+@@<Copy the first |num_pure| cities@@>=
+{ int r,w;
+	for ( r=w=start_work; w<start_work+num_pure; r++ ) { 
+		if ( work[r].city != i ) work[w++] = work[r];
+	}
+	work_next = w;
+}
+@
+
+
+1.124
+log
+@Now it compiles.
+and links.
+@
+text
+@d8 4
+d145 1
+a145 1
+const char *nn_rcs_id="$Id: nn.w,v 1.123 1997/10/28 20:27:50 neto Exp neto $";
+d287 1
+a288 1
+	n = tsp_instance->n;
+d293 2
+d313 1
+d405 1
+a405 1
+@@<|nn_build| variables@@>=
+d408 1
+a437 1
+	mem_realloc(list,sizeof(int)*new_size);
+d439 1
+d614 19
+a632 3
+if ( verbose >= 25 ) {
+	printf("nn: Resize list from %d elements to %d elements", 
+		list_size, new_size);
+@
+
+
+1.123
+log
+@Removed FINISH signal to finish coding.
+Removed old balanced quadrant material.
+Added maintenance of nn max bound, that jbmr requires.
+@
+text
+@d8 5
+d141 1
+a141 1
+const char *nn_rcs_id="$Id: nn.w,v 1.121 1997/10/18 20:39:43 neto Exp neto $";
+d234 1
+a234 1
+begin = new_arr_of(int *,n+1);
+d316 1
+a316 1
+	"%d nearest neighbours specified, but there are only %d cities",num_pure,n;
+d319 2
+a320 1
+@@<Module headers@@>=
+a321 1
+#include "read.h"
+d387 1
+a387 1
+sort(work,work_next,sizeof(nn_entry_t),cmp_entry_compress);
+d447 1
+a447 1
+	int start_work = next_work;
+d472 3
+a474 3
+		work[next_work].city = city;
+		work[next_work].len = cost(i,city);
+		next_work++;
+d477 1
+a477 1
+	for (j=start_work;j<next_work;j++) E2_unhide(work[j].city);
+d511 1
+a511 1
+	next_work = w;
+d566 1
+a566 1
+{ int j, start_work=next_work;
+d570 3
+a572 3
+		work[next_work].city = city;
+		work[next_work].len = cost(i,city);
+		next_work++;
+d575 1
+a575 1
+	for (j=start_work;j<next_work;j++) E2_unhide(work[j].city);
+@
+
+
+1.122
+log
+@Done coding the quadrants.
+Will remove old stuff.
+@
+text
+@d8 4
+d120 3
+d131 1
+d151 1
+d159 9
+d270 2
+d282 1
+d288 1
+a290 12
+
+
+#if FINISH 
+
+
+		/* Build the list for city |i| */
+			/*Build a pure list for city |i|*/
+
+			errorif(!E2_supports(tsp_instance), 
+				"NN_QUADRANT requires 2D instance");
+			/* Build a quadrant-balanced list for city |i|*/
+#endif
+a322 1
+@@d min(A,B) ((A)<(B) ? (A) : (B))
+d533 1
+a533 1
+if ( num_pure ) {
+d552 1
+a552 1
+to be balanced; they are congruent.
+d557 3
+d563 1
+a563 1
+		const int city = E2_nn_quadrant(i,quadrant);
+d578 1
+a578 1
+We cheat a little by redefining the |num_quadrant| variable temporarily.
+d586 4
+d591 3
+a593 11
+	for (j=0;j<num_pure;j++) {
+		city = E2_nn(i);
+		if ( city == -1 ) break; /* No such neighbour. */
+		work[next_work].city = city;
+		work[next_work].len = cost(i,city);
+		next_work++;
+		E2_hide(city);
+	}
+@@<Find up to |num_quadrant| neighbours in quadrant |quadrant|@@>@@;
+{ int quadrant
+}
+d595 2
+a596 114
+
+@@ Building quadrant-balanced lists is more interesting.
+We'd like the nearest representatives from each of the four 
+quadrants surrounding city |i|, but we want equal representation from
+all four quadrants.
+
+We'd like to find them efficiently, \ie, without too many passes over the data.
+The tricky part comes in the case when a quadrant doesn't have
+|nn_bound/4| members.
+
+
+@@<Build a quadrant-balanced list for city |i|@@>=
+@@<Compute all the distances@@>@@;
+@@<Sort the entries@@>@@;
+{ int j, w[5], r[5], wsum;
+double ix = tsp_instance->coord[i].x[0];
+double iy = tsp_instance->coord[i].x[1];
+@@<Copy the first |nn_bound| entries from each quadrant to their own lists@@>@@;
+@@<Copy the entries from each of the lists in a balanced manner@@>@@;
+@@<Sort the short list@@>@@;
+@@<Copy the first |nn_bound| cities from the |work| array into |nn_list[i]|@@>@@;
+}
+
+@@ We need arrays for {\it five} regions: the four quadrants, and all cities
+that lie on the same coordinates as city |i|.
+
+@@<Module variables@@>=
+static nn_entry_t **q;
+
+@@ We need to allocate space for these quadrant arrays.
+@@<Set up the array data structures@@>=
+{ int j;
+q = new_arr_of(nn_entry_t *,5);
+for ( j=0;j<5;j++ ) {
+	q[j] = new_arr_of(nn_entry_t,max_bound);
+}
+}
+
+@@ 
+|wsum| allows us to terminate early in the common case.  
+It is always defined as |wsum = +w[1]+w[2]+w[3]+w[4]|.  
+
+We don't count |w[0]| in this because there are likely no `zero-quadrant' 
+cities.  If we did count it, then we wouldn't get early termination in
+this common case:  we'd never satisfy |w[0] == nn_bound|.
+
+We're also careful to define the quadrants in a half-closed/half-open manner.
+We've partitioned the plane (and hence there is no overlap and there
+are no missing pieces).
+
+@@<Copy the first |nn_bound| entries from each quadrant to their own lists@@>=
+w[0] = w[1] = w[2] = w[3] = w[4] = wsum = 0;
+for ( j=0; wsum < nn_bound * 4 && j<n ; j++ ) {
+	double jx = tsp_instance->coord[work[j].city].x[0];
+	double jy = tsp_instance->coord[work[j].city].x[1];
+	if ( jx == ix && jy == iy ) {
+		if ( work[j].city != i && w[0] < nn_bound ) {
+			q[0][w[0]++] = work[j];
+		}
+	} else if ( jx > ix && jy >= iy ) {
+		if ( w[1] < nn_bound ) {
+			q[1][w[1]++] = work[j];
+			wsum++;
+		}
+	} else if ( jx <= ix && jy > iy ) {
+		if ( w[2] < nn_bound ) {
+			q[2][w[2]++] = work[j];
+			wsum++;
+		}
+	} else if ( jx < ix && jy <= iy ) {
+		if ( w[3] < nn_bound ) {
+			q[3][w[3]++] = work[j];
+			wsum++;
+		}
+	} else if ( jx >= ix && jy < iy ) {
+		if ( w[3] < nn_bound ) {
+			q[4][w[4]++] = work[j];
+			wsum++;
+		}
+	} else {
+		errorif(1,"Bad quadrant checking code!\n");
+	}
+}
+
+@@ First priority goes to the zero quadrant cities.  Then we take cities
+in a balanced manner from each of the other four quadrants.  
+
+We copy them back into the |work| array.
+
+Think of |l| as a radar sweeping beam.
+
+@@<Copy the entries from each of the lists in a balanced manner@@>=
+{ int l;
+r[0] = r[1] = r[2] = r[3] = r[4] = 0;
+for ( j=0;j<w[0] ; j++ ) {
+	work[j] = q[0][j];
+}
+l=1;
+while ( j < nn_bound ) {
+	if ( r[l] < w[l] ) {
+		work[j] = q[l][r[l]];
+		r[l]++;
+		j++;
+	}
+	l++; if ( l==5 ) l=1;
+}
+}
+
+@@ The merged entres may not be in sorted order because we biased their
+selection in favour of quadrant balance.  So we need to sort them in
+ascending order.
+
+@@<Sort the short list@@>=
+sort((char *)work,(size_t)nn_bound,sizeof(nn_entry_t),cmp_entry);
+a605 3
+@@*TODO.
+@@
+		@@<Build a Delauney work list for city |i|@@>=
+d607 1
+@
+
+
+1.121
+log
+@Restructuring so that we really do use multiple criteria.
+Also, change to a single list structure with variable sublists.
+@
+text
+@d8 4
+a125 1
+@@<Global variables@@>@@;
+d128 1
+a128 1
+const char *nn_rcs_id="$Id: nn.w,v 1.120 1997/10/18 17:26:28 neto Exp neto $";
+d211 1
+a211 1
+begin = new_arr_of(int *,n);
+d230 1
+a230 1
+if ( begin ) { free_mem(begin);mem_deduct(sizeof(int)*n); }
+d241 1
+a241 1
+in a particular quadrant, or a city near in the Delauney triangulation.
+d247 4
+a250 1
+in the Delauney triangulation of the instance.
+d258 1
+a258 3
+	errorif(num_pure==0 && num_quadrant==0 && num_delauney==0,
+		"Must specify some candidates");
+
+a259 2
+
+	errorif(num_pure >= n-1, "num_pure = % > %d = n-1", num_pure, n-1);
+d274 2
+a275 2
+		@@<Build the list for city |i|@@>@@;
+			@@<Build a pure list for city |i|@@>@@;
+d279 1
+a279 1
+			@@<Build a quadrant-balanced list for city |i|@@>@@;
+d287 16
+d366 2
+a367 1
+Module \module{LK} sets the |sort| pointer.
+d388 1
+a388 1
+We promise to put nearer
+d403 3
+a405 1
+@@ We use repeated doubling to expand the |list| array.  
+d409 1
+a409 1
+There is no performance penalty because we access the memory we don't
+d414 1
+a414 1
+	int new_size = last_size;
+d421 1
+a421 1
+@@*1 The pure list.
+d424 1
+a424 1
+Otherwise, for now we're going to use a quick and dirty method to calculate
+d427 2
+d447 2
+a448 2
+@@ Let's do the fast way first.
+It uses the $k$-d search structure implemented in \module{KDTREE}.
+d463 1
+a463 3
+	for (j=start_work;j<next_work;j++) {
+		E2_unhide(work[j].city);
+	}
+d501 86
+a586 1
+#if FINISH
+a587 1
+#endif
+d710 3
+@
+
+
+1.120
+log
+@Added support for CEIL 2D.
+@
+text
+@d8 3
+d100 1
+a100 1
+via a parameter passed to the construction routine.
+d107 1
+a107 2
+Procedure |nn_build| builds the nearest neighbour arrays.  This is stored
+in the global array variable |nn_list| which is indexed by city number.
+d109 2
+d125 1
+a125 1
+const char *nn_rcs_id="$Id: nn.w,v 1.119 1997/10/17 21:27:34 neto Exp neto $";
+a133 1
+#include <assert.h>
+a139 2
+@@<Exported constants@@>@@;
+@@<Exported variables@@>@@;
+d151 3
+a153 2
+The exported array, |nn_list| stores only the neighbouring cities.  This
+saves a lot on space.  (For most 32-bit architectures, it saves 2/3 of
+d155 2
+a156 1
+usually 8 bytes.)
+d170 23
+a192 2
+@@ We need to declare the |nn_list| array.  It is an array of arrays of 
+integers.
+d194 3
+a196 16
+We also want |nn_bound|, which is the number of entries
+in each city's array.
+Every city will have the same number of neighbours in its |nn_list| entry,
+namely |nn_bound|.
+
+The neighbour lists themselves are stored contiguously
+in the array |nn_list_pool|.
+
+@@<Global variables@@>=
+int **nn_list, *nn_list_pool;
+int nn_bound;
+
+@@ We export these variables.
+@@<Exported variables@@>=
+extern int **nn_list;
+extern int nn_bound;
+d198 2
+a199 2
+@@ It will be convenient to store |n|, the number of cities, and |max_bound|,
+the maximum number of entries in each city's list.
+d202 1
+a202 1
+static int n, max_bound=-1;
+d204 2
+a205 2
+@@ These variables get allocated in the setup routine.  We will be adding
+to this code later, so we separate it out in a new named section.
+d207 3
+a209 15
+@@<Subroutines@@>=
+void
+nn_setup(int num_vertices, int the_max_bound) {
+	@@<Set up the array data structure@@>@@;
+}
+
+@@
+@@<Set up the array data structure@@>=
+n = num_vertices;
+max_bound = the_max_bound;
+errorif(max_bound <= 0, "NN list min bound too low: %d", max_bound);
+errorif(max_bound > n, "NN list max bound too high: max_bound == %d > n == %d",
+	max_bound, n);
+nn_list = new_arr_of(int *,n);
+nn_list_pool = new_arr_of(int,n*max_bound);
+d222 1
+a222 1
+	@@<Clean up the array data structure@@>@@;
+d226 2
+a227 7
+@@<Clean up the array data structure@@>=
+if ( nn_list ) {
+	free_mem(nn_list);mem_deduct(sizeof(int *)*n);
+	free_mem(nn_list_pool);mem_deduct(sizeof(int)*n*max_bound);
+}
+max_bound = -1;
+nn_bound = -1;
+d229 1
+a229 1
+@@ Both these procedures must be declared externally.
+a230 1
+void nn_setup(int num_vertices, int the_max_bound);
+d236 9
+a244 2
+The first parameter tells it how long each city's list should be.
+The second tells it whether to build a pure list or a region-oriented list.
+d248 3
+a250 1
+nn_build(int list_len, int kind) {
+d252 6
+a257 4
+	errorif( max_bound < 0, "nn_setup must be called before nn_build" );
+	errorif( list_len > max_bound, "list_len == %d > max_bound == %d!",
+		list_len, max_bound);
+	nn_bound = list_len;
+d259 1
+d261 12
+a272 3
+		nn_list[i]=nn_list_pool + list_len*i;
+		switch( kind ) {
+		case NN_PURE:
+d274 1
+a274 2
+			break;
+		case NN_QUADRANT:
+d278 1
+a278 5
+			break;
+		default :
+			errorif(1,"Invalid kind value == %d\n",kind);
+		}
+	}
+d281 1
+a281 6
+@@ We need to export the special values |NN_PURE| and |NN_QUADRANT|.
+@@<Exported constants@@>=
+#define NN_PURE (0)
+#define NN_QUADRANT (1)
+
+@@ We also export the subroutine.
+d283 1
+a283 1
+void nn_build(int list_len, int kind);
+d285 1
+a285 1
+@@ We need to import the instance |tsp_instance|.
+d288 56
+d345 57
+a401 3
+@@ If the cost function is based on coordinates, then
+we can use the $k$-d search structure that we've already built 
+elsewhere.  This speeds things up considerably.
+d408 10
+a417 7
+@@<Build a pure list for city |i|@@>=
+if (E2_supports(tsp_instance)) {
+	@@<Use $k$-d tree to find nearest neighbours@@>@@;
+} else {
+	@@<Compute all the distances@@>@@;
+	@@<Sort the entries@@>@@;
+	@@<Copy the first |nn_bound| cities from the |work| array into |nn_list[i]|@@>@@;
+d420 1
+a420 2
+@@ The instance type |tsp_instance_t| is defined by the \module{READ} module.
+The |E2| routines for 2-d trees are in the \module{KDTREE} module.
+a421 1
+#include "read.h"
+d429 1
+a429 1
+@@<Use $k$-d tree to find nearest neighbours@@>=
+d431 8
+a438 3
+	int j;
+	for (j=0;j<nn_bound;j++) {
+		E2_hide(nn_list[i][j]=E2_nn(i));
+d440 2
+a441 2
+	for (j=0;j<nn_bound;j++) {
+		E2_unhide(nn_list[i][j]);
+d445 2
+a446 18
+
+@@*Brute force.
+We need to declare the |work| array.
+@@<Module variables@@>=
+static nn_entry_t *work;
+
+@@ And allocate space for it.
+@@<Set up the array data structure@@>=
+work = new_arr_of(nn_entry_t,n);
+
+@@ And deallocate it.
+@@<Clean up the array data structure@@>=
+free_mem(work);
+
+@@ Computing all the distances is easy.
+
+The |cost| function is provided by 
+the \module{read} module.  We've already included that interface.
+d451 2
+a452 2
+		work[j].city = j;
+		work[j].len = cost(i,j);
+a455 4
+@@ 
+We use the sorting routine pointed to by |sort|; it must have
+the same signature as the |qsort| standard library function.
+Module \module{LK} sets the |sort| pointer.
+d457 2
+d460 1
+a460 1
+sort((char *)work,(size_t)n,sizeof(nn_entry_t),cmp_entry);
+a461 16
+@@ We do have to provide a comparison function.
+@@<Module subroutines@@>=
+static int 
+cmp_entry(const void *a, const void *b) {
+	length_t ad = ((const nn_entry_t *)a)->len;
+	length_t bd = ((const nn_entry_t *)b)->len;
+	if ( ad < bd ) return -1;
+	else if ( ad > bd ) return 1;
+	else return 
+#if defined(QSORT_DETERMINATE)
+		(int)(((nn_entry_t *)a)-((nn_entry_t *)b))
+#else
+				0
+#endif
+				;
+}
+d468 4
+a471 1
+@@<Copy the first |nn_bound| cities from the |work| array into |nn_list[i]|@@>=
+d473 2
+a474 3
+	for ( r=w=0 ;w<nn_bound; r++ ) {
+		if ( work[r].city != i )
+			nn_list[i][w++] = work[r].city;
+d476 1
+d479 4
+d512 1
+a512 1
+@@<Set up the array data structure@@>=
+d596 8
+@
+
+
+1.119
+log
+@Convert coord2d to x[0] and x[1].
+Fixed an apparent initialization bug in quadrant search.
+@
+text
+@d8 4
+d121 1
+a121 1
+const char *nn_rcs_id="$Id: nn.w,v 1.118 1997/09/27 18:06:21 neto Exp neto $";
+d262 2
+a263 2
+			errorif(tsp_instance->edge_weight_type != EUC_2D,
+				"NN_QUADRANT requires EUC_2D instance");
+d295 1
+a295 2
+switch ( tsp_instance->edge_weight_type ) {
+case EUC_2D:
+d297 1
+a297 2
+	break;
+default:
+d303 2
+a304 1
+@@ The constant |EUC_2D| is defined by the \module{READ} module.
+d307 1
+a324 3
+@@ We need the interface to the $k$-d tree routines.
+@@<Module headers@@>=
+#include "kdtree.h"
+@
+
+
+1.118
+log
+@Fixed RCS log behaviour.
+@
+text
+@d8 3
+d117 1
+a117 1
+const char *nn_rcs_id="$Id: nn.w,v 1.117 1997/08/15 20:18:25 neto Exp neto $";
+d403 2
+a404 2
+double ix = tsp_instance->coord[i].x;
+double iy = tsp_instance->coord[i].x;
+d441 2
+a442 2
+	double jx = tsp_instance->coord[work[j].city].x;
+	double jy = tsp_instance->coord[work[j].city].y;
+@
+
+
+1.117
+log
+@Added Index major section.
+@
+text
+@d6 5
+a10 1
+{\obeylines$Log: nn.w,v $
+d114 1
+a114 1
+const char *nn_rcs_id="$Id: nn.w,v 1.116 1997/05/16 21:16:24 neto Exp neto $";
+@
+
+
+1.116
+log
+@Got rid of an unused variable and scope.
+@
+text
+@d7 3
+d110 1
+a110 1
+const char *nn_rcs_id="$Id: nn.w,v 1.115 1997/05/16 18:11:41 neto Exp neto $";
+d495 2
+@
+
+
+1.115
+log
+@Break locks by david and neto.
+Include <config.h> and "lkconfig.h"
+@
+text
+@d7 4
+d107 1
+a107 1
+const char *nn_rcs_id="$Id: nn.w,v 1.114 1997/05/16 18:09:40 neto Exp neto $";
+a213 1
+{ int i;
+a219 1
+}
+@
+
+
+1.114
+log
+@Include <config.h> and lkconfig.h
+@
+text
+@d7 3
+d103 1
+a103 1
+const char *nn_rcs_id="$Id: nn.w,v 1.113 1997/02/11 15:58:26 neto Exp neto $";
+@
+
+
+1.113
+log
+@Reduced the number of calls to malloc.  This is also a bit
+smarter about compacting the memory used when list\_len < max\_bound.
+Luk pointed out the problem with malloc to me.
+@
+text
+@d7 5
+d89 2
+d100 1
+a100 1
+const char *nn_rcs_id="$Id: nn.w,v 1.112 1997/01/22 15:18:31 david Exp david $";
+@
+
+
+1.112
+log
+@Simplified wording. Fixed a wordo.
+@
+text
+@d7 3
+d93 1
+a93 1
+const char *nn_rcs_id="$Id: nn.w,v 1.111 1997/01/21 21:55:55 david Exp david $";
+d147 3
+d151 1
+a151 1
+int **nn_list;
+d182 1
+a182 5
+{ int i;
+for ( i=0; i<n ; i++ ) {
+	nn_list[i] = new_arr_of(int,max_bound);
+}
+}
+d202 2
+a203 4
+	for ( i=0;i<n;i++ ) {
+		free_mem(nn_list[i]);
+	}
+	free_mem(nn_list);
+d224 1
+a224 1
+	errorif ( max_bound < 0, "nn_setup must be called before nn_build" );
+d230 1
+@
+
+
+1.111
+log
+@Added standard copyright notice by including copyrt.w
+@
+text
+@d6 4
+a9 1
+{\obeylines$Log:	nn.w,v $
+d44 1
+a44 1
+natural structure for this is build an array of neighbours of that city,
+d60 1
+a60 1
+The principle idea is to ensure that there is representation on this list
+d90 1
+a90 1
+const char *nn_rcs_id="$Id: nn.w,v 1.110 96/12/02 15:31:37 neto Exp $";
+@
+
+
+1.110
+log
+@Add copyright notice.
+@
+text
+@d1 1
+a4 1
+\copyright 1996 David Neto
+d6 3
+a8 1
+All rights reserved, etc.
+a9 1
+{\obeylines$Log: nn.w,v $
+d87 1
+a87 1
+const char *nn_rcs_id="$Id: nn.w,v 1.109 1996/08/23 16:36:44 david Exp david $";
+@
+
+
+1.109
+log
+@Changed "Module types" to "Module type definitions" for consistency
+with other modules.
+@
+text
+@d4 9
+a12 1
+{\obeylines$Log:	nn.w,v $
+d86 1
+a86 1
+const char *nn_rcs_id="$Id: nn.w,v 1.108 96/08/15 14:13:21 neto Exp $";
+@
+
+
+1.108
+log
+@Fixed usage to match prototype of sort()
+@
+text
+@d5 3
+d73 1
+a73 1
+@@<Module types@@>@@;
+d78 1
+a78 1
+const char *nn_rcs_id="$Id: nn.w,v 1.107 96/08/15 13:32:02 neto Exp $";
+d112 1
+a112 1
+@@<Module types@@>=
+@
+
+
+1.107
+log
+@Must export nn\_build
+@
+text
+@d5 3
+d75 1
+a75 1
+const char *nn_rcs_id="$Id: nn.w,v 1.106 96/08/14 13:36:08 neto Exp $";
+d319 1
+a319 1
+sort((char *)work,n,sizeof(nn_entry_t),cmp_entry);
+d325 2
+a326 2
+	length_t ad = ((nn_entry_t *)a)->len;
+	length_t bd = ((nn_entry_t *)b)->len;
+d463 1
+a463 1
+qsort((char *)work,nn_bound,sizeof(nn_entry_t),cmp_entry);
+@
+
+
+1.106
+log
+@Use sort instead of qsort.
+@
+text
+@d5 3
+d72 1
+a72 1
+const char *nn_rcs_id="$Id: nn.w,v 1.105 96/08/07 15:20:35 neto Exp $";
+d231 4
+@
+
+
+1.105
+log
+@Make qsort optionally perserve the order of equals
+@
+text
+@d5 3
+d69 1
+a69 1
+const char *nn_rcs_id="$Id: nn.w,v 1.104 96/07/29 17:10:35 neto Exp $";
+d303 5
+a307 1
+@@ We'll just use the |qsort| library routine.
+d309 1
+a309 1
+qsort((char *)work,n,sizeof(nn_entry_t),cmp_entry);
+@
+
+
+1.104
+log
+@Added an RCS id, and it compiles.
+@
+text
+@d4 4
+a7 1
+{\obeylines$Log$
+d66 1
+a66 1
+const char *nn_rcs_id="$Id$";
+d312 7
+a318 1
+	else return 0;
+@
+
+
+1.103
+log
+@Fixed for compiling. I forgot the EUC\_2D case label.
+@
+text
+@a0 1
+
+d4 3
+d63 1
+d78 1
+@
+
+
+1.102
+log
+@Added smart kd search tree .
+@
+text
+@d234 1
+d243 3
+a245 1
+
+a280 2
+But we do need access to the |cost| function,
+which is provided by the \module{read} module.
+d282 2
+a283 3
+
+@@<Early module headers@@>=
+#include "read.h"
+d285 1
+a285 1
+@@ @@<Compute all the distances@@>=
+@
+
+
+1.101
+log
+@Only free the nn_list array elements if nn_list itself is non-null.
+@
+text
+@d3 1
+d31 1
+a31 1
+The principal idea is to ensure that there is representation on this list
+d223 5
+a227 1
+@@ For now, we're going to use a quick and dirty method for calculating 
+d233 30
+a262 3
+@@<Compute all the distances@@>@@;
+@@<Sort the entries@@>@@;
+@@<Copy the first |nn_bound| cities from the |work| array into |nn_list[i]|@@>@@;
+d264 2
+a265 1
+@@ We need to declare the |work| array.
+@
+
+
+1.100
+log
+@This version works.  
+Needs improvement:
+	command-line switches
+	faster tabu check
+	allow Papadimitriou tabu rule
+	faster preprocessing
+	different candidate lists
+@
+text
+@d140 1
+d167 5
+a171 2
+for ( i=0;i<n;i++ ) {
+	free_mem(nn_list[i]);
+a172 1
+free_mem(nn_list);
+@
+
+
+1.2
+log
+@Initial implementation of LK.  This is buggy.
+@
+text
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d55 1
+a73 1
+@@<Exported types@@>@@;
+d83 3
+a85 4
+@@ The procedure that searches the nearest neigbhour lists needs both the
+city number and the distance from the given city to that city.  The nearest
+neighbour list for a given city is an array of these pairs.  We need to 
+declare this type.
+d87 6
+a92 1
+@@<Exported types@@>=
+d105 1
+a105 1
+|nn_entry_t| entries.  
+d113 1
+a113 1
+nn_entry_t **nn_list;
+d118 1
+a118 1
+extern nn_entry_t **nn_list;
+d142 1
+a142 1
+nn_list = new_arr_of(nn_entry_t *,n);
+d145 1
+a145 1
+	nn_list[i] = new_arr_of(nn_entry_t,max_bound);
+a222 2
+The only tricky part is to skip city |i| itself.  This is only tricky
+because there may be multiple cities with distance zero to city |i|.
+d227 1
+a227 6
+{ int r,w;
+	for ( r=w=0 ;w<nn_bound; r++ ) {
+		if ( work[r].city != i )
+			nn_list[i][w++] = work[r];
+	}
+}
+d272 13
+d304 1
+d371 2
+d379 1
+a379 1
+	nn_list[i][j] = q[0][j];
+d384 1
+a384 1
+		nn_list[i][j] = q[l][r[l]];
+d397 1
+a397 1
+qsort((char *)nn_list[i],nn_bound,sizeof(nn_entry_t),cmp_entry);
+@

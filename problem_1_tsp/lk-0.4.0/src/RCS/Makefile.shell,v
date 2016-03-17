@@ -1,0 +1,401 @@
+head	1.1;
+access;
+symbols
+	zero-four-zero:1.1;
+locks
+	neto:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	97.05.14.19.20.48;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@old Makefile structure.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# Generated automatically from Makefile.in by configure.
+# Makefile for LK, the program.
+# David Neto
+# netod@@acm.org
+#
+# $Header: /mnt2/home/neto/graph/tsp/lk/RCS/Makefile.in,v 1.1 1997/04/30 18:28:10 neto Exp neto $
+#
+
+SHELL = /bin/sh
+
+
+
+#########################################################################
+# Paths.
+
+srcdir = .
+
+#  SGB stuff is needed for gb_flip
+SGBLIBDIR = -L$(HOME)/local/lib
+#SGBLIBDIR = -L/usr/local/lib
+SGBINCLUDEDIR = -I$(HOME)/local/share/include/sgb
+#SGBINCLUDEDIR = -I/usr/local/include/sgb
+
+
+#########################################################################
+# Programs.
+
+CTANGLE = ctangle 
+CTANGLEFLAGS = -bhp # Turn off banner, happy, progress messages
+CTANGLE_CMD = $(CTANGLE) $(CTANGLEFLAGS)
+CWEAVE = cweave
+TEX = tex
+
+C_DIALECT = 
+C_WARNINGS = 
+
+# For SGI machines
+#  I Use -xansi instead of -ansi so that some intrinsics are inlined.  hypot?
+#SGIWARNINGS = -fullwarn -xansi
+# Turn warnings off if compiling for COFF.
+SGIWARNINGS =  -xansi
+#CC = cc $(SGIWARNINGS) 
+# The following is for Luk's experiments
+#CC = cc $(SGIWARNINGS) -non_shared
+
+
+# For speed tests
+# 	On the SPARCs, use
+#OPTIMIZE = -O2
+#	On the RS6K, use
+#OPTIMIZE = -O3 -qstrict
+#   for ordinary debugging, use
+#OPTIMIZE = -pg -g
+#	for profiling, add -pg
+OPTIMIZE = -O
+#OPTIMIZE = -O3
+#OPTIMIZE = -O2
+#OPTIMIZE =
+LINKOPTIMIZE = -O2	
+# IRIX linker doesn't like -O3; it asks for -O2 or lower.
+
+
+
+
+#########################################################################
+# Set variables DEBUG, OUTPUT, TABU
+
+include Makefile.lk.options
+
+
+#########################################################################
+# System fixes.
+
+
+#  Use the following for SunOS and IRIX
+#SYSTEM_FIXES = -DFIX_INCLUDES
+SYSTEM_FIXES = 
+
+#  SunOS 5.4 is broken because it puts definition of struct rusage in
+#  sys/rusage.h instead of sys/resource.h
+#  You might also need to add /usr/ucblib to LD_LIBRARY_PATH
+OS_VERSION_MAJOR = `uname -r | sed -e "s/\\([0-9]*\\)\\..*/\\1/"`
+OS_VERSION_MINOR = `uname -r | sed -e "s/[0-9]*\\.\\([0-9]*\\).*/\\1/"`
+
+SYSTEM_FIXES += -DOS_VERSION_MAJOR=$(OS_VERSION_MAJOR) -DOS_VERSION_MINOR=$(OS_VERSION_MINOR)
+SOLARIS_BSD_LIB = -L/usr/ucblib -lucb
+#SOLARIS_BSD_LIB = 
+
+CFLAGS = $(OPTIMIZE) $(DEBUG) $(TABU) $(SYSTEM_FIXES) $(OUTPUT)
+#LINKFLAGS = $(LINKOPTIMIZE) $(SOLARIS_BSD_LIB)
+LINKFLAGS = $(LINKOPTIMIZE)
+
+COMPILE = $(CC) $(C_DIALECT) $(C_WARNINGS) $(CFLAGS)
+
+
+#########################################################################
+# File sets.
+
+MAINSOURCES = \
+	$(srcdir)/copyrt.w \
+	$(srcdir)/webdefs.w \
+	$(srcdir)/prolog.ps \
+	$(srcdir)/error.w \
+	$(srcdir)/memory.w \
+	$(srcdir)/read.w \
+	$(srcdir)/resource.w \
+	$(srcdir)/pool.w \
+	$(srcdir)/kdtree.w \
+	$(srcdir)/construct.w \
+	$(srcdir)/array.w \
+	$(srcdir)/twolevel.w \
+	$(srcdir)/dsort.w \
+	$(srcdir)/nn.w \
+	$(srcdir)/dict.w \
+	$(srcdir)/jbmr.w \
+	$(srcdir)/lk.w
+
+SOURCES = \
+	$(srcdir)/gb_flip.ch \
+	$(srcdir)/length.w \
+	$(srcdir)/fixincludes.w \
+	$(MAINSOURCES)
+
+CSOURCES = \
+	error.c \
+	memory.c \
+	read.c \
+	resource.c \
+	pool.c \
+	kdtree.c \
+	construct.c \
+	array.c \
+	twolevel.c \
+	dsort.c \
+	nn.c \
+	dict.c \
+	jbmr.c \
+	lk.c \
+	gb_flip.c
+
+AUXCSOURCES = \
+	ifs.c \
+	unifd.c
+
+OBJS = \
+	error.o \
+	memory.o \
+	read.o \
+	resource.o \
+	pool.o \
+	kdtree.o \
+	construct.o \
+	array.o \
+	twolevel.o \
+	dsort.o \
+	nn.o \
+	dict.o \
+	jbmr.o \
+	lk.o
+
+DVIS = \
+	error.dvi \
+	memory.dvi \
+	length.dvi \
+	read.dvi \
+	resource.dvi \
+	pool.dvi \
+	kdtree.dvi \
+	construct.dvi \
+	array.dvi \
+	twolevel.dvi \
+	dsort.dvi \
+	nn.dvi \
+	dict.dvi \
+	jbmr.dvi \
+	lk.dvi \
+	fixincludes.dvi \
+	sier.dvi \
+	unifd.dvi \
+	ifs.dvi
+
+
+UTILITIES = \
+	$(srcdir)/countpages \
+	$(srcdir)/distcalc.w \
+	$(srcdir)/unifd.w \
+	$(srcdir)/grid.w \
+	$(srcdir)/sier.w \
+	$(srcdir)/ifs.w \
+	$(srcdir)/doitfly.double \
+	$(srcdir)/*.pl
+
+RCSSTUFF = $(srcdir)/RCS/*
+
+
+#########################################################################
+# Package-specific targets.
+
+all : lk
+
+lk : gb_flip.o $(OBJS) compile.o
+	$(COMPILE) $(LINKFLAGS) -o lk gb_flip.o compile.o $(OBJS) -lm
+
+lk.sgi.jsg : lk
+	mv lk lk.sgi.jsg
+
+pagecount : $(DVIS)
+	wc *.log
+
+linecount : $(CSOURCES) $(AUXCSOURCES)
+	wc $(CSOURCES) $(AUXCSOURCES)
+
+
+	
+unifd : unifd.o gb_flip.o
+	$(COMPILE) unifd.o gb_flip.o -o unifd
+
+unif : unif.o gb_flip.o
+	$(COMPILE) unif.o gb_flip.o -o unif
+
+sier : sier.o gb_flip.o
+	$(COMPILE) sier.o gb_flip.o -o sier -lm
+
+ifs : ifs.o gb_flip.o
+	$(COMPILE) ifs.o gb_flip.o -o ifs -lm
+
+#grid : grid.o
+#	$(COMPILE) grid.o -o grid
+
+compile.c : $(SOURCES) Makefile
+	rm -f compile.o compile.c
+	echo const char \*compile=\" $(COMPILE) $(CFLAGS) \"\; >compile.c
+
+Makefile :
+	echo Making makefile for compile.c
+
+out: lk
+	rm -f out
+	lk run/lin318.tsp -r tld >out
+
+# Force the genereration of error.h when error.w has changed.
+error.h : error.c
+
+length.h : length.w
+	$(CTANGLE_CMD) length.w
+
+dict.h : dict.w
+	$(CTANGLE_CMD) dict.w
+
+gb_flip.o : gb_flip.h gb_flip.c
+	$(COMPILE) $(CFLAGS) -c gb_flip.c
+
+gb_flip.h : gb_flip.ch
+	$(CTANGLE_CMD) gb_flip.w gb_flip.ch
+
+gb_flip.c : gb_flip.ch
+	$(CTANGLE_CMD) gb_flip.w gb_flip.ch
+
+# Force the genereration of memory.h when memory.w has changed.
+memory.h : memory.c
+
+tgz :
+	rm -f lk.tar.gz
+	tar cvf lk.tar $(SOURCES) $(RCSSTUFF) $(UTILITIES) Makefile
+	gzip --best lk.tar
+
+
+test :
+	rm -f /tmp/neto.out.test
+	unif.sparc 62 100000 failure | lk.sparc -v 125 - -S dsort -r two-level --noround >/tmp/neto.out.test
+
+distcalc : distcalc.o read.o error.o resource.o memory.o gb_flip.o 
+	$(COMPILE) -o distcalc distcalc.o read.o error.o resource.o memory.o gb_flip.o -lm
+
+docs : $(DVIS)
+
+csources : $(CSOURCES)
+	wc $(CSOURCES)
+
+dicttest : gb_flip.o pool.o dicttest.o dict.o error.o memory.o resource.o
+	$(COMPILE) gb_flip.o pool.o dicttest.o dict.o error.o memory.o resource.o -o dicttest
+
+dicttest.c : $(srcdir)/dict.w
+	$(CTANGLE_CMD) $(srcdir)/dict.w
+
+$(MAINSOURCES) : $(srcdir)/length.h
+$(MAINSOURCES) : $(srcdir)/fixincludes.h
+
+
+striphashline : $(CSOURCES)
+	striphashline.pl gb_flip.c
+	striphashline.pl error.c 
+	striphashline.pl memory.c 
+	striphashline.pl read.c 
+	striphashline.pl resource.c 
+	striphashline.pl pool.c 
+	striphashline.pl kdtree.c 
+	striphashline.pl construct.c 
+	striphashline.pl array.c 
+	striphashline.pl twolevel.c 
+	striphashline.pl dsort.c 
+	striphashline.pl nn.c 
+	striphashline.pl dict.c 
+	striphashline.pl jbmr.c 
+	striphashline.pl lk.c 
+	striphashline.pl gb_flip.h
+	striphashline.pl error.h
+	striphashline.pl memory.h
+	striphashline.pl read.h
+	striphashline.pl resource.h
+	striphashline.pl pool.h
+	striphashline.pl kdtree.h
+	striphashline.pl construct.h
+	striphashline.pl array.h
+	striphashline.pl twolevel.h
+	striphashline.pl dsort.h
+	striphashline.pl nn.h
+	striphashline.pl dict.h
+	striphashline.pl jbmr.h
+	striphashline.pl lk.h
+
+
+#########################################################################
+# Implicit rules.
+# .w files are CWEB files.
+# .idx files are index files for CWEAVE.
+
+.SUFFIXES : 
+.SUFFIXES : .c .w .tex .dvi .idx $(SUFFIXES)
+
+.w.c :
+	if [ -f $*.ch ]; then $(CTANGLE_CMD) $< $*.ch; else $(CTANGLE_CMD) $<; fi
+
+.w.h :
+	if [ -f $*.ch ]; then $(CTANGLE_CMD) $< $*.ch; else $(CTANGLE_CMD) $<; fi
+
+.c.o :
+	$(COMPILE) -c $*.c
+
+#.w.o : $*.c
+#	# echo making $< into $*.o
+#	$(COMPILE) -c $*.c
+
+.w.tex : webdefs.w copyrt.w
+	if [ -f $*.ch ]; then $(CTANGLE_CMD) $< $*.ch; else $(CTANGLE_CMD) $<; fi
+
+.w.idx : webdefs.w copyrt.w
+	if [ -f $*.ch ]; then $(CTANGLE_CMD) $< $*.ch; else $(CTANGLE_CMD) $<; fi
+
+.tex.dvi : $*.idx
+	#echo making $*.tex into $*.dvi
+	$(TEX) $*.tex
+
+
+#########################################################################
+# Standard GNU targets -- see the GNU Coding Standards.
+#
+# all : # see above
+
+install : lk
+
+clean : 
+	rm -f core *.o *.dvi *.idx *.log *.scn *.toc
+	$(CTANGLE_CMD) error.w
+	$(CTANGLE_CMD) length.w
+	$(CTANGLE_CMD) memory.w
+	$(CTANGLE_CMD) fixincludes.w
+	$(CTANGLE_CMD) lk.w
+
+maintainer-clean:
+	rm -f $(CSOURCES) $(AUXCSOURCES)
+
+veryclean : maintainer-clean
+
+
+@

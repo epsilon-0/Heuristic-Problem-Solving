@@ -1,0 +1,17 @@
+Sources:
+- LLL algorithm:
+    - Used to get an initial reference approximation.
+    - Used implementation from the monos-algebra library; adapted for our use cases.
+    - https://code.google.com/p/monos-algebra/
+- BKZ reduction and Gram-Schmidt Orthogonolization
+    - Used as initial pre-processing step for the Gaussian Sieve algorithm.
+    - We are calling the BKZ and Gram-Schmidt modules from the NTL library.
+    - http://www.shoup.net/ntl/
+- Gaussian Sieve algorithm
+    - Sieving-based exact SVP algorithm. Exponential run-time, but usually feasible for small enough graphs (< 50 dimensions). 
+    - We took the available C++ code and implemented it in Java. Modified the algorithm to add early termination in case of larger problem sizes.
+    - http://cseweb.ucsd.edu/~pvoulgar/files/sieve.pdf
+- Gaussian Elimination
+    - Used to calculate the integer coefficients that give the linear combination resulting in our candidate “shortest vector”.
+    - We used the least squares implementation from the JAMA linear algebra package.
+    - http://math.nist.gov/javanumerics/jama/

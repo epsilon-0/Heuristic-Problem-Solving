@@ -1,0 +1,943 @@
+head	1.5;
+access;
+symbols
+	zero-four-zero:1.5;
+locks
+	neto:1.5;
+
+
+1.5
+date	98.05.21.19.29.35;	author neto;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	95.11.17.16.06.08;	author neto;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	95.05.29.16.28.43;	author neto;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	95.04.07.15.46.12;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	95.04.03.17.00.35;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Edge exchange analysis.
+@
+
+
+1.5
+log
+@Fixed up standard CWEB thingies and Log stuff.
+@
+text
+@@@i webdefs.w
+@@i copyrt.w
+@@i types.w
+
+{\obeylines
+$Log$
+}
+
+@@*Branch-chord exchanges.
+This module implements the edge exchange analysis given in
+Volgenant and Jonker, ``The symmetric traveling salesman problem and edge
+exchanges in minimal 1-trees'' {\sl European Journal of Operational Research},
+{\bf 12} (1983) 394--403.
+
+
+Fix a graph $G$.
+The {\sl branches\/} of a 1-tree are the edges used in the 1-tree, and
+the {\sl chords\/}  of that 1-tree are the rest of the possible edges.
+A branch is {\sl indispensable} if it must appear in an optimal tour.
+A chord is {\sl superfluous} if it cannot appear in an optimal tour.
+
+For two disjoint subsets of vertices $N_1$ and $N_2$, the cutset of edges
+in $G$ is the set of edges such that one endpoint is in $N_1$ and the
+other in $N_2$.  The fundamental cutset of a branch $b$ of a spanning tree
+$T$ of $G$ is the cutset of the partition defined by the two connected
+components that remain once $b$ is removed from $T$.
+
+The fundamental path of a chord $(p,q)$ is the unique set of branches 
+on the simple path connecting $p$ with $q$ in $T$.
+
+As is observed by Volgenant and Jonker, and Smith and Thompson, 
+two equivalent conditions for a spanning tree to be minimal are:
+a) every branch of the tree is at least as short as any chord in its 
+fundamental cutset; b) every chord of the tree is at least as long as any
+branch in its fundamental path.
+
+The idea behind the algorithms in this module is that with a good
+minimal 1-tree and a good upper bound, we can determine a large number
+of indispensable branches and superfluous chords.  This knowledge 
+supposedly helps us
+to find tours quicker, and if the upper bound is a fictitious one
+that underestimates the optimal tour length, then helps us to
+determine this underestimation quickly.
+
+
+The outline of this module is as follows.
+
+@@c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <assert.h>
+#include "tsp.h"
+#include "memory.h"
+#include <config.h>
+#include "lkconfig.h"
+#include "length.h"
+#include "read.h"
+#include "error.h"
+
+@@<Type definitions@@>@@;
+@@<Module-level variables@@>@@;
+@@<Global variables@@>@@;
+@@<Local subroutines@@>@@;
+@@<Subroutines@@>@@;
+
+@@ The exported interface is contained in the {\tt ee.h} header file,
+which has the following form.
+
+@@(ee.h@@>=
+@@<Exported variables@@>@@;
+@@<Exported routines@@>@@;
+
+@@ We keep an array of bits to store the fixed in edges
+and the fixed out edges.  Because the graph is symmetric, we can
+store both arrays in the same square array.  We will put the fixed
+in edges in the upper triangle and the fixed out edges in the lower
+triangle.  A bit will be 1 for a fixed in/out edge and zero otherwise.
+
+We only keep one such array and generate it after the first iteration
+of an ascent.
+
+Variable |n| is the number of cities, and |edge_bits| is the actual array
+of bits.  I assume that a |char| is at least eight bits wide.
+
+@@<Module-level variables@@>=
+static int n;
+static unsigned char **edge_bits;
+static stack_node_t *v;
+static int *debug_in_count;
+
+@@ Setup and cleanup routines.  We get passed the number of cities.
+@@<Subroutines@@>=
+void
+ee_setup( const int num_cities )
+{
+	int i;
+	n = num_cities;
+
+	edge_bits = new_arr_of( unsigned char *,n);	
+	for (i=0;i<n;i++) {
+		edge_bits[i] = new_arr_of( unsigned char, (n+7)/8 );	
+	}
+	
+	v = new_arr_of(stack_node_t,n);	
+	debug_in_count = new_arr_of(int,n);
+	@@<Other allocations@@>@@;
+}
+
+void
+ee_cleanup(void)
+{
+	int i;
+	for (i=0;i<n;i++) {
+		free_mem(edge_bits[i]);
+	}
+	free_mem(edge_bits);
+	free_mem(v);
+	free_mem(debug_in_count);
+	@@<Other deallocations@@>@@;
+}
+
+@@
+@@<Exported routines@@>=
+void ee_setup( const int num_cities );
+void ee_cleanup(void);
+
+@@ The |powers_of_2| array helps in indexing the bits.
+@@<Module-level variables@@>=
+static const powers_of_2[] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+
+@@ The functions |is_in| and |is_out| return true if the given edge is
+fixed in or fixed out according to the |edge_bits| array.
+@@<Subroutines@@>=
+int
+is_in( int from, int to )
+{
+	if ( from == to ) return 0;
+	if ( from > to ) { int t = from; from = to; to=t; }
+	return edge_bits[from][to/8] & powers_of_2[ to & 7 ];
+}
+
+int
+is_out( int from, int to )
+{
+	if ( from == to ) return 1;
+	if ( from < to ) { int t = from; from = to; to=t; }
+	return edge_bits[from][to/8] & powers_of_2[ to & 7 ];
+}
+
+@@
+@@<Exported routines@@>=
+int is_in( int from, int to);
+int is_out( int from, int to);
+
+@@ When setting edges in or out, we update a flag telling us that this
+has happened.  This way we can tell when the array has settled down.
+
+For example, sometimes setting an edge in will force $n-2$ edges out
+for some vertex which might set another edge in, etc.  This kind
+of bouncing back and forth might be rare, but it is worth checking.
+
+The flag |has_changed| is used for this purpose.
+
+@@<Module-level variables@@>=
+static int has_changed;
+
+@@
+@@<Local subroutines@@>=
+static void
+set_in( int from, int to )
+{
+	errorif( from == to, "Setting in self-loop %d to itself", from);
+	if ( from > to ) { int t = from; from = to; to=t; }
+	if ( (edge_bits[from][to/8] & powers_of_2[ to & 7 ]) == 0 ) {
+		extern int verbose;
+		has_changed = edge_bits[from][to/8] |=  powers_of_2[ to & 7 ];
+		if ( verbose >= 500 ) {
+			printf("# Fixing in (%d,%d)\n",from,to);
+		}
+	}
+}
+
+static void
+set_out( int from, int to )
+{
+	errorif( from == to, "Setting in self-loop %d to itself", from);
+	if ( from < to ) { int t = from; from = to; to=t; }
+	if ( (edge_bits[from][to/8] & powers_of_2[ to & 7 ]) == 0 ) {
+		extern int verbose;
+		has_changed = edge_bits[from][to/8] |=  powers_of_2[ to & 7 ];
+		if ( verbose >= 500 ) {
+			printf("# Fixing out (%d,%d)\n",from,to);
+		}
+	}
+}
+
+@@ Initializing the array is just wiping out all the bits.
+@@<Wipe out all the bits@@>=
+{int i,j, max_j = (n+7)/8;
+for (i=0;i<n;i++)
+	for ( j=0;j<max_j; j++ ) edge_bits[i][j] = 0;
+}
+
+@@ The |edge_exchanges| procedure first wipes out the bit array.
+Then it inserts the constraints due to the location in the search tree.
+Then it examines chords not incident upon vertex |n-1|.
+Then chords incident to |n-1|.
+Finally it iterates, determining if some of some inclusions (exclusions)
+force more exclusions (inclusions).
+
+Parameter |len| is the lower bound on the optimal tour
+that is generated by the 1-tree stored 
+in |edge| and |onetree| with Lagrange multipliers |lambda|.
+
+Volgenant and Jonker say that the if the cost function is integral, then
+the right hand side of the pruning equations can be decreased from $u$
+to $u-1$ if finding one optimal solution
+is sufficient and a solution associated with the upper bound $u$ is available.
+This is how we set |our_prune_len|.
+
+@@<Subroutines@@>=
+void
+edge_exchanges(const search_node_t *bbnode,
+	const edge_list_t *edge, const onetree_node_t *onetree, 
+	const double *lambda, const double len)
+{
+	int num_visited;
+	const double our_prune_len = prune_len == incumbent_len ? prune_len-1 : prune_len;
+printf("# Entering edge_exchange, prune_len == %f incumbent_len == %f\n",
+	prune_len, incumbent_len); fflush(stdout);
+
+	has_changed = 0;
+	@@<Wipe out all the bits@@>@@;
+	@@<Process the search node constraints@@>@@;
+	@@<Process chords not incident to vertex |n-1|@@>@@;
+#if 0
+	@@<Process branches not incident to vertex |n-1|@@>@@;
+#endif
+	@@<Process chords and branches incident to vertex |n-1|@@>@@;
+	while ( has_changed ) {
+		has_changed=0;
+		@@<Process secondary effects@@>@@;
+	}
+	num_available_edges = show_bits();
+	@@<Generate the |available_edge| table@@>@@;
+}
+
+@@
+@@<Exported routines@@>=
+void
+edge_exchanges(const search_node_t *bbnode,
+	const edge_list_t *edge, const onetree_node_t *onetree, 
+	const double *lambda, const double len);
+
+@@ We traverse the path from |bbnode| up to the root of the tree, adding
+in constraints as we go.
+
+@@<Process the search node constraints@@>=
+{ search_node_t *here;
+    for ( here = (search_node_t *)bbnode; here ; here = here->parent ) {/* Discard const */
+        const int i = here->e.from, j = here->e.to; 
+        switch( here->in_out ) {
+        case FIXED_IN : set_in(i,j); break;
+        case FIXED_OUT : set_out(i,j); break;
+        }
+    }
+}
+
+@@ The following two paragraphs are taken from page 395 of the Volgenant 
+and Jonker paper.
+It assumes that the $\lambda$ vector is all-zero.  Furthermore, it
+takes vertex 1 as the distinguished node, while we take vertex $n-1$
+as the distinguished node.  Edges in the 1-tree are called {\sl branches\/}
+and all others are {\sl chords}.
+
+Let $(1,p)$ and $(1,q)$ be branches of the minimal 1-tree $T$, and 
+$c(1,p) \le c(1,q)$.  Let $m$ be an index with 
+$c(1,m) = \min \{ c(1,j)\mid j \in N, j \not= p, q\}$.
+It is easy to see that:  the 1-trees $T^-(1,p)$ and $T^-(1,q)$
+follow from $T$ by exchanging
+branch $(1,p)$ respectively $(1,q)$ with chord $(1,m)$.
+
+So branch $(1,j)$ is indispensable if $l(T^-_{1j}) = l(T)-c(1,j)+c(1,m)>u$
+and a chord $(1,j)$ is superfluous if $l(T^+_{1j}) = l(T)+c(1,j)-c(1,q)>u$.
+
+
+@@<Process chords and branches incident to vertex |n-1|@@>=
+{	int p, q, j, m;
+	
+	@@<Find |p| and |q|@@>@@;
+	@@<Find |m|@@>@@;
+
+	/* Indispensible branches */
+	if ( len - cost(n-1,p) - lambda[p] + cost(n-1,m) + lambda[m] > our_prune_len )
+		set_in(n-1,p);
+	if ( len - cost(n-1,q) - lambda[q] + cost(n-1,m) + lambda[m] > our_prune_len )
+		set_in(n-1,q);
+
+	/* Superfluous chords */
+	{ const base_len = len - cost(n-1,q) - lambda[q];
+	for ( j=0; j<n-1; j++ ) {
+		if ( !is_out(n-1,j) && base_len + cost(n-1,j)+lambda[j] > our_prune_len) 
+			set_out(n-1,j);
+	}
+	}
+}
+
+@@ To find |p| and |q| we just look at the edges in the 1-tree emanating from 
+vertex |n-1|.  Then make sure the ordering is right.
+@@<Find |p| and |q|@@>=
+{ int from, to;
+	from = onetree[n-1].edges->e.from;
+	to   = onetree[n-1].edges->e.to;
+	if ( from == n-1 ) {
+		p = to;
+		from = onetree[n-1].edges->from_next->e.from;
+		to   = onetree[n-1].edges->from_next->e.to;
+		q = from == n-1 ? to : from;
+	} else {
+		p = from;
+		from = onetree[n-1].edges->to_next->e.from;
+		to   = onetree[n-1].edges->to_next->e.to;
+		q = to == n-1 ? from : to;
+	}
+	if ( cost(n-1,p) > cost(n-1,q) ) { const int t = p; p = q; q = t; }
+}
+	
+@@
+@@<Find |m|@@>=
+{ int m_not_set = 1; double len_to_m=0;
+for ( j=0;j<n-1;j++ ) {
+	if ( j!=p && j!=q ) {
+		const len_to_j = cost(n-1,j)+lambda[j];
+		if ( m_not_set || len_to_j < len_to_m ) {
+			m_not_set = 0;
+			m = j;
+			len_to_m = len_to_j;
+		}
+	}
+}
+errorif( m_not_set,"%s:%d: m not set.", __FILE__,__LINE__);
+}
+
+
+@@ We treat chords not incident to vertex |n-1| in groups.
+@@<Process chords not incident to vertex |n-1|@@>=
+{ int i;
+	for ( i=0; i<n-1; i++ ) {
+		@@<Process chords from $i$ to non-$n-1$@@>@@;
+	}
+}
+
+@@
+For each vertex $i \not=n-1$, we look at all the chords with $i$ at one
+endpoint as follows.  We perform a depth-first search, rooted at $i$, 
+(excluding vertex $n-1$) of the given 1-tree.  At each stage, the stack
+represents a path in the 1-tree from the current vertex back to $i$.
+
+Let $j_1$ be the last vertex on the stack when we add vertex $j_2$.
+Then $(j_1,j_2)$ is a branch on the fundamental path of chord $(i,j_2)$.
+(Actually, this still works even if $(i,j_2)$ isn't a chord.)
+
+There is another important relationship between $j_1$ and $j_2$.
+Let $b$ be the longest branch branch on the fundamental path of $(i,j_1)$.
+Then the longest branch on the fundamental path of $(i,j_2)$ is either
+$e$ again, or is $(j_1,j_2)$.
+
+So along with the path back to $i$, we maintain a second stack which 
+records the length of the longest branch
+on the path encoded in the main depth-first-search stack.
+
+The |work| fields are the vertices on the path back to $i$.
+
+We use the |order| and |pred| fields to record the vertices as we visit 
+them in order, together with their
+parent.  (We record this order information
+on each one of the $n-1$ depth first searches but we use only the 
+last one.  Alas.)
+
+We will also later find it useful to record the shortest chord from 
+a given vertex. 
+
+@@<Type definitions@@>=
+typedef struct {
+	int work;
+	int visited;
+	int edge_used;
+	edge_list_t *e;
+	double len_longest_branch;
+	int order;
+	int parent;
+	double shortest_chord;
+	int shortest_from, shortest_to;
+	int invalid_shortest_chord;
+} stack_node_t;
+
+@@
+The depth-first search is performed as follows.  First all vertices 
+are unvisited and all edges are marked unused.
+
+When vertex $j$ is put on the stack, |top| is incremented, and then $j$ put into 
+|v[top].work|.  The list of unexamined edges emanating from |v[l].work|
+is always |v[l].e|.
+We mark edges when we use them so that we don't use them a second time
+to go backward.
+
+@@<Process chords from $i$ to non-$n-1$@@>=
+{ 	int k, top;
+
+for (k=0;k<n;k++) {
+	v[k].visited = 0;
+	v[k].edge_used = 0;
+}
+
+num_visited = 0;
+top = 0;
+v[0].work = i;
+v[0].e = onetree[i].edges;
+v[0].len_longest_branch=0; /* I assuming non-negative edge lengths. */
+while ( top >= 0 ) {
+	const int j = v[top].work;
+	const edge_list_t *e = v[top].e;
+	if ( !v[j].visited ) {
+		v[j].visited = 1;
+		v[num_visited].order = j;
+		if ( top > 0 ) v[num_visited].parent = v[top-1].work;
+		num_visited++;
+		@@<Check the chord from |i| to |j|@@>@@;
+	}
+	if ( e == NULL ) top--;
+	else {
+		const int dest = (e->e.from == j)? e->e.to : e->e.from;
+		v[top].e = (e->e.from == j)? e->from_next : e->to_next;
+		if ( !v[e-edge].edge_used ) {
+			v[e-edge].edge_used = 1;
+			if ( dest != n-1 && !v[dest].visited ) {
+				top++;
+				v[top].work = dest;
+				v[top].e = onetree[dest].edges;
+			}
+		}
+	}
+}
+}
+
+@@
+@@d max(A,B) ((A)<(B)?(B):(A))
+@@<Check the chord from |i| to |j|@@>=
+if ( top > 0 ) {
+	const int j1 = v[top-1].work;
+	const double lbj1 = v[top-1].len_longest_branch;
+	const double lj1j = cost(j1,j)+lambda[j1]+lambda[j];
+	
+	assert(i!=j);
+	v[top].len_longest_branch = max( lbj1, lj1j );
+
+	if ( len + cost(i,j) + lambda[i]+lambda[j] - v[top].len_longest_branch 
+		> our_prune_len )
+		set_out(i,j);
+}
+
+
+@@ To process the branches not incident to vertex |n-1| we do the following.
+(In the following we ignore vertex |n-1|, leaving a minimum spanning tree
+on the vertices $\{0,\ldots,n-2\}$.)
+
+We do a depth-first search on the minimum spanning tree that remains.
+Now look at the search as a sequence of visitations to branches of the
+tree.
+We incrementally maintain the shortest chords in
+the fundamental cutset of the branch we're currently visiting.
+
+How do we do this incrementally?
+For each unvisited vertex $k$ we record the length of the shortest chord
+from $k$ to a visited vertex.
+Now suppose we visit vertex $i$.
+Then for any unvisited vertex $k$, the new length of the shortest 
+chord to the visited verticies is either what it was before, or
+the length of the chord from $i$ to $k$.  (We use the |parent| field
+to only consider the edge $(i,k)$ when it is a chord and not a branch.)
+
+{\bf I've come to the conclusion that Volgenant and Jonker can't have 
+implemented this correctly.}  Their description is incomplete in the case
+when $d(j)>2$.  Their construction is as follows.  Suppose that the 
+fundamental cutset for $(i,j)$ has been computed, partitioning the set
+of vertices into  $S$ (those vertices on the $i$ side) and $\bar{S}$
+(those vertices on the $j$ side), and that the shortest chord from each
+vertex in $\bar{S}$ to any vertex in $S$.
+Now we want to visit the branch
+$(j,k)$.  
+Let $S'$ and $\bar{S}'$ be the fundamental cutset of $(j,k)$.
+Then they claim we need retrieve at most $n$ lengths to incrementally
+update the shortest chords array (for vertex $l\in \bar{S}'$, 
+by taking the min of 
+the previous shortest chord from $l$ to $S$ and the length from $l$ to $j$)
+and to find the shortest chord of the fundamental cutset of $(j,k)$.
+But I claim this is not possible 
+in the case that the degree of $j$ is greater than
+two because there is an arbitrarily large portion of the graph which switches
+from one side of the current branch (i.e. from $\bar{S}$) to the other 
+(i.e. to $S'$) when we go from examining $(i,j)$ to $(j,k)$, namely the
+portion of the graph hanging off any edges $(j,l)$ with $l\not=i,k$.
+
+So this is all bunk about being able to do it in $O(n^2)$ time.
+So skip it altogether.  Because the fastest way to do it correctly is
+$O(n^3)$, which is much too large when $n$ is large like 1000.
+
+@@<Process branches not incident to vertex |n-1|@@>=
+#if 0
+{ int j,k;
+
+	for ( j=0; j<num_visited ; j++ ) {
+		v[j].invalid_shortest_chord = 1;
+	}
+
+	for ( j=0; j<num_visited ; j++ ) { /* Visit |j| */
+		double shortest_chord; int shortest_from, shortest_to;
+		int invalid_min=1;
+		for ( k=j+1; k<num_visited ; k++ ) {
+			if ( v[k].parent != v[j].order ) {
+				/* Parents must appear earlier in the search than their children,
+				so this test catches all branches of the spanning tree. */
+				const double ljk = cost(v[j].order,v[k].order)+lambda[v[j].order]+lambda[v[k].order];
+				if (v[k].invalid_shortest_chord || ljk < v[k].shortest_chord ) {
+					v[k].shortest_chord = ljk;
+					v[k].shortest_from = v[k].order;
+					v[k].shortest_to = v[j].order;
+					v[k].invalid_shortest_chord = 0;
+				}
+			}
+			if ( !v[k].invalid_shortest_chord &&
+				( invalid_min || v[k].shortest_chord < shortest_chord ) ) {
+				invalid_min = 0;
+				shortest_chord = v[k].shortest_chord;
+				shortest_from  = v[k].shortest_from ;
+				shortest_to    = v[k].shortest_to;
+			}
+		}
+		{	const int jv=v[j].order, jpv=v[j].parent;
+			const double cjvjpv = cost(jv,jpv) + lambda[jv] + lambda[jpv];
+#if 0
+fprintf(stderr,"jv == %d, jpv == %d, its len == %f\n",jv,jpv,cjvjpv);
+fprintf(stderr,"    len == %f, (%d,%d) shortest_chord == %f, our_prune_len == %f\n",
+	len, shortest_from, shortest_to, shortest_chord, our_prune_len );
+fprintf(stderr,"    j == %d  invalid_min == %d\n", j, invalid_min );
+#endif
+		if ( j>0 && !invalid_min ) {
+			if ( shortest_chord < cjvjpv ) {
+				fprintf(stderr,"  Warning: (%d,%d) shortest_chord == %f < cjvjpv == %f\n",
+					shortest_from, shortest_to, shortest_chord, cjvjpv );
+			}
+			if ( len + shortest_chord - cjvjpv > our_prune_len )
+				set_in(jv,jpv);
+		}
+		}
+	}
+}
+#endif
+
+
+@@ Secondary effects are as follows.
+
+If there are two fixed in edges incident upon vertex $i$ then
+all other edges incident upon vertex $i$ should be fixed out.
+
+If there are exactly two edges incident upon vertex $i$ which are not
+fixed out, then they should be fixed in.
+
+@@<Process secondary effects@@>=
+{	int i,j, fn[2], num_fn;
+	
+
+	/* Rule 1 */
+	for (i=0;i<n;i++) {
+		num_fn = 0;
+		for ( j=0; j<n ;j++ ) {
+			if ( j==i ) continue;
+			if ( is_in(i,j) ) { 
+				if ( num_fn == 2 ) {canonical_tour();return;}
+				fn[num_fn++] = j;
+			}
+		}
+		if ( num_fn == 2 ) {
+			for ( j=0;j<n;j++ ) {
+				if ( j!=i && j!=fn[0] && j!=fn[1] ) set_out(i,j);
+			}
+		}
+	}
+
+	/* Rule 2 */
+	for (j=0;j<n;j++) {	/* Here we overload the |visited| field to mean 
+							{\sl unexcluded}. */
+		v[j].visited = 1;
+	}
+	for (i=0;i<n;i++) {
+		num_fn = 0;
+		for ( j=0;j<n;j++ ) {
+			if ( is_out(i,j) ) {
+				v[j].visited = 0;
+			} else {
+				num_fn++;
+			}
+		}
+		if ( num_fn < 2 ) {canonical_tour();return;}
+		if ( num_fn == 2 ) {
+			for (j=0;j<n;j++) {
+				if ( v[j].visited ) set_in(i,j);
+			}
+		}
+	}
+}
+
+@@ This is debugging output.  But it also usefully computes the number of
+available edges left. 
+@@<Local subroutines@@>=
+static int
+show_bits(void)
+{ int i,j, count_out=0, count_possible_out=0;
+extern int verbose;
+if ( verbose >= 700 ) printf("# fixed out \\ fixed in\n#");
+for (i=0;i<n;i++) {
+	debug_in_count[i]=0;
+	for (j=0;j<n;j++)
+		if ( is_in(i,j) ) debug_in_count[i]++;
+}
+for (i=0;i<n;i++) {
+	for(j=0;j<n;j++) {
+		char ch = '.';
+		if (i==j) ch = ' ';
+		else if ( i<j ) {
+			if ( is_in(i,j) ) {
+				ch = '1';
+			}
+		} else {
+			count_possible_out++;
+			if ( is_out(i,j) ) {
+				ch = '1';
+				count_out++;
+			}
+		}
+		if ( verbose >=700 ) putchar(ch);
+	}
+	if ( verbose >=700 ) printf("%c\n#",debug_in_count[i]>2?'*':' ');
+}
+printf("# Only %d out of a possible %d edges remain\n",
+	count_possible_out-count_out, count_possible_out );
+fflush(stdout);
+return  count_possible_out-count_out;
+}
+
+@@ In case we end up generating constraints which exclude all tours, then
+wipe them out and generate constraints for some tour.  
+This way we terminate any ascent which
+may be going on.  We arbitrarily pick the canonical tour.
+
+@@<Local subroutines@@>=
+static void
+canonical_tour(void)
+{
+	int i,j;
+printf("# Generating canonical_tour\n"); fflush(stdout);
+	@@<Wipe out all the bits@@>@@;
+	for (i=0;i<n;i++) {
+		set_in(i,(i+1)%n);
+	}
+	for (i=0;i<n-1;i++) {
+		for (j=0;j<i-1;j++) {
+			set_out(i,j);
+		}
+	}
+	for ( j=1; j<n-2 ; j++) set_out(n-1,j);
+	
+show_bits();
+}
+
+
+@@ The final product of this module is a table of the available edges.
+An edge is available if it hasn't been excluded due to the chord exchange
+rules given above.
+
+The number of available edges is stored in |num_available_edges|, and the
+edges themselves are stored in the |available_edge| array.  These are made
+globally accessible so that the Kruskal routine can use it.
+
+
+@@<Global variables@@>=
+int num_available_edges;
+edge_t *available_edge;
+
+@@
+@@<Exported variables@@>=
+extern int num_available_edges;
+extern edge_t *available_edge;
+
+@@ We remember the size of the currently allocated table in the variable
+|size_available_edge|.
+@@<Module-level variables@@>=
+static int size_available_edge;
+
+@@ Initialization of the table is easy.
+@@<Other allocations@@>=
+size_available_edge = 0;
+available_edge = new_arr_of( edge_t , 0 );
+
+@@ Deallocation is easy too.
+@@<Other deallocations@@>=
+free_mem(available_edge);
+
+@@ It is useful to know the boundary between edges incident to |n-1| and those
+which are not.  We remember this by keeping a count of the number of edges
+not incident to |n-1| in the variable |num_available_not_nm1|.
+
+@@<Global variables@@>=
+int num_available_not_nm1;
+
+@@
+@@<Exported variables@@>=
+extern int num_available_not_nm1;
+
+@@ By the time we get here, |num_available_edges| has been initialized to the
+exact number of edges which are available.
+@@<Generate the |available_edge| table@@>=
+if ( num_available_edges > size_available_edge ) {
+	free_mem(available_edge); mem_deduct(sizeof(edge_t)*size_available_edge);
+	size_available_edge = num_available_edges;
+	available_edge = new_arr_of(edge_t,size_available_edge);
+}
+{ int i,j,k;
+	num_available_not_nm1 = -1;
+	k = 0;
+	for ( i=0; i<n; i++ ) {
+		for ( j=0 ; j<i ; j++ ) {
+			if ( !is_out(i,j) ) {
+				if ( i==n-1 && num_available_not_nm1 == -1 ) {
+					num_available_not_nm1 = k;
+				}
+				available_edge[k].from = i;
+				available_edge[k].to   = j;
+				k++;
+			}
+		}
+	}
+	errorif( k!=num_available_edges, "k and num_available_edges disagree");
+}
+@
+
+
+1.4
+log
+@Last revision before depth paper.
+@
+text
+@d1 8
+d55 3
+@
+
+
+1.3
+log
+@Generate canonical tours.
+Generate a table of available edges.
+@
+text
+@@
+
+
+1.2
+log
+@Fixed some bugs.
+Noticed that Volgenant and Jonker's branch analysis is bogus.
+@
+text
+@d48 1
+d52 1
+d60 1
+d96 1
+d109 1
+d167 1
+a167 1
+		if ( verbose >= 200 ) {
+a168 1
+			fprintf(stderr, "# Fixing in (%d,%d)\n",from,to);
+d181 1
+a181 1
+		if ( verbose >= 200 ) {
+a182 1
+			fprintf(stderr,"# Fixing out (%d,%d)\n",from,to);
+d219 2
+a220 2
+fprintf(stderr,"Entering edge_exchange\n"); fflush(stderr);
+fprintf(stderr,"prune_len == %f incumbent_len == %f\n",prune_len, incumbent_len); fflush(stderr);
+a223 1
+fprintf(stderr,"To process the node constraints\n"); fflush(stderr);
+a224 1
+fprintf(stderr,"To process chords not incident to n-1 \n"); fflush(stderr);
+a226 1
+fprintf(stderr,"To process branches not incident to n-1 \n"); fflush(stderr);
+a227 1
+show_bits();
+a228 1
+fprintf(stderr,"To process chords and branches incident to n-1 \n"); fflush(stderr);
+a231 1
+fprintf(stderr,"To process secondary effects to n-1 \n"); fflush(stderr);
+d234 2
+a235 2
+show_bits();
+fprintf(stderr,"Leaving edge_exchange\n"); fflush(stderr);
+d603 2
+a604 1
+@@ This is debugging output.
+d606 1
+a606 1
+static void
+d610 1
+a610 1
+if ( verbose >= 300 ) fprintf(stderr,"fixed out \\ fixed in\n");
+d631 1
+a631 1
+		if ( verbose >=300 ) fputc(ch,stderr);
+d633 1
+a633 1
+	if ( verbose >=300 ) fprintf(stderr,"%c\n",debug_in_count[i]>2?'*':' ');
+d635 1
+a635 1
+fprintf(stderr,"Only %d out of a possible %d edges remain\n",
+d637 2
+a638 1
+fflush(stderr);
+d650 2
+a651 2
+	int i;
+fprintf(stderr,"Entering canonical_tour\n"); fflush(stderr);
+d656 7
+d664 70
+a733 1
+fprintf(stderr,"Leaving canonical_tour\n"); fflush(stderr);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d162 4
+a165 1
+		if ( verbose >= 200 ) printf("# Fixing in (%d,%d)\n",from,to);
+d177 4
+a180 1
+		if ( verbose >= 200 ) printf("# Fixing out (%d,%d)\n",from,to);
+a220 1
+show_bits();
+a222 1
+show_bits();
+d225 1
+a225 1
+show_bits();
+d229 1
+a231 1
+show_bits();
+d386 1
+d461 4
+a464 4
+(We use the depth-first ordering generated on the last search from
+the processing of chords not incident to |n-1|.)
+All the while, we incrementally maintain the shortest chords in
+the cutset defined by the partition of visited versus unvisited vertices.
+d475 26
+d502 1
+d510 1
+a510 1
+		double shortest_chord; 
+d513 1
+a513 1
+			if ( v[k].parent != j ) {
+d519 2
+d528 2
+d533 14
+a546 3
+		if ( j>0 && !invalid_min &&
+			len + shortest_chord - cost(jv,jpv) - lambda[jv] - lambda[jpv] < our_prune_len )
+			set_in(jv,jpv);
+d548 1
+d551 1
+d610 3
+a612 2
+{ int i,j;
+fprintf(stderr,"fixed out \\ fixed in\n");
+d620 14
+a633 2
+		fprintf(stderr,"%s", i==j ? " " : (i<j ? (is_in(i,j)?"1":"."):
+												 (is_out(i,j)?"1":".")));
+d635 5
+a639 3
+	
+	fprintf(stderr,"%c\n",debug_in_count[i]>2?'*':' ');
+} fflush(stderr);
+@

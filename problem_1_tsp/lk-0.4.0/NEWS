@@ -1,0 +1,7 @@
+Major changes in version 0.1.1:
+
+* Added module decluster.  It passes its own self-test.
+
+Major changes in version 0.1:
+
+* Use Autoconf, Automake, and conform to many GNU coding standards.

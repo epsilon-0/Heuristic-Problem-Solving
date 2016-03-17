@@ -1,0 +1,417 @@
+head	1.10;
+access;
+symbols
+	zero-four-zero:1.10;
+locks
+	neto:1.10;
+comment	@% @;
+
+
+1.10
+date	97.10.11.14.40.30;	author neto;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	97.08.15.16.46.44;	author neto;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	97.02.10.21.59.42;	author neto;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	97.02.10.19.49.22;	author neto;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	97.02.10.19.34.55;	author neto;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	97.02.10.19.14.23;	author neto;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	97.02.10.19.05.50;	author neto;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	97.01.21.17.39.15;	author david;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	97.01.17.20.25.56;	author neto;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	97.01.17.20.14.38;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Prolog for postscript output.
+@
+
+
+1.10
+log
+@Make drawing of number labels easily switchable.
+@
+text
+@%!PS-Adobe-3.0 EPSF-2.0
+%%Creator: David Neto, directly and indirectly
+%%%BoundingBox: 0 0 288 288
+%%Pages: 1
+%%Page: 1 1
+% The following is 4x4 inch, for EPS
+%BoundingBox: 0 0 288 288
+% The following is 7.75x7.75 inch, with title
+%BoundingBox: 54 90 612 720
+% Draw a graph with N nodes
+% edges.
+%
+% Written by David Neto (on his Linux machine, no less!)
+% Tue Aug  2 14:43:24 EDT 1994
+% Fri Nov 17 17:01:21 EST 1995
+% $Log: prolog.ps,v $
+% Revision 1.9  1997/08/15  16:46:44  neto
+% Added operator ue for printing edges from untransformed coordinates.
+%
+% Revision 1.8  1997/02/10  21:59:42  neto
+% Make the large display the default.
+%
+% Revision 1.7  1997/02/10  19:49:22  neto
+% Fixed up the DSC for ghostview.
+%
+% Revision 1.7  1997/02/10  19:49:22  neto
+% Fixed up the DSC for ghostview.
+%
+% Revision 1.6  1997/02/10  19:34:55  neto
+% Added a gsave at the beginning.
+%
+% Revision 1.5  1997/02/10  19:14:23  neto
+% Added ts which shows a dot at raw coordinates, transforming them
+% first.
+%
+% Revision 1.4  1997/02/10  19:05:50  neto
+% Made it more EPSF-friendly.
+%
+
+% The EPS file must end with "end grestore %EOF"
+
+gsave  
+100 dict begin    % Create a local scope for a few definitions 
+
+/drawnumberlabels false def
+/numberlabel 1 def
+/dotsize 1 def % 1 pt radius
+/size 7.75 72 mul def % 7.75 inch square bounding box
+/hoffset 8.5 72 mul size sub 2 div def
+/voffset 9 72 mul size sub def  % Remember the title
+/makeepsf { 
+	/dotsize .2 def 
+	/size 4 72 mul def
+	/hoffset 0 def
+	/voffset 0 def
+} def
+
+%makeepsf
+
+/x { % x -- scaledx
+	xmin sub 
+	xoffset add
+	maxrange div
+	size mul
+	hoffset add
+} def
+
+/y { % y -- scaledy
+	ymin sub 
+	yoffset add
+	maxrange div
+	size mul
+	voffset add
+} def
+
+/dot { % x y --
+        % Put a dot at this position
+        dotsize 0 360 arc fill 
+} def
+
+/circle { % x y --
+        % Put a circle at this position
+		gsave
+			0 setlinewidth
+			dotsize .5 add 0 360 arc stroke
+		grestore
+} def
+
+/bigdot { % i --
+		1 add dup 				% 1+i 1+i
+		xs exch get exch		% x 1+i
+		ys exch get				% x y
+        % Put a big dot at this position
+        5 0 360 arc stroke        % 5pt * scalingfactor radius
+} def
+
+/bigbigdot { % i --
+		1 add dup 				% 1+i 1+i
+		xs exch get exch		% x 1+i
+		ys exch get				% x y
+        % Put a big big dot at this position
+        7 0 360 arc stroke        % 7pt * scalingfactor radius
+} def
+
+/label { % string i --
+		1 add dup 				% s 1+i 1+i
+		xs exch get exch		% s x 1+i
+		ys exch get				% s x y
+		moveto 
+		-45 rotate 
+		show
+		45 rotate
+} def
+
+/labelall {
+	0 1 N 1 sub {
+		dup (        ) cvs exch label
+	} for
+} def
+
+/shownode { % i x y --
+	y exch
+	x exch
+	dot
+	pop
+} def
+
+% Draw a bounding box
+/boundingbox { % -- 
+	newpath
+	xmin x ymin y moveto
+	xmax x ymin y lineto
+	xmax x ymax y lineto
+	xmin x ymax y lineto
+	closepath
+	stroke
+} def
+
+
+/s { % i xcoord ycoord --
+	ys			% i xcoord ycoord ys  
+	3 index		% i xcoord ycoord ys i
+	3 -1 roll 	% i xcoord ys i ycoord 
+	y			% i xcoord ys i transformedy
+	put			% i xcoord
+	x			% i transformedx
+	xs			% i transformedx xs
+	3 1 roll 	% xs i transformedx
+	put			% 
+} def
+
+/sfcs { % i xcoord ycoord --
+	s
+} def
+
+/ts { % raw-x raw-y --     % Draw dot at transformed x and y
+	drawnumberlabels {  % Should we draw labels too?
+		y exch x exch 
+		1 index 1 index
+		dot
+		gsave
+			% /Helvetica 10 findfont scalefont setfont
+			moveto
+			numberlabel (             ) cvs ( ) show show
+			/numberlabel numberlabel 1 add def
+		grestore
+	} {
+		y exch x exch dot
+	} ifelse
+} def
+
+/rawedge { % x1 y1 x2 y2 -- % draw an edgefrom finalx to finaly
+	newpath moveto lineto stroke
+} def
+
+/ue { % ux1 uy1 ux2 uy2 -- % draw an edge from point (x1,y1) to (x2,y2)
+	% The coordinates are given in untransformed versions.
+	y 4 1 roll	
+	x 4 1 roll	
+	y 4 1 roll	
+	x 4 1 roll	
+	rawedge
+} def
+	
+/edge { % i j -- 
+	/j exch 1 add def
+	/i exch 1 add def
+	xs i get ys i get 
+	xs j get ys j get
+	rawedge
+} def
+
+/inedge { % i j --
+	gsave 8 setlinewidth 0.2 setgray edge grestore } def
+
+/outedge { % i j --
+	gsave 8 setlinewidth 0.8 setgray edge grestore } def
+
+/drawcities {
+	1 1 N { dup xs exch get exch ys exch get dot } for
+} def
+
+/Helvetica findfont 5 scalefont setfont
+
+/title { % string -- 
+	gsave
+	72 9.5 72 mul moveto
+	/Helvetica findfont 24 scalefont setfont
+	show
+	grestore
+} def
+
+newpath
+% FILE-SPECIFIC HERE
+@
+
+
+1.9
+log
+@Added operator ue for printing edges from untransformed coordinates.
+@
+text
+@d3 1
+a3 1
+%%BoundingBox: 0 0 288 288
+d17 3
+d45 2
+d157 13
+a169 1
+	y exch x exch dot
+@
+
+
+1.8
+log
+@Make the large display the default.
+@
+text
+@d17 3
+d157 9
+@
+
+
+1.7
+log
+@Fixed up the DSC for ghostview.
+@
+text
+@d17 6
+d50 1
+a50 1
+makeepsf
+@
+
+
+1.6
+log
+@Added a gsave at the beginning.
+@
+text
+@a2 1
+% The following is 4x4 inch
+d4 5
+a8 1
+% The following is 7.75x7.75 with title
+a9 1
+%%Pages: 1
+d17 3
+a26 1
+%%Page: 1 1
+@
+
+
+1.5
+log
+@Added ts which shows a dot at raw coordinates, transforming them
+first.
+@
+text
+@d2 1
+d15 4
+d24 4
+a27 1
+40 dict begin    % Create a local scope for a few definitions 
+@
+
+
+1.4
+log
+@Made it more EPSF-friendly.
+@
+text
+@d13 4
+a16 1
+% $Log$
+d130 3
+@
+
+
+1.3
+log
+@Added rawedge facility.
+@
+text
+@d1 5
+a5 1
+%!PS-Adobe-3.0
+d13 1
+d22 8
+d128 1
+a128 1
+/rawedge { x1 y1 x2 y2 -- % draw an edgefrom finalx to finaly
+d130 1
+a130 1
+}
+@
+
+
+1.2
+log
+@Added a circle option.
+@
+text
+@d63 1
+a63 1
+/label { % s i --
+d115 3
+d122 3
+a124 4
+	newpath
+	xs i get ys i get moveto
+	xs j get ys j get lineto
+	stroke
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d13 1
+d36 9
+a44 1
+        1 0 360 arc fill        % 1pt 
+d108 4
+@

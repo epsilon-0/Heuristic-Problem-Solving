@@ -1,0 +1,17 @@
+#! @PERL@
+# @configure_input@
+# probe.pl
+# Extract probe and move depth from a LK output file.
+
+open(IN, "zcat @ARGV |");  # Uncompress input files.
+open(POUT ,">probe.gpl");
+open(MOUT ,">move.gpl");
+while(<IN>) {
+	if( m/p (\d+) citydeep (\d+)/ ) {
+		print POUT "$1 $2\n";
+	} elsif( m/m (\d+) citydeep (\d+)/ ) {
+		print MOUT "$1 $2\n";
+	}
+}
+close(POUT);
+close(MOUT);

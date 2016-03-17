@@ -1,0 +1,1569 @@
+head	1.21;
+access;
+symbols
+	zero-four-zero:1.21;
+locks
+	neto:1.21;
+
+
+1.21
+date	98.05.22.17.03.26;	author neto;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	98.05.21.20.34.29;	author neto;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	98.05.21.19.29.35;	author neto;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	98.05.21.19.20.24;	author neto;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	95.11.17.16.08.25;	author neto;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	95.05.30.17.26.57;	author neto;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	95.05.30.16.35.47;	author neto;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	95.05.17.11.48.08;	author neto;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	95.04.07.16.18.39;	author neto;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	95.04.07.15.43.25;	author neto;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	95.04.03.17.02.25;	author neto;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	95.03.23.13.55.06;	author neto;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	95.01.24.13.00.23;	author neto;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	95.01.13.16.32.04;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@Branch and bound code data definitions
+@
+
+
+1.21
+log
+@Got rid of non-tested parallel data structures.
+@
+text
+@@@i webdefs.w
+@@i copyrt.w
+@@i types.w
+
+{\obeylines
+$Log: hk.w,v $
+Revision 1.20  1998/05/21 20:34:29  neto
+Excised Wayne Hayes' heap routines.
+
+Revision 1.19  1998/05/21 19:29:35  neto
+Fixed up standard CWEB thingies and Log stuff.
+
+}
+
+@@*Held-Karp lower bounds for the TSP.
+
+@@ The outline of this module is as follows:
+@@c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <assert.h>
+#include <math.h>
+#include "hk.h"
+#include "prim.h"
+#include "kruskal.h"
+#include "upper.h"
+#include "memory.h"
+#include "error.h"
+#include "ascend.h"
+#include "ee.h"
+
+
+@@<Module-level variables@@>@@;
+@@<Global variables@@>@@;
+@@<Module subroutines@@>@@;
+@@<Subroutines@@>@@;
+
+@@ The exported interface is contained in the {\tt hk.h} header file,
+which has the following form.
+
+@@(hk.h@@>=
+@@<Exported type definitions@@>@@;
+@@<Exported variables@@>@@;
+@@<Exported subroutines@@>@@;
+
+
+@@ The branch and bound search tree consists of nodes, each of which specifies
+a subproblem by a set of constraints.  
+Each node specifies one edge constraint in conjunction with all the
+constraints specified by its ancestors in the tree.
+The |e| field specifies the edge that is either fixed into or out of
+the tours, depending on the value of the |in_out| field.
+The |parent| field points to the parent subproblem's node in the search
+tree, thus allowing the rest of the constraints to be found.
+
+The |from_next| field points to the nearest ancestor having a 
+fixed out constraint
+involving an edge incident upon the |e.from| vertex.  The |to_next|
+field is similar.  
+These are used to thread together 
+all exclusion constraints involving
+a particular vertex.
+
+
+@@<Exported type definitions@@>=
+typedef enum { FIXED_IN, FIXED_OUT, FIXED_NEITHER } in_out_t;
+
+typedef struct { int from, to;
+} edge_t;
+
+typedef struct search_node_s {
+	in_out_t in_out;
+	edge_t e;
+	struct search_node_s *parent, *from_next_out, *to_next_out, 
+					*from_next_in, *to_next_in;
+	double lower_bound;
+	double *lambda;
+	int node_num, parent_num;
+	double alpha;
+	unsigned long seq_num;
+} search_node_t;
+
+@@ We will be computing many 1-trees on the same underlying graph.  
+To
+save time we will allocate the data structures once for each graph.
+The allocation of these data structures depends on |n|, 
+the number of vertices in
+the graph.
+
+@@<Module-level variables@@>=
+static int n;
+
+@@ The setup and cleanup routines are as follows.
+@@<Subroutines@@>=
+void
+hk_setup(const int num_vertices)
+{
+	int i;
+	n = num_vertices;
+	@@<Allocate the space needed for onetrees@@>@@;
+	prim_setup(n);
+#if 0
+	branch_setup(n);
+#endif
+	ascend_setup(n);
+#if 0
+	ee_setup(n);
+	kruskal_setup(n);
+#endif
+}
+
+void
+hk_cleanup(void)
+{
+	int i;
+	@@<Free the space allocated for onetrees@@>@@;
+	prim_cleanup();
+#if 0
+	branch_cleanup();
+#endif
+	ascend_cleanup();
+#if 0
+	ee_cleanup();
+	kruskal_cleanup();
+#endif
+}
+
+@@
+@@<Exported subroutines@@>=
+void hk_setup(const int num_vertices);
+void hk_cleanup(void);
+
+@@ Each time we compute a 1-tree we get back an array 
+indexed by vertex number.
+The $i$'th entry of the |onetree| array consists of two fields.
+The first is a pointer to the head
+of the list of edges used in the 1-tree that have $i$ as an endpoint.
+The second is the degree of the $i$th vertex, less 2.
+The third is the number of fixed-in edges incident upon vertex $i$.
+
+The edges themselves are stored in the |edge| array.
+
+@@<Exported type definitions@@>=
+typedef struct edge_list_s {
+	edge_t e;
+	struct edge_list_s *from_next, *to_next;
+} edge_list_t;
+
+typedef struct onetree_node_s {
+	edge_list_t *edges;
+	int degree_less2;
+	int a_fixed_in_dest;
+} onetree_node_t;
+
+@@
+@@<Module-level variables@@>=
+static edge_list_t **edge;
+static onetree_node_t **onetree;
+
+@@
+@@<Allocate the space needed for onetrees@@>=
+edge = new_arr_of(edge_list_t,n);
+onetree = new_arr_of(onetree_node_t,n);
+
+@@
+@@<Free the space allocated for onetrees@@>=
+free_mem(edge);mem_deduct(sizeof(edge_list_t)*n);
+free_mem(onetree);mem_deduct(sizeof(onetree_node_t)*n);
+
+@@ The best tour found so far in the search is called the {\it incumbent}.
+Its length is stored in |incumbent_len| and its edges are stored in
+|incumbent_edges|.  The way it was derived is stored in |incumbent_kind|,
+whose values are chosen from the enumerated type |incumbent_kind_t|.
+
+The lambda vector associated with the best 1-tree without constraints is
+stored in |GLB_lambda|.  It is used in other modules to measure the
+benefit of the ascent scheme after the initial ascent.
+
+@@<Global variables@@>=
+volatile double incumbent_len;
+edge_list_t *incumbent_edges;
+incumbent_kind_t incumbent_kind;
+double *GLB_lambda;
+
+
+@@ The following type enumerates the ways in which the incumbent was found.
+@@<Exported type definitions@@>=
+typedef enum { CANONICAL, RANDOM, DOUBLE_ONETREE, NEAREST_NEIGHBOUR, 
+	ARBITRARY_INSERTION, ONETREE, PSEUDO } incumbent_kind_t;
+
+@@
+@@<Exported variables@@>=
+extern volatile double incumbent_len;
+extern edge_list_t *incumbent_edges;
+extern incumbent_kind_t incumbent_kind;
+extern double *GLB_lambda;
+
+
+@@
+@@<Allocate the space needed for onetrees@@>=
+incumbent_edges = new_arr_of(edge_list_t,n);
+
+@@
+The priority queue heap routines need a comparison function, served by
+|bf_cmp_search_nodes| and |df_cmp_search_nodes|.
+
+I assume that the root search tree node, represented by |NULL| is never
+stored in the heap.
+
+@@<Subroutines@@>=
+
+int
+bf_cmp_search_nodes(void *a, void *b) /* Best first search */
+{
+	const double al =  ((search_node_t*)(a))->lower_bound;
+	const double bl =  ((search_node_t*)(b))->lower_bound;
+	unsigned long as = ((search_node_t*)(a))->seq_num;
+	unsigned long bs = ((search_node_t*)(b))->seq_num;
+	if ( al < bl)  return -1;
+	if ( al > bl)  return 1;
+	/* Now that they've got equal lower bounds, resort to depth first */
+	if ( as > bs ) return -1; else return 1;
+	return 0;
+}
+
+int
+df_cmp_search_nodes(void *a, void *b) /* Depth first search */
+{
+	unsigned long as = ((search_node_t*)(a))->seq_num;
+	unsigned long bs = ((search_node_t*)(b))->seq_num;
+	if ( as > bs ) return -1; else return 1;
+	return 0;
+}
+
+
+@@ We count the number of 1-trees computed, and the number of subproblems
+generated, and the number of ascents performed.  The number of ascents
+is always less than or equal to the number of subproblems; it can be
+strictly less in the case that some subproblems are discarded because
+they have a lower bound which is greater than an upper bound discovered
+since their creation.
+
+We also add up the size of the heaps in the variable |sum_heapsizes|
+so that the average number of problems on the queue can be computed
+as |sum_heapsizes/count_heapascent|.
+
+We also maintain the maximum number of active nodes in |max_heap_size|.
+
+@@<Global variables@@>=
+unsigned long count_onetree, count_subproblem, count_ascent, count_heapascent,max_heap_size;
+double sum_heapsizes, sum_sq_heapsizes;
+
+
+@@ On the initial ascent or if |thousands(method)==0|, 
+we use Prim's algorithm to compute minimum 1-trees.
+On subsequent ascents when |thousands(method)=1|, we use Kruskal's algorithm
+instead.  We parameterize which routine will be executed by the function
+pointer |compute_onetree|.
+
+@@<Global variables@@>=
+double (*compute_onetree)(search_node_t *bbnode,
+    edge_list_t *edge, onetree_node_t *onetree, double *lambda,
+    const int use_edge_exchanges);
+
+@@
+@@<Exported variables@@>=
+extern double (*compute_onetree)(search_node_t *bbnode,
+    edge_list_t *edge, onetree_node_t *onetree, double *lambda,
+    const int use_edge_exchanges);
+
+@@ Here's the top level of the branch and bound algorithm.
+The function |do_seq_test| returns the length of the optimal tour.
+It also stores this length in |incumbent_len| and the edges of the
+tour in |incumbent_edges|.
+
+
+@@<Subroutines@@>=
+double 
+do_seq_test(const int method, FILE *debug_ps)
+{
+	extern int verbose;
+	int is_tour;
+	int bb_node_num = 0;
+	dict_t *pending, *discard, *new_pending;
+	const int use_double_queue = 0 || tenthousands(method)==1;
+	double len, GLB;	/* General Lower Bound */
+	edge_list_t *GLB_edge = new_arr_of(edge_list_t,n);
+	onetree_node_t *GLB_onetree = new_arr_of(onetree_node_t,n);
+
+	/* Variables used in the branch and bound section. */
+	const double fudge_factor = 1.015;
+	extern double VJ_missed_fudge_factor;
+	double VJ_fudge_factor = 1.0 + VJ_missed_fudge_factor;
+	incumbent_kind_t prune_kind;
+	search_node_t *bbnode;
+	double old_prune_len = -1.0;
+
+	GLB_lambda = new_arr_of(double,n);
+	switch(tenthousands(method)) {
+	case 0: 
+		pending = dict_create(bf_cmp_search_nodes,NULL);
+		discard = dict_create(bf_cmp_search_nodes,NULL);
+		new_pending = dict_create(bf_cmp_search_nodes,NULL);
+		break;
+	case 1:
+		pending = dict_create(df_cmp_search_nodes,NULL);
+		discard = dict_create(df_cmp_search_nodes,NULL);
+		new_pending = dict_create(df_cmp_search_nodes,NULL);
+		break;
+	default:
+		errorif(1,"Invalid tenthousands(method)==%d\n",tenthousands(method));
+	}
+
+	count_onetree = count_ascent = count_heapascent = 0;
+	sum_heapsizes = sum_sq_heapsizes = 0.0;
+	count_subproblem = 1;
+	max_heap_size = 0;
+	mem_usage_reset();
+
+printf("# Before upper\n");
+fflush(stdout);
+
+	upper(n);	/* Produce some upper bounds and an incumbent */
+root_restart:
+	compute_onetree = prim_onetree;
+	{int i; for (i=0;i<n;i++) GLB_lambda[i] = 0.0;}
+	@@<Set initial upper bounds@@>@@;
+	printf("# Before initial ascent\n"); fflush(stdout);
+	GLB = ascend(n,NULL,0,GLB_edge,GLB_onetree,GLB_lambda,&is_tour,method);
+	printf("# After initial ascent\n"); fflush(stdout);
+	if ( verbose >= 10 ) { char s[100];
+		sprintf(s,"Initial ascent: best 1-tree with no constraints; length %f",
+			(float) GLB);
+		show_onetree(debug_ps,s,n,NULL,GLB_edge);
+	}
+	if ( GLB < incumbent_len && is_tour ) {
+		edge_list_t *t = incumbent_edges;
+		incumbent_edges = edge;
+		edge = t;
+		incumbent_len = GLB;
+		incumbent_kind = ONETREE;
+		show_bb_node(NULL,bb_node_num++,GLB,'t');
+	} else if ( GLB == incumbent_len ) {
+		show_bb_node(NULL,bb_node_num++,GLB,'a');
+		return incumbent_len;
+	} else {	/* We weren't extremely lucky */
+		show_bb_node(NULL,bb_node_num++,GLB,'a');
+		@@<Branch and bound@@>@@;
+		if (verbose) {	
+			printf("# incumbent_len == %f\n",incumbent_len);
+			fflush(stdout);
+		}
+	}
+	mem_report();
+	return incumbent_len;
+}
+
+
+@@
+@@<Exported subroutines@@>=
+double do_seq_test(const int method);
+double do_par_test(search_node_t *current_search_node,double *lambda,
+	int team_id, int num_threads);
+
+@@ 
+@@d hundreds(x)  (((x)/100)%10)
+@@d thousands(x)  (((x)/1000)%10)
+@@d tenthousands(x)  (((x)/10000)%10)
+
+@@<Branch and bound@@>=
+target_len = GLB * fudge_factor;
+prune_kind = PSEUDO;
+
+branch(pending,GLB,NULL,0,GLB_edge,GLB_onetree,GLB_lambda);
+
+while ( dict_size(pending)+dict_size(discard) > 0 ) {
+	@@<Update fictitious upper bounds (depth-first)@@>@@;
+	while ( dict_size(pending) > 0 ) {
+		bbnode = dict_delete_min(pending);
+		@@<Update fictitious upper bounds (best-first)@@>@@;
+		@@<|continue| if this node's lower bound exceeds the pruning bound@@>@@;
+		@@<Collect heap size statistics@@>@@;
+		len = ascend(n,bbnode,0,edge,onetree, bbnode->lambda,&is_tour,method);
+		fflush(stdout);
+		if ( verbose >= 100 ) show_onetree(debug_ps,NULL,n,bbnode,edge);
+		assert( prune_len <= incumbent_len );
+		if ( len < incumbent_len ) {
+			if (is_tour) {
+				edge_list_t *t = incumbent_edges; incumbent_edges = edge; edge = t;
+				incumbent_len = len;
+				if ( len <= prune_len ) {
+					prune_len = len;
+					prune_kind = incumbent_kind = ONETREE;
+				}
+				if ( verbose && debug_ps ) {
+					extern int pageno; 
+					char s[100]; sprintf(s,"Tour len %f",(float)len);
+					show_onetree(debug_ps,s,n,bbnode,edge);
+					printf("#  Tour on page %d\n", pageno-1);
+				}
+				show_bb_node(bbnode,bb_node_num++,len,'t');
+				if ( prune_len < len ) {
+					/* We found a tour here, but there might be shorter tours
+					  here using edges that we've eliminated due to a too-short
+                      pruning bound.  So we must keep this node around. */
+					if ( len > bbnode->lower_bound ) bbnode->lower_bound = len;
+					@@<Discard this node due to pruning bound@@>@@;
+				} else {
+					free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+					free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+				}
+			} else if ( len < prune_len ) {
+				show_bb_node(bbnode,bb_node_num++,len,'a');
+				branch(pending,len,bbnode,0,edge,onetree,bbnode->lambda);
+				free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+			} else {
+				show_bb_node(bbnode,bb_node_num++,len,'u');
+				if ( len > bbnode->lower_bound ) bbnode->lower_bound = len;
+				@@<Discard this node due to pruning bound@@>@@;
+			}
+		} else {
+			/* We must be careful because of the chord exchange analysis. */
+			show_bb_node(bbnode,bb_node_num++,len,'r');
+			if ( len > bbnode->lower_bound ) bbnode->lower_bound = len;
+			@@<Discard this node due to pruning bound@@>@@;
+		}
+	}
+	printf("# unfathomed list is exhausted.  prune_kind == %sPSEUDO\n", 
+		prune_kind == PSEUDO ? "" : "non-");
+	
+	if ( prune_kind == PSEUDO ) {
+		if ( ceil(prune_len) >= incumbent_len ) {
+			/* An optimal tour was found by the upper bounding heuristics. */
+			prune_kind = incumbent_kind;
+			prune_len = incumbent_len;
+		} else {
+			switch( ones(method) ) {
+			case 0:
+				target_len *= fudge_factor;
+				break;
+			case 1:
+				VJ_fudge_factor += VJ_missed_fudge_factor; 
+				while ( target_len < VJ_fudge_factor * GLB )
+					target_len *= fudge_factor;
+				break;
+			case 2:
+				break;
+			}
+		
+			switch(hundreds(method)) {
+			case 0: 
+				errorif( dict_size( use_double_queue ? discard : pending )==0,
+					"Restarting from leaves but list exhausted while still |PSEUDO|");
+				break;
+			case 1: 
+				dict_delete_all(discard,NULL);
+				dict_delete_all(pending,NULL);
+				goto root_restart; 
+				break;
+			default: errorif(1,"Invalid hundreds(method)==%d",hundreds(method));
+			}
+		}
+	}
+	if ( use_double_queue ) { 
+		dict_t *t = pending; pending = discard; discard = t; 
+	}
+}
+errorif( prune_kind == PSEUDO, "prune is still PSEUDO!");
+
+
+@@ We use two kinds of fictitous upper bounds.  To prune the tree we 
+use |prune_len|.  For the step lengths in the ascent, we use |target_len|.
+
+@@<Global variables@@>=
+volatile double prune_len, target_len;
+
+@@ @@<Exported variables@@>=
+extern volatile double prune_len, target_len;
+
+@@ For the initial ascent these are just the legngth of the best known
+upper bound.
+@@ @@<Set initial upper bounds@@>=
+prune_len = target_len = incumbent_len;
+
+
+@@ For all other ascents we go as follows.
+@@d ones(x) (x%10)
+@@<Update fictitious upper bounds (best-first)@@>=
+if ( tenthousands(method)==0){
+	while ( bbnode->lower_bound >= target_len ) {
+		target_len *= fudge_factor;	
+	}
+	if ( target_len >= incumbent_len ) target_len = incumbent_len;
+
+	switch( ones(method) ) {
+	case 0:
+		prune_len = target_len;
+		break;
+	case 1:
+		prune_len = GLB * VJ_fudge_factor; 
+		while ( bbnode->lower_bound >= prune_len ) {
+			VJ_fudge_factor += VJ_missed_fudge_factor;
+			prune_len = GLB * VJ_fudge_factor; 
+		}
+		while ( prune_len >= target_len ) target_len *= fudge_factor;	
+		if ( target_len >= incumbent_len ) target_len = incumbent_len;
+		break;
+	case 2:
+		prune_len = floor( (double)1.0 + bbnode->lower_bound );
+		break;
+	default:
+		errorif(1,"%s:%d: ones(method)==%d",__FILE__,__LINE__,ones(method));
+	}
+
+	if ( prune_len < old_prune_len ) prune_len = old_prune_len;
+
+	if ( prune_len >= incumbent_len ) {
+		prune_len = incumbent_len;
+		prune_kind = incumbent_kind;
+	}
+
+	if ( prune_len != old_prune_len ) {
+		old_prune_len = prune_len;
+		if ( verbose ) {
+			printf("# prune_len == %f  incumbent_len == %f\n", prune_len, incumbent_len );
+		}
+		if ( thousands(method) ) {
+			edge_exchanges(NULL,GLB_edge,GLB_onetree,GLB_lambda,GLB);
+			compute_onetree = onetree_kruskal;
+			@@<Recompute the lower bounds@@>@@;
+			continue;
+		}
+	}
+}
+
+@@
+@@<Discard this node due to pruning bound@@>=
+if ( prune_kind == PSEUDO ) {
+	switch( hundreds(method) ) {
+	case 0: 	/* Using restart from leaves */
+		bbnode->parent_num = bbnode->node_num;
+		dict_insert( (use_double_queue ? discard : pending), bbnode); 
+		break;
+	case 1: 	/* Really discard it.  Using restart from root. */
+		free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+		free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+		break;
+	default: errorif(1,"hundreds(method)==%d",hundreds(method));
+	}
+} else {
+	free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+	free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+}
+
+@@ 
+@@<|continue| if this node's lower bound exceeds the pruning bound@@>=
+printf("# prune_len == %f   bbnode->lower_bound == %f\n",
+	prune_len, bbnode->lower_bound); fflush(stdout);
+if ( prune_len <= bbnode->lower_bound ) {
+	show_bb_node(bbnode,bb_node_num++,bbnode->lower_bound,'>');
+	@@<Discard this node due to pruning bound@@>@@;
+	continue;	
+}
+
+@@
+@@<Collect heap size statistics@@>=
+{ const int heap_size = dict_size(pending)+1;
+if ( heap_size > max_heap_size )  {
+	max_heap_size = heap_size;
+}
+sum_heapsizes += heap_size;
+sum_sq_heapsizes += heap_size*heap_size;
+count_heapascent++;
+}
+
+@@
+@@<Update fictitious upper bounds (depth-first)@@>=
+if ( tenthousands(method)==1) {
+	if ( target_len >= incumbent_len ) target_len = incumbent_len;
+
+	switch( ones(method) ) {
+	case 0:
+		prune_len = target_len;
+		break;
+	case 1:
+		prune_len = GLB * VJ_fudge_factor; 
+		while ( prune_len >= target_len ) target_len *= fudge_factor;	
+		if ( target_len >= incumbent_len ) target_len = incumbent_len;
+		break;
+	case 2:
+		errorif(1,"Can't combine depth-first with ultra-aggressive");
+		break;
+	default:
+		errorif(1,"Invalid ones(method)==%d",ones(method));
+	}
+
+	if ( prune_len < old_prune_len ) prune_len = old_prune_len;
+
+	if ( prune_len >= incumbent_len ) {
+		prune_len = incumbent_len;
+		prune_kind = incumbent_kind;
+	}
+
+	if ( prune_len != old_prune_len ) {
+		old_prune_len = prune_len;
+		if ( verbose ) {
+			printf("# prune_len == %f  incumbent_len == %f\n", prune_len, incumbent_len );
+		}
+		if ( thousands(method) ) {
+			edge_exchanges(NULL,GLB_edge,GLB_onetree,GLB_lambda,GLB);
+			compute_onetree = onetree_kruskal;
+			bbnode = dict_delete_min( (dict_size(pending)>0) ? pending : discard );
+			@@<Recompute the lower bounds@@>@@;
+			continue;
+		}
+	}
+}
+
+@@ When we increase the pruning bounds and compute a new, possibly larger,
+available edge set, this invalidates the lower bounds for all the nodes.
+So we must recompute them.
+
+The nodes to be recomputed are in the |bbnode| variable, in the |pending|
+queue and the |discard| queue.
+
+@@<Recompute the lower bounds@@>=
+	@@<Recompute the lower bound for |bbnode|@@>@@;
+	dict_insert(new_pending,bbnode);
+	while( dict_size(pending) > 0 ) {
+		bbnode = dict_delete_min(pending);
+		@@<Recompute the lower bound for |bbnode|@@>@@;
+		dict_insert(new_pending,bbnode);
+	}
+	while( dict_size(discard) > 0 ) {
+		bbnode = dict_delete_min(pending);
+		@@<Recompute the lower bound for |bbnode|@@>@@;
+		dict_insert(new_pending,bbnode);
+	}
+	{ dict_t *t = pending; pending = new_pending; new_pending=t;}
+
+@@  We might consider checking for a new incumbent here, but that seems so
+remote a possibility that it seems hardly worth the computational effort.
+
+NOTE: This assumes that the $\sum \lambda_i = 0$, which is guaranteed by
+the update rules for the $\lambda$ vector.
+
+@@<Recompute the lower bound for |bbnode|@@>=
+bbnode->lower_bound 
+	= ceil(compute_onetree(bbnode,edge,onetree,bbnode->lambda,1));
+
+@@*Verbose.
+@@<Module subroutines@@>=
+static void
+show_bb_node(search_node_t *bbnode, const int node_num, const double lower_bound,
+	const char kind)
+{
+	extern FILE *bb_out;
+	extern int verbose;
+	if ( verbose >= 50 && bb_out ) {
+		fprintf(bb_out,"%d %d %c %f\n",
+			node_num, 
+			bbnode ? bbnode->parent_num : -1,
+			kind, 
+			lower_bound);
+		if ( bbnode ) bbnode->node_num = node_num;
+		fflush(bb_out);
+	}
+}
+@
+
+
+1.20
+log
+@Excised Wayne Hayes' heap routines.
+@
+text
+@d7 3
+d89 1
+a89 1
+the graph, and |p|, the number of teams that will be working concurrently.
+a92 1
+static int p;
+d97 1
+a97 1
+hk_setup(const int num_vertices, const int num_teams)
+a100 1
+	p = num_teams;
+d104 1
+a104 1
+	branch_setup(n,p);
+d109 1
+a109 1
+	kruskal_setup(n,p);
+d131 1
+a131 1
+void hk_setup(const int num_vertices, const int num_teams);
+d150 1
+a150 1
+typedef struct Onetree_node_s {
+d163 2
+a164 6
+edge = new_arr_of(edge_list_t *,p);
+onetree = new_arr_of(onetree_node_t *,p);
+for (i=0;i<p;i++){
+	edge[i] = new_arr_of(edge_list_t,n);
+	onetree[i] = new_arr_of(onetree_node_t,n);
+}
+d168 2
+a169 6
+for (i=0;i<p;i++) {
+	free_mem(edge[i]);
+	free_mem(onetree[i]);
+}
+free_mem(edge);
+free_mem(onetree);
+d339 2
+a340 2
+		incumbent_edges = edge[0];
+		edge[0] = t;
+d384 1
+a384 1
+		len = ascend(n,bbnode,0,edge[0],onetree[0], bbnode->lambda,&is_tour,method);
+d386 1
+a386 1
+		if ( verbose >= 100 ) show_onetree(debug_ps,NULL,n,bbnode,edge[0]);
+d390 1
+a390 1
+				edge_list_t *t = incumbent_edges; incumbent_edges = edge[0]; edge[0] = t;
+d399 1
+a399 1
+					show_onetree(debug_ps,s,n,bbnode,edge[0]);
+d415 1
+a415 1
+				branch(pending,len,bbnode,0,edge[0],onetree[0],bbnode->lambda);
+d650 1
+a650 1
+	= ceil(compute_onetree(bbnode,edge[0],onetree[0],bbnode->lambda,1));
+@
+
+
+1.19
+log
+@Fixed up standard CWEB thingies and Log stuff.
+@
+text
+@d6 4
+a9 1
+$Log$
+a27 2
+#include "misc.h"	/* For |voint| */
+#include "heap.h"
+d213 1
+a213 3
+|bf_cmp_search_nodes| and |df_cmp_search_nodes|, 
+and a printing routine (which we don't use), served
+by |HeapTypePrint|.
+d221 1
+a221 1
+bf_cmp_search_nodes(voint a, voint b) /* Best first search */
+d223 4
+a226 4
+	const double al =  ((search_node_t*)(a.v))->lower_bound;
+	const double bl =  ((search_node_t*)(b.v))->lower_bound;
+	unsigned long as = ((search_node_t*)(a.v))->seq_num;
+	unsigned long bs = ((search_node_t*)(b.v))->seq_num;
+d235 1
+a235 1
+df_cmp_search_nodes(voint a, voint b) /* Depth first search */
+d237 2
+a238 2
+	unsigned long as = ((search_node_t*)(a.v))->seq_num;
+	unsigned long bs = ((search_node_t*)(b.v))->seq_num;
+a242 7
+void
+HeapTypePrint(voint a)
+{
+	if ( a.v == NULL ) printf("0 ");
+	else printf("%1.0f ",(float)(((search_node_t*)(a.v))->lower_bound));
+}
+
+d292 1
+a292 3
+	HEAP *pending; 
+	HEAP *discard; 
+	HEAP *new_pending; 
+a302 1
+	voint vv;
+d309 3
+a311 3
+		pending = HeapAlloc(1000,bf_cmp_search_nodes);
+		discard = HeapAlloc(1000,bf_cmp_search_nodes);
+		new_pending = HeapAlloc(1000,bf_cmp_search_nodes);
+d314 3
+a316 3
+		pending = HeapAlloc(1000,df_cmp_search_nodes);
+		discard = HeapAlloc(1000,df_cmp_search_nodes);
+		new_pending = HeapAlloc(1000,df_cmp_search_nodes);
+d384 1
+a384 1
+while ( HeapSize(pending)+HeapSize(discard) > 0 ) {
+d386 2
+a387 2
+	while ( HeapSize(pending) > 0 ) {
+		bbnode = HeapNext(pending).v;
+d460 1
+a460 1
+				errorif( HeapSize( use_double_queue ? discard : pending )==0,
+d464 2
+a465 2
+				HeapReset(discard);
+				HeapReset(pending);
+d473 1
+a473 1
+		HEAP *t = pending; pending = discard; discard = t; 
+d550 1
+a550 2
+		vv.v = bbnode; 
+		HeapInsert( (use_double_queue ? discard : pending), vv); 
+d575 1
+a575 1
+{ const int heap_size = HeapSize(pending)+1;
+d620 1
+a620 1
+			bbnode = HeapNext( (HeapSize(pending)>0) ? pending : discard ).v;
+d636 3
+a638 3
+	vv.v = bbnode; HeapInsert(new_pending,vv);
+	while( HeapSize(pending) > 0 ) {
+		bbnode = HeapNext(pending).v;
+d640 1
+a640 1
+		vv.v = bbnode; HeapInsert(new_pending,vv);
+d642 2
+a643 2
+	while( HeapSize(discard) > 0 ) {
+		bbnode = HeapNext(pending).v;
+d645 1
+a645 1
+		vv.v = bbnode; HeapInsert(new_pending,vv);
+d647 1
+a647 1
+	{ HEAP *t = pending; pending = new_pending; new_pending=t;}
+@
+
+
+1.18
+log
+@Some cleanup before insertion into LK.
+Use parameter-passed file handle for PS debugging output.
+Remove team number argument to onetree routines.
+@
+text
+@d5 6
+@
+
+
+1.17
+log
+@Last revision before depth paper.
+@
+text
+@d1 3
+d12 1
+a12 1
+#include "tsp.h"
+d26 1
+d29 1
+a29 1
+@@ The exported interface is contained in the {\tt tsp.h} header file,
+d32 1
+a32 1
+@@(tsp.h@@>=
+d88 1
+a88 1
+test_setup(const int num_vertices, const int num_teams)
+d94 2
+a95 1
+	prim_setup(n,p);
+d97 1
+d99 1
+d102 1
+d106 1
+a106 1
+test_cleanup(void)
+d111 1
+d113 1
+d115 1
+d118 1
+d123 2
+a124 2
+void test_setup(const int num_vertices, const int num_teams);
+void test_cleanup(void);
+d171 1
+a171 1
+@@ The best tour found so far in the search is called the {\em incumbent}.
+d271 1
+a271 1
+double (*compute_onetree)(search_node_t *bbnode,const int team_num,
+d277 1
+a277 1
+extern double (*compute_onetree)(search_node_t *bbnode,const int team_num,
+a287 18
+
+void
+show_bb_node(search_node_t *bbnode, const int node_num, const double lower_bound,
+	const char kind)
+{
+	extern FILE *bb_out;
+	extern int verbose;
+	if ( verbose >= 50 && bb_out ) {
+		fprintf(bb_out,"%d %d %c %f\n",
+			node_num, 
+			bbnode ? bbnode->parent_num : -1,
+			kind, 
+			lower_bound);
+		if ( bbnode ) bbnode->node_num = node_num;
+		fflush(bb_out);
+	}
+}
+
+d289 1
+a289 1
+do_seq_test(const int method)
+a290 1
+	extern FILE *debug;
+d338 1
+a338 1
+	compute_onetree = onetree_prim;
+d347 1
+a347 1
+		show_onetree(s,n,NULL,GLB_edge);
+a370 13
+#if __ksr__
+double 
+do_par_test(search_node_t *current_search_node, double *lambda,
+	int team_id, int num_threads)
+{
+	double len=0.0;
+#if 0
+	len = par_onetree_prim(current_search_node,0,edge[0],onetree[0], lambda,
+		team_id,num_threads);
+#endif
+	return len;
+}
+#endif
+d398 1
+a398 1
+		if ( verbose >= 100 ) show_onetree(NULL,n,bbnode,edge[0]);
+d408 1
+a408 1
+				if ( verbose && debug ) {
+d411 1
+a411 1
+					show_onetree(s,n,bbnode,edge[0]);
+d663 20
+a682 1
+	= ceil(compute_onetree(bbnode,0,edge[0],onetree[0],bbnode->lambda,1));
+@
+
+
+1.16
+log
+@Fixed the following subtle bug.  When we raise the pruning length
+we compute a possibly larger available edge set.  This invalidates
+the lower bounds for all the nodes, so we should recomput them.
+That's what this modification does.  (Also be careful in the situation
+where we find a tour that is longer than the current pruning bound: we
+should ``discard'' that node into the discard heap, not just throw it
+away.)
+bays29.tsp is an example of the first problem.  Now fixed.
+eil101 proves that we can get tours that are longer than the pruning
+bound (use method 1011 to see this: we get tour length 629 when the
+pruning length is 627.627).
+@
+text
+@d243 1
+a243 1
+as |sum_heapsizes/count_ascent|.
+d248 1
+a248 1
+unsigned long count_onetree, count_subproblem, count_ascent, max_heap_size;
+d334 1
+a334 1
+	count_onetree = count_ascent = 0;
+a411 1
+		@@<Collect heap size statistics@@>@@;
+d415 1
+d439 1
+d450 1
+a450 1
+				/* |len >= prune_len| so `discard' this node. */
+a451 1
+				show_bb_node(bbnode,bb_node_num++,len,'u');
+d455 1
+a455 1
+			/* |len >= incumbent_len|, so we can always discard it now. */
+d457 2
+a458 2
+			free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+			free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+d601 8
+a608 4
+if ( HeapSize(pending) > max_heap_size ) 
+	max_heap_size = HeapSize(pending);
+sum_heapsizes += HeapSize(pending);
+sum_sq_heapsizes += HeapSize(pending)*HeapSize(pending);
+d639 1
+d646 3
+a649 1
+		old_prune_len = prune_len;
+d683 1
+a683 1
+	= compute_onetree(bbnode,0,edge[0],onetree[0],bbnode->lambda,1);
+@
+
+
+1.15
+log
+@Added variable use_double_queue to allow easier switching between single
+and double queue implementations in restarting from leaves.
+@
+text
+@d303 1
+d323 1
+d328 1
+d435 9
+a443 2
+				free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+				free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+d556 1
+d563 2
+a565 1
+		old_prune_len = prune_len;
+d645 32
+@
+
+
+1.14
+log
+@Added depth-first selection rule (tenthousands(method)==1).
+Added use of edge-exchange analysis and use of Kruskal's algorithm.
+Use a double queue in case of depth-first rule.
+@
+text
+@d303 1
+d475 1
+a475 2
+				errorif( (tenthousands(method)==1&&HeapSize(discard)==0) 
+					||(tenthousands(method)==0&&HeapSize(pending)==0),
+d487 1
+a487 1
+	if ( tenthousands(method) ) { 
+d564 1
+a564 1
+		HeapInsert( (tenthousands(method)==0? pending : discard),vv); 
+@
+
+
+1.13
+log
+@Added threading of from_next_in and to_next_in.
+@
+text
+@d11 1
+d14 1
+d53 1
+a53 1
+typedef enum { FIXED_IN, FIXED_OUT } in_out_t;
+d94 1
+d106 1
+d194 2
+a195 1
+|cmp_search_nodes|, and a printing routine (which we don't use), served
+d204 1
+a204 1
+cmp_search_nodes(voint a, voint b)
+d217 9
+d251 18
+d301 2
+a302 2
+	HEAP *pending = HeapAlloc(1000,cmp_search_nodes);
+	HEAP *discard = HeapAlloc(1000,cmp_search_nodes);
+d306 10
+d317 12
+a328 1
+	{int i; for (i=0;i<n;i++) GLB_lambda[i] = 0.0;}
+d340 3
+d344 1
+a344 2
+printf("# Before initial ascent\n");
+fflush(stdout);
+d346 1
+a346 2
+printf("# After initial ascent\n");
+fflush(stdout);
+d365 4
+a368 1
+		if (verbose) printf("# incumbent_len == %f\n",incumbent_len);
+d395 3
+a397 1
+@@d hundreds(x)  ((x/100)%10)
+a399 9
+{
+const double fudge_factor = 1.015;
+extern double VJ_missed_fudge_factor;
+double VJ_fudge_factor = 1.0 + VJ_missed_fudge_factor;
+incumbent_kind_t prune_kind;
+voint vv;
+search_node_t *bbnode;
+double old_prune_len = -1.0;
+
+d403 1
+a403 2
+while( prune_kind == PSEUDO ) {
+	branch(pending,GLB,NULL,0,GLB_edge,GLB_onetree,GLB_lambda);
+d405 2
+d408 1
+a408 3
+printf("# Start of while loop \n");
+fflush(stdout);
+		if ( HeapSize(pending) > max_heap_size ) max_heap_size = HeapSize(pending);
+d410 1
+a410 1
+		@@<Update fictitious upper bounds@@>@@;
+a411 2
+		sum_heapsizes += HeapSize(pending)+1;
+		sum_sq_heapsizes += (HeapSize(pending)+1)*(HeapSize(pending)+1);
+d452 1
+d454 7
+a460 4
+		switch(ones(method)) {
+		case 1: 
+			VJ_fudge_factor += VJ_missed_fudge_factor; 
+			while ( target_len < VJ_fudge_factor * GLB )
+d462 23
+a484 2
+			break;
+		default: errorif(1,"ones(method)==%d but list exhausted while PSEUDO",ones(method));
+d487 3
+a491 3
+if ( verbose ) 
+	printf("# incumbent_len == %f\n",incumbent_len);
+}
+d511 6
+a516 5
+@@<Update fictitious upper bounds@@>=
+while ( bbnode->lower_bound >= target_len ) {
+	target_len *= fudge_factor;	
+}
+if ( target_len >= incumbent_len ) target_len = incumbent_len;
+d518 5
+a522 8
+switch( ones(method) ) {
+case 0:
+	prune_len = target_len;
+	break;
+case 1:
+	prune_len = GLB * VJ_fudge_factor; 
+	while ( bbnode->lower_bound >= prune_len ) {
+		VJ_fudge_factor += VJ_missed_fudge_factor;
+d524 12
+a536 7
+	break;
+case 2:
+	prune_len = floor( (double)1.0 + bbnode->lower_bound );
+	break;
+default:
+	errorif(1,"%s:%d: ones(method)==%d",__FILE__,__LINE__,ones(method));
+}
+d538 1
+a538 1
+if ( prune_len < old_prune_len ) prune_len = old_prune_len;
+d540 4
+a543 4
+if ( prune_len >= incumbent_len ) {
+	prune_len = incumbent_len;
+	prune_kind = incumbent_kind;
+}
+d545 10
+a554 3
+if ( verbose && prune_len != old_prune_len ) {
+	printf("# prune_len == %f  incumbent_len == %f\n", prune_len, incumbent_len );
+	old_prune_len = prune_len;
+d563 2
+a564 1
+		vv.v = bbnode; HeapInsert(pending,vv); 
+d573 2
+a574 2
+		free_mem(bbnode->lambda);mem_deduct(sizeof(double)*n);
+		free_mem(bbnode);mem_deduct(sizeof(search_node_t));
+d580 1
+a580 1
+	prune_len, bbnode->lower_bound);
+d585 47
+@
+
+
+1.12
+log
+@Break ties in best-first search using a depth-first rule.
+@
+text
+@d59 2
+a60 1
+	struct search_node_s *parent, *from_next_out, *to_next_out;
+@
+
+
+1.11
+log
+@Added edge exchange analysis
+@
+text
+@d64 1
+d192 3
+d200 4
+a203 2
+	const double al = ( a.v == NULL ) ? 0.0 : ((search_node_t*)(a.v))->lower_bound;
+	const double bl = ( b.v == NULL ) ? 0.0 : ((search_node_t*)(b.v))->lower_bound;
+d206 2
+@
+
+
+1.10
+log
+@Version used for March 17 draft of the fictitious upper bounds paper.
+@
+text
+@d16 1
+d89 1
+d100 1
+d222 2
+d225 1
+a225 1
+unsigned long count_onetree, count_subproblem, count_ascent;
+d271 2
+d274 3
+d279 2
+d282 2
+d304 1
+d328 4
+a331 1
+@@ @@<Branch and bound@@>=
+d334 2
+a335 2
+double VJ_fudge_factor = 1.001;
+const double VJ_missed_fudge_factor = 0.001;
+a342 1
+branch(pending,GLB,NULL,0,GLB_edge,GLB_onetree,GLB_lambda);
+d344 42
+a385 17
+while ( HeapSize(pending) > 0 ) {
+	bbnode = HeapNext(pending).v;
+	@@<Update fictitious upper bounds@@>@@;
+	@@<|break| if we're done@@>@@;
+	sum_heapsizes += HeapSize(pending)+1;
+	sum_sq_heapsizes += (HeapSize(pending)+1)*(HeapSize(pending)+1);
+	len = ascend(n,bbnode,0,edge[0],onetree[0], bbnode->lambda,&is_tour,method);
+	fflush(stdout);
+	if ( verbose >= 100 ) show_onetree(NULL,n,bbnode,edge[0]);
+	assert( prune_len <= incumbent_len );
+	if ( len < incumbent_len ) {
+		if (is_tour) {
+			edge_list_t *t = incumbent_edges; incumbent_edges = edge[0]; edge[0] = t;
+			incumbent_len = len;
+			if ( len <= prune_len ) {
+				prune_len = len;
+				prune_kind = incumbent_kind = ONETREE;
+a386 12
+			if ( verbose && debug ) {
+				extern int pageno; 
+				char s[100]; sprintf(s,"Tour len %f",(float)len);
+				show_onetree(s,n,bbnode,edge[0]);
+				printf("#  Tour on page %d\n", pageno-1);
+			}
+			show_bb_node(bbnode,bb_node_num++,len,'t');
+			free_mem(bbnode->lambda);
+		} else if ( len < prune_len ) {
+			show_bb_node(bbnode,bb_node_num++,len,'a');
+			branch(pending,len,bbnode,0,edge[0],onetree[0],bbnode->lambda);
+			free_mem(bbnode->lambda);
+d388 4
+a391 5
+			if ( len > bbnode->lower_bound ) bbnode->lower_bound = len;
+			show_bb_node(bbnode,bb_node_num++,len,'u');
+			bbnode->parent_num = bbnode->node_num;
+			vv.v = bbnode;
+			HeapInsert(pending,vv);
+a392 3
+	} else {
+		show_bb_node(bbnode,bb_node_num++,len,'r');
+		free_mem(bbnode->lambda);
+d394 12
+d429 1
+d436 1
+a436 1
+switch( method % 10 ) {
+d450 2
+d467 20
+a486 1
+@@<|break| if we're done@@>=
+a489 12
+	assert( prune_kind != PSEUDO );
+	@@<Show '>' branch and bound nodes@@>@@;
+	break;	
+}
+
+
+
+@@
+@@<Show '>' branch and bound nodes@@>=
+show_bb_node(bbnode,bb_node_num++,bbnode->lower_bound,'>');
+while( HeapSize(pending) > 0 ) {
+	bbnode = HeapNext(pending).v;
+d491 2
+@
+
+
+1.9
+log
+@Complete branch and bound code.  81 SPARC IPC seconds for eil51.tsp
+@
+text
+@d8 1
+d61 2
+d87 1
+d97 1
+d169 1
+a169 1
+	ONETREE, PSEUDO } incumbent_kind_t;
+d178 1
+d204 1
+a204 1
+	else printf("%f ",(float)(((search_node_t*)(a.v))->lower_bound));
+d207 16
+a227 5
+There are two methods under investigation.  Method 0 is one in which
+we perform a set of ascend iterations at each subproblem.
+Method 1 is one in which only one 1-tree is computed in each subproblem,
+and that computation uses the same $\lambda$ vector as was found at
+the end of the initial ascent.
+d230 18
+d254 3
+a256 1
+	HEAP *PQ = HeapAlloc(1000,cmp_search_nodes);
+d263 4
+d268 3
+a270 2
+	GLB = ascend(n,NULL,0,GLB_edge,GLB_onetree,GLB_lambda,&is_tour);
+	if ( verbose >= 100 ) { char s[100];
+d281 1
+d283 1
+d286 3
+a288 82
+		switch (method) {
+		case 0: {
+			double real_incumbent_len = incumbent_len;
+			double fudge_factor = 1.015;
+
+			for ( incumbent_len = GLB * fudge_factor;
+				incumbent_len < real_incumbent_len ;  ) {
+				incumbent_kind = PSEUDO;
+				printf("#  incumbent_len == %f  real_incumbent_len == %f\n",
+					incumbent_len, real_incumbent_len );
+				branch(PQ,GLB,NULL,0,GLB_edge,GLB_onetree,GLB_lambda,method);
+				while (HeapSize(PQ)>0) {
+					search_node_t *bbnode = HeapNext(PQ).v;
+					if ( bbnode->lower_bound >= incumbent_len ) break;
+					len = ascend(n,bbnode,0,edge[0],onetree[0],
+							bbnode->lambda,&is_tour);
+					if ( verbose >= 100 ) show_onetree(NULL,n,bbnode,edge[0]);
+					assert( incumbent_len <= real_incumbent_len );
+					if ( len < real_incumbent_len ) {
+							if (is_tour) {
+								edge_list_t *t = incumbent_edges;
+								incumbent_edges = edge[0];
+								edge[0] = t;
+								real_incumbent_len = len;
+								if ( len <= incumbent_len ) {
+									incumbent_len = len;
+									incumbent_kind = ONETREE;
+								}
+								{extern int pageno; printf("#  Tour on page %d\n",
+										pageno-1);}
+							} else if ( len < incumbent_len ) {
+								branch(PQ,len,bbnode,0,edge[0],onetree[0],
+									bbnode->lambda,method);
+							}
+						}
+
+					free_mem(bbnode->lambda);
+				}
+				HeapReset(PQ);
+				if ( incumbent_kind == PSEUDO ) incumbent_len *= fudge_factor;
+			}
+			errorif( incumbent_kind == PSEUDO, "incumbent is still PSEUDO!");
+			printf("# incumbent_len == %f\n",incumbent_len);
+		}
+		break;
+		case 1: {
+			extern int total_iter;
+			(void)branch(PQ,GLB,NULL,0,GLB_edge,GLB_onetree,GLB_lambda,method);
+			while (HeapSize(PQ)>0) {
+				search_node_t *bbnode = HeapNext(PQ).v;
+				if ( bbnode->lower_bound >= incumbent_len ) 
+					break;
+				len = onetree_prim(bbnode,0,edge[0],onetree[0],GLB_lambda);
+				is_tour = branch(PQ,len,bbnode,0,edge[0],onetree[0],GLB_lambda,
+					method);
+				if ( is_tour ) {
+					if ( len < incumbent_len ) {
+						edge_list_t *t = incumbent_edges;
+						incumbent_edges = edge[0];
+						edge[0] = t;
+						incumbent_len = len;
+						incumbent_kind = ONETREE;
+						if ( verbose >= 100 ) { extern int pageno; char s[100];
+							printf("#  Tour len %f on page %d\n",pageno);
+							sprintf(s,"Tour length %f\n",(float)len);
+							show_onetree(s,n,bbnode,incumbent_edges);
+						}
+					}
+				} else {
+					printf(" %d %f # L(GLB_lambda)\n", ++total_iter,(float)len);
+					if ( verbose >= 500 ) {
+						char s[100];
+						sprintf(s,"1-tree length %f\n",(float)len);
+						show_onetree(s,n,bbnode,edge[0]);
+					}
+				}
+			}
+			HeapReset(PQ);
+		}
+		printf("# incumbent_len == %f\n",incumbent_len);
+		break;
+		}
+d298 2
+a299 1
+	double len;
+d302 1
+d313 131
+@
+
+
+1.5
+log
+@Getting ready for multiple teams.  Compiles and works correctly
+in sequential mode.
+@
+text
+@d10 1
+d12 3
+d16 1
+d18 1
+d26 1
+d58 2
+d83 1
+d92 1
+d106 1
+d116 1
+a116 1
+typedef struct onetree_node_s {
+d119 1
+d145 21
+d167 15
+d183 30
+d214 1
+a214 1
+do_seq_test(search_node_t *current_search_node, double *lambda)
+d216 110
+a325 3
+	double len;
+	len = onetree_prim(current_search_node,0,edge[0],onetree[0],lambda);
+	return len;
+d342 1
+a342 1
+double do_seq_test(search_node_t *current_search_node,double *lambda);
+d345 1
+@

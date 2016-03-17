@@ -1,0 +1,19 @@
+#! @PERL@
+# @configure_input@
+# improve.pl
+# Distill tour improvement data from LK output.
+#
+$number_expr = "(\\d+\\.?\\d*|\\.\\d+)"; # See Programming Perl
+$lklen_expr = "\\(0+\\*2\\^32\\+$number_expr\\)";
+$improve_expr = "=== improve by $lklen_expr to $lklen_expr\\s+after $number_expr";
+open(IN, "zcat @ARGV |");  # Uncompress input files.
+open(IOUT ,">improve.gpl") || die "Can't open improve.gpl for writing";
+#print STDERR "improve string is $improve_expr\n";
+while(<IN>) {
+	if( m/Initial tour length: $lklen_expr/o) {
+		print IOUT "0 $1 # guess at 0 elapsed time from initial tour\n";
+	} elsif( m/$improve_expr/o) {
+		print IOUT "$3 $2\n";
+	}
+}
+close(IOUT);

@@ -1,0 +1,2037 @@
+head	1.28;
+access;
+symbols
+	zero-four-zero:1.28;
+locks
+	neto:1.28;
+
+
+1.28
+date	98.07.16.21.58.55;	author neto;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	98.05.30.18.51.12;	author neto;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	98.05.23.19.20.17;	author neto;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	98.05.23.18.10.46;	author neto;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	98.05.23.17.50.46;	author neto;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	98.05.23.16.22.11;	author neto;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	98.05.23.15.22.50;	author neto;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	98.05.23.15.13.21;	author neto;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	98.05.22.20.38.10;	author neto;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	98.05.22.20.21.21;	author neto;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	98.05.22.18.18.53;	author neto;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	98.05.22.17.59.00;	author neto;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	98.05.21.19.29.35;	author neto;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	98.05.21.19.25.34;	author neto;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	98.05.21.18.11.40;	author neto;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	98.02.27.22.03.58;	author neto;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	95.11.17.16.02.41;	author neto;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	95.04.03.17.01.20;	author neto;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	95.03.23.13.54.06;	author neto;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	95.01.24.12.58.53;	author neto;	state Exp;
+branches;
+next	;
+
+
+desc
+@1-tree ascension iterations.
+@
+
+
+1.28
+log
+@Added the LGPL notice in each file.
+@
+text
+@
+
+
+\noindent Copyright \copyright 1994, 1995, 1996, 1997, 1998 David Neto
+\smallskip
+
+\noindent 
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+\smallskip
+
+\noindent 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+\smallskip
+
+\noindent   
+   You should have received a copy of the GNU Library General Public
+   License along with this library; if not, write to the
+   Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA  02111-1307, USA.
+\smallskip
+
+\noindent   
+   You may contact David Neto via email at {\tt netod@@@@acm.org}, or with
+   greater latency at
+\smallskip
+\noindent{\obeylines
+     Department of Computer Science
+     University of Toronto
+     10 King's College Rd.
+     Toronto, Ontario
+     M5S 3G4
+     Canada
+}
+\medskip
+
+
+\noindent\hbox{}\hrule\hbox{}\penalty-1000
+\vskip0.5cm\relax
+
+
+@@i webdefs.w
+@@i types.w
+
+{\obeylines
+$Log: ascend.w,v $
+Revision 1.27  1998/05/30 18:51:12  neto
+Make it stop after 1500 iterations.  That's just enough, ok?
+
+Revision 1.26  1998/05/23 19:20:17  neto
+Implement combination of previous two degree components.  Another
+stopping criterion (stop when close enough to upper bound: 0.1 percent)
+Clean up output a bit so it is more easily digested by gnuplot
+
+Revision 1.25  1998/05/23 18:10:46  neto
+sqrt in the normalizer is definitely the *wrong* thing!
+Tightened the t parameter bound to 1e-4
+
+Revision 1.24  1998/05/23 17:50:46  neto
+Now it compiles and links into lk.
+
+Revision 1.23  1998/05/23 16:22:11  neto
+Added necessary target len.
+Added access to best lambda.
+Think about adding convex combination of the last two lambdas.
+
+Revision 1.22  1998/05/23 15:22:50  neto
+normalizer should be Euclidean distance.
+
+Revision 1.21  1998/05/23 15:13:21  neto
+Switch to a fixed distinguished degree 2 node (number n-1).
+This seems "more correct".
+Also, added much explanatory documentation about Held-Karp lower bounds.
+This should be the only new module added to LK.
+
+Revision 1.20  1998/05/22 20:38:10  neto
+Fixed a 1-tree length accounting bug.  Oops.
+Better comments, and removed pageno.
+
+Revision 1.19  1998/05/22 20:21:21  neto
+This might be completely switched over to the simpler non branch and buond
+scheme.  Now I'll read the code again...
+
+Revision 1.18  1998/05/22 18:18:53  neto
+Removed more stuff not appropriate to pure Held-Karp lower bounds.
+
+Revision 1.17  1998/05/22 17:59:00  neto
+Got rid of double-including of headers...
+Got rid of bbnode search tree stuff
+Use efficient multiple buffering of lambda vectors.
+
+Revision 1.16  1998/05/21 19:29:35  neto
+Fixed up standard CWEB thingies and Log stuff.
+
+Revision 1.15  1998/05/21 19:25:34  neto
+More restructuring and comments.
+Include standard CWEB goodies.
+}
+
+@@*Held-Karp lower bounds for the TSP.
+In {\sl The Traveling Salesman Problem and Minimum Spanning Trees},
+Operations Research, {\bf 18}, pp.~1138--1162, 1970, Michael Held and Richard
+Karp described a lower bound for the length of the shortest tour for a
+given
+graph.  
+@@^Held, Michael@@>
+@@^Karp, Richard@@>
+
+A \term{1-tree} for graph $G$ on $n$ vertices is a spanning subgraph of
+$G$ that has $n$ edges.  Since all tours of $G$ span $G$ and have as
+many edges as $G$ has vertices, then all tours are 1-trees.
+So the weight of a minimum weight 1-tree for $G$ is a lower bound
+on the length of a shortest tour of $G$.
+
+Minimum 1-trees are easy to compute.  Let us label the vertices of
+$G$ with numbers 0 through $n-1$.  We may as well restrict
+our attention to 1-trees in which vertex $n-1$ is of degree 2, since
+all tours of $G$ also have this property.
+Then a minimum 1-tree is just a minimum spanning tree over the subgraph
+induced by vertices 0 through $n-2$, together with the two shortest edges
+incident upon vertex $n-1$.
+
+@@ Now, the lower bounds one gets with this simple minimum 1-tree scheme
+are not very good: they underestimate the optimal tour length by about
+a third.  What to do?
+
+Held and Karp describe how to use Lagrange multipliers in this setting.
+(Go back to your vector calculus text to recall what Lagrange multipliers
+are in general.  I'll describe them in the particular here.)
+Instead of computing minimum 1-trees with the basic distance function 
+\cost, compute minimum 1-trees with cost function
+$\cost_\lambda(i,j) = 
+\cost(i,j)+\lambda_i+\lambda_j$, where $\lambda$ is an arbitrary
+$n$-dimensional vector over the reals.
+
+How does that help us?  For a given graph, let 
+$L(\lambda)$ be the length of a shortest
+1-tree using cost function $\cost_\lambda$ and let $T(\lambda)$ be the length
+of a shortest tour using the same cost function $\cost_\lambda$.
+Then for any real vector $\lambda$, we have 
+from before that $$L(\lambda) \le T(\lambda).$$
+Now, since
+each tour is a 1-tree in which each vertex is of degree 2,  we have
+$$T(0)=T(\lambda)-2\sum_i\lambda_i.$$ Note that $T(0)$ is just the
+length of a shortest tour with the original cost function.
+Substituting for $T(\lambda)$ in the first equation, we get the 
+inequality
+$$L(\lambda) - 2\sum_i\lambda_i \le T(0).$$
+
+The
+Lagrange multipliers have given us
+an extra $n$ degrees of freedom.
+The task then becomes finding a $\lambda$ that makes this inequality
+as tight as possible.
+Held and Karp proved that the objective function is convex over the
+space of possible values for $\lambda$, and prove convergence for
+an iterative ascent algorithm with certain parameters.
+
+The Held-Karp lower bound for the TSP is the
+1-tree lower bound with optimal Lagrange multitpliers.
+Held-Karp lower bounds are {\it very\/} tight, often getting
+within 0.5\% of the length of a shortest tour for the graph.
+
+@@ In a a second paper, {\sl The Traveling Salesman Problem and Minimum Spanning
+Trees II}, Mathematical Programming, {\bf 1}, pp.~6--25, 1971, Held and
+Karp described a subgradient optimization method for optimizing the
+lower bound.  That is the algorithm implemented here.
+@@^Held, Michael@@>
+@@^Karp, Richard@@>
+
+
+@@*Subgradient optimization.
+Held and Karp described a convenient and effective
+method for approximating the Held-Karp
+lower bound to the TSP.  
+The algorithm is to refine the $\lambda$ vector iteratively.
+Each iteration consists of the following steps:
+compute a 1-tree with the durrent $\lambda$ vector, then update 
+$\lambda_i$ if vertex $i$ in the 1-tree is not of degree 2.
+If the degree of vertex $i$ is 1, then decrease $\lambda_i$.  If the
+degree of vertex $i$ is greater than 2, then increase $\lambda_i$.
+@@^Held, Michael@@>
+@@^Karp, Richard@@>
+
+This update rule has the effect of making well-connected vertices less
+attractive next time around, and under-connected vertices more attractive.
+One can think of this as ``warping'' the local space around each vertex.
+Rather cool, actually.
+@@^cool@@>
+@@^warping local space@@>
+
+@@
+This iterative algorithm belongs to the class of optimization algorithms
+known as \term{subgradient optimization}.  Held and Karp prove that
+the optimization space explored here is well-behaved (convex). 
+As a consequence, with parameters in the right range, this iterative
+procedure is guaranteed to converge.  (As long as the floating point
+arithmetic holds out, anyway$\ldots$)
+
+Of course, we need practicality too.  All lower bounds computed
+by this procedure are valid, and are thus valid approximations
+to \term{the} Held-Karp lower bound.  We'll live with taking
+the
+best lower bound we find here and declaring it as ``good enough''.
+
+@@ The outline of this module is as follows:
+@@c
+#include <config.h>
+#include "lkconfig.h"
+@@<System headers@@>@@;
+@@<Module headers@@>@@;
+
+@@<Module variables@@>@@;
+@@<Early module subroutines@@>@@;
+@@<Module subroutines@@>@@;
+@@<Subroutines@@>@@;
+
+@@ We need some standard stuff.
+@@<System headers@@>=
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+
+@@ We need lots of stuff from other header files included with LK.
+@@<Module headers@@>=
+#include "error.h"
+#include "length.h"
+#include "read.h"	/* For |cost| and |tsp_instance_t|. */
+#include "lk.h"
+#include "memory.h"
+#include "decluster.h"
+
+@@ The exported interface is contained in the {\tt ascend.h} header file,
+which has the following form.
+
+@@(ascend.h@@>=
+#if !defined(_ASCEND_H_)
+#define _ASCEND_H_
+@@<Exported subroutines@@>@@;
+#endif
+
+
+@@ For consistency, we include our own header.
+@@<Module headers@@>=
+#include "ascend.h"
+
+@@ The setup routine allocates space for the best setting of the $\lambda$
+vector. It also initializes |n|, a local copy of the number of vertices
+in the instance.
+
+In case anyone asks for the Lagrange multipliers we used to find
+a particular lower bound, we'd better be able to tell them.
+That's what |best_lambda| is all about.
+
+To save on scans, we use double-buffering for the $\lambda$ vector,
+storing both a |read_lambda| vector and a |write_lambda| vector.
+
+
+@@<Subroutines@@>=
+void
+ascend_setup(int the_n)
+{
+	n = the_n;
+	best_lambda = new_arr_of(double,n);
+	read_lambda = new_arr_of(double,n);
+	write_lambda = new_arr_of(double,n);
+	@@<Other allocations@@>@@;
+	total_iter = -1;
+}
+
+@@ The cleanup routine undoes the effect of the setup routine.
+
+@@<Subroutines@@>=
+void
+ascend_cleanup(void)
+{
+	free_mem(best_lambda);
+	free_mem(read_lambda);
+	free_mem(write_lambda);
+	mem_deduct(sizeof(double)*3*n);
+	@@<Other deallocations@@>@@;
+	n = 0;
+	total_iter = -1;
+}
+
+@@ We give the outside world read-only access to |best_lambda|.
+@@<Subroutines@@>=
+double * const
+ascend_best_lambda(void)
+{
+	return best_lambda;
+}
+
+@@ These routines need to be announced to the world.
+@@<Exported subroutines@@>=
+void ascend_setup(int the_n);
+void ascend_cleanup(void);
+double * const ascend_best_lambda(void);
+
+@@ We need to declare the local state.
+@@<Module variables@@>=
+static int n=0;
+static int total_iter = -1;
+static double *best_lambda=NULL, *read_lambda=NULL, *write_lambda=NULL;
+
+@@ We also record the degree of each vertex in the 1-tree.
+Value |degree_less_2[i]| is two less than the degree of vertex $i$.
+
+We also record the previous iteration's degree vector as
+|degree_less_2_old|.
+
+@@<Other allocations@@>=
+degree_less_2 = new_arr_of(int,n);
+degree_less_2_old = new_arr_of(int,n);
+
+@@
+@@<Other deallocations@@>=
+free_mem(degree_less_2); mem_deduct(sizeof(int)*n);
+free_mem(degree_less_2_old); mem_deduct(sizeof(int)*n);
+
+@@
+@@<Module variables@@>=
+static int *degree_less_2=NULL;
+static int *degree_less_2_old=NULL;
+
+
+@@ The \term{normalizer} of a 1-tree is a measure of how far off the
+1-tree is from being a tour.  It is zero when the 1-tree is a tour,
+and grows the farther (degree-wise) the 1-tree is from a tour.
+
+In fact, it is the square of the Euclidean distance between the |degree_less_2| 
+vector
+and the origin. We're trying to drive the |degree_less_2| vector
+to the origin.
+
+@@<Module subroutines@@>=
+static double normalizer(int n, int *degree_less_2);
+static double 
+normalizer(int n, int *degree_less_2)
+{
+	int i;
+	double l;
+	for (l=0.0,i=0;i<n;i++) {
+		l += degree_less_2[i]*degree_less_2[i];
+	}
+	return l;
+}
+
+@@ Given a step size factor $t$, procedure |update_lambda|
+updates $\lambda$ to make each
+vertex either more or less attractive next time around, depending
+on whether that vertex is currently over-connected or under-connected.
+
+We implement the double-buffering here too: read from |read_lambda|,
+write to |write_lambda|.
+
+@@<Module subroutines@@>=
+static void update_lambda(int n, double t, int *degree_less_2, int
+*degree_less_2_old, double
+	*read_lambda, double *write_lambda);
+static void
+update_lambda(int n, double t, int *degree_less_2, int *degree_less_2_old,
+	double *read_lambda, double *write_lambda)
+{
+	int i;
+	const double recent_share=0.75;  /* Between 0 and 1, nearer 1. */
+	const double ta = t*recent_share, tb = t*(1.0-recent_share);
+	for ( i=0 ; i<n ; i++ ) {
+		write_lambda[i] = read_lambda[i] 
+			+ ta * degree_less_2[i] + tb * degree_less_2_old[i];
+	}
+}
+
+@@ Once we've used |degree_less_2| for updating, we rotate it with
+|degree_less_2_old|.
+
+@@<Rotate the degree vectors@@>=
+{
+	int *t = degree_less_2; 
+	degree_less_2 = degree_less_2_old; 
+	degree_less_2_old = t; 
+}
+
+@@ Here we come to the core of  this module: procedure |ascend_alpha_beta|.
+It performs the subgradient ascension, modifying the $\lambda$ vector as we go.
+
+Value |upper_bound_len| is the value of an upper bound on the tour length.
+It is used as a parameter in the step size.
+
+Its return value is the length of the best lower bound discovered.
+
+It takes three arguments.  The first is |n|, the number of vertices
+in the graph.  The second and third are parameters controlling the
+convergence of the ascent.  The update rule used is
+$\lambda^{(k+1)}_i = \lambda^{(k)}_i + \alpha\cdot\beta^k\cdot {\rm
+deg}(i)/\rho$, where $\rho$ is a scaling factor.
+That is, the step size 
+begins with a multiplier of $\alpha$ and
+decays each iteration by a factor of $\beta$.
+
+@@<Subroutines@@>=
+length_t
+ascend_alpha_beta(const int n, double upper_bound_len, double alpha, double beta)
+{
+	extern int verbose;
+	int i, best_iter, iter=-1, new_is_best;
+	double t, norm, best_lower_bound=0.0, onetree_len;
+	errorif(LENGTH_TYPE_IS_INTEGRAL,
+		"Held-Karp lower bound computations require length_t to be a "
+		"floating point type.  Sorry, but you have to recompile.");
+	errorif(n<3,"ascend: n=%d < 3\n",n);
+	errorif(beta>=1.0,"ascend: beta=%f > 1\n",beta);
+	errorif(beta<=0,"ascend: beta=%f <= 0\n",beta);
+	
+	for (i=0;i<n;i++) degree_less_2_old[i]=read_lambda[i]=0.0;
+	best_lower_bound = 0.0;
+	while (1) {
+		total_iter++, iter++;
+		@@<Compute a new |onetree| and its length |onetree_len|@@>@@;
+		@@<Compute |degree_less_2| from |onetree|@@>@@;
+		new_is_best = ( onetree_len > best_lower_bound );
+		norm = normalizer(n, degree_less_2);
+
+		@@<Update |best_lower_bound|@@>@@;
+		@@<|break| if we're close enough to |upper_bound_len|@@>@@;
+		@@<|break| if we found a tour@@>@@;
+		@@<|break| if we've run too many iterations@@>@@;
+
+		t = alpha * (upper_bound_len - onetree_len)/norm;
+		@@<Verbose: print new 1-tree weight@@>@@;
+		@@<|break| if $t$ is too small@@>@@;
+		@@<|break| if the best 1-tree length is old@@>@@;
+
+		update_lambda( n, t, degree_less_2, degree_less_2_old, read_lambda, write_lambda );
+		alpha *= beta;	/* See Held Karp, 1971, Lemma 3 */
+		@@<Verbose: show 1-tree and flush@@>@@;
+		@@<Permute the $\lambda$ vectors@@>@@;
+		@@<Rotate the degree vectors@@>@@;
+	}
+	return best_lower_bound;
+}
+
+@@ The step size parameters can either be dictated by theory as given
+by Held and Karp, or by practice, as given by Held and Karp or any
+other researcher who has implemented this algorithm$\ldots$.
+
+As I come back to this code after about 3 years, I'll leave this pretty
+much well alone.  Except I will say that a larger $\alpha$ produces 
+larger steps, and often overshooting if you have a bad upper bounding
+length.  The scaler $\beta$ should be less than 1; the closer it is to 1, the
+slower the convergence, and the slower the run.
+
+Apparently, it is wise to have different rules depending on whether you
+already have a good upper bound on the length of the optimal tour.
+
+Here are some good defaults for a slow but accurate ascent.  Call
+|ascend| instead of |ascend_alpha_beta| in order to get these values.
+
+@@<Subroutines@@>=
+length_t 
+ascend(const int n, double upper_bound_len)
+{
+	return ascend_alpha_beta(n,upper_bound_len,1.5,0.995);
+}
+
+@@
+@@<Exported subroutines@@>=
+length_t ascend(const int n, double upper_bound_len);
+length_t ascend_alpha_beta(const int n, double upper_bound_len, double alpha, double beta);
+
+@@ We need an array of $n$ edges to hold the 1-tree.
+@@<Other allocations@@>=
+onetree=new_arr_of(decluster_edge_t,n);
+
+@@
+@@<Other deallocations@@>=
+free_mem(onetree); mem_deduct(n*sizeof(decluster_edge_t));
+
+@@
+@@<Module variables@@>=
+static decluster_edge_t *onetree=NULL;
+
+@@  The 1-tree length we compute must be discounted by $2\cdot\sum \lambda_i$ in
+order for it to be comparable to tour lengths.
+
+@@<Compute a new |onetree| and its length |onetree_len|@@>=
+{
+const double len = compute_onetree(onetree);
+double lambda_2 = 0.0;
+int i;
+for (lambda_2 = 0.0, i=0; i<n; i++) lambda_2 += 2*read_lambda[i];
+onetree_len = len - lambda_2;
+}
+
+
+
+@@ If by some miracle we find a tour, then we stop right away and return
+that result. But since we don't trust floating point numbers, we 
+recompute the tour length first.
+
+@@<|break| if we found a tour@@>=
+if ( norm == 0.0 ) {
+	@@<Verbose: found a tour@@>@@;
+	for ( onetree_len = 0.0, i=0;i<n;i++)
+		onetree_len += onetree[i].cost;
+	best_lower_bound = onetree_len; /* just in case imprecision screwed up |best_lower_bound|*/
+	@@<Verbose: show tour graphically@@>@@;
+	break;
+}
+
+@@ If we get within a specified percentage, say 0.1\% of the upper bound,
+then let's declare victory.
+
+
+@@ In Held-Karp lower bounds, don't activate this code either$\ldots$
+@@<|break| if the best 1-tree length is old@@>=
+#if 0
+if ( is_random_dist_matrix ) {
+	if ( iter > 1000 &&  iter - best_iter > 5 && iter - best_iter < 8 ) {
+		if ( verbose >= 75 ) 
+			printf("#  Ascend: stopping criteria met:  best is old\n");
+		break;
+	}
+} else {
+	if ( iter > 1000 &&  iter - best_iter > 5 ) {
+		if ( verbose >= 75 ) 
+			printf("#  Ascend: stopping criteria met:  best is old\n");
+		break;
+	}
+}
+#endif
+
+
+
+@@ I want the Held-Karp lower bounds to be as good as possible, so we
+don't want to activate this code.
+@@<|break| if we've run too many iterations@@>=
+if ( iter > 1500 ) {
+	if ( verbose >= 75 )
+		printf("#  Ascend: Iterations exceeded 1500\n");
+	break;
+}
+
+
+@@
+@@<|break| if $t$ is too small@@>=
+if ( t < 1e-2 ) {
+	if ( verbose >= 75 )
+		printf("#  Ascend: stopping criteria met: t < 0.01 \n");
+	break;
+}
+
+@@  We also remember when the best iteration happened so we can later
+tell if has been a long time ago.
+
+@@<Update |best_lower_bound|@@>=
+if ( new_is_best ) {
+	best_lower_bound = onetree_len;
+	best_iter = iter;
+}
+
+@@ Within a tenth of a percent is close enough for me!
+
+@@<|break| if we're close enough to |upper_bound_len|@@>=
+if ( new_is_best ) {
+	double err = (upper_bound_len - onetree_len)/upper_bound_len;
+	if ( err < 0.001 ) { 
+		if ( verbose >= 75 )
+			printf("#  Ascend: stopping criteria met: %.2f%% away from upper\n",err*100);
+		break;
+	}
+}
+
+@@
+The update scheme for the $\lambda$ vector is as follows, 
+with $B$ representing |best_lambda|,
+$R$ representing |read_lambda| (the $\lambda$ vector used to construct the
+current 1-tree) and $W$ representing |write_lambda|, the new $\lambda$
+used for the next round.  If we get a new best value, then 
+we preserve |best_lambda| with the assignment
+$(B,R,W) := (B,W,R)$.  If we don't get a new best value, then
+we save |read_lambda| in |best_lambda| with the assignment
+$(B,R,W) := (R,W,B)$.   In both cases, the |write_lambda| gets moved to
+|read_lambda| for the next round.
+
+@@<Permute the $\lambda$ vectors@@>=
+{
+double *b=best_lambda, *r=read_lambda, *w=write_lambda;
+if ( new_is_best ) {
+	best_lambda=b;
+	read_lambda=w;
+	write_lambda=r;
+} else {
+	best_lambda=r;
+	read_lambda=w;
+	write_lambda=b;
+}
+}
+
+
+@@*Computing 1-trees.
+A 1-tree on a graph with $n$ vertices is a spanning subgraph with $n$
+edges. (Note that a 1-tree is not a tree.)
+All tours are 1-trees, so the heaviest tour is at least as heavy
+as the shortest 1-tree.
+
+We will compute minimum 1-trees by computing an $n-2$ edge minimum spanning
+tree 
+over the subgraph induced by the first $n-1$ vertices, then add the
+two shortest edges to the last vertex, the vertex labeled $n-1$.
+
+@@ Now, module \module{DECLUSTER} already has machinery for computing
+minimum spanning trees.   Let's take advantage of it here.
+
+For one thing, that means we have to use the data structures defined
+there.  In particular, we require |onetree| to be an array of
+$n$ edges, each stored as a |decluster_edge_t| value.
+
+We also require the Lagrange multiplier $\lambda$ vector
+to be stored in |read_lambda|.
+
+We return the length of the 1-tree under the given cost function.
+We don't discount by $\sum_i \lambda_i$ like one should before comparing
+to a tour length.
+
+@@<Module subroutines@@>=
+static length_t compute_onetree(decluster_edge_t *onetree);
+static length_t
+compute_onetree(decluster_edge_t *onetree)
+{
+	length_t len;
+	@@<Compute a MST over the first $n-1$ vertices@@>@@;
+	@@<Now add the two shortest edges from vertex $n-1$@@>@@;
+	return len;
+}
+
+@@ Note that although |onetree| points to an array of $n$ edges, we only
+tell the MST routine about the first $n-2$ of them.
+
+@@<Compute a MST over the first $n-1$ vertices@@>=
+{
+decluster_tree_t T;
+T.n = n-2;
+T.edge = onetree;
+len = decluster_mst_custom(&T,work_from,work_dist,custom_cost);
+}
+
+@@ The custom MST routine requires two length $n-1$ buffers: one of |int|
+values
+and another of |double| values.    We prefer to do the allocation only
+once, not every time we compute a MST.
+@@<Other allocations@@>=
+work_from = new_arr_of(int,n-1);
+work_dist = new_arr_of(double,n-1);
+
+@@
+@@<Other deallocations@@>=
+free_mem(work_from);
+free_mem(work_dist);
+mem_deduct((n-1)*(sizeof(int)+sizeof(double)));
+
+@@
+@@<Module variables@@>=
+static int *work_from=NULL;
+static double *work_dist=NULL;
+
+
+@@ The custom cost function is just the ordinary cost function,  but
+with Lagrange multipliers.
+
+@@<Early module subroutines@@>=
+static length_t
+custom_cost(int i, int j)
+{ 
+	return cost(i,j)+read_lambda[i]+read_lambda[j];
+}
+
+
+@@ To add the two shortest edges we first need to find them.
+Array |short_to| holds the two cities to which vertex $n-1$ is closest,
+with the closest in position 0.  Array |short_dist| holds the distances
+to those cities.
+
+@@<Now add the two shortest edges from vertex $n-1$@@>=
+{ const int v=n-1;
+int i, short_to[2];
+length_t short_dist[2]={INFINITY,INFINITY};
+for (i=0;i<v;i++) {
+	const length_t di=custom_cost(v,i);
+	if ( di < short_dist[0] ) {
+		short_to[1]=short_to[0];
+		short_dist[1]=short_dist[0];
+		short_to[0]=i;
+		short_dist[0]=di;
+	} else if ( di < short_dist[1] ) {
+		short_to[1]=i;
+		short_dist[1]=di;
+	}
+}
+onetree[n-2].city[0]=v;
+onetree[n-2].city[1]=short_to[0];
+onetree[n-2].cost=short_dist[0];
+onetree[n-1].city[0]=v;
+onetree[n-1].city[1]=short_to[1];
+onetree[n-1].cost=short_dist[1];
+len += short_dist[0] + short_dist[1];
+}
+
+@@ Computing degrees is pretty simple, requiring one pass over the |onetree|
+array.
+
+@@<Compute |degree_less_2| from |onetree|@@>=
+{ int i;
+for (i=0;i<n;i++) degree_less_2[i]=-2;
+for (i=0;i<n-1;i++) {
+	degree_less_2[onetree[i].city[0]]++;
+	degree_less_2[onetree[i].city[1]]++;
+}
+}
+
+
+@@*Verbose.
+@@<Verbose: print new 1-tree weight@@>=
+if ( verbose >= 100  ) {
+	printf("%d %f # 1-tree weight iter = %d L(l) t == %f alpha = %f\n",
+		total_iter,onetree_len,iter, t,alpha);
+	fflush(stdout);
+}
+
+@@
+@@<Verbose: show 1-tree and flush@@>=
+#if 0
+if ( total_iter==0 && verbose >=100)
+	show_onetree( debug_ps, "First 1-tree, lambda==0 vector", n, NULL, edge);
+else if ( verbose >= 500 )
+	show_onetree( debug_ps, NULL, n, NULL, edge);
+
+if (verbose) fflush(stdout);
+#endif
+
+
+@@
+@@<Verbose: found a tour@@>=
+#if 0
+if ( verbose >= 50 )
+	printf("#  Ascend: Page %% total_iter %d Found a tour of length %f\n", 
+		total_iter, (float)(onetree_len));
+#endif
+
+
+@@
+@@<Verbose: show tour graphically@@>=
+#if 0
+if ( verbose >= 100 ) {
+	char s[100];
+	sprintf(s,"Tour length %f",(float)onetree_len);
+	show_onetree( debug_ps, s, n, NULL, edge);
+}
+#endif
+
+@@*Index.
+@@^easter eggs@@>
+@
+
+
+1.27
+log
+@Make it stop after 1500 iterations.  That's just enough, ok?
+@
+text
+@d2 45
+a47 1
+@@i copyrt.w
+d52 3
+@
+
+
+1.26
+log
+@Implement combination of previous two degree components.  Another
+stopping criterion (stop when close enough to upper bound: 0.1 percent)
+Clean up output a bit so it is more easily digested by gnuplot
+@
+text
+@d8 5
+d496 1
+a496 2
+#if 0
+if ( iter > ((double)n/50)*n + n + 15 ) { /* Volgenant \& Jonker */
+d498 1
+a498 1
+		printf("#  Ascend: Iterations exceeded n^2 /50 + n + 15\n");
+a500 1
+#endif
+@
+
+
+1.25
+log
+@sqrt in the normalizer is definitely the *wrong* thing!
+Tightened the t parameter bound to 1e-4
+@
+text
+@d8 4
+d262 3
+d267 1
+d272 1
+d277 1
+d311 2
+a312 1
+static void update_lambda(int n, double t, int *degree_less_2, double
+d315 1
+a315 1
+update_lambda(int n, double t, int *degree_less_2,
+d319 2
+d322 2
+a323 1
+		write_lambda[i] = read_lambda[i] + t * degree_less_2[i];
+d327 10
+d368 1
+a368 1
+	for (i=0;i<n;i++) read_lambda[i]=0.0;
+d378 1
+d387 1
+a387 1
+		update_lambda( n, t, degree_less_2, read_lambda, write_lambda );
+d391 1
+d416 1
+a416 1
+	return ascend_alpha_beta(n,upper_bound_len,1.1,0.990);
+d464 4
+d502 1
+a502 1
+if ( t < 1e-4 ) {
+d504 1
+a504 1
+		printf("#  Ascend: stopping criteria met: t < 0.0001 \n");
+d517 12
+d555 1
+d680 1
+a680 1
+	printf("1-tree weight %d %f # iter = %d L(l) t == %f alpha = %f\n",
+d682 1
+@
+
+
+1.24
+log
+@Now it compiles and links into lk.
+@
+text
+@d8 3
+d274 4
+a277 2
+In fact, it is the Euclidean distance of the |degree_less_2| vector
+from the origin, where we're trying to get it.
+d289 1
+a289 1
+	return sqrt(l);
+a291 4
+@@ We need the definition of the square root function |sqrt|.
+@@<System headers@@>=
+#include <math.h>
+
+d390 1
+a390 1
+	return ascend_alpha_beta(n,upper_bound_len,1.5,0.995);
+d472 1
+a472 1
+if ( t < 0.001 ) {
+d474 1
+a474 1
+		printf("#  Ascend: stopping criteria met: t < 0.001 \n");
+@
+
+
+1.23
+log
+@Added necessary target len.
+Added access to best lambda.
+Think about adding convex combination of the last two lambdas.
+@
+text
+@d8 5
+d160 1
+d172 4
+a175 1
+#include "hk.h"
+a177 2
+#include "length.h"
+#include "read.h"	/* For |cost| */
+d183 2
+d186 6
+a208 1
+	int i;
+d244 1
+a244 1
+double * const ascend_lambda(void);
+d315 1
+a315 1
+Value |target_len| is the value of an upper bound on the tour length.
+d331 1
+a331 1
+ascend_alpha_beta(const int n, double target_len, double alpha, double beta);
+d335 1
+a335 2
+	double t, alpha, norm, best_lower_bound=0.0, 
+		onetree_len, beta;
+d356 1
+a356 1
+		t = alpha * (target_len - onetree_len)/norm;
+d387 1
+a387 1
+ascend(const int n, double target_len)
+d389 1
+a389 1
+	return ascend_alpha_beta(n,target_len,1.5,0.995);
+d394 2
+a395 2
+length_t ascend(const int n);
+length_t ascend_alpha_beta(const int n, double alpha, double beta);
+a433 1
+	*is_tour = 1;
+a481 1
+	int i;
+d500 1
+a500 1
+const double *b=best_lambda, *r=read_lambda, *w=write_lambda;
+d554 3
+a556 3
+T->n = n-2;
+T->edge = onetree;
+len = decluster_mst_custom(T,work_from,work_dist,custom_cost);
+d582 1
+a582 1
+@@<Module subroutines@@>=
+@
+
+
+1.22
+log
+@normalizer should be Euclidean distance.
+@
+text
+@d8 3
+d218 9
+a226 1
+@@ Both routines need to be announced to the world.
+d230 1
+d301 3
+d317 1
+a317 1
+ascend_alpha_beta(const int n, double alpha, double beta);
+d374 1
+a374 1
+ascend(const int n)
+d376 1
+a376 1
+	return ascend_alpha_beta(n,1.5,0.995);
+@
+
+
+1.21
+log
+@Switch to a fixed distinguished degree 2 node (number n-1).
+This seems "more correct".
+Also, added much explanatory documentation about Held-Karp lower bounds.
+This should be the only new module added to LK.
+@
+text
+@d8 6
+d245 3
+d258 1
+a258 1
+	return l;
+d261 4
+d312 2
+@
+
+
+1.20
+log
+@Fixed a 1-tree length accounting bug.  Oops.
+Better comments, and removed pageno.
+@
+text
+@d8 4
+d32 71
+d105 2
+a106 1
+Held and Karp described a convenient method for approximating the Held-Karp
+d114 2
+d121 2
+d273 1
+a273 1
+@@ Here we come to the core of  this module: procedure |ascend|.
+d278 9
+d288 2
+a289 3
+
+double
+ascend(const int n);
+d294 1
+a294 1
+		onetree_len, scaler;
+d298 1
+a300 1
+	@@<Set step size decay parameters |alpha| and |scaler|@@>@@;
+d304 2
+a305 1
+		@@<Compute a new |onetree|, its length |onetree_len|, and |degree_less_2|@@>@@;
+d319 1
+a319 1
+		alpha *= scaler;	/* See Held Karp, 1971, Lemma 3 */
+d326 22
+d351 2
+a352 1
+double ascend(const int n);
+d369 1
+a369 1
+@@<Compute a new |onetree|, its length |onetree_len|, and |degree_less_2|@@>=
+a378 16
+@@ The step size parameters can either be dictated by theory as given
+by Held and Karp, or by practice, as given by Held and Karp or any
+other researcher who has implemented this algorithm$\ldots$.
+
+As I come back to this code after about 3 years, I'll leave this pretty
+much well alone.  Except I will say that a larger $alpha$ produces 
+larger steps, and often overshooting if you have a bad upper bounding
+length.  The scaler should be less than 1; the closer it is to 1, the
+slower the convergence, and the slower the run.
+
+Apparently, it is wise to have different rules depending on whether you
+already have a good upper bound on the length of the optimal tour.
+
+@@<Set step size decay parameters |alpha| and |scaler|@@>=
+alpha = 1.5;
+scaler = 0.995;
+d474 2
+d477 4
+a480 6
+We will compute minimum 1-trees by computing an n-1 edge minimum spanning
+tree on the underlying graph, and then add one more edge to some
+degree 1 vertex $v$ in the MST.  This is valid because we could have done
+the following instead: remove $v$ from the graph, compute a MST, 
+add $v$ back to the graph, then add the two shortest edges incident upon 
+$v$. That is, we could have designated $v$ in advance.
+d492 4
+d497 2
+a498 2
+static double compute_onetree(decluster_edge_t *onetree);
+static double
+d502 2
+a503 2
+	@@<Compute a MST over the $n$ vertices@@>@@;
+	@@<Now add a short edge to some degree 1 vertex@@>@@;
+d507 4
+a510 2
+@@
+@@<Compute a MST over the $n$ vertices@@>=
+d513 1
+a513 1
+T->n = n-1;
+d518 4
+a521 2
+@@ The custom MST routine requires two length $n$ buffers: an |int| buffer
+and a |double| buffer.
+d523 2
+a524 2
+work_from = new_arr_of(int,n);
+work_dist = new_arr_of(double,n);
+d530 1
+a530 1
+mem_deduct(n*(sizeof(int)+sizeof(double)));
+d549 29
+a577 4
+@@ To add an edge to a degree 1 vertex, we first have to find a degree 1
+vertex, say $v$.
+Then we add the next shortest edge from $v$.
+
+d579 2
+a580 6
+@@<Now add a short edge to some degree 1 vertex@@>=
+{ int v;
+@@<Compute |degree_less_2| for the MST@@>@@;
+@@<Set |v| to be a degree 1 vertex@@>@@;
+@@<Add the shortest unused edge from $v$@@>@@;
+}
+d582 1
+a582 2
+@@ This is pretty simple.
+@@<Compute |degree_less_2| for the MST@@>=
+a590 61
+@@
+We want to get good multipliers for all the vertices,
+so
+we do a pseudo-round-robin searching for those vertices.
+This is reminiscent of next-fit strategies in memory allocators.
+
+We remember the last choice we made for $v$ in variable |last_choice|.
+Because it is declared
+|static|, its value lives from one invocation of this block to the next.
+
+Each spanning tree must have at least two degree 1 vertices, and
+has no degree 0 vertices.  So the while loop terminates, and the
+test does what we want.
+
+
+@@<Set |v| to be a degree 1 vertex@@>=
+{
+static int last_choice=0;
+v = last_choice+1;
+if ( v >= n ) v=0;
+while( degree_less_2[v] >= 0 ) {
+	v++;
+	if ( v>=n ) v=0;
+}
+last_choice = v;
+errorif(degree_less_2[v]!=-1,"Bug!");
+}
+
+@@ Now, since |v| is of degree 1, then we need scan the distance
+from |v| to all the vertices
+except for |v| itself and $u$, where $(u,v)$ is the unique edge
+in the tree incident upon $v$.
+
+@@<Add the shortest unused edge from $v$@@>=
+{
+	int i, u,short_to;
+	length_t short_len, d;
+	for (i=0;i<n-1;i++) { /* Find |u| */
+		if ( onetree[i].city[0] == v ) {
+			u= onetree[i].city[1];
+			break;
+		} else if ( onetree[i].city[1] == v ) {
+			u= onetree[i].city[0];
+			break;
+		}
+	}
+	for (i=0,short_len=INFINITY;i<n;i++) {
+		if ( i==u || i==v ) continue;
+		d = cost(v,i);
+		if ( d<short_len ) {
+			short_to = v;
+			short_len = d;
+		}
+	}
+	onetree[n-1].city[0]=v;
+	onetree[n-1].city[1]=short_to;
+	onetree[n-1].cost=short_len;
+	degree_less_2[v]++;
+	degree_less_2[short_len]++;
+	len += short_len;
+}
+d629 3
+@
+
+
+1.19
+log
+@This might be completely switched over to the simpler non branch and buond
+scheme.  Now I'll read the code again...
+@
+text
+@d8 4
+d79 1
+a79 1
+#include "debug.h"
+a109 1
+	for (i=0;i<n;i++) read_lambda[i]=0.0;
+d160 1
+d181 2
+d203 1
+a203 1
+	extern int verbose, pageno;
+d211 1
+a211 1
+
+d216 1
+a216 1
+		@@<Compute a new |onetree| and its length |onetree_len|@@>@@;
+a217 1
+		@@<Compute |degree_less_2|@@>@@;
+d254 1
+a254 1
+@@  The 1-tree length we compute must be discounted by $\sum \lambda_i$ in
+d257 1
+a257 1
+@@<Compute a new |onetree| and its length |onetree_len|@@>=
+d305 1
+a305 1
+			printf("#  Ascend: %d stopping criteria met:  best is old\n", pageno);
+d311 1
+a311 1
+			printf("#  Ascend: %d stopping criteria met:  best is old\n", pageno);
+d325 1
+a325 1
+		printf("#  Ascend: %d Iterations exceeded n^2 /50 + n + 15\n", pageno);
+d335 1
+a335 1
+		printf("#  Ascend: %d stopping criteria met: t < 0.001 \n", pageno);
+d350 2
+a351 1
+The update scheme is as follows, with $B$ representing |best_lambda|,
+d386 1
+a386 1
+@@ Now, module \module{decluster} already has machinery for computing
+d416 1
+a416 1
+@@ The custom MST routine requires two length $n-1$ buffers: an |int| buffer
+d419 2
+a420 2
+work_from = new_arr_of(int,n-1);
+work_dist = new_arr_of(double,n-1);
+d426 1
+a426 1
+mem_deduct((n-1)*(sizeof(int)+sizeof(double)));
+d445 2
+a446 1
+@@ To add an edge to a degree 1 vertex, we first have to find one, say $v$.
+d458 1
+a458 1
+@@<Compute |degree_less_2| for the MST@@>@@;
+d473 2
+a474 1
+We remember the last choice we made for $v$.  Because it is declared
+d478 3
+a480 1
+has no degree 0 vertices.
+d492 1
+d513 1
+a513 1
+	for (i=1,short_len=INFINITY;i<n;i++) {
+d526 1
+d552 2
+a553 2
+	printf("#  Ascend: Page %d total_iter %d Found a tour of length %f\n", 
+		pageno, total_iter, (float)(onetree_len));
+@
+
+
+1.18
+log
+@Removed more stuff not appropriate to pure Held-Karp lower bounds.
+@
+text
+@d8 3
+a73 2
+#include "prim.h"
+#include "upper.h"
+a74 1
+#include "branch.h"
+a77 1
+#include "ee.h"	/* For |edge_exchanges| */
+a95 2
+@@d thousands(X) (((X)/1000) %10)
+@@d tens(X) (((X)/10) %10)
+d107 1
+d121 1
+d135 15
+a149 1
+static double *best_lambda, *read_lambda, *write_lambda;
+d158 1
+a158 1
+normalizer(int n, onetree_node_t *onetree)
+d163 1
+a163 1
+		l += onetree[i].degree_less2 * onetree[i].degree_less2;
+d178 1
+a178 1
+update_lambda(int n, double t, onetree_node_t *onetree, 
+d183 1
+a183 1
+		write_lambda[i] = read_lambda[i] + t * onetree[i].degree_less2;
+d195 1
+a195 2
+ascend(const int n, double prune_len, edge_list_t *edge,
+	onetree_node_t *onetree, int *is_tour);
+d201 4
+a205 1
+	*is_tour = 0;
+d212 2
+a213 1
+		norm = normalizer(n, onetree);
+d224 1
+a224 1
+		update_lambda( n, t, onetree, read_lambda, write_lambda );
+d235 1
+a235 2
+double ascend(const int n, double prune_len, 
+	edge_list_t *edge, onetree_node_t *onetree, int *is_tour);
+d237 11
+d254 1
+a254 1
+const double len = compute_onetree(edge,onetree,read_lambda);
+d287 1
+a287 2
+edge is not used outside of here.
+		onetree_len += cost(edge[i].e.from,edge[i].e.to);
+d369 46
+d416 100
+d520 1
+a520 1
+	printf(" %d %f # iter = %d L(l) t == %f alpha = %f\n",
+d526 1
+d533 1
+d538 1
+d542 1
+d547 1
+d553 1
+a553 2
+
+
+@
+
+
+1.17
+log
+@Got rid of double-including of headers...
+Got rid of bbnode search tree stuff
+Use efficient multiple buffering of lambda vectors.
+@
+text
+@d8 5
+d182 2
+a183 4
+ascend(const int n, double prune_len, 
+	const int team_num, edge_list_t *edge,
+	onetree_node_t *onetree, int *is_tour, int method, 
+const int is_random_dist_matrix)
+d186 3
+a188 2
+	int i, best_iter, iter=-1;
+	double len, t, alpha, lambda_2, norm, best_lower_bound, onetree_len, scaler;
+d194 2
+a195 2
+		int new_is_best;
+		len = compute_onetree(team_num,edge,onetree,read_lambda);
+a196 2
+		total_iter++;
+		iter++;
+a197 2
+		for (lambda_2 = 0.0, i=0; i<n; i++) lambda_2 += 2*read_lambda[i];
+		onetree_len = len - lambda_2;
+a200 1
+		@@<|break| if the 1-tree is heavier than the prune length@@>@@;
+d219 16
+a234 3
+double ascend(const int n, double prune_len, const int team_num,
+	edge_list_t *edge, onetree_node_t *onetree, int *is_tour,
+	int method, const int is_random_dist_matrix);
+d261 1
+d269 1
+a269 1
+@@
+d271 1
+d273 1
+a273 1
+	if ( 0  && iter > 1000 &&  iter - best_iter > 5 && iter - best_iter < 8 ) {
+d279 1
+a279 1
+	if ( 0 && iter > 1000 &&  iter - best_iter > 5 ) {
+d285 1
+a287 9
+@@
+@@<|break| if the 1-tree is heavier than the prune length@@>=
+if ( onetree_len >=  prune_len ) {
+	if ( verbose >= 75 )
+		printf("#  Ascend: %d Found a 1-tree len %f >= %f == prune_len\n",
+			 pageno, (float)(onetree_len), (float)prune_len);
+	onetree_len = onetree_len;
+	break;
+}
+d289 2
+a290 1
+@@
+d292 2
+a293 1
+if ( 0 && iter > n*n / 50 + n + 15 ) { /* Volgenant \& Jonker */
+d298 1
+d309 3
+a311 1
+@@ Not only do we update
+a316 1
+	for ( i=0;i<n; i++) best_lambda[i] = lambda[i];
+@
+
+
+1.16
+log
+@Fixed up standard CWEB thingies and Log stuff.
+@
+text
+@d8 3
+a51 11
+#include "hk.h"
+#include "prim.h"
+#include "upper.h"
+#include "memory.h"
+#include "branch.h"
+#include "debug.h"
+#include <config.h>
+#include "lkconfig.h"
+#include "length.h"
+#include "read.h"	/* For |cost| */
+#include "ee.h"	/* For |edge_exchanges| */
+d85 7
+d99 1
+d102 3
+d114 4
+a117 1
+	free_mem(best_lambda);mem_deduct(sizeof(double)*n);
+a128 1
+static double *best_lambda;
+d131 1
+d155 3
+d160 2
+a161 1
+update_lambda(int n, double t, onetree_node_t *onetree, double *lambda)
+d165 1
+a165 1
+		lambda[i] += t * onetree[i].degree_less2;
+d170 1
+a170 1
+It performs the subgradient ascension, modifying |lambda| as we go.
+d177 1
+a177 1
+ascend(const int n, double prune_len, search_node_t *bbnode,
+d179 1
+a179 1
+	onetree_node_t *onetree, double *lambda, int *is_tour, int method, 
+a184 1
+	const int use_edge_exchanges = 0; /* |thousands(method)==1 && bbnode != NULL;| */
+d190 3
+a192 2
+		len = compute_onetree(bbnode,team_num,edge,onetree,lambda, 
+			iter!=-1 && use_edge_exchanges);
+d196 1
+a196 1
+		for (lambda_2 = 0.0, i=0; i<n; i++) lambda_2 += 2*lambda[i];
+a207 1
+		@@<Possibly use edge exchanges to reduce future MST work@@>@@;
+d209 1
+a209 1
+		update_lambda( n, t, onetree, lambda );
+d212 1
+a213 3
+	if ( is_random_dist_matrix )
+		for (i=0;i<n;i++) lambda[i] = best_lambda[i];
+	if ( bbnode ) bbnode->alpha = alpha;
+d220 2
+a221 2
+double ascend(const int n, double prune_len, search_node_t *bbnode, const int team_num,
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda, int *is_tour,
+d238 2
+a239 17
+if ( bbnode == NULL ) { /* Initial run, no restrictions */
+	if ( is_random_dist_matrix ) {
+		alpha = 0.85;
+		scaler = 0.95;
+	} else {
+#if 0
+		alpha = 2.0;
+		scaler = 0.85;
+#endif
+		alpha = 2.0;
+		scaler = 0.995;
+	}
+} else {
+	if ( tens(method) == 0 || bbnode->alpha == 0.0 ) alpha = 1.1;
+	else alpha = bbnode->alpha;
+	scaler = 0.95;
+}
+d300 1
+a300 1
+@@
+d302 2
+a303 1
+if ( onetree_len > best_lower_bound ) {
+d306 1
+a306 2
+	if ( is_random_dist_matrix )
+		for ( i=0;i<n; i++) best_lambda[i] = lambda[i];
+d309 24
+a333 2
+@@  It's a long story.  Maybe I should always use a linear-time randomized
+MST algorithm instead$\ldots$.  
+a334 6
+@@<Possibly use edge exchanges to reduce future MST work@@>=
+#if 0
+if ( iter == 0 && use_edge_exchanges ) {
+	edge_exchanges(bbnode,edge,onetree,lambda,onetree_len);
+}
+#endif
+d345 2
+a346 2
+if ( bbnode==NULL && iter==0 && verbose >=100)
+	show_onetree( debug_ps, "First 1-tree, lambda==0 vector", n, bbnode, edge);
+d348 1
+a348 1
+	show_onetree( debug_ps, NULL, n, bbnode, edge);
+d365 1
+a365 1
+	show_onetree( debug_ps, s, n, bbnode, edge);
+d367 2
+@
+
+
+1.15
+log
+@More restructuring and comments.
+Include standard CWEB goodies.
+@
+text
+@d6 7
+a12 1
+$Log$
+@
+
+
+1.14
+log
+@Midst of cleaning up for inclusion into lk.
+@
+text
+@d6 2
+d39 4
+a42 5
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <assert.h>
+#include <math.h>
+d59 18
+d96 1
+d107 1
+d119 1
+d156 2
+d161 1
+a161 1
+ascend(const int n, search_node_t *bbnode,
+a168 1
+	int total_iter = -1;
+a170 1
+
+a182 1
+
+a183 7
+		if ( ceil(onetree_len) > best_lower_bound ) {
+			best_lower_bound = ceil(onetree_len);
+			best_iter = iter;
+			if ( is_random_dist_matrix )
+				for ( i=0;i<n; i++) best_lambda[i] = lambda[i];
+		}
+
+d192 1
+a192 6
+
+#if 0
+		if ( iter == 0 && use_edge_exchanges ) {
+			edge_exchanges(bbnode,edge,onetree,lambda,onetree_len);
+		}
+#endif
+d195 1
+a195 2
+
+		alpha *=  scaler;	/* See Held Karp, 1971, Lemma 3 */
+d207 1
+a207 1
+double ascend(const int n, search_node_t *bbnode, const int team_num,
+d243 4
+a246 1
+@@
+d249 1
+a249 5
+	char s[100];
+	if ( verbose >= 50 )
+		printf("#  Ascend: Page %d total_iter %d Found a tour of length %f\n", 
+			pageno, total_iter, (float)(onetree_len));
+	/* Don't trust inexact arithmetic for computation of the tour length */
+d253 1
+a253 2
+	sprintf(s,"Tour length %f",(float)onetree_len);
+	if ( verbose >= 100 ) show_onetree( s, n, bbnode, edge);
+d277 1
+a277 1
+if ( ceil(onetree_len) >=  prune_len ) {
+d279 1
+a279 1
+		printf("#  Ascend: %d Found a 1-tree len ceil(%f) >= %f == prune_len\n",
+d281 1
+a281 1
+	onetree_len = ceil(onetree_len);
+a292 6
+@@
+@@<Verbose: print new 1-tree weight@@>=
+if ( verbose >= 100  ) {
+	printf(" %d %f # iter = %d L(l) t == %f alpha = %f\n",
+		total_iter,onetree_len,iter, t,alpha);
+}
+d302 20
+d323 7
+d332 1
+a332 1
+	show_onetree( "First 1-tree, lambda==0 vector", n, bbnode, edge);
+d334 1
+a334 1
+	show_onetree( NULL, n, bbnode, edge);
+d337 16
+@
+
+
+1.13
+log
+@Fixed for TeX
+@
+text
+@d2 4
+d7 27
+d42 1
+a42 1
+#include "tsp.h"
+a45 1
+#include "heap.h"
+d48 3
+a52 4
+#if __ksr__
+#include <ksr/ksr_timers.h>
+static double total_ascend_time, ascend_start, ascend_end;
+#endif
+d54 2
+a55 1
+static double *best_lambda;
+d64 4
+a67 1
+@@ Do a subgradient ascension, while modifying |lambda| as we go.
+d69 2
+a71 1
+
+d73 1
+a73 1
+ascend_setup(int n)
+d75 1
+a76 3
+#if __ksr__
+	total_ascend_time = 0.0;
+#endif
+d79 3
+d85 2
+a86 7
+	extern unsigned long count_ascent;
+	free_mem(best_lambda);
+#if __ksr__
+	total_ascend_time = 0.0;
+	printf("# KSR Total ascend time %f s", total_ascend_time );
+	printf(" average %f s\n", count_ascent ? total_ascend_time/count_ascent : 0.0 );
+#endif
+d89 16
+d116 6
+d131 4
+a134 1
+int total_iter = -1;
+d139 2
+a140 1
+	onetree_node_t *onetree, double *lambda, int *is_tour, int method)
+d144 2
+a145 3
+	double len, t, alpha, lambda_2, norm, best, onetree_len, scaler;
+	extern unsigned long count_ascent;
+	const extern tsp_problem_t *p;
+a147 4
+#if __ksr__
+	ascend_start = user_seconds();
+#endif
+	count_ascent++;
+d150 2
+a151 14
+	if ( bbnode == NULL ) { /* Initial run */
+		if ( p->edge_weight_type == RANDOM_EDGES ) {
+			alpha = 0.85;
+			scaler = 0.95;
+		} else {
+			alpha = 2.0;
+			scaler = 0.85;
+		}
+	} else {
+		if ( ((method / 10)%10) == 0 || bbnode->alpha == 0.0 ) alpha = 1.1;
+		else alpha = bbnode->alpha;
+		scaler = 0.95;
+	}
+	best = 0.0;
+d162 3
+a164 3
+		if ( ceil(onetree_len) > best ) {
+			
+			best = ceil(onetree_len);
+d166 1
+a166 1
+			if ( p->edge_weight_type == RANDOM_EDGES )
+d170 3
+a172 28
+		if ( norm == 0.0 ) {
+			char s[100];
+			if ( verbose >= 50 )
+				printf("#  Ascend: Page %d total_iter %d Found a tour of length %f\n", 
+					pageno, total_iter, (float)(onetree_len));
+			/* Don't trust inexact arithmetic for computation of the tour length */
+			for ( onetree_len = 0.0, i=0;i<n;i++)
+				onetree_len += cost(edge[i].e.from,edge[i].e.to);
+			best = onetree_len; /* just in case imprecision screwed up |best|*/
+			sprintf(s,"Tour length %f",(float)onetree_len);
+			if ( verbose >= 100 ) show_onetree( s, n, bbnode, edge);
+			*is_tour = 1;
+			break;
+		}
+
+		if ( ceil(onetree_len) >=  prune_len ) {
+			if ( verbose >= 75 )
+				printf("#  Ascend: %d Found a 1-tree len ceil(%f) >= %f == prune_len\n",
+					 pageno, (float)(onetree_len), (float)prune_len);
+			onetree_len = ceil(onetree_len);
+			break;
+		}
+		
+		if ( iter > n*n / 50 + n + 15 ) { /* Volgenant \& Jonker */
+			if ( verbose >= 75 )
+				printf("#  Ascend: %d Iterations exceeded n^2 /50 + n + 15\n", pageno);
+			break;
+		}
+d175 3
+a177 24
+		if ( verbose >= 100  ) {
+			printf(" %d %f # iter = %d L(l) t == %f alpha = %f\n",
+				total_iter,onetree_len,iter, t,alpha);
+		}
+
+		if ( t < 0.001 ) {
+			if ( verbose >= 75 )
+				printf("#  Ascend: %d stopping criteria met: t < 0.001 \n", pageno);
+			break;
+		}
+
+		if ( p->edge_weight_type == RANDOM_EDGES ) {
+			if ( iter > 15 &&  iter - best_iter > 5 && iter - best_iter < 8 ) {
+				if ( verbose >= 75 ) 
+					printf("#  Ascend: %d stopping criteria met:  best is old\n", pageno);
+				break;
+			}
+		} else {
+			if ( iter > 15 &&  iter - best_iter > 5 ) {
+				if ( verbose >= 75 ) 
+					printf("#  Ascend: %d stopping criteria met:  best is old\n", pageno);
+				break;
+			}
+		}
+d187 2
+a188 6
+		alpha *=  scaler;	/* See Held Karp 1971 Lemma 3 */
+		if ( bbnode==NULL && iter==0 && verbose >=100)
+			show_onetree( "First 1-tree, lambda==0 vector", n, bbnode, edge);
+		else if ( verbose >= 500 )
+			show_onetree( NULL, n, bbnode, edge);
+		fflush(stdout);
+d190 1
+a190 1
+	if ( p->edge_weight_type == RANDOM_EDGES )
+d193 1
+a193 5
+#if __ksr__
+	ascend_end = user_seconds();
+	total_ascend_time += ascend_end - ascend_start;
+#endif
+	return best;
+d201 107
+a307 1
+	int method);
+d309 1
+@
+
+
+1.12
+log
+@Last revision before depth paper.
+@
+text
+@d154 1
+a154 1
+		if ( iter > n*n / 50 + n + 15 ) { /* Volgenant & Jonker */
+@
+
+
+1.11
+log
+@Added edge exchange analysis modifications.
+@
+text
+@d20 4
+d42 3
+d50 1
+d52 5
+d91 1
+a91 1
+	const int use_edge_exchanges = thousands(method)==1;
+d93 3
+d114 1
+a114 1
+		len = onetree_prim(bbnode,team_num,edge,onetree,lambda, 
+d162 2
+a163 2
+			printf(" %d %f # iter = %d L(lambda) t == %f alpha = %f\n",
+				total_iter,(float)(onetree_len),iter, (float)t,(float)alpha);
+d186 1
+d190 1
+d204 4
+d210 1
+@
+
+
+1.10
+log
+@Version used for March 17 draft of the fictitious upper bounds paper.
+@
+text
+@d19 1
+d31 1
+d78 1
+d92 1
+a92 1
+		if ( method / 10 == 0 || bbnode->alpha == 0.0 ) alpha = 1.1;
+d98 2
+a99 1
+		len = onetree_prim(bbnode,team_num,edge,onetree,lambda);
+d168 4
+@
+
+
+1.9
+log
+@Complete branch and bound code.  81 SPARC IPC seconds for eil51.tsp
+@
+text
+@d20 1
+d32 12
+a63 14
+float 
+benefit ( const int n, const double *lambda )
+{
+	int i;
+	double dl,l;
+	for (i=0,dl=l=0.0; i<n;i++ ) {
+		dl += (GLB_lambda[i]-lambda[i])*(GLB_lambda[i]-lambda[i]);
+		l += GLB_lambda[i]*GLB_lambda[i];
+	}
+	if ( l == 0.0 ) return 0.0;
+	else return (float)sqrt(dl/l);
+}
+
+
+d69 1
+a69 1
+	onetree_node_t *onetree, double *lambda, int *is_tour)
+d74 2
+d77 2
+d80 8
+a87 4
+	if ( bbnode == NULL ) {
+		/* Initial run */
+		alpha = 2.0;
+		scaler = 0.85;
+d89 2
+a90 1
+		alpha = 1.1;
+d104 1
+d107 2
+d113 3
+a115 2
+			printf("#  Ascend: Page %d total_iter %d Found a tour of length %f\n", 
+				pageno, total_iter, (float)(onetree_len));
+d119 1
+d126 4
+a129 3
+		if ( ceil(onetree_len) >=  incumbent_len ) {
+			printf("#  Ascend: %d Found a 1-tree len ceil(%f) >= %f == incumbent_len\n",
+					 pageno, (float)(onetree_len), (float)incumbent_len);
+d135 2
+a136 1
+			printf("#  Ascend: %d Iterations exceeded n^2 /50 + n + 15\n", pageno);
+d140 5
+a144 4
+		t = alpha * (incumbent_len - onetree_len)/norm;
+		printf(" %d %f # iter = %d L(l) L(l)/L(l0) %f t == %f alpha = %f\n",
+			total_iter,(float)(onetree_len),iter,benefit(n,lambda),
+			(float)t,(float)alpha);
+d147 2
+a148 1
+			printf("#  Ascend: %d stopping criteria met: t < 0.001 \n", pageno);
+d151 13
+a163 3
+		if ( iter > 15 &&  iter - best_iter > 5 ) {
+			printf("#  Ascend: %d stopping criteria met:  best is old\n", pageno);
+			break;
+d168 1
+a168 2
+		/* alpha = 2.0/(iter+1.01); */
+		alpha *= scaler;
+d175 4
+a178 1
+	return onetree_len;
+d180 1
+d184 2
+a185 1
+	edge_list_t *edge, onetree_node_t *onetree, double *lambda, int *is_tour);
+@
