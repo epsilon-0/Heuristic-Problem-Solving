@@ -1,7 +1,0 @@
-#!/bin/sh
-rm -rf lingeling-587f-4882048-110513
-tar xvzf lingeling-587f-4882048-110513.tar.gz
-cd lingeling-587f-4882048-110513
-sed -i -e 's/static=yes/static=no/' configure
-./configure --competition
-make

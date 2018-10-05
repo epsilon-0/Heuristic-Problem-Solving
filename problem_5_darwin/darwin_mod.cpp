@@ -1,63 +1,64 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <numeric>
-#include <algorithm>
 #include <unordered_set>
-#include <cmath>
 
-#include "edmondskarp.h"
+#include "edmondskarp.hh"
 
 bool isProblemA = true;
-vector< vector< bool > > canonical;
-vector< int > R, C;
+vector<vector<bool>> canonical;
+vector<int> R, C;
 int rows, columns;
 int totalPoints;
 
-void my_print_std_out(vector<vector< bool > > M);
+void my_print_std_out(vector<vector<bool>> M);
 
-int get_input(){
+int get_input() {
   cin >> isProblemA;
   cin >> rows >> columns;
-  R.resize(rows); C.resize(columns);
-  for ( int i = 0; i < rows; i++ ){
+  R.resize(rows);
+  C.resize(columns);
+  for (int i = 0; i < rows; i++) {
     cin >> R[i];
   }
-  for ( int i = 0; i < columns; i++ ){
+  for (int i = 0; i < columns; i++) {
     cin >> C[i];
   }
   totalPoints = accumulate(C.begin(), C.end(), 0);
-  canonical.resize(rows, vector< bool >(columns, false));
+  canonical.resize(rows, vector<bool>(columns, false));
 }
 
-int makeCanonical(){
+int makeCanonical() {
   int tot = 2 + rows + columns;
-  vector< vector< int > > graph(tot), capacities(tot, vector<int>(tot, 0));
+  vector<vector<int>> graph(tot), capacities(tot, vector<int>(tot, 0));
   graph.clear();
   graph.resize(tot);
-  for ( int i = 1; i < rows + 1; i++ ){
+  for (int i = 1; i < rows + 1; i++) {
     graph[0].push_back(i);
     graph[i].push_back(0);
-    capacities[0][i] = R[i-1];
+    capacities[0][i] = R[i - 1];
   }
-  for ( int i = 1; i < rows + 1; i++ ){
-    for ( int j = rows + 1; j < rows + columns + 1; j++ ){
+  for (int i = 1; i < rows + 1; i++) {
+    for (int j = rows + 1; j < rows + columns + 1; j++) {
       graph[i].push_back(j);
       graph[j].push_back(i);
       capacities[i][j] = 1;
     }
   }
-  for ( int i = rows + 1; i < rows + columns + 1; i++ ){
+  for (int i = rows + 1; i < rows + columns + 1; i++) {
     graph[i].push_back(rows + columns + 1);
     graph[rows + columns + 1].push_back(i);
-    capacities[i][rows + columns + 1] = C[i-rows-1];
+    capacities[i][rows + columns + 1] = C[i - rows - 1];
   }
 
-  EdmondsKarp edk(graph, capacities, 0, tot-1);
+  EdmondsKarp edk(graph, capacities, 0, tot - 1);
 
-  vector< vector< int > > flo = edk.getFlowGraph();
-  for ( int i = 1; i < rows + 1; i++ ){
-    for ( int j = rows + 1; j < rows + columns + 1; j++ ){
-      if ( flo[i][j] == 1 ){
-	canonical[i-1][j-rows-1] = true;
+  vector<vector<int>> flo = edk.getFlowGraph();
+  for (int i = 1; i < rows + 1; i++) {
+    for (int j = rows + 1; j < rows + columns + 1; j++) {
+      if (flo[i][j] == 1) {
+        canonical[i - 1][j - rows - 1] = true;
       }
     }
   }
@@ -65,13 +66,13 @@ int makeCanonical(){
   return 1;
 }
 
-int mhash(vector< vector< bool > > mat){
-  int MOD = 19+1e6;
+int mhash(vector<vector<bool>> mat) {
+  int MOD = 19 + 1e6;
   long long int h = 1;
   int s = 0;
-  for ( int i = 0; i < rows; i++ ){
+  for (int i = 0; i < rows; i++) {
     s = 0;
-    for ( int j = 0; i + j < rows && j < columns; j++ ){
+    for (int j = 0; i + j < rows && j < columns; j++) {
       s += mat[i + j][j];
     }
     h = (h * s) % MOD;
@@ -80,18 +81,17 @@ int mhash(vector< vector< bool > > mat){
 }
 
 struct matrixHash {
-  size_t operator () (const vector<vector<bool > > &x) const {return mhash(x);}
+  size_t operator()(const vector<vector<bool>> &x) const { return mhash(x); }
 };
-
 
 struct OnBit {
   int row;
   int column;
 };
 
-int dotprod(vector< bool > v1, vector< bool > v2){
+int dotprod(vector<bool> v1, vector<bool> v2) {
   int pr = 0;
-  for ( int i = 0; i < v1.size(); i++ ){
+  for (int i = 0; i < v1.size(); i++) {
     pr += v1[i] && v2[i];
   }
   return pr;
@@ -100,9 +100,9 @@ int dotprod(vector< bool > v1, vector< bool > v2){
 // computes the current score
 int score() {
   int score = 0;
-  for ( int i = 0; i < rows; i++ ){
-    for ( int j = 0; j < rows; j++ ){
-      score += pow(dotprod(canonical[i],canonical[j]), 2);
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < rows; j++) {
+      score += pow(dotprod(canonical[i], canonical[j]), 2);
     }
   }
   return score;
@@ -128,8 +128,8 @@ void iterate() {
   int lastScore;
   int steps;
   int MAX_STEPS = 100000;
-  vector<vector< bool> > best;
-  unordered_set< vector < vector< bool > >, matrixHash> seenMatricies;
+  vector<vector<bool>> best;
+  unordered_set<vector<vector<bool>>, matrixHash> seenMatricies;
   bool is_in = false;
   while (true) {
     random_shuffle(onBits.begin(), onBits.end());
@@ -151,17 +151,15 @@ void iterate() {
           int temp = a.row;
           a.row = b.row;
           b.row = temp;
-          
+
           // test
           int newScore = score();
           if (isProblemA) {
             is_in = seenMatricies.find(canonical) != seenMatricies.end();
           }
-          if (canGoLower || newScore > lastScore &&
-              (!isProblemA || !is_in)) {
+          if (canGoLower || newScore > lastScore && (!isProblemA || !is_in)) {
             lastScore = newScore;
             best = canonical;
-
 
             // stuff specific to problem A
             if (isProblemA) {
@@ -182,7 +180,6 @@ void iterate() {
             a.row = b.row;
             b.row = temp;
           }
-
         }
       }
     }
@@ -197,11 +194,10 @@ void iterate() {
   }
 }
 
-
-void my_print_std_out(vector<vector< bool > > M) {
+void my_print_std_out(vector<vector<bool>> M) {
   bool isFirst = false;
-  for ( int i = 0; i < rows; i++ ){
-    for ( int j = 0; j < columns; j++ ){
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < columns; j++) {
       if (!isFirst) {
         cout << " ";
       } else {
@@ -213,19 +209,19 @@ void my_print_std_out(vector<vector< bool > > M) {
   cout << endl;
 }
 
-void my_prints(vector< vector< bool > > M){
+void my_prints(vector<vector<bool>> M) {
   int tot;
   int rtot = 0, ctot = 0;
-  for ( int i = 0; i < rows; i++){
-    rtot += accumulate( M[i].begin(), M[i].end(), 0);
-    cout << accumulate( M[i].begin(), M[i].end(), 0) << " ";
+  for (int i = 0; i < rows; i++) {
+    rtot += accumulate(M[i].begin(), M[i].end(), 0);
+    cout << accumulate(M[i].begin(), M[i].end(), 0) << " ";
   }
   cout << endl;
-  for ( int i = 0; i < columns; i++ ){
+  for (int i = 0; i < columns; i++) {
     tot = 0;
-    for ( int j = 0; j < rows; j++ ){
-      if ( M[j][i] ){
-	tot++;
+    for (int j = 0; j < rows; j++) {
+      if (M[j][i]) {
+        tot++;
       }
     }
     ctot += tot;
@@ -235,17 +231,14 @@ void my_prints(vector< vector< bool > > M){
   cout << rtot << " " << ctot << endl;
 }
 
-void optimize() {
-}
+void optimize() {}
 
-int main(){
+int main() {
   get_input();
-  
+
   makeCanonical();
-  
+
   my_prints(canonical);
 
   iterate();
-  
-
 }

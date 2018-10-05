@@ -1,9 +1,9 @@
-#include "BNBTree.h"
-#include <functional>
+#include "BNBTree.hh"
+#include "knapsack.hh"
 #include <algorithm>
-#include <iostream>
 #include <cassert>
-#include "knapsack.h"
+#include <functional>
+#include <iostream>
 
 using namespace std;
 
@@ -13,14 +13,13 @@ vector<bool> setSubtraction(vector<bool> a, vector<bool> b);
 
 Knapsack_sol::Knapsack_sol() {}
 Knapsack_sol::Knapsack_sol(knapsack knapsack, int size)
-  : knapsack_id(knapsack.index), size(size), remainingCapacity(knapsack.capacity),
-  included(vector<bool>(size, false)), value(0)
-{
-};
+    : knapsack_id(knapsack.index), size(size),
+      remainingCapacity(knapsack.capacity), included(vector<bool>(size, false)),
+      value(0){};
 
-int Knapsack_sol::getRemainingCapacity() { return remainingCapacity;}
-int Knapsack_sol::getValue() {return value; }
-vector<bool>& Knapsack_sol::getIncluded() { return included;}
+int Knapsack_sol::getRemainingCapacity() { return remainingCapacity; }
+int Knapsack_sol::getValue() { return value; }
+vector<bool> &Knapsack_sol::getIncluded() { return included; }
 
 void Knapsack_sol::addItem(item item) {
   assert(item.weight <= remainingCapacity);
@@ -37,9 +36,8 @@ void Knapsack_sol::removeItem(item item) {
   included[item.index] = false;
 }
 
-BnbTree::BnbTree( vector< int > value, vector< int > weight, vector< int > capacity) 
-  : weight(weight), capacity(capacity), value(value)
-{
+BnbTree::BnbTree(vector<int> value, vector<int> weight, vector<int> capacity)
+    : weight(weight), capacity(capacity), value(value) {
   item new_item;
   knapsack new_knapsack;
 
@@ -78,25 +76,25 @@ BnbTree::BnbTree( vector< int > value, vector< int > weight, vector< int > capac
     items[i].index = i;
     items[i].value = value[i];
     items[i].weight = weight[i];
-    items[i].vw_ratio = (float) items[i].value / items[i].weight;
+    items[i].vw_ratio = (float)items[i].value / items[i].weight;
   }
 
   sort(items.begin(), items.end());
   sort(knapsacks.begin(), knapsacks.end());
   reverse(knapsacks.begin(), knapsacks.end());
   reverse(items.begin(), items.end());
-
 }
 
 void BnbTree::solve() {
   score = 0;
   vector<bool> included = vector<bool>(numItems, false);
-  sol = vector<vector<bool> >(numKnapsacks, vector<bool>(numItems, false));
+  sol = vector<vector<bool>>(numKnapsacks, vector<bool>(numItems, false));
   for (int i = 0; i < knapsacks.size(); i++) {
     knapsack considered_knapsack = knapsacks[i];
     Knapsack_sol considered_sol = Knapsack_sol(considered_knapsack, numItems);
     for (int j = 0; j < items.size(); j++) {
-      if (included[j]) continue;
+      if (included[j])
+        continue;
       item considered_item = items[j];
       if (considered_item.weight <= considered_sol.getRemainingCapacity()) {
         considered_sol.addItem(considered_item);
@@ -108,12 +106,10 @@ void BnbTree::solve() {
   }
 }
 
-int BnbTree::getScore() {
-  return score;
-}
+int BnbTree::getScore() { return score; }
 
-vector<vector<int> > BnbTree::getWitness() {
-  vector<vector<int> > result;
+vector<vector<int>> BnbTree::getWitness() {
+  vector<vector<int>> result;
   result.resize(numKnapsacks);
   int index;
   for (int i = 0; i < numKnapsacks; i++) {

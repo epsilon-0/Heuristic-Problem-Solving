@@ -1,1 +1,0 @@
-gcc *.c -O2 -o tsp.out
